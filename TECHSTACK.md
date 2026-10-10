@@ -8,7 +8,9 @@ All-TypeScript Next.js app, self-hosted on a Proxmox Linux VM, exposed via Cloud
 |---|---|
 | **Next.js (App Router) + TypeScript** | UI + API routes in one app |
 | **Vanilla CSS** | Styling, mobile-responsive layout |
-| **Leaflet + react-leaflet** | Map; OpenStreetMap / CARTO tiles (HTTPS, no API key) |
+| **Leaflet 1.9.4 + react-leaflet** | Map (client-only component; Leaflet can't render server-side). Matches the `bigPharma/` prototype. |
+| **leaflet.markercluster 1.5.3** (via `react-leaflet-cluster`) | Clusters thousands of pharmacy markers; render as canvas `circleMarker`s (`preferCanvas`) |
+| **CARTO Voyager raster tiles** | Basemap (`basemaps.cartocdn.com/rastertiles/voyager`), keyed via `NEXT_PUBLIC_CARTO_KEY`; OSM + CARTO attribution required. Key is browser-visible, so restrict it by domain. |
 | **Fuse.js** | Client-side fuzzy autocomplete over drug list |
 | **Browser Geolocation API** | Current location (requires HTTPS — provided by Cloudflare) |
 | **Nominatim** | Address → lat/lng fallback when location is denied |
@@ -23,12 +25,14 @@ All-TypeScript Next.js app, self-hosted on a Proxmox Linux VM, exposed via Cloud
 |---|---|
 | **SQLite** (`better-sqlite3`) | Pharmacies, drugs, inventory, transit stops |
 | **turf.js / haversine** | Distances, radius checks, nearest transit stop |
+| **OpenTripPlanner (OTP)** | Transit itineraries and travel-time estimates from NJ Transit GTFS and OpenStreetMap data; run as a Docker container |
 | **`@google/genai` (Gemini)** | Help chatbot; structured JSON output constrained to our drug list. Server-side only. |
 
 ## Data Sources
 | Data | Source | Notes |
 |---|---|---|
 | Pharmacy locations | **OpenStreetMap Overpass API** (`amenity=pharmacy`, NJ) | Includes lat/lng. Pulled once → DB. (NPI Registry = "production" source in pitch.) |
+| Pharmacy locations (prototype) | `bigPharma/` | Already pulled: `pharmacies_osm.csv` (535 OSM rows) and `nj_pharmacies_geocoded.csv` (3,731 NPPES rows, geocoded via US Census batch geocoder + Nominatim fallback) |
 | Transit stops | **NJ Transit GTFS static feed** (`stops.txt`) | Bus + rail stops with coordinates |
 | Drug names | Hardcoded JSON (~150 drugs) | Generic + brand names + strengths |
 | Stock / prices | **Simulated** via seed script | Fixed random seed → deterministic demo |
@@ -57,7 +61,7 @@ transit_stops(id, name, lat, lng, type)   -- type: bus | rail
 | Train fare | ~$5–10 (hardcoded) |
 | Car cost | $0.70 / mi |
 
-**Transit ETA (heuristic):**
+**Transit ETA (heuristic fallback until OTP is integrated):**
 `walk to stop + avg wait + ride (straight-line ÷ mode speed) + walk from stop`
 
 **Ranking:**
@@ -70,12 +74,13 @@ Out-of-stock results filtered out or pushed to bottom. `totalCost = rxPrice + tr
 ## Infrastructure
 | Piece | Choice |
 |---|---|
-| Host | Proxmox VM (Ubuntu/Debian), Node 20+ |
+| Host | Proxmox VM (Ubuntu/Debian), Node 20+, Docker Engine |
+| Transit routing runtime | OpenTripPlanner in a Docker container, managed by Docker Engine |
 | Process manager | pm2 (`pm2 startup` + `pm2 save`) |
 | Public access | Cloudflare Tunnel (`cloudflared` as systemd service) → `localhost:3000` |
 | Domain | `.tech` domain, nameservers on Cloudflare |
 | Deploy | `deploy.sh`: `git pull && npm ci && npm run build && pm2 restart pharm` |
-| Secrets | `.env` on VM only (`GEMINI_API_KEY`); `.env.example` committed |
+| Secrets | `.env` on VM only (`GEMINI_API_KEY`, `NEXT_PUBLIC_CARTO_KEY`); `.env.example` committed |
 | Team access | VS Code Live Share; fallback: per-person SSH keys, each person edits only their owned files |
 | Backup | Proxmox snapshot after setup; app runnable locally on a laptop; pre-recorded demo video |
 
@@ -93,4 +98,4 @@ Out-of-stock results filtered out or pushed to bottom. `totalCost = rxPrice + tr
 | **C: Gemini + infra + pitch** | `app/api/chat/`, `components/chat/`, `deploy.sh`, VM/tunnel/domain, Devpost |
 
 ## Out of Scope (post-hackathon)
-Real NJ Transit realtime API / true transit routing, Google Maps business info, crowdsourced corrections, insurance/copay (Plaid), user accounts, PWA/mobile app.
+Real-time NJ Transit data, Google Maps business info, crowdsourced corrections, insurance/copay (Plaid), user accounts, PWA/mobile app.
