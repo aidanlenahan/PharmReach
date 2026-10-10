@@ -90,3 +90,8 @@ desktop.ini
 .idea/
 *.swp
 *.swo
+
+
+poc/
+bigPharma/
+tmp-frontend/
