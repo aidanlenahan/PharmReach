@@ -5,6 +5,7 @@ SCHEDULE.md
 node_modules/
 .pnp
 .pnp.*
+.npm/
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -19,17 +20,32 @@ dist/
 next-env.d.ts
 *.tsbuildinfo
 .vercel
+.turbo/
+.cache/
+.eslintcache
 
 # Environment / secrets
 .env
-.env*.local
+.env.*
 !.env.example
+!.env.*.example
+
+# Credentials and local certificates
+credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
 
 # Database (regenerate via seed script)
 *.db
 *.sqlite
 *.sqlite3
 *.db-journal
+*.db-shm
+*.db-wal
+*.sqlite-shm
+*.sqlite-wal
 
 # Logs
 logs/
@@ -42,17 +58,25 @@ pnpm-debug.log*
 
 # Testing / coverage
 coverage/
+.vitest/
+htmlcov/
+.coverage
+.coverage.*
 
-# Python (data scripts, if any)
+# Python data scripts
 __pycache__/
 *.py[cod]
 .venv/
 venv/
+.tox/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 
 # Cloudflare tunnel credentials
 .cloudflared/
-*.pem
-credentials.json
+infra/cloudflared/*.json
 
 # OS
 .DS_Store
