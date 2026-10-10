@@ -20,14 +20,14 @@ Before building on NJ Transit data, confirm we can reach the API, get the static
 
 - [x] Create `poc/njtransit/` with its own README, `.env.example`, and test command; gitignore its `.env` and downloaded feed data.
 - [ ] Register for NJ Transit developer access and store the credentials in `poc/njtransit/.env`.
-- [ ] Write a minimal client that authenticates and downloads the bus and rail static GTFS feeds.
-- [ ] Parse `stops.txt` from each feed and confirm the fields we need (`stop_id`, `stop_name`, `stop_lat`, `stop_lon`) and the bus/rail distinction.
-- [ ] Write connectivity tests covering successful authentication, rejection of bad credentials, feed download, and a non-empty stop list.
-- [ ] Write data tests checking that coordinates fall within New Jersey bounds, IDs are unique, and the expected New Brunswick stops are present (for example, New Brunswick rail station).
+- [x] Write a minimal client that authenticates and downloads the bus and rail static GTFS feeds.
+- [x] Parse `stops.txt` from each feed and confirm the fields we need (`stop_id`, `stop_name`, `stop_lat`, `stop_lon`) and the bus/rail distinction.
+- [ ] Write connectivity tests covering successful authentication, rejection of bad credentials, feed download, and a non-empty stop list. (Written; the successful-auth tests skip until real credentials are in `poc/njtransit/.env`.)
+- [x] Write data tests checking that coordinates fall within New Jersey bounds, IDs are unique, and the expected New Brunswick stops are present (for example, New Brunswick rail station).
 - [x] Write scope-logic tests from the fixed New Brunswick demo location: nearest stop, stops within the walking-comfort radius, and a heuristic transit ETA to a few pharmacies from `bigPharma/`.
 - [x] Record rate limits, token expiry, and terms of use, then decide whether to snapshot the feeds once or fetch them at seed time.
-- [ ] Write a go/no-go summary in the POC README. If the API doesn't work for our scope, identify a fallback GTFS source.
-- [ ] Cache the API token in `poc/njtransit/data/` along with when it was issued, and reuse it until it expires. Rail `getToken` is limited to 10 calls per day and tokens last about 24 hours, so running the live tests repeatedly must not request a new token every time.
+- [x] Write a go/no-go summary in the POC README. If the API doesn't work for our scope, identify a fallback GTFS source.
+- [x] Cache the API token in `poc/njtransit/data/` along with when it was issued, and reuse it until it expires. Rail `getToken` is limited to 10 calls per day and tokens last about 24 hours, so running the live tests repeatedly must not request a new token every time.
 
 ## Phase 2 — Define shared contracts and prepare data
 
@@ -35,7 +35,9 @@ Before building on NJ Transit data, confirm we can reach the API, get the static
 - [ ] Create the SQLite schema and database initialization/seeding path.
 - [ ] Build the drug JSON dataset with generic names, brand names, and strengths.
 - [ ] Import New Jersey pharmacy locations into the database, starting from the data already pulled in `bigPharma/` (OSM `pharmacies_osm.csv` or geocoded NPPES `nj_pharmacies_geocoded.csv`).
-- [ ] Import NJ Transit static GTFS bus and rail stops from `stops.txt`.
+- [ ] Import NJ Transit static GTFS bus and rail stops from `stops.txt`, using the public `rail_data.zip`/`bus_data.zip` snapshot (Phase 1 go/no-go: no token needed). Reuse `poc/njtransit/src/gtfs.ts` and `download.ts`.
+- [ ] Pick one pharmacy source or remove duplicates (OSM and NPPES overlap, e.g. 303 George St).
+- [ ] Transit heuristic: compute bus-only and rail-only estimates and take the faster feasible one (combined nearest-stop snapping almost always picks bus).
 - [ ] Generate deterministic simulated inventory and prices with a fixed seed.
 - [ ] Verify seeded data covers the rehearsed demo drugs and locations.
 
