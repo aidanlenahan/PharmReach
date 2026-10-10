@@ -1,0 +1,68 @@
+# Internal planning
+SCHEDULE.md
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Next.js / build output
+.next/
+out/
+build/
+dist/
+next-env.d.ts
+*.tsbuildinfo
+.vercel
+
+# Environment / secrets
+.env
+.env*.local
+!.env.example
+
+# Database (regenerate via seed script)
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pm2/
+
+# Testing / coverage
+coverage/
+
+# Python (data scripts, if any)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Cloudflare tunnel credentials
+.cloudflared/
+*.pem
+credentials.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
