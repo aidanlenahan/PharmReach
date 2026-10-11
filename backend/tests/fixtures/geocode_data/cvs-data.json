@@ -1,0 +1,8 @@
+{
+ "source_info": {"checked_on": "2026-10-10"},
+ "medications": [],
+ "inventory": {},
+ "pharmacies": [
+  {"id": "cvs-100-14th-jc", "name": "CVS Pharmacy", "address": "100 14th St · Jersey City, NJ 07310", "city": "Jersey City", "state": "NJ", "latitude": 40.732831, "longitude": -74.035759}
+ ]
+}

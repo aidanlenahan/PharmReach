@@ -1,0 +1,9 @@
+{
+ "source": "Test fixture (subset shaped like backend/data/address-index.json)",
+ "addresses": [
+  {"address": "116 14th Street, Hoboken, NJ", "house_number": "116", "street": "14th Street", "latitude": 40.7537, "longitude": -74.0280},
+  {"address": "200 14th Street, Hoboken, NJ", "house_number": "200", "street": "14th Street", "latitude": 40.7540, "longitude": -74.0300},
+  {"address": "64 10th Street, Hoboken, NJ", "house_number": "64", "street": "10th Street", "latitude": 40.7486251, "longitude": -74.0270282}
+ ],
+ "aliases": []
+}
