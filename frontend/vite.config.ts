@@ -39,13 +39,26 @@ function locationsAsset(): Plugin {
   };
 }
 
+// Serve /results etc. from results.html in dev and preview, matching backend/serve.py.
+const cleanPages = new Set(['find-medicine', 'results', 'settings', 'privacy', 'onboarding', 'products']);
+function cleanUrls(): Plugin {
+  const rewrite = (middlewares: { use: (handler: (request: { url?: string }, response: unknown, next: () => void) => void) => void }) => {
+    middlewares.use((request, _response, next) => {
+      const [path, query] = (request.url || '').split('?');
+      if (cleanPages.has(path.slice(1))) request.url = `${path}.html${query ? `?${query}` : ''}`;
+      next();
+    });
+  };
+  return { name: 'clean-urls', configureServer: (server) => rewrite(server.middlewares), configurePreviewServer: (server) => rewrite(server.middlewares) };
+}
+
 export default defineConfig(({ mode }) => {
   // The browser Maps key lives in the repo-root .env next to the backend keys.
   const env = loadEnv(mode, resolve(rootDir, '..'), '');
   const mapsKey = env.VITE_GOOGLE_MAPS_API_KEY || env.GOOGLE_MAPS_API_KEY || env.GOOGLE_API_KEY || '';
   return {
     root: rootDir,
-    plugins: [react(), locationsAsset(), loadingFrame(rootDir)],
+    plugins: [react(), cleanUrls(), locationsAsset(), loadingFrame(rootDir)],
     define: { 'import.meta.env.VITE_GOOGLE_MAPS_API_KEY': JSON.stringify(mapsKey) },
     server: {
       port: 5173,

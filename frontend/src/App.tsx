@@ -13,24 +13,25 @@ import { AppShell } from './components/AppShell';
 import { Skeleton } from './components/LoadingSkeleton';
 
 export function App() {
-  const path = location.pathname;
+  // The server redirects *.html to clean paths; this also covers dev servers that don't.
+  const path = location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
   const styles = path === '/styles' || path === '/styles/' || path === '/styles/index.html';
   const palette = styles ? getPalette(new URLSearchParams(location.search).get('palette')) : undefined;
-  const onboarding = path === '/onboarding.html';
-  const needsPreferences = path === '/find-medicine.html' || path === '/results.html' || path === '/settings.html';
+  const onboarding = path === '/onboarding';
+  const needsPreferences = path === '/find-medicine' || path === '/results' || path === '/settings';
   useEffect(() => {
-    document.title = path === '/find-medicine.html' ? 'Find medicine · PharmReach' : path === '/privacy.html' ? 'Privacy · PharmReach' : styles && !palette ? 'Styles · PharmReach' : onboarding ? 'Travel setup · PharmReach' : path === '/results.html' ? 'Results · PharmReach' : path === '/products.html' ? 'Products · PharmReach' : path === '/settings.html' ? 'Settings · PharmReach' : 'PharmReach · Find your medicine nearby';
+    document.title = path === '/find-medicine' ? 'Find medicine · PharmReach' : path === '/privacy' ? 'Privacy · PharmReach' : styles && !palette ? 'Styles · PharmReach' : onboarding ? 'Travel setup · PharmReach' : path === '/results' ? 'Results · PharmReach' : path === '/products' ? 'Products · PharmReach' : path === '/settings' ? 'Settings · PharmReach' : 'PharmReach · Find your medicine nearby';
     if (needsPreferences && !getPreferences()) {
-      location.replace(`/onboarding.html?next=${encodeURIComponent(path + location.search)}`);
+      location.replace(`/onboarding?next=${encodeURIComponent(path + location.search)}`);
     }
   }, [onboarding, path, needsPreferences]);
   if (styles) return palette ? <HomePage /> : <StylesPage />;
-  if (path === '/privacy.html') return <PrivacyPage />;
+  if (path === '/privacy') return <PrivacyPage />;
   if (onboarding) return <OnboardingPage />;
   if (needsPreferences && !getPreferences()) return <AppShell onboarding><main className="onboarding" aria-busy="true"><span className="visually-hidden" role="status">Opening travel setup…</span><Skeleton className="skeleton-name" /><Skeleton className="skeleton-text" /></main></AppShell>;
-  if (path === '/find-medicine.html') return <FindMedicinePage />;
-  if (path === '/results.html') return <ResultsPage />;
-  if (path === '/products.html') return <ProductsPage />;
-  if (path === '/settings.html') return <SettingsPage />;
+  if (path === '/find-medicine') return <FindMedicinePage />;
+  if (path === '/results') return <ResultsPage />;
+  if (path === '/products') return <ProductsPage />;
+  if (path === '/settings') return <SettingsPage />;
   return <HomePage />;
 }
