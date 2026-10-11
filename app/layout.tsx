@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pharmacy Searcher",
+  title: "PharmReach",
   description: "Find NJ pharmacies with your medication in stock, ranked by travel cost and time.",
 };
 
