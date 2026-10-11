@@ -1,0 +1,21 @@
+[Unit]
+Description=HackRU pharmacy API and compiled frontend
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=@USER@
+WorkingDirectory=@ROOT@
+ExecStart=/bin/bash @ROOT@/backend/otp/run_demo_with_otp.sh
+Restart=always
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=-/etc/hackru.env
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

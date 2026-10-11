@@ -5,12 +5,11 @@ tunnel: 02ebf828-e43e-4503-8eb8-7ccb01d87611
 credentials-file: /etc/cloudflared/02ebf828-e43e-4503-8eb8-7ccb01d87611.json
 
 ingress:
+  - hostname: pharmreach.tech
+    service: http://127.0.0.1:4173
+  - hostname: otp.pharmreach.tech
+    service: http://127.0.0.1:8080
+  # Legacy app links redirect to pharmreach.tech in the Python server.
   - hostname: hackru.alenahan.net
-    service: http://localhost:3000
-  # NearRx frontend prototype (tmp-frontend/serve.py)
-  - hostname: hackru-preview.alenahan.net
-    service: http://localhost:4173
-  # OpenTripPlanner debug UI + GTFS GraphQL API
-  - hostname: hackru-otp.alenahan.net
-    service: http://localhost:8080
+    service: http://127.0.0.1:4173
   - service: http_status:404
