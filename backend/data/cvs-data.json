@@ -1,14 +1,19 @@
 {
   "source_info": {
     "merchant": "CVS Pharmacy",
-    "region": "New Jersey",
-    "checked_on": "2026-10-10",
-    "inventory_note": "Availability is a point-in-time store snapshot. A product-specific store search with no listing is recorded as “Out of stock” per user guidance; the store may not carry the item or it may be unavailable. “Unknown” means the lookup was blocked, not completed, or has no recorded store-specific result.",
+    "region": "Hudson County, New Jersey",
+    "checked_on": "2026-10-11",
+    "inventory_note": "Inventory is point-in-time. In stock and out of stock reflect visible store-specific CVS results. Unknown means no store-specific result was observed; it is not an out-of-stock result. New county observations are mixed with the preserved source records and have their own checked_on dates.",
     "price_note": "Prices are current online product-page prices checked 2026-10-10. CVS notes that in-store prices may vary.",
     "availability_note": "Pickup status is shown only when CVS provided it. In-stock with pickup unavailable means CVS showed the item in store but not for pickup.",
     "friend_cvs_additions_checked_on": "2026-10-10",
     "walgreens_additions_checked_on": "2026-10-10",
-    "new_cvs_research_checked_on": "2026-10-10"
+    "new_cvs_research_checked_on": "2026-10-10",
+    "hudson_locations_checked_on": "2026-10-11",
+    "location_note": "Hudson County CVS locations were gathered from the public CVS store locator. New coordinates are the locator Get directions destination and may identify the store pin rather than the pharmacy entrance. Existing coordinates and route estimates are preserved.",
+    "dataset_scope": "Original dataset plus deduplicated Hudson County store additions.",
+    "excluded_existing_store_count": 9,
+    "addition_store_count": 9
   },
   "medications": [
     {
@@ -1337,6 +1342,231 @@
       "location_verified_on": "2026-10-10",
       "coordinates_verified_on": "2026-10-10",
       "merchant": "CVS"
+    },
+    {
+      "id": "cvs-store-2753",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · Bayonne",
+      "address": "560 Avenue C · Bayonne, NJ 07002",
+      "latitude": 40.66643,
+      "longitude": -74.11893,
+      "coordinates_source": "https://www.cvs.com/store-locator/bayonne-nj-pharmacies/560-avenue-c-bayonne-nj-07002/storeid=2753",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-823-5601",
+      "location_source": "https://www.cvs.com/store-locator/bayonne-nj-pharmacies/560-avenue-c-bayonne-nj-07002/storeid=2753",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "Bayonne",
+      "zip": "07002",
+      "cvs_store_id": "2753"
+    },
+    {
+      "id": "cvs-store-11203",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · Bayonne",
+      "address": "18-40 Goldsborough Drive · Bayonne, NJ 07002",
+      "latitude": 40.67181,
+      "longitude": -74.1059,
+      "coordinates_source": "https://www.cvs.com/store-locator/bayonne-nj-pharmacies/18-40-goldsborough-drive-bayonne-nj-07002/storeid=11203",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-443-0093",
+      "location_source": "https://www.cvs.com/store-locator/bayonne-nj-pharmacies/18-40-goldsborough-drive-bayonne-nj-07002/storeid=11203",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "Bayonne",
+      "zip": "07002",
+      "cvs_store_id": "11203"
+    },
+    {
+      "id": "cvs-store-17892",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · Jersey City",
+      "address": "381 Route 440 · Jersey City, NJ 07305",
+      "latitude": 40.70891,
+      "longitude": -74.1021,
+      "coordinates_source": "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/381-route-440-jersey-city-nj-07305/storeid=17892",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-551-6700",
+      "location_source": "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/381-route-440-jersey-city-nj-07305/storeid=17892",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "Jersey City",
+      "zip": "07305",
+      "cvs_store_id": "17892"
+    },
+    {
+      "id": "cvs-store-385",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · Kearny",
+      "address": "220 Schuyler Ave · Kearny, NJ 07032",
+      "latitude": 40.75607,
+      "longitude": -74.14407,
+      "coordinates_source": "https://www.cvs.com/store-locator/kearny-nj-pharmacies/220-schuyler-ave-kearny-nj-07032/storeid=385",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-997-4600",
+      "location_source": "https://www.cvs.com/store-locator/kearny-nj-pharmacies/220-schuyler-ave-kearny-nj-07032/storeid=385",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "Kearny",
+      "zip": "07032",
+      "cvs_store_id": "385"
+    },
+    {
+      "id": "cvs-store-17848",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · Kearny",
+      "address": "200 Passaic Avenue · Kearny, NJ 07032",
+      "latitude": 40.76028,
+      "longitude": -74.15868,
+      "coordinates_source": "https://www.cvs.com/store-locator/kearny-nj-pharmacies/200-passaic-avenue-kearny-nj-07032/storeid=17848",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-467-2008",
+      "location_source": "https://www.cvs.com/store-locator/kearny-nj-pharmacies/200-passaic-avenue-kearny-nj-07032/storeid=17848",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "Kearny",
+      "zip": "07032",
+      "cvs_store_id": "17848"
+    },
+    {
+      "id": "cvs-store-478",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · North Bergen",
+      "address": "9015 Bergenline Avenue 90Th Street · North Bergen, NJ 07047",
+      "latitude": 40.80901,
+      "longitude": -74.00233,
+      "coordinates_source": "https://www.cvs.com/store-locator/north-bergen-nj-pharmacies/9015-bergenline-avenue-90th-street-north-bergen-nj-07047/storeid=478",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-869-3930",
+      "location_source": "https://www.cvs.com/store-locator/north-bergen-nj-pharmacies/9015-bergenline-avenue-90th-street-north-bergen-nj-07047/storeid=478",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "North Bergen",
+      "zip": "07047",
+      "cvs_store_id": "478"
+    },
+    {
+      "id": "cvs-store-16985",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · North Bergen",
+      "address": "7101 Tonnelle Ave · North Bergen, NJ 07047",
+      "latitude": 40.80157,
+      "longitude": -74.02201,
+      "coordinates_source": "https://www.cvs.com/store-locator/north-bergen-nj-pharmacies/7101-tonnelle-ave-north-bergen-nj-07047/storeid=16985",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-520-1702",
+      "location_source": "https://www.cvs.com/store-locator/north-bergen-nj-pharmacies/7101-tonnelle-ave-north-bergen-nj-07047/storeid=16985",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "North Bergen",
+      "zip": "07047",
+      "cvs_store_id": "16985"
+    },
+    {
+      "id": "cvs-store-808",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · Secaucus",
+      "address": "101 Plaza Center · Secaucus, NJ 07094",
+      "latitude": 40.7918,
+      "longitude": -74.05702,
+      "coordinates_source": "https://www.cvs.com/store-locator/secaucus-nj-pharmacies/101-plaza-center-secaucus-nj-07094/storeid=808",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-863-5535",
+      "location_source": "https://www.cvs.com/store-locator/secaucus-nj-pharmacies/101-plaza-center-secaucus-nj-07094/storeid=808",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "Secaucus",
+      "zip": "07094",
+      "cvs_store_id": "808"
+    },
+    {
+      "id": "cvs-store-1124",
+      "name": "CVS Pharmacy",
+      "merchant": "CVS",
+      "tag": "CVS · West New York",
+      "address": "5300 Bergenline Ave, Coviello Plaza · West New York, NJ 07093",
+      "latitude": 40.78472,
+      "longitude": -74.01921,
+      "coordinates_source": "https://www.cvs.com/store-locator/west-new-york-nj-pharmacies/5300-bergenline-ave-coviello-plaza-west-new-york-nj-07093/storeid=1124",
+      "coordinates_note": "Public CVS directory Get directions link map center; not an OSM pharmacy-door coordinate",
+      "distance": null,
+      "walk": null,
+      "transit": null,
+      "depart": null,
+      "drive": null,
+      "driveCost": null,
+      "bike": null,
+      "phone": "201-974-0818",
+      "location_source": "https://www.cvs.com/store-locator/west-new-york-nj-pharmacies/5300-bergenline-ave-coviello-plaza-west-new-york-nj-07093/storeid=1124",
+      "location_verified_on": "2026-10-11",
+      "state": "NJ",
+      "city": "West New York",
+      "zip": "07093",
+      "cvs_store_id": "1124"
     }
   ],
   "inventory": {
@@ -1425,6 +1655,93 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "price": 12.49,
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623"
+      },
+      "cvs-store-478": {
+        "price": 12.49,
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623"
+      },
+      "cvs-store-808": {
+        "price": 12.49,
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-pepto-original-12oz": {
@@ -1514,6 +1831,90 @@
         "availability_note": "CVS Check store availability panel showed In Stock and In-store pickup available at 4700 Bergenline Ave, Union City, NJ 07087.",
         "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "price": 18.39,
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322"
+      },
+      "cvs-store-478": {
+        "price": 18.39,
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322"
+      },
+      "cvs-store-808": {
+        "price": 18.39,
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322"
+      },
+      "cvs-store-2753": {
+        "price": 18.39,
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322"
+      },
+      "cvs-store-11203": {
+        "price": 18.39,
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322"
+      },
+      "cvs-store-385": {
+        "price": 18.39,
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-tums-ultra-160": {
@@ -1604,6 +2005,90 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "price": 12.99,
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352"
+      },
+      "cvs-store-478": {
+        "price": 12.99,
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352"
+      },
+      "cvs-store-808": {
+        "price": 12.99,
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352"
+      },
+      "cvs-store-2753": {
+        "price": 12.99,
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352"
+      },
+      "cvs-store-11203": {
+        "price": 12.99,
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352"
+      },
+      "cvs-store-385": {
+        "price": 12.99,
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-omeprazole-20-42": {
@@ -1694,6 +2179,90 @@
         "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch.",
         "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-11"
+      },
+      "cvs-store-11203": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-11"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-11"
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-11"
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-11"
+      },
+      "cvs-store-1124": {
+        "price": 25.49,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-11"
       }
     },
     "cvs-acetaminophen-500": {
@@ -1783,6 +2352,96 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-ibuprofen-200-100": {
@@ -1872,6 +2531,90 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price": 8.99,
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-478": {
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price": 8.99,
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-808": {
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price": 8.99,
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price": 8.99,
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-11203": {
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price": 8.99,
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-385": {
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price": 8.99,
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-aspirin-325-500": {
@@ -1963,6 +2706,90 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "price": 12.79,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693"
+      },
+      "cvs-store-478": {
+        "price": 12.79,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693"
+      },
+      "cvs-store-808": {
+        "price": 12.79,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693"
+      },
+      "cvs-store-2753": {
+        "price": 12.79,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693"
+      },
+      "cvs-store-11203": {
+        "price": 12.79,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693"
+      },
+      "cvs-store-385": {
+        "price": 12.79,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-aspirin-325-100": {
@@ -2054,6 +2881,90 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "price": 4.49,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314"
+      },
+      "cvs-store-478": {
+        "price": 4.49,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314"
+      },
+      "cvs-store-808": {
+        "price": 4.49,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314"
+      },
+      "cvs-store-2753": {
+        "price": 4.49,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314"
+      },
+      "cvs-store-11203": {
+        "price": 4.49,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314"
+      },
+      "cvs-store-385": {
+        "price": 4.49,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-naproxen-220-500": {
@@ -2145,6 +3056,90 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "price": 30.49,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-11",
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594"
+      },
+      "cvs-store-478": {
+        "price": 30.49,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594"
+      },
+      "cvs-store-808": {
+        "price": 30.49,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594"
+      },
+      "cvs-store-2753": {
+        "price": 30.49,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-11",
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594"
+      },
+      "cvs-store-11203": {
+        "price": 30.49,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594"
+      },
+      "cvs-store-385": {
+        "price": 30.49,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-triple-antibiotic-2oz": {
@@ -2234,6 +3229,90 @@
         "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
         "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-1124": {
+        "price": 17.49,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643"
+      },
+      "cvs-store-478": {
+        "price": 17.49,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643"
+      },
+      "cvs-store-808": {
+        "price": 17.49,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643"
+      },
+      "cvs-store-2753": {
+        "price": 17.49,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643"
+      },
+      "cvs-store-11203": {
+        "price": 17.49,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643"
+      },
+      "cvs-store-385": {
+        "price": 17.49,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-11",
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-11",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643"
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-hydrocortisone-1-1oz": {
@@ -2320,6 +3399,96 @@
         "availability_note": "This store was not included in the product-specific CVS lookup.",
         "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-budesonide-32mcg-120": {
@@ -2412,6 +3581,96 @@
         "availability_note": "CVS online price is listed; store-specific availability was not verified.",
         "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-guaifenesin-dextromethorphan-er-20": {
@@ -2504,6 +3763,96 @@
         "availability_note": "CVS online price is listed; store-specific availability was not verified.",
         "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-dextromethorphan-guaifenesin-liquid-8oz": {
@@ -2596,6 +3945,96 @@
         "availability_note": "CVS online price is listed; store-specific availability was not verified.",
         "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-loperamide-softgels-24": {
@@ -2682,6 +4121,96 @@
         "availability_note": "This store was not included in the product-specific CVS lookup.",
         "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-saline-nasal-spray-1-5oz": {
@@ -2768,6 +4297,96 @@
         "availability_note": "This store was not included in the product-specific CVS lookup.",
         "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-polyethylene-glycol-3350-4-1oz": {
@@ -2860,6 +4479,96 @@
         "availability_note": "CVS online price is listed; store-specific availability was not verified.",
         "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-magnesium-citrate-10oz": {
@@ -2952,6 +4661,96 @@
         "availability_note": "CVS online price is listed; store-specific availability was not verified.",
         "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-famotidine-20-75": {
@@ -3044,6 +4843,96 @@
         "availability_note": "CVS online price is listed; store-specific availability was not verified.",
         "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-docusate-sodium-100-30": {
@@ -3136,6 +5025,96 @@
         "availability_note": "CVS online price is listed; store-specific availability was not verified.",
         "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-chlorpheniramine-4mg-100-tablets": {
@@ -3222,6 +5201,96 @@
         "availability_note": "This store was not included in the product-specific CVS lookup.",
         "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-docosanol-10pct-2g-pump": {
@@ -3308,6 +5377,96 @@
         "availability_note": "This store was not included in the product-specific CVS lookup.",
         "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-diphenhydramine-25mg-48-capsules": {
@@ -3391,6 +5550,96 @@
         "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
         "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-olopatadine-02pct-25ml-eye-drops": {
@@ -3474,6 +5723,96 @@
         "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
         "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-fexofenadine-60mg-12-tablets": {
@@ -3557,6 +5896,96 @@
         "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
         "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-melatonin-5mg-120-tablets": {
@@ -3640,6 +6069,96 @@
         "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
         "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     },
     "cvs-cetirizine-10mg-14-tablets": {
@@ -3723,6 +6242,96 @@
         "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
         "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
         "price_checked_on": "2026-10-10"
+      },
+      "cvs-store-2753": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-11203": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17892": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-385": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-17848": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-478": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-16985": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-808": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
+      },
+      "cvs-store-1124": {
+        "price": null,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": null,
+        "price_checked_on": null,
+        "availability_note": "Store-specific stock and price have not been observed in this county expansion."
       }
     }
   },
@@ -4006,6 +6615,56 @@
           "visible_evidence": "Out of stock 100 14TH ST; 0 in stock"
         }
       }
+    },
+    {
+      "evidence_type": "Hudson County locations",
+      "observed_on": "2026-10-11",
+      "method": "Public CVS store locator pages and visible Get directions links; no automated inventory endpoint used.",
+      "store_count": 18,
+      "sources": [
+        "https://www.cvs.com/store-locator/bayonne-nj-pharmacies/18-40-goldsborough-drive-bayonne-nj-07002/storeid=11203",
+        "https://www.cvs.com/store-locator/bayonne-nj-pharmacies/560-avenue-c-bayonne-nj-07002/storeid=2753",
+        "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/210-14th-st-hoboken-nj-07030/storeid=4443",
+        "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/59-washington-st-court-street-plaza-hoboken-nj-07030/storeid=1928",
+        "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/811-clinton-street-hoboken-nj-07030/storeid=2209",
+        "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/100-14th-st-jersey-city-nj-07310/storeid=17006",
+        "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/104-sip-ave-jersey-city-nj-07306/storeid=17919",
+        "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/381-route-440-jersey-city-nj-07305/storeid=17892",
+        "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/70-hudson-st-jersey-city-nj-07302/storeid=11135",
+        "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/88-morgan-street-jersey-city-nj-07302/storeid=11088",
+        "https://www.cvs.com/store-locator/kearny-nj-pharmacies/200-passaic-avenue-kearny-nj-07032/storeid=17848",
+        "https://www.cvs.com/store-locator/kearny-nj-pharmacies/220-schuyler-ave-kearny-nj-07032/storeid=385",
+        "https://www.cvs.com/store-locator/north-bergen-nj-pharmacies/7101-tonnelle-ave-north-bergen-nj-07047/storeid=16985",
+        "https://www.cvs.com/store-locator/north-bergen-nj-pharmacies/9015-bergenline-avenue-90th-street-north-bergen-nj-07047/storeid=478",
+        "https://www.cvs.com/store-locator/secaucus-nj-pharmacies/101-plaza-center-secaucus-nj-07094/storeid=808",
+        "https://www.cvs.com/store-locator/union-city-nj-pharmacies/4700-bergenline-ave-union-city-nj-07087/storeid=7400",
+        "https://www.cvs.com/store-locator/union-city-nj-pharmacies/714-summit-ave-union-city-nj-07087/storeid=4615",
+        "https://www.cvs.com/store-locator/west-new-york-nj-pharmacies/5300-bergenline-ave-coviello-plaza-west-new-york-nj-07093/storeid=1124"
+      ]
+    },
+    {
+      "evidence_type": "Hudson County product checks",
+      "observed_on": "2026-10-11",
+      "method": "Visible CVS product pages and Check store availability drawer. Captured eight products across the returned store list. Other store/product pairs remain Unknown.",
+      "products_checked": [
+        "cvs-low-dose-aspirin-81-300",
+        "cvs-pepto-original-12oz",
+        "cvs-tums-ultra-160",
+        "cvs-ibuprofen-200-100",
+        "cvs-aspirin-325-500",
+        "cvs-aspirin-325-100",
+        "cvs-naproxen-220-500",
+        "cvs-triple-antibiotic-2oz"
+      ]
+    },
+    {
+      "evidence_type": "Hudson County product check",
+      "observed_on": "2026-10-11",
+      "medication_id": "cvs-omeprazole-20-42",
+      "online_price": 25.49,
+      "method": "Visible CVS product page and Check store availability drawer; seven ZIP searches; stock status and pickup wording captured per listed store.",
+      "store_count": 13,
+      "product_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305"
     }
   ],
   "archived_products_no_store": []
