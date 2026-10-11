@@ -1,4 +1,4 @@
-# Cloudflare Tunnel "hackru26" -> Next.js app on this VM.
+# Cloudflare Tunnel "hackru26" -> services on this VM.
 # Credentials JSON is NOT in the repo; it lives next to the active config
 # (~/.cloudflared/ for manual runs, /etc/cloudflared/ for the systemd service).
 tunnel: 02ebf828-e43e-4503-8eb8-7ccb01d87611
@@ -7,4 +7,10 @@ credentials-file: /etc/cloudflared/02ebf828-e43e-4503-8eb8-7ccb01d87611.json
 ingress:
   - hostname: hackru.alenahan.net
     service: http://localhost:3000
+  # NearRx frontend prototype (tmp-frontend/serve.py)
+  - hostname: hackru-preview.alenahan.net
+    service: http://localhost:4173
+  # OpenTripPlanner debug UI + GTFS GraphQL API
+  - hostname: hackru-otp.alenahan.net
+    service: http://localhost:8080
   - service: http_status:404
