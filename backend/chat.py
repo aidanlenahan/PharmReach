@@ -266,7 +266,7 @@ def render_reply(status, category, ids, catalog):
             'name': m['name'],
             'strength': m.get('strength', ''),
             'category': m.get('category', ''),
-            'results_url': '/results.html?medication=' + quote(m['id'], safe=''),
+            'results_url': '/results?medication=' + quote(m['id'], safe=''),
             'product_url': retailer_url(m.get('product_source')),
         })
     # Prefer the category of the top product so the heading always matches the list.

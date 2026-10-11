@@ -283,6 +283,28 @@ class GetPharmaciesTests(unittest.TestCase):
         self.assertEqual(result['unrouted_count'], 0)
         self.assertIn('George St', json.dumps(result))
 
+    def test_mpg_prices_the_drive(self):
+        routes = copy.deepcopy(OTP_ROUTES)
+        routes['s-a']['methods']['drive']['distance_miles'] = 6.2
+        result = search(StubFetch(routes), mode='drive', sort='Travel cost', mpg=31)
+        by_id = {r['id']: r for r in result['pharmacies']}
+        drive = by_id['s-a']['methods']['drive']
+        # 6.2 mi / 31 MPG = 0.2 gal; other stores fall back to the routed distance (1.0 mi).
+        self.assertEqual(drive['travel_cost'], round(0.2 * serve.GAS_PRICE_PER_GALLON, 2))
+        self.assertEqual(drive['total_cost'], round(10.0 + drive['travel_cost'], 2))
+        self.assertEqual(by_id['s-b']['methods']['drive']['travel_cost'], round(1 / 31 * serve.GAS_PRICE_PER_GALLON, 2))
+        self.assertIsNone(by_id['s-e']['methods']['drive']['travel_cost'])  # unrouted stays unknown
+        self.assertEqual(ids(result)[:4], ['s-b', 's-g', 's-h', 's-a'])  # Alpha is now the costliest drive
+        # Without mpg the per-store estimate is kept.
+        self.assertEqual({r['id']: r for r in search()['pharmacies']}['s-a']['methods']['drive']['travel_cost'], 3.0)
+
+    def test_parse_mpg(self):
+        self.assertIsNone(serve.parse_mpg(''))
+        self.assertEqual(serve.parse_mpg('28.5'), 28.5)
+        for value in ('abc', '0', '500'):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                serve.parse_mpg(value)
+
 
 class OtpUnavailableTests(unittest.TestCase):
     def assert_stock_only(self, result):
@@ -533,7 +555,7 @@ class ForbiddenPathTests(unittest.TestCase):
             self.assertTrue(handler_for(path).forbidden_path(), path)
 
     def test_allowed(self):
-        for path in ('/', '/index.html', '/results.html?medication=ibu', '/assets/index-abc123.js', '/error.css', '/api/health', '/api/pharmacies?origin=../x'):
+        for path in ('/', '/index.html', '/results?medication=ibu', '/results.html?medication=ibu', '/assets/index-abc123.js', '/error.css', '/api/health', '/api/pharmacies?origin=../x'):
             self.assertFalse(handler_for(path).forbidden_path(), path)
 
 
@@ -567,6 +589,33 @@ class StaticServingTests(unittest.TestCase):
         finally:
             connection.close()
 
+    def raw_request(self, path):
+        connection = http.client.HTTPConnection('127.0.0.1', self.server.server_address[1], timeout=5)
+        try:
+            connection.request('GET', path)
+            response = connection.getresponse()
+            return response.status, response.read(), response
+        finally:
+            connection.close()
+
+    def test_clean_urls_serve_the_page(self):
+        for name in ('find-medicine', 'results', 'settings', 'privacy', 'onboarding', 'products'):
+            status, body, response = self.raw_request(f'/{name}?medication=ibu')
+            self.assertEqual(status, 200, name)
+            self.assertEqual(body, (serve.FRONTEND_ROOT / f'{name}.html').read_bytes(), name)
+            self.assertEqual(response.getheader('Cache-Control'), 'no-store')
+
+    def test_html_urls_redirect_to_clean_urls(self):
+        for path, location in (('/results.html?medication=ibu&mode=walk', '/results?medication=ibu&mode=walk'),
+                               ('/settings.html', '/settings'), ('/index.html', '/'), ('/index.html?x=1', '/?x=1')):
+            status, _, response = self.raw_request(path)
+            self.assertEqual(status, 301, path)
+            self.assertEqual(response.getheader('Location'), location)
+
+    def test_unknown_pages_stay_404(self):
+        for path in ('/nothing', '/results/', '/api2'):
+            self.assertEqual(self.raw_request(path)[0], 404, path)
+
     def test_index_is_served(self):
         status, body, response = self.request('/')
         self.assertEqual(status, 200)
@@ -595,6 +644,8 @@ class StaticServingTests(unittest.TestCase):
             relative = file.relative_to(dist).as_posix()
             if any(part.startswith('.') for part in relative.split('/')) or relative.endswith('.map'):
                 continue
+            if relative.removesuffix('.html') in serve.CLEAN_PAGES or relative == 'index.html':
+                continue  # these redirect to their clean URL; test_clean_urls_serve_the_page covers them
             status, body, _ = self.request('/' + relative)
             self.assertEqual((status, body), (200, file.read_bytes()), relative)
 
@@ -623,6 +674,9 @@ class StaticServingTests(unittest.TestCase):
             status, body, _ = self.request('/api/medications?q=ibuprofen')
             self.assertEqual(status, 200)
             self.assertEqual([(item['id'], item['store_count']) for item in json.loads(body)['medications']], [(MED, 6)])
+            for query in ('ibuprofen 200mg', 'ibuprofen 200 mg'):
+                status, body, _ = self.request('/api/medications?q=' + query.replace(' ', '%20'))
+                self.assertEqual([item['id'] for item in json.loads(body)['medications']], [MED], query)
         self.assertEqual(data, original)
 
     def test_unknown_api(self):

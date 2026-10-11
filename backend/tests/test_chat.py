@@ -135,7 +135,7 @@ class OutputValidationTests(unittest.TestCase):
         self.assertEqual(body['status'], 'match')
         self.assertEqual([s['name'] for s in body['suggestions']], ['Ibuprofen', 'Acetaminophen'])
         first = body['suggestions'][0]
-        self.assertEqual(first['results_url'], '/results.html?medication=ibu')
+        self.assertEqual(first['results_url'], '/results?medication=ibu')
         self.assertEqual(first['product_url'], 'https://www.cvs.com/shop/ibu')
         self.assertIsNone(body['suggestions'][1]['product_url'])  # non-retailer URL dropped
         self.assertIn('pain relief', body['message'])
