@@ -20,7 +20,6 @@ export function DisclaimerFooter() {
     };
   }, []);
   return <>
-    <footer className="legal-footer"><a href="/privacy.html">Privacy &amp; browser storage</a></footer>
     <dialog ref={dialogRef} className="disclaimer-modal" aria-labelledby="disclaimer-title" onClose={() => { document.body.style.overflow = previousOverflow.current; }}>
       <header><h2 id="disclaimer-title">Disclaimer</h2><button type="button" aria-label="Close disclaimer" onClick={() => dialogRef.current?.close()} autoFocus><X size={20} /></button></header>
       <div className="disclaimer-content">

@@ -1,0 +1,12 @@
+.app-footer{max-width:1390px;margin:auto;padding:25px clamp(12px,3.2vw,42px) 35px;display:flex;align-items:center;justify-content:space-between;gap:25px;border-top:1px solid var(--line);color:var(--ink)}
+.app-footer a{text-decoration:none;color:inherit}
+.app-footer a:hover{text-decoration:underline;text-underline-offset:3px}
+.app-footer .brand{font-size:18px}
+.app-footer .brand-mark{width:36px;height:36px;border-radius:9px}
+.app-footer p{font-size:10px;color:var(--muted);margin:12px 0 0}
+.app-footer nav{display:flex;gap:22px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.app-footer>span{font-size:10px;color:var(--muted)}
+.footer-search{display:inline-flex;align-items:center;gap:6px;line-height:1}
+.footer-search>svg{display:block;flex-shrink:0}
+@media(max-width:1050px){.app-footer{flex-wrap:wrap}.app-footer>span{width:100%}}
+@media(max-width:600px){.app-footer{padding-inline:16px;gap:23px}.app-footer nav{gap:15px;font-size:10px}.app-footer>span{font-size:10px}}
