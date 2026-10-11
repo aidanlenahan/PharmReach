@@ -39,7 +39,7 @@
   .nav a:hover, .nav a.current, .nav button:hover, .nav button.current,
   .category-chip:hover, .category-chip.selected, .mode-card.selected,
   .setup-choice:has(input:checked), .location-panel, .eta-summary,
-  .catalog-count, .pill-icon, .product-symbol, .step i, .maps-links a,
+  .catalog-count, .pill-icon, .step i, .maps-links a,
   .landing-store-pin, .landing-category-icon, .landing-preview-link:hover {
     background: var(--green2);
     color: var(--green);
@@ -157,7 +157,7 @@
   .nav a:hover, .nav a.current, .nav button:hover, .nav button.current,
   .suggestion:hover, .suggestion:focus, .mode-card.selected,
   .category-chip:hover, .category-chip.selected, .setup-choice:has(input:checked),
-  .location-panel, .eta-summary, .catalog-count, .pill-icon, .product-symbol,
+  .location-panel, .eta-summary, .catalog-count, .pill-icon,
   .step i, .maps-links a, .landing-store-pin, .landing-category-icon,
   .landing-preview-link:hover {
     background: var(--green2);
