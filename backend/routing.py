@@ -544,6 +544,9 @@ def _otp_query(service_url, origin, pharmacy, allowed_transit_modes, transit_far
         if mode == 'transit':
             route['transit_types'] = transit_types_used
             route['walk_is_faster'] = transit_walk_is_faster
+        if mode == 'drive':
+            # Lets the server price the trip from the user's gas mileage.
+            route['distance_miles'] = round(distance_miles, 2)
         return route, distance_miles
 
     modes = {}

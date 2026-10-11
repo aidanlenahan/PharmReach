@@ -20,9 +20,13 @@ from njt.status import transit_data_status
 ROOT = Path(__file__).resolve().parent
 DATA_ROOT = ROOT / 'data'
 FRONTEND_ROOT = ROOT.parent / 'frontend' / 'dist'
+# Pages are built as <name>.html but published without the extension.
+CLEAN_PAGES = frozenset({'find-medicine', 'results', 'settings', 'privacy', 'onboarding', 'products'})
 SORT_OPTIONS = ('Best match', 'Soonest arrival', 'Travel time', 'Medication cost', 'Travel cost', 'Total cost', 'Pharmacy', 'Availability')
 MODES = ('walk', 'transit', 'drive', 'bike')
 DEFAULT_ORIGIN = '40.744,-74.0324'
+# Regular gas, roughly the NJ average. Prices a drive when the user sets their MPG.
+GAS_PRICE_PER_GALLON = 3.10
 
 
 def load_data():
@@ -215,7 +219,7 @@ def build_routes(pharmacy, item):
     return routes
 
 
-def get_pharmacies(data, medication_id, mode='transit', sort='Best match', direction='asc', origin='', routing_url=None, transit_types=None, variant_id='', otp_url=None, transit_fare=None, leave_at=None):
+def get_pharmacies(data, medication_id, mode='transit', sort='Best match', direction='asc', origin='', routing_url=None, transit_types=None, variant_id='', otp_url=None, transit_fare=None, leave_at=None, mpg=None):
     origin_is_default = not origin
     origin = origin or DEFAULT_ORIGIN
     medication_record = next((m for m in data['medications'] if m['id'] == medication_id), None)
@@ -309,6 +313,17 @@ def get_pharmacies(data, medication_id, mode='transit', sort='Best match', direc
                     route['total_cost'] = round(record['price'] + route['travel_cost'], 2) if route.get('travel_cost') is not None else None
                 record['methods'][method] = route
 
+    if mpg:
+        for record in records:
+            route = record['methods']['drive']
+            miles = route.get('distance_miles', record.get('distance'))
+            if route.get('at_destination') or miles is None:
+                continue
+            route['travel_cost'] = round(miles / mpg * GAS_PRICE_PER_GALLON, 2)
+            route['travel_cost_type'] = 'mpg'
+            if route.get('available'):
+                route['total_cost'] = round(record['price'] + route['travel_cost'], 2)
+
     def rank(record):
         route = record['methods'][mode]
         if sort == 'Pharmacy':
@@ -352,6 +367,19 @@ def parse_leave_at(value):
     if departure > now + timedelta(days=30):
         raise ValueError('Choose a departure time within the next 30 days.')
     return departure.isoformat(timespec='seconds').replace('+00:00', 'Z')
+
+
+def parse_mpg(value):
+    """The user's gas mileage from ?mpg=, or None to keep the default driving estimate."""
+    if not value:
+        return None
+    try:
+        mpg = float(value)
+    except ValueError:
+        raise ValueError('Enter gas mileage as a number of miles per gallon.') from None
+    if not (1 <= mpg <= 200):
+        raise ValueError('Enter gas mileage between 1 and 200 MPG.')
+    return mpg
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -411,10 +439,32 @@ class Handler(SimpleHTTPRequestHandler):
                    'walgreens-new-products.json', 'address-index.json'}
         return any(part.startswith('.') or part in private for part in parts) or path.casefold().endswith(('.py', '.pyc', '.pem', '.key', '.map'))
 
+    def clean_url_route(self):
+        """Returns ('redirect', location) for /<page>.html, ('serve', file path) for /<page>, else None."""
+        request = urlsplit(self.path)
+        query = f'?{request.query}' if request.query else ''
+        if request.path == '/index.html':
+            return 'redirect', '/' + query
+        name = request.path.removeprefix('/').removesuffix('.html')
+        if name in CLEAN_PAGES:
+            if request.path.endswith('.html'):
+                return 'redirect', f'/{name}{query}'
+            return 'serve', f'/{name}.html{query}'
+        return None
+
     def send_head(self):
         if self.forbidden_path():
             self.send_error(403)
             return None
+        route = self.clean_url_route()
+        if route and route[0] == 'redirect':
+            self.send_response(301)
+            self.send_header('Location', route[1])
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return None
+        if route:
+            self.path = route[1]
         root = Path(self.directory).resolve()
         target = Path(self.translate_path(self.path)).resolve()
         if not target.is_relative_to(root):
@@ -498,7 +548,9 @@ class Handler(SimpleHTTPRequestHandler):
                 def searchable_text(medication):
                     fields = [medication.get('name', ''), medication.get('strength', ''), medication.get('aka', '')]
                     fields.extend(medication.get('search_terms', []))
-                    return ' '.join(re.findall(r'[a-z0-9]+', ' '.join(fields).casefold()))
+                    text = ' '.join(re.findall(r'[a-z0-9]+', ' '.join(fields).casefold()))
+                    # "81mg" should find "81 mg" (the search box shows doses without the space).
+                    return text + ' ' + re.sub(r'(\d) (mg|mcg|g|ml|iu)\b', r'\1\2', text)
                 matches = [
                     {**m, 'store_count': sum(
                         str(data['inventory'][m['id']][pharmacy['id']].get('stock', '')).strip().casefold()
@@ -511,7 +563,7 @@ class Handler(SimpleHTTPRequestHandler):
                 ]
                 return self.send_json({'mock': True, 'source_info': data.get('source_info', {}), 'medications': matches})
             if request.path == '/api/pharmacies':
-                return self.send_json({**get_pharmacies(data, param('medication'), param('mode', 'transit'), param('sort', 'Best match'), param('direction', 'asc'), param('origin')[:512], self.routing_url, [t for t in param('transit_types').split(',') if t in ('bus', 'subway', 'commuter', 'ferry')], param('variant'), self.otp_url, self.transit_fare, parse_leave_at(param('leave_at'))), 'transit_data': transit_data_status()})
+                return self.send_json({**get_pharmacies(data, param('medication'), param('mode', 'transit'), param('sort', 'Best match'), param('direction', 'asc'), param('origin')[:512], self.routing_url, [t for t in param('transit_types').split(',') if t in ('bus', 'subway', 'commuter', 'ferry')], param('variant'), self.otp_url, self.transit_fare, parse_leave_at(param('leave_at')), parse_mpg(param('mpg'))), 'transit_data': transit_data_status()})
             return self.send_json({'error': 'Unknown API endpoint.'}, 404)
         except RoutingError as error:
             return self.send_json({'error': str(error)}, 502)
