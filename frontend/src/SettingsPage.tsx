@@ -50,9 +50,11 @@ export function SettingsPage() {
           </div>
           <p className="settings-hint">The walking limit includes getting to and from transit stops. Enter 0 if you cannot walk.</p>
           {error && <p className="status-message" role="alert">{error}</p>}
-          <button type="submit" className="primary">Save travel preferences</button>
+          <div className="travel-actions">
+            <button type="submit" className="primary">Save travel preferences</button>
+            <a className="travel-reset" href="/onboarding.html?next=%2Fsettings.html">Reset travel setup</a>
+          </div>
         </form>
-        <a className="restart-setup" href="/onboarding.html?next=%2Fsettings.html">Restart travel setup →</a>
       </div>
       <div className="setting-section"><h2>Default sort</h2><p>This is the starting sort each time you run a new search. Changing sort on the results page only applies to that search.</p>
         <div className="sort-card"><div><b>Sort new searches by</b><small>{explanation}</small></div><select aria-label="Default sort" value={sort} onChange={(event) => setSort(event.target.value as SortOption)}>{defaultSortOptions.map((option) => <option key={option}>{option}</option>)}</select></div>
