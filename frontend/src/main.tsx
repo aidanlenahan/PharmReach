@@ -1,6 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
+import { MedicationHelper } from './MedicationHelper';
+import { DisclaimerFooter } from './components/DisclaimerFooter';
 import './styles.css';
 import './theme.css';
 import { applyPalette, getPalette } from './palettes';
@@ -16,4 +18,4 @@ systemTheme.addEventListener('change', updateBrowserTheme);
 const palette = location.pathname.startsWith('/styles') ? getPalette(new URLSearchParams(location.search).get('palette')) : undefined;
 if (palette) applyPalette(palette);
 
-createRoot(document.getElementById('app')!).render(<StrictMode><App /></StrictMode>);
+createRoot(document.getElementById('app')!).render(<StrictMode><App /><DisclaimerFooter /><MedicationHelper /></StrictMode>);
