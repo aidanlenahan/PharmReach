@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AppShell } from './components/AppShell';
+import { ProductsSkeleton, Skeleton } from './components/LoadingSkeleton';
 import { api } from './core';
 
 type Medication = {
@@ -16,19 +17,23 @@ export function ProductsPage() {
   const [medications, setMedications] = useState<Medication[]>([]);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState(new URLSearchParams(location.search).get('category') || 'All products');
-  const [status, setStatus] = useState('Loading products…');
+  const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(true);
   const [request, setRequest] = useState(0);
 
   useEffect(() => {
     let active = true;
+    setLoading(true);
+    setStatus('');
     api<{ medications: Medication[] }>('/api/medications')
       .then((response) => {
         if (!active) return;
         setMedications(response.medications);
-        setStatus('');
+        setLoading(false);
       })
       .catch((error: unknown) => {
         if (!active) return;
+        setLoading(false);
         setStatus(error instanceof Error ? error.message : 'Could not load the product list.');
       });
     return () => { active = false; };
@@ -44,19 +49,19 @@ export function ProductsPage() {
     }).sort((left, right) => left.name.localeCompare(right.name) || left.strength.localeCompare(right.strength));
   }, [medications, query, category]);
 
-  return <AppShell active="products"><main className="screen active catalog-page">
+  return <AppShell active="products"><main className="screen active catalog-page" aria-busy={loading}>
     <div className="catalog-heading">
       <div><div className="eyebrow">Browse OTC</div><h1>Product list</h1><p className="lead">Find a medication by its common name, ingredient, or brand, then compare nearby pharmacy options.</p></div>
-      <div className="catalog-count"><b>{medications.length}</b><span>products</span></div>
+      <div className="catalog-count"><b>{loading && !medications.length ? <Skeleton className="skeleton-count" /> : medications.length}</b><span>products</span></div>
     </div>
     <div className="catalog-tools">
       <label className="catalog-search"><span aria-hidden="true">⌕</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search products, ingredients, or brands" aria-label="Search product list" /></label>
-      <span className="catalog-result-count" aria-live="polite">{visible.length} shown</span>
+      <span className="catalog-result-count" aria-live="polite">{loading ? <Skeleton className="skeleton-result-count" /> : `${visible.length} shown`}</span>
     </div>
     <div className="catalog-categories" aria-label="Filter products by category">
-      {categories.map((item) => <button key={item} type="button" className={`category-chip${category === item ? ' selected' : ''}`} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
+      {loading && !medications.length ? [0, 1, 2, 3].map((chip) => <Skeleton className="skeleton-category" key={chip} />) : categories.map((item) => <button key={item} type="button" className={`category-chip${category === item ? ' selected' : ''}`} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
     </div>
-    {status ? <section className="catalog-empty" role="status"><p>{status}</p>{status !== 'Loading products…' && <button className="text-btn" type="button" onClick={() => setRequest((value) => value + 1)}>Try again</button>}</section> : visible.length ? <section className="product-grid" aria-label="Products">
+    {loading && !medications.length ? <ProductsSkeleton /> : status ? <section className="catalog-empty" role="status"><p>{status}</p><button className="text-btn" type="button" onClick={() => setRequest((value) => value + 1)}>Try again</button></section> : visible.length ? <section className="product-grid" aria-label="Products">
       {visible.map((item) => {
         const aliases = (item.aka || '').split(' · ').filter(Boolean).slice(0, 3);
         return <article className="product-card" key={item.id}>

@@ -9,6 +9,8 @@ import { StylesPage } from './StylesPage';
 import { PrivacyPage } from './PrivacyPage';
 import { getPalette } from './palettes';
 import { getPreferences } from './core';
+import { AppShell } from './components/AppShell';
+import { Skeleton } from './components/LoadingSkeleton';
 
 export function App() {
   const path = location.pathname;
@@ -25,7 +27,7 @@ export function App() {
   if (styles) return palette ? <HomePage /> : <StylesPage />;
   if (path === '/privacy.html') return <PrivacyPage />;
   if (onboarding) return <OnboardingPage />;
-  if (needsPreferences && !getPreferences()) return null;
+  if (needsPreferences && !getPreferences()) return <AppShell onboarding><main className="onboarding" aria-busy="true"><span className="visually-hidden" role="status">Opening travel setup…</span><Skeleton className="skeleton-name" /><Skeleton className="skeleton-text" /></main></AppShell>;
   if (path === '/find-medicine.html') return <FindMedicinePage />;
   if (path === '/results.html') return <ResultsPage />;
   if (path === '/products.html') return <ProductsPage />;
