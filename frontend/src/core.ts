@@ -35,13 +35,21 @@ export async function api<T = any>(path: string): Promise<T> {
 }
 export const escapeHtml = (value: unknown) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]!);
 export const money = (value: unknown) => value == null ? '—' : `$${Number(value).toFixed(2)}`;
+export function durationText(minutes: number | undefined): string {
+  if (minutes == null || !Number.isFinite(minutes)) return '—';
+  const rounded = Math.round(minutes);
+  if (rounded < 60) return `${rounded} min`;
+  const hours = Math.floor(rounded / 60);
+  const remainder = rounded % 60;
+  return `${hours} ${hours === 1 ? 'hr' : 'hrs'}${remainder ? ` ${remainder} min` : ''}`;
+}
 export function normalizeSort(value: string | null): SortOption {
   const current = value === 'Travel / shipping cost' ? 'Travel cost' : value;
-  return sortOptions.includes(current as SortOption) ? current as SortOption : 'Best match';
+  return sortOptions.includes(current as SortOption) ? current as SortOption : 'Travel time';
 }
 export function getDefaultSort(): SortOption {
   try { return normalizeSort(localStorage.getItem(SORT_KEY)); }
-  catch { return 'Best match'; }
+  catch { return 'Travel time'; }
 }
 export function saveDefaultSort(sort: SortOption) { try { localStorage.setItem(SORT_KEY, sort); } catch { /* Storage can be disabled. */ } }
 export function getPreferences(): TravelPreferences | null {
