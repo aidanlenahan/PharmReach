@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root{--ink:#19362d;--muted:#74827a;--green:#19765a;--green2:#eaf4e9;--lime:#d8f17c;--line:#e4eae2;--paper:#f6f8f4;--white:#fff;--gold:#957332;--goldbg:#fbf5e4;--shadow:0 12px 35px #18352c12}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px 'DM Sans',sans-serif}button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1390px;margin:auto;padding:0 42px}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:10px;font:800 20px Manrope;letter-spacing:-.7px}.brand-mark{height:35px;width:35px;background:var(--green);color:white;border-radius:12px;display:grid;place-items:center}.brand-mark svg{width:19px}.nav{display:flex;align-items:center;gap:9px}.nav button{border:0;background:transparent;padding:10px 13px;border-radius:10px;color:#69786f}.nav button:hover,.nav button.current{color:var(--green);background:#edf4eb;font-weight:700}.nav .settings-nav{display:flex;align-items:center;gap:7px}.nav svg{width:15px}.screen{display:none}.screen.active{display:block}.eyebrow{text-transform:uppercase;letter-spacing:1.5px;font-size:11px;font-weight:700;color:var(--green);display:flex;align-items:center;gap:8px}.eyebrow:before{content:'';width:18px;height:2px;background:var(--green)}h1,h2,h3,p{margin-top:0}h1{font:700 clamp(35px,4.4vw,52px)/1.1 Manrope;letter-spacing:-2.4px;margin:12px 0 10px}.lead{font-size:16px;color:var(--muted);margin:0 0 27px}.home{max-width:920px;margin:62px auto 95px}.home .hero-copy{max-width:670px}.search-area{position:relative;max-width:870px}.search-box{min-height:66px;padding:7px 8px 7px 17px;background:white;border:1px solid #dce5dc;border-radius:16px;display:flex;align-items:center;gap:13px;box-shadow:0 4px 16px #18352c09}.search-icon{width:20px;color:#809087;flex:none}.search-box input{border:0;outline:0;min-width:100px;flex:1;color:var(--ink);font-size:16px}.search-box input::placeholder{color:#9ba79f}.search-loc{display:flex;align-items:center;gap:6px;padding:0 8px;border-left:1px solid var(--line);color:#69786f;white-space:nowrap;font-size:13px}.search-loc svg{width:15px}.primary{border:0;background:var(--green);color:white;padding:14px 19px;border-radius:11px;font-weight:700;transition:.15s;white-space:nowrap}.primary:hover{background:#125f47;transform:translateY(-1px)}.suggestions{position:absolute;z-index:10;top:73px;left:0;right:0;background:white;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;padding:7px;display:none}.suggestions.open{display:block}.suggestion{width:100%;padding:12px;border:0;border-radius:10px;background:white;text-align:left;color:var(--ink);display:flex;align-items:center;gap:12px}.suggestion:hover,.suggestion:focus{background:var(--green2);outline:0}.pill-icon{width:34px;height:34px;border-radius:10px;background:#edf4e9;color:var(--green);display:grid;place-items:center}.suggestion small{display:block;color:var(--muted);margin-top:3px}.suggestion-tag{margin-left:auto;padding:5px 8px;border-radius:20px;background:#f4f6f1;color:#718078;font-size:10px}.popular{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:13px;color:#89968e;font-size:12px}.popular button{border:1px solid var(--line);border-radius:20px;background:white;color:#576a5d;font-size:12px;padding:6px 10px}.popular button:hover{border-color:#9dbba2;color:var(--green)}.home-note{margin-top:67px;padding:20px 22px;border:1px solid #e5ebe2;background:#f0f4ed;border-radius:16px;display:flex;align-items:center;gap:16px;max-width:680px;color:#586c5f}.home-note .note-icon{width:39px;height:39px;flex:none;background:white;border-radius:12px;color:var(--green);display:grid;place-items:center;font-size:19px}.home-note b{display:block;color:var(--ink);font:700 13px Manrope;margin-bottom:4px}.home-note p{font-size:12px;line-height:1.5;margin:0}
+    .results{padding:25px 0 55px}.results-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:19px}.result-search{position:relative;flex:1;max-width:690px}.result-search .search-box{min-height:52px;padding-left:14px;border-radius:12px;box-shadow:none}.result-search .search-box input{font-size:14px}.result-search .primary{padding:11px 15px;font-size:13px}.result-search .suggestions{top:59px}.results-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:11px 0 14px}.results-heading h2{font:700 21px Manrope;letter-spacing:-.7px;margin:0 0 4px}.results-heading p{color:var(--muted);font-size:12px;margin:0}.sort-wrap{display:flex;align-items:center;gap:8px;color:#75837a;font-size:12px;white-space:nowrap}.sort-wrap select,.sort-card select{border:1px solid var(--line);border-radius:9px;padding:9px 30px 9px 11px;background-color:white;color:#40594b;font-weight:600;font-size:12px}.demo-banner{background:var(--goldbg);color:#77643b;border:1px solid #f0e6c7;border-radius:10px;padding:9px 12px;font-size:11px;margin-bottom:13px;display:flex;gap:8px;align-items:center}.demo-banner strong{font-weight:700}.data-label{font-size:9px;text-transform:uppercase;letter-spacing:.65px;color:#957b41;background:#fbf5e5;border-radius:4px;padding:4px 6px;white-space:nowrap}.table-shell{border:1px solid var(--line);background:white;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px #18352c06}.table-scroll{overflow-x:auto}.table{width:100%;min-width:1100px;border-collapse:collapse}.table th{background:#f8faf6;color:#79867e;font-size:10px;font-weight:700;text-align:left;text-transform:uppercase;letter-spacing:.55px;padding:12px 13px;border-bottom:1px solid var(--line);white-space:nowrap}.table th:first-child,.table td:first-child{padding-left:17px}.table td{padding:14px 13px;border-bottom:1px solid #edf0eb;vertical-align:middle}.table tr:last-child td{border-bottom:0}.table tbody tr{cursor:pointer;transition:background .12s}.table tbody tr:hover{background:#f9fcf8}.pharmacy-name{font-weight:700;color:#264539;font-size:13px;white-space:nowrap}.pharmacy-address{display:block;margin-top:4px;font-size:10px;color:#89958d;font-weight:400}.brand-tag{display:inline-block;margin-left:5px;font-size:9px;color:#7e8b82;background:#f1f4ef;border-radius:4px;padding:3px 5px;vertical-align:1px}.med-price{font:800 15px Manrope;color:#25483b;white-space:nowrap}.med-price small{display:block;font:400 9px 'DM Sans';color:#97a199;margin-top:3px}.availability{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;white-space:nowrap}.availability:before{content:'';width:6px;height:6px;border-radius:50%;background:#56a16b}.availability.limited{color:#967331}.availability.limited:before{background:#d2a344}.availability.unavailable{color:#9b6f6b}.availability.unavailable:before{background:#c07d70}.method{min-width:105px;border-left:1px solid #edf0eb;padding-left:11px!important}.method strong{display:block;color:#334d40;font:700 12px Manrope;white-space:nowrap}.method small{display:block;color:#89958d;font-size:9px;margin-top:4px;white-space:nowrap}.method em{font-style:normal;color:#64776b;font-weight:600}.route-link{color:var(--green);font-size:10px;font-weight:700;white-space:nowrap}.table-foot{padding:12px 16px;background:#fbfcfa;border-top:1px solid var(--line);color:#88958d;font-size:10px;display:flex;justify-content:space-between;gap:15px}.map-section{margin-top:18px;border:1px solid var(--line);background:white;border-radius:16px;overflow:hidden}.map-head{padding:15px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.map-head strong{font:700 14px Manrope}.map-head span{font-size:11px;color:var(--muted)}.map-illustration{height:260px;position:relative;overflow:hidden;background:#ebefe6}.map-illustration svg{position:absolute;width:100%;height:100%;inset:0}.map-dot{position:absolute;transform:translate(-50%,-50%);height:30px;width:30px;border-radius:50% 50% 50% 8px;transform:translate(-50%,-65%) rotate(-45deg);background:var(--green);border:2px solid white;box-shadow:0 3px 9px #18352c33;color:white;display:grid;place-items:center;font-size:10px;font-weight:700}.map-dot span{transform:rotate(45deg)}.map-you{background:#dfa260}.map-caption{position:absolute;left:13px;bottom:12px;background:#ffffffdf;color:#69796f;border-radius:7px;padding:6px 9px;font-size:10px}.detail{position:fixed;z-index:30;right:24px;top:94px;width:min(420px,calc(100vw - 30px));max-height:calc(100vh - 115px);overflow:auto;background:white;border:1px solid var(--line);border-radius:17px;box-shadow:0 18px 65px #18352c2b;display:none}.detail.open{display:block}.detail-cover{height:63px;background:linear-gradient(120deg,#e9f3df,#d6e9db);position:relative}.detail-close{position:absolute;right:12px;top:11px;width:31px;height:31px;border:0;border-radius:9px;background:#ffffffcc;color:#486457;font-size:18px}.detail-body{padding:17px 20px 19px}.detail-body h3{font:700 18px Manrope;margin:0 0 5px}.detail-sub{font-size:11px;color:var(--muted)}.detail-price{margin:15px 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.detail-price b{font:800 23px Manrope}.detail-price small{display:block;color:#87948b;font-size:10px}.route-title{font:700 13px Manrope;margin:15px 0 8px}.detail-modes{display:grid;grid-template-columns:1fr 1fr;gap:7px}.mode-card{border:1px solid var(--line);border-radius:10px;padding:9px 10px}.mode-card b{font:700 11px Manrope;display:block}.mode-card span{font-size:10px;color:#75837a;display:block;margin-top:4px}.route-steps{margin:14px 0}.step{display:flex;gap:9px;padding:0 0 12px;position:relative;font-size:11px;color:#68776e}.step:not(:last-child):before{content:'';position:absolute;left:7px;top:16px;bottom:0;border-left:1px dashed #aec2ae}.step i{height:15px;width:15px;border-radius:50%;background:#edf4e9;color:#52805a;font-style:normal;font-size:9px;display:grid;place-items:center;z-index:1;flex:none}.step b{display:block;color:#345142;margin-bottom:3px}.detail .primary{width:100%;padding:12px}.detail-note{font-size:9px;color:#929d95;text-align:center;line-height:1.45;margin:10px 0 0}.scrim{position:fixed;inset:0;background:#17322833;z-index:29;display:none}.scrim.open{display:block}
+    .settings{max-width:760px;margin:42px auto 90px}.settings-card{background:white;border:1px solid var(--line);border-radius:17px;padding:26px 28px;box-shadow:0 3px 12px #18352c06}.settings h1{font-size:34px;letter-spacing:-1.4px;margin:9px 0}.settings-intro{color:var(--muted);font-size:14px;margin-bottom:24px}.setting-section{padding:19px 0;border-top:1px solid var(--line)}.setting-section h2{font:700 14px Manrope;margin:0 0 7px}.setting-section p{color:var(--muted);font-size:12px;line-height:1.55;margin:0 0 14px}.sort-card{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#f8faf6;border:1px solid var(--line);border-radius:12px;padding:14px}.sort-card b{font:700 12px Manrope;display:block;margin-bottom:4px}.sort-card small{font-size:10px;color:#839087}.settings-actions{display:flex;align-items:center;justify-content:space-between;padding-top:15px}.text-btn{border:0;background:transparent;color:#708077;font-weight:600;padding:10px}.settings-actions .primary{padding:11px 17px}.toast{position:fixed;z-index:70;bottom:23px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.2s;background:#1c3e30;color:white;padding:11px 16px;border-radius:11px;font-size:12px;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:900px){.shell{padding:0 22px}.results-toolbar{align-items:flex-start;flex-direction:column}.result-search{max-width:none;width:100%}.results-meta{align-items:flex-start;flex-direction:column}.map-illustration{height:220px}}
+    @media(max-width:600px){.shell{padding:0 14px}.topbar{height:65px}.brand{font-size:18px}.nav{gap:0}.nav button{font-size:12px;padding:8px}.nav .settings-nav{font-size:0}.nav .settings-nav svg{width:18px}.home{margin:43px auto 60px}h1{font-size:37px}.lead{font-size:14px}.search-box{min-height:60px;gap:8px;padding:6px 6px 6px 12px}.search-box input{font-size:14px}.search-loc{display:none}.primary{padding:12px 12px;font-size:12px}.results{padding-top:18px}.results-toolbar{gap:11px}.results-meta{gap:11px}.sort-wrap{width:100%;justify-content:space-between}.sort-wrap select{flex:1;max-width:70%}.table-foot{flex-direction:column}.settings{margin:29px auto 60px}.settings-card{padding:21px 17px}.sort-card{align-items:flex-start;flex-direction:column}.detail{right:10px;top:auto;bottom:10px;max-height:84vh;width:calc(100vw - 20px)}}
+.map-dot.limited{background:#bb9140}.map-dot.unavailable{background:#b97870}
+
+
+.nav a{color:#69786f;text-decoration:none;padding:10px 13px;border-radius:10px}.nav a:hover{color:var(--green);background:#edf4eb}.result-controls{display:flex;gap:15px;flex-wrap:wrap}.comparison-note{font-size:12px;color:#6e7e73;margin:0 0 12px}.status-message{font-size:13px;color:#936443}.empty-search{padding:15px;color:var(--muted);font-size:13px}.row-detail{border:0;background:transparent;color:var(--green);font-size:11px;font-weight:700;padding:8px}.ph-number{color:var(--green);font-weight:800;font-size:11px}.mode-card{background:white;text-align:left;cursor:pointer;color:var(--ink)}.mode-card.selected{border-color:#99bfa0;background:#f0f7ed}.cost-breakdown{margin:17px 0;border:1px solid var(--line);border-radius:10px;padding:12px}.cost-breakdown>div{display:flex;justify-content:space-between;gap:10px;margin:7px 0;font-size:12px}.cost-total{border-top:1px solid var(--line);padding-top:10px;font-weight:700}.eta-summary{padding:10px;background:#f1f7ed;border-radius:9px;font-size:12px;color:#426c4c;margin:8px 0 14px}.table th:first-child,.table td:first-child{position:sticky;left:0;background:#fff;z-index:1}.table th:first-child{background:#f8faf6}.map-dot.limited{background:#bb9140}.map-dot.unavailable{background:#b97870}
+.nav a.current{color:var(--green);background:#edf4eb;font-weight:700}.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:600px){.nav a{font-size:12px;padding:8px}.result-controls{width:100%;gap:9px}.result-controls .sort-wrap{justify-content:space-between;min-width:250px}.pharmacy-name{white-space:normal;max-width:170px;display:block}.pharmacy-address{max-width:170px}.table th:first-child,.table td:first-child{min-width:190px}}
+
+.demo-footer{max-width:1390px;margin:15px auto 25px;padding:0 42px;font-size:10px;color:#97a197}
+@media(max-width:750px){
+ .table-scroll{overflow:visible}.table{display:block;min-width:0}.table thead{display:none}.table tbody{display:block}
+ .table tbody tr{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:16px;border-bottom:1px solid var(--line)}
+ .table td{display:block;border:0;padding:8px 6px;font-size:12px}.table th:first-child,.table td:first-child{position:static;min-width:0;grid-column:1/-1;background:transparent;padding:0 6px 9px}
+ .pharmacy-name{font-size:14px;max-width:none}.pharmacy-address{max-width:none;font-size:11px}.med-price{font-size:19px}.availability{font-size:11px}
+ .table td.method{border:1px solid var(--line);padding:10px!important;margin:4px;border-radius:9px;min-width:0;background:#f9fbf7}
+ .method:before{content:attr(data-label);display:block;color:#64796b;font-size:10px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+ .method strong{font-size:13px}.method small{white-space:normal;font-size:10px;line-height:1.5}.table td:last-child{grid-column:1/-1;text-align:right}.row-detail{font-size:12px}.demo-footer{padding:0 18px}
+}
+
+.brand{color:var(--ink)}
+
+.sort-header{display:flex;align-items:center;gap:7px;border:0;padding:3px 0;background:transparent;color:#667a6c;font:700 10px 'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.4px;text-align:left}.sort-arrow{font-size:13px;min-width:9px}.header-metrics{display:flex;gap:8px;margin-top:7px}.metric-header{background:transparent;border:0;border-bottom:1px solid transparent;padding:3px 0;color:#8b978e;font-size:9px}.metric-header .sort-arrow{font-size:10px}.metric-header:hover,.sort-header:hover{color:var(--green)}.active-sort{background:#eaf4e7!important}.active-sort-button{color:var(--green)!important}.metric-header.active-sort-button{border-color:var(--green)}.maps-links{display:flex;gap:8px;margin-top:16px}.maps-links a{flex:1;text-align:center;padding:11px 8px;border:1px solid #bfd3bf;border-radius:9px;color:var(--green);font-size:12px;font-weight:700;text-decoration:none;background:#f4f8f0}.maps-links a:hover{background:#e8f1e3}.maps-help{font-size:10px;color:#829084;line-height:1.5;margin:8px 0 0}
+@media(min-width:751px){.mobile-control{display:none!important}}
+
+.location-panel{max-width:870px;margin:15px 0 19px;background:#eef4e9;border:1px solid #dfe8da;border-radius:12px;padding:12px 14px}.location-panel label{display:block;font:700 11px Manrope,sans-serif;color:#4a6754;margin-bottom:8px}.origin-row{display:flex;gap:8px}.origin-row input{flex:1;min-width:0;border:1px solid #d7e2d3;border-radius:8px;padding:10px 11px;background:white;color:var(--ink);font-size:13px;outline:none}.origin-row input:focus{border-color:#76a87e;box-shadow:0 0 0 2px #19765a15}.origin-row input[aria-invalid=true]{border-color:#bd766c}.origin-save{border:1px solid #b4c9b4;border-radius:8px;background:white;color:var(--green);font-weight:700;font-size:12px;padding:8px 12px}.location-actions{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:9px}.location-actions button{border:0;background:transparent;padding:3px 0;color:var(--green);font-size:11px;font-weight:600}.location-actions button:disabled{opacity:.55;cursor:wait}.location-actions #clearLocation{color:#7f8e81}.location-actions span{font-size:10px;color:#738574;line-height:1.4}.maps-help{overflow-wrap:anywhere}@media(max-width:600px){.location-panel{padding:11px}.origin-save{font-size:11px;padding:8px 9px}.origin-row input{font-size:12px}.location-actions span{flex-basis:100%}}
+
+.onboarding{max-width:620px;margin:44px auto 70px}.onboarding h1{font-size:34px;letter-spacing:-1.3px;line-height:1.18}.setup-header{color:var(--muted);font-size:12px}.setup-progress{height:5px;background:var(--green2);border-radius:10px;margin:24px 0 12px;overflow:hidden}.setup-progress div{height:100%;background:var(--green);transition:width .2s}.setup-count{color:var(--muted);font-size:12px;margin-bottom:20px}.setup-choices{display:grid;gap:10px}.setup-choice{display:flex;align-items:center;gap:13px;border:1px solid var(--line);border-radius:12px;padding:17px;cursor:pointer}.setup-choice:has(input:checked){background:#eef6e9;border-color:#85b699}.setup-choice input,.transit-types input{accent-color:var(--green);width:18px;height:18px;flex-shrink:0}.setup-choice b{display:block;font:700 15px Manrope}.setup-choice small{display:block;color:var(--muted);line-height:1.5;margin-top:5px}.walk-amount{margin-top:20px}.walk-amount label{display:block;font-weight:700;margin-bottom:8px}.walk-amount input{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px;color:var(--ink)}.walk-amount small{display:block;margin-top:7px;color:var(--muted)}.transit-types{margin:20px 0;border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:15px}.transit-types legend{font-weight:700;padding:0 5px}.transit-types label{display:flex;align-items:center;gap:8px}.setup-review{border:1px solid var(--line);border-radius:12px;margin-bottom:20px;padding:4px 15px}.setup-review div{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid var(--line)}.setup-review div:last-child{border:0}.setup-review b{text-align:right;max-width:65%}.setup-review span{color:var(--muted)}.setup-footnote{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}.restart-setup{display:inline-block;color:var(--green);font-weight:700;text-decoration:none;padding:11px 14px;background:var(--green2);border-radius:9px}.preference-warning{color:#926c30!important;line-height:1.5}.onboarding [hidden]{display:none!important}.onboarding .settings-actions{margin-top:20px}.onboarding h1:focus{outline:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--green);outline-offset:3px}@media(max-width:600px){.onboarding{margin:25px auto 50px}.onboarding h1{font-size:29px}.setup-choice{padding:14px}.transit-types{grid-template-columns:1fr}.setup-header{font-size:10px}}
+
+[hidden]{display:none!important}.travel-form{margin:18px 0 20px}.travel-toggles{display:grid;grid-template-columns:1fr 1fr;gap:12px}.travel-toggles label{display:flex;gap:9px;align-items:center;background:#f8faf6;padding:12px;border:1px solid var(--line);border-radius:9px}.travel-toggles input{accent-color:var(--green);width:18px;height:18px}.walking-setting{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:20px 0 10px}.walking-setting select,.walking-setting input{border:1px solid var(--line);border-radius:8px;padding:9px;background:white;color:var(--ink)}.walking-setting input{width:90px}.walking-setting>label:first-child{font-weight:700}.settings-hint{margin-bottom:12px!important}.empty-results{padding:30px;border:1px solid var(--line);background:white;border-radius:15px;margin:20px 0}.empty-results h2{font:700 24px Manrope;margin:12px 0}.empty-results p{color:var(--muted);line-height:1.6;max-width:560px}.table{min-width:var(--table-min-width,1100px)}@media(max-width:750px){.table{min-width:0}.empty-results{padding:22px}}
+
+/* Responsive layout: keep long names and controls inside their containers. */
+.shell,.results,.result-search,.settings,.settings-card,.search-area{min-width:0}
+.results-heading,.hero-copy{min-width:0}.results-heading h2,.pharmacy-address,.detail-sub{overflow-wrap:anywhere}
+.table-scroll{max-width:100%;overscroll-behavior-x:contain}.detail{overscroll-behavior:contain}
+.result-controls{max-width:100%}.sort-wrap select{min-width:0}.search-box input{width:0}
+@media(max-width:750px){
+ .shell{padding-inline:16px}.topbar{height:auto;min-height:68px;gap:12px;padding:13px 0;flex-wrap:wrap}.nav{gap:2px}.nav a{padding:9px 8px;font-size:12px}
+ .table{width:100%;max-width:100%;min-width:0!important}.table tbody{width:100%}.table tbody tr{grid-template-columns:repeat(2,minmax(0,1fr));padding:14px 10px;min-width:0}
+ .table td{min-width:0;max-width:100%}.table td:first-child{padding:0 6px 12px}.pharmacy-name{white-space:normal;line-height:1.5}.pharmacy-address{line-height:1.6}.brand-tag{white-space:nowrap}
+ .table td.method{margin:4px;padding:11px!important}.method strong{white-space:normal;line-height:1.4}.method small{overflow-wrap:anywhere;white-space:normal;line-height:1.6}
+ .table td:nth-child(3){display:flex;align-items:center;justify-content:flex-end}.row-detail{min-height:42px}.table td:last-child{padding:5px 4px 0}
+ .result-controls{display:grid;grid-template-columns:minmax(0,1fr);width:100%;gap:8px}.result-controls .sort-wrap{min-width:0;width:100%;display:grid;grid-template-columns:95px minmax(0,1fr);gap:12px}.sort-wrap select{max-width:none;width:100%;min-height:42px}
+ .results-meta{gap:18px}.comparison-note{line-height:1.6;font-size:11px}.result-search .search-box input{font-size:16px}.origin-row input{font-size:16px}
+ .map-head{align-items:flex-start;gap:8px;flex-wrap:wrap}.map-caption{max-width:calc(100% - 26px);line-height:1.5}
+ .settings{margin:26px auto 55px}.settings-card{padding:22px 18px}.sort-card{flex-direction:column;align-items:stretch}.sort-card select{width:100%;min-height:42px;font-size:14px}.walking-setting{align-items:stretch}.walking-setting>label:first-child{width:100%}.walking-setting select{flex:1;min-width:0}.walking-setting input{font-size:16px}.walking-setting #editWalkAmount{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+ .detail{top:auto;right:8px;bottom:max(8px,env(safe-area-inset-bottom));width:calc(100% - 16px);max-height:calc(100dvh - 24px);border-radius:16px}.detail-body{padding:16px}.detail-modes{grid-template-columns:repeat(2,minmax(0,1fr))}.mode-card{min-width:0}.mode-card span{line-height:1.5}.maps-links{flex-wrap:wrap}.maps-links a{min-width:130px;min-height:44px}.detail-cover{height:48px}
+ .onboarding{margin:25px auto 45px}.setup-review div{gap:12px}.setup-review b{overflow-wrap:anywhere}.setup-footnote{line-height:1.5}.demo-footer{padding-inline:16px;line-height:1.6}
+}
+@media(max-width:380px){
+ .topbar{justify-content:center}.brand{margin-right:auto}.nav{width:100%;justify-content:space-between}.nav a{flex:1;text-align:center;background:#edf4eb}
+ .home{margin-top:30px}h1{font-size:32px;letter-spacing:-1.5px}.search-box{flex-wrap:wrap}.home .search-box .primary{width:100%;margin-top:3px}.home .search-box input{min-width:0}.home-note{margin-top:30px;align-items:flex-start;padding:16px}.lead{line-height:1.6}
+ .detail-modes,.travel-toggles{grid-template-columns:minmax(0,1fr)}.settings-actions{flex-wrap:wrap;gap:8px}.setup-review div{flex-direction:column;gap:5px}.setup-review b{max-width:100%;text-align:left}.onboarding h1{font-size:27px}
+}
+
+/* Final responsive refinements shared by search, results, settings, and setup. */
+.shell{padding-inline:clamp(12px,3.2vw,42px)}
+.demo-footer{padding-inline:clamp(12px,3.2vw,42px);line-height:1.6}
+.search-box,.result-controls,.sort-card,.origin-row,.settings-actions{min-width:0}
+.result-controls .sort-wrap input[type=datetime-local]{min-width:0;border:1px solid var(--line);border-radius:9px;padding:8px 9px;background:white;color:#40594b;font-weight:600;font-size:12px}
+.leave-at-control{display:flex;align-items:center;gap:6px;min-width:0}.leave-at-control input{width:190px}.leave-now{border:1px solid var(--line);background:white;border-radius:8px;color:#52675b;font-size:11px;font-weight:700;padding:8px 10px;min-height:36px}.leave-now:hover{border-color:#9dbba2;color:var(--green)}
+.result-controls [hidden]{display:none!important}
+.mobile-cell-label{display:none}
+@media(max-width:750px){
+  .shell{padding-inline:16px}
+  .table-shell{overflow:hidden}
+  .table tbody tr{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+  .table td:nth-child(3){display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px}
+  .mobile-cell-label{display:block;color:#75837a;font-size:10px;font-weight:700;letter-spacing:.35px;text-transform:uppercase}
+  .table td.method{display:block}
+  .result-controls .sort-wrap{grid-template-columns:minmax(95px,34%) minmax(0,1fr)}
+  .result-controls .sort-wrap select,.result-controls .sort-wrap input[type=datetime-local]{min-width:0;width:100%;min-height:42px}.leave-at-control{width:100%}.leave-at-control input{flex:1;width:0}.leave-now{min-height:42px}
+  .table-foot{line-height:1.55}
+}
+@media(max-width:520px){
+  .topbar{align-items:center;flex-wrap:nowrap;gap:8px;min-height:62px;padding-block:8px}
+  .brand{font-size:17px;gap:7px;white-space:nowrap}
+  .brand-mark{height:32px;width:32px;flex:none}
+  .nav{flex:1;justify-content:flex-end;min-width:0}
+  .nav a{padding:9px 8px;font-size:11px;white-space:nowrap}
+  .home{margin:34px auto 50px}
+  .home-note{margin-top:34px}
+  .location-panel{margin-block:12px 16px}
+  .origin-row{align-items:stretch}
+  .origin-save{white-space:nowrap}
+  .map-illustration{height:190px}
+  .map-head{padding:13px 14px}
+  .settings{margin-block:24px 44px}
+  .settings-card{padding:20px 16px}
+  .setup-header{max-width:42%;text-align:right;line-height:1.4}
+}
+@media(max-width:380px){
+  .topbar{flex-wrap:wrap;justify-content:space-between;padding-block:10px}
+  .brand{margin-right:0}
+  .nav{width:auto;flex:1}
+  .nav a{flex:0 1 auto;background:transparent;padding-inline:7px}
+  .results-toolbar>.text-btn{align-self:flex-start}
+  .table tbody tr{padding:13px 8px}
+  .table td.method{margin:3px;padding:9px!important}
+  .detail{width:calc(100% - 12px);right:6px;bottom:max(6px,env(safe-area-inset-bottom));max-height:calc(100dvh - 12px)}
+  .settings-card{padding-inline:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+
+/* Interactive pharmacy map */
+.map-illustration{height:330px;background:#edf0e7;isolation:isolate}
+.map-illustration.leaflet-container{font:12px 'DM Sans',sans-serif}
+.map-status{position:absolute;z-index:500;inset:0;display:grid;place-items:center;margin:0;padding:20px;text-align:center;color:var(--muted);background:#edf0e7}
+.map-status[hidden]{display:none}
+.map-legend{display:flex;align-items:center;gap:15px;flex-wrap:wrap;padding:11px 15px;color:#64766a;font-size:10px;line-height:1.5}
+.map-legend>span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.legend-dot{height:9px;width:9px;border-radius:50%;background:#19765a;display:inline-block}
+.legend-dot.limited{background:#bb9140}.legend-dot.unavailable{background:#b97870}
+.map-legend .map-route-note{margin-left:auto;color:#829084;white-space:normal}
+.pharmacy-marker-shell{border:0;background:transparent}
+.pharmacy-marker{height:30px;width:30px;border:2px solid white;border-radius:50%;background:var(--green);box-shadow:0 2px 8px #18352c55;color:white;display:grid;place-items:center;font:700 11px Manrope,sans-serif}
+.pharmacy-marker.limited{background:#bb9140}.pharmacy-marker.unavailable{background:#b97870}
+.leaflet-tooltip{max-width:min(220px,calc(100vw - 48px));white-space:normal;overflow-wrap:anywhere;border:1px solid var(--line);border-radius:7px;color:var(--ink);box-shadow:0 4px 12px #18352c20}
+@media(max-width:750px){.map-illustration{height:300px}.map-legend .map-route-note{margin-left:0;flex-basis:100%}}
+@media(max-width:380px){.map-illustration{height:260px}.map-legend{gap:9px;padding-inline:11px}}
+
+/* Compact mode sketch in each available comparison cell. */
+.route-visual{display:flex;align-items:center;gap:2px;width:max-content;height:24px;margin:0 0 7px;color:var(--route-color,#3d7961)}
+.route-mode-icon{display:grid;place-items:center;width:24px;height:24px;flex:none;border-radius:6px;background:var(--route-background,#edf4ef)}
+
+/* CVS snapshot states and source links */
+.availability.unknown{color:#777f79}.availability.unknown:before{background:#a5ada7}
+.legend-dot.unknown{background:#a5ada7}
+.pharmacy-marker.unknown{background:#8d9690}
+.snapshot-note{margin:0 0 12px;padding:10px 12px;border:1px solid #e6ece5;border-radius:9px;background:#f8faf7;color:#718076;font-size:11px;line-height:1.5}
+.source-link{display:inline-block;margin-top:6px;color:var(--green);font-size:10px;font-weight:700}
+.route-mode-icon svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.route-chevron{display:block;width:8px;height:12px;flex:none;stroke-width:2;color:#a0afa6}
+.route-visual.transit{--route-color:#3d7961;--route-background:#edf4ef}
+.route-visual.walk{--route-color:#3d7961;--route-background:#edf4ef}
+.route-visual.drive{--route-color:#496a88;--route-background:#edf2f7}
+.route-visual.bike{--route-color:#8a6a2e;--route-background:#f7f1e6}
+.geocoder-credit{display:block;margin-top:6px;color:#7b8a7e;font-size:9px}
+.geocoder-credit a{color:inherit;text-underline-offset:2px}
+@media(max-width:750px){.route-visual{margin-bottom:6px}}
+
+/* Switch the wide comparison table to stacked pharmacy cards before tablet widths. */
+@media (min-width:751px) and (max-width:900px){
+  .table-scroll{overflow:visible}
+  .table{display:block;width:100%;min-width:0!important}
+  .table thead{display:none}
+  .table tbody{display:block;width:100%}
+  .table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:16px;border-bottom:1px solid var(--line)}
+  .table td{display:block;min-width:0;max-width:100%;border:0;padding:8px 6px;font-size:12px}
+  .table td:first-child{position:static;grid-column:1/-1;min-width:0;background:transparent;padding:0 6px 12px}
+  .table td.method{display:block;min-width:0;margin:4px;padding:11px!important;border:1px solid var(--line);border-radius:9px;background:#f9fbf7}
+  .table td.method:before{content:attr(data-label);display:block;margin-bottom:5px;color:#64796b;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .table td:nth-child(3){display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px}
+  .table td:last-child{grid-column:1/-1;text-align:right;padding:5px 4px 0}
+  .pharmacy-name{display:block;max-width:none;white-space:normal;font-size:14px;line-height:1.5}
+  .pharmacy-address{max-width:none;font-size:11px;line-height:1.6}
+  .method strong{font-size:13px;line-height:1.4;white-space:normal}
+  .method small{white-space:normal;overflow-wrap:anywhere;font-size:10px;line-height:1.6}
+}
+.hours-today{display:block;margin-top:4px;color:#61786a;font-size:10px;line-height:1.45}
+.pharmacy-hours{margin:13px 0 15px;padding:10px 12px;background:#f7f9f5;border:1px solid #e8eee5;border-radius:10px}
+.pharmacy-hours h4{margin:0;color:#365343;font:700 11px Manrope,sans-serif}
+.pharmacy-hours p{margin:4px 0 0;color:#718076;font-size:10px;line-height:1.5}
+.pharmacy-hours details{margin-top:6px;color:#607167;font-size:10px}
+.pharmacy-hours summary{cursor:pointer;font-weight:700;color:#42614e}
+.pharmacy-hours ul{list-style:none;margin:8px 0;padding:0}
+.pharmacy-hours li{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid #e8eee5}
+.pharmacy-hours li b{font-weight:600;text-align:right}
+.pharmacy-hours details>a{display:inline-block;margin:4px 10px 0 0;color:var(--green);font-weight:700}
+.pharmacy-hours details>small{display:block;margin-top:7px;color:#89958d}
+.catalog-page{max-width:1120px;margin:42px auto 76px}
+.catalog-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:24px}
+.catalog-heading>div:first-child{max-width:760px}
+.catalog-heading h1{margin-bottom:9px}
+.catalog-heading .lead{margin-bottom:0;line-height:1.55}
+.catalog-count{display:flex;align-items:baseline;gap:8px;padding:12px 15px;background:#edf4e9;border:1px solid #e0ebdd;border-radius:12px;color:#607567;white-space:nowrap}
+.catalog-count b{font:700 24px Manrope;color:var(--green)}
+.catalog-tools{display:flex;align-items:center;gap:14px;margin:23px 0 13px}
+.catalog-search{height:52px;max-width:590px;display:flex;align-items:center;gap:10px;flex:1;padding:0 15px;background:white;border:1px solid #dce5dc;border-radius:12px;color:#85938a}
+.catalog-search span{font-size:24px;line-height:1}
+.catalog-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font-size:14px}
+.catalog-search input::placeholder{color:#9ba79f}
+.catalog-result-count{color:var(--muted);font-size:12px;white-space:nowrap}
+.catalog-categories{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+.category-chip{padding:8px 12px;border:1px solid var(--line);border-radius:22px;background:white;color:#607168;font-size:12px;font-weight:600}
+.category-chip:hover,.category-chip.selected{border-color:#a9c5a9;background:#edf5e9;color:var(--green)}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.product-card{min-width:0;display:flex;flex-direction:column;padding:17px 18px 15px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 3px 12px #18352c06}
+.product-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+.product-category{color:var(--green);font-size:10px;font-weight:700;letter-spacing:.45px;text-transform:uppercase}
+.product-symbol{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#edf4e9;color:var(--green);font-size:15px}
+.product-card h2{margin:0 0 5px;font:700 17px/1.35 Manrope;letter-spacing:-.25px;overflow-wrap:anywhere}
+.product-strength{min-height:34px;margin:0;color:#67776d;font-size:12px;line-height:1.5}
+.product-aliases{display:flex;gap:6px;flex-wrap:wrap;margin:11px 0 15px}
+.product-aliases span{padding:4px 7px;border-radius:7px;background:#f4f6f2;color:#68776e;font-size:10px;line-height:1.35}
+.product-compare{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:12px;border-top:1px solid #edf0eb;color:var(--green);font-size:12px;font-weight:700;text-decoration:none}
+.product-compare:hover{text-decoration:underline}
+.catalog-empty{padding:28px;background:white;border:1px solid var(--line);border-radius:14px;color:var(--muted)}
+.catalog-empty h2{margin:0 0 7px;color:var(--ink);font:700 19px Manrope}
+.catalog-empty p{margin:0 0 12px;line-height:1.55}
+@media(max-width:900px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.catalog-page{margin:27px auto 55px}.catalog-heading{align-items:flex-start}.catalog-heading h1{font-size:36px}.catalog-count{gap:5px;padding:9px 11px;font-size:11px}.catalog-count b{font-size:20px}.catalog-tools{align-items:stretch}.catalog-search{height:48px}.catalog-result-count{align-self:center}.product-grid{grid-template-columns:1fr;gap:10px}.product-card{padding:15px}.product-strength{min-height:0}.catalog-categories{gap:6px}.category-chip{padding:7px 10px;font-size:11px}}

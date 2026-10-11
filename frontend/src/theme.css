@@ -1,0 +1,205 @@
+/* CSS follows the OS preference immediately, including changes while the page is open. */
+:root {
+  color-scheme: light;
+  --ink: #242933;
+  --muted: #6f7785;
+  --green: #2d62bb;
+  --green2: #edf2fb;
+  --line: #e0e4eb;
+  --paper: #f7f8fa;
+  --white: #fff;
+  --shadow: 0 12px 35px #26364d12;
+  --stock-green: #25804a;
+}
+
+.availability:not(.unavailable):not(.limited):not(.unknown),
+.landing-preview-offer > div > small { color: var(--stock-green); }
+.availability:not(.unavailable):not(.limited):not(.unknown):before,
+.legend-dot:not(.unavailable):not(.limited):not(.unknown) { background: var(--stock-green); }
+
+.scrim { background: rgb(18 20 24 / 24%); }
+
+@media (prefers-color-scheme: light) {
+  .primary:hover, .landing-nav .landing-nav-cta:hover { background: #24529d; }
+  .nav a, .nav button, .text-btn, .sort-header, .comparison-note,
+  .pharmacy-address, .med-price small, .method small, .method em,
+  .table th, .table-foot, .brand-tag, .step, .product-strength,
+  .product-aliases span, .category-chip, .catalog-count,
+  .landing-lead, .landing-location > summary, .landing-hero-assurance,
+  .landing-preview-tabs button, .landing-preview-product p,
+  .landing-preview-offer > div > span, .landing-preview-offer > b small,
+  .landing-scene-trip, .landing-scene-note, .landing-coverage-copy span,
+  .landing-coverage-stats span, .landing-section-heading > p,
+  .landing-steps p, .landing-category-grid p, .landing-faq details p,
+  .landing-footer p, .landing-footer nav, .landing-footer > span {
+    color: var(--muted);
+  }
+  .pharmacy-name, .med-price, .method strong, .step b,
+  .sort-wrap select, .sort-card select, .location-panel label { color: var(--ink); }
+  .nav a:hover, .nav a.current, .nav button:hover, .nav button.current,
+  .category-chip:hover, .category-chip.selected, .mode-card.selected,
+  .setup-choice:has(input:checked), .location-panel, .eta-summary,
+  .catalog-count, .pill-icon, .product-symbol, .step i, .maps-links a,
+  .landing-store-pin, .landing-category-icon, .landing-preview-link:hover {
+    background: var(--green2);
+    color: var(--green);
+    border-color: #c4d3ec;
+  }
+  .table th, .table th:first-child, .table-foot, .sort-card,
+  .travel-toggles label, .snapshot-note, .pharmacy-hours, .home-note,
+  .brand-tag, .suggestion-tag, .product-aliases span, .landing-preview-tabs,
+  .landing-preview-link, .landing-preview-loading > div { background: #f2f4f7; }
+  .table tbody tr:hover, .table tbody tr:hover td:first-child,
+  .table td.method { background: #fafbfc; }
+  .active-sort { background: var(--green2) !important; }
+  .search-box, .catalog-search, .landing-search .search-box,
+  .table td, .method, .product-compare, .landing-category-grid > a,
+  .landing-preview-offer, .landing-preview-link, .landing-coverage,
+  .landing-steps article, .landing-faq-items details, .landing-footer {
+    border-color: var(--line);
+  }
+  .landing-preview-scene, .landing-final-cta { background: #edf0f5; }
+  .landing-travel, .landing-preview-top { background: #2b3340; }
+  .landing-preview-symbol { color: #b5d1ff; background: #ffffff0d; }
+  .landing-preview-top > div > span { color: #bac6d8; }
+  .landing-travel .landing-kicker, .landing-travel-copy > a { color: #b5d1ff; }
+  .landing-travel-copy > p, .landing-travel-panel-label,
+  .landing-travel-panel > p { color: #bec6d2; }
+  .landing-travel-method { color: #e4eaf4; }
+  .landing-travel-method svg { color: #b5d1ff; }
+  .landing-final-cta > a { background: var(--green); }
+  .landing-final-cta > a:hover { background: #24529d; }
+  .landing-preview-tabs button.selected { color: var(--green); }
+  .landing-preview-offer > div > small { color: var(--stock-green); }
+  .landing-category-grid > a:hover { border-color: #91acd8; }
+  .landing-assurance-divider { background: var(--line); }
+  .landing-journey-art { stroke: #c3ccdb; }
+  .landing-journey-art circle { fill: #d8e2f2; stroke: #9eb7dd; }
+  .landing-live-dot { background: var(--green); box-shadow: 0 0 0 4px #dbe5f5; }
+  .landing-step-number, .landing-step-number svg, .landing-category-grid > a > svg,
+  .landing-faq summary svg { color: #6c86ad; }
+  .detail-cover { background: linear-gradient(120deg, #edf2fb, #d8e5f8); }
+  .detail-close { color: var(--ink); }
+  .route-visual.transit, .route-visual.walk { --route-color: #3767ae; --route-background: #edf2fb; }
+  .route-visual.drive { --route-color: #285fc2; --route-background: #e6edfc; }
+  .toast { background: #2b3340; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink: #edf0f5;
+    --muted: #a6adba;
+    --green: #8bb8ff;
+    --green2: #242d3d;
+    --line: #343840;
+    --paper: #141518;
+    --white: #1e2025;
+    --gold: #e0bc74;
+    --goldbg: #382f1e;
+    --shadow: 0 12px 35px #00000040;
+    --stock-green: #85d5a0;
+  }
+
+  .search-box, .suggestions, .suggestion, .table-shell, .map-section,
+  .detail, .settings-card, .mode-card, .empty-results, .catalog-search,
+  .product-card, .catalog-empty, .category-chip, .popular button,
+  .origin-row input, .origin-save, .walking-setting select, .walking-setting input,
+  .sort-wrap select, .sort-card select, .leave-now,
+  .result-controls .sort-wrap input[type=datetime-local], .walk-amount input,
+  .landing-preview-card, .landing-category-grid > a {
+    background: var(--white);
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  input, select, textarea { color: var(--ink); }
+  .search-box input { background: transparent; }
+  input::placeholder, .search-box input::placeholder { color: #9199a8; }
+  .primary, .brand-mark, .landing-nav .landing-nav-cta {
+    background: #3166c7;
+    color: #fff;
+  }
+  .primary:hover, .landing-nav .landing-nav-cta:hover { background: #3e76db; }
+  .nav a, .nav button, .text-btn, .sort-wrap, .sort-header, .metric-header,
+  .comparison-note, .pharmacy-address, .med-price small, .method small,
+  .method em, .method:before, .table th, .table-foot, .brand-tag,
+  .detail-price small, .mode-card span, .step, .detail-note, .sort-card small,
+  .maps-help, .location-actions span, .location-actions #clearLocation,
+  .geocoder-credit, .snapshot-note, .product-strength, .product-aliases span,
+  .catalog-count, .catalog-result-count, .category-chip,
+  .landing-lead, .landing-location > summary, .landing-hero-assurance,
+  .landing-preview-tabs button, .landing-preview-product p,
+  .landing-preview-offer > div > span, .landing-preview-offer > b small,
+  .landing-scene-trip, .landing-scene-note, .landing-preview-loading span,
+  .landing-preview-empty, .landing-coverage-copy span, .landing-coverage-stats span,
+  .landing-section-heading > p, .landing-steps p, .landing-category-grid p,
+  .landing-faq details p, .landing-footer p, .landing-footer nav, .landing-footer > span {
+    color: var(--muted);
+  }
+  .pharmacy-name, .med-price, .method strong, .step b, .location-panel label {
+    color: var(--ink);
+  }
+  .table td, .method, .product-compare, .landing-preview-offer,
+  .landing-preview-link, .landing-coverage, .landing-steps article,
+  .landing-faq-items details, .landing-footer { border-color: var(--line); }
+  .table td:first-child { background: var(--white); }
+  .table th, .table th:first-child, .table-foot, .sort-card,
+  .travel-toggles label, .snapshot-note, .pharmacy-hours, .home-note,
+  .brand-tag, .suggestion-tag, .product-aliases span,
+  .landing-preview-tabs, .landing-preview-link, .landing-preview-loading > div {
+    background: #25272d;
+    border-color: var(--line);
+  }
+  .table tbody tr:hover, .table tbody tr:hover td:first-child { background: #2b2e36; }
+  .table td.method { background: var(--white); }
+  .table td.method:hover { background: #2b2e36; }
+  .active-sort { background: var(--green2) !important; }
+  .nav a:hover, .nav a.current, .nav button:hover, .nav button.current,
+  .suggestion:hover, .suggestion:focus, .mode-card.selected,
+  .category-chip:hover, .category-chip.selected, .setup-choice:has(input:checked),
+  .location-panel, .eta-summary, .catalog-count, .pill-icon, .product-symbol,
+  .step i, .maps-links a, .landing-store-pin, .landing-category-icon,
+  .landing-preview-link:hover {
+    background: var(--green2);
+    color: var(--green);
+    border-color: #475c7b;
+  }
+  .availability.limited, .preference-warning, .status-message { color: #e0bc74 !important; }
+  .availability.unavailable { color: #e4a79e; }
+  .detail-cover { background: linear-gradient(120deg, #262b35, #303846); }
+  .detail-close { background: var(--white); color: var(--ink); }
+  .scrim { background: rgb(0 0 0 / 35%); }
+  .route-visual.transit, .route-visual.walk { --route-color: #9abfff; --route-background: #273143; }
+  .route-visual.drive { --route-color: #a5c5ff; --route-background: #2c3c5a; }
+  .route-visual.bike { --route-color: #e6c686; --route-background: #403821; }
+  .map-illustration, .map-status { background: #25272d; }
+  /* Keep map tiles legible and their original colors; theme the surrounding controls. */
+  .leaflet-bar a, .leaflet-control-attribution { background: var(--white); color: var(--ink); }
+  .leaflet-bar a:hover { background: var(--green2); }
+  .leaflet-control-attribution a { color: var(--green); }
+  .pharmacy-marker, .map-dot { background: #3166c7; }
+  .pharmacy-marker.limited { background: #9c7834; }
+  .pharmacy-marker.unavailable { background: #a4655e; }
+  .landing-preview-scene, .landing-final-cta { background: #202227; }
+  .landing-preview-tabs button.selected { background: #303b50; color: var(--green); }
+  .landing-preview-offer > div > small { color: var(--stock-green); }
+  .landing-assurance-divider { background: var(--line); }
+  .landing-journey-art { stroke: #576782; opacity: .5; }
+  .landing-journey-art circle { fill: #313d51; stroke: #7f99bc; }
+  .landing-live-dot { background: #8bb8ff; box-shadow: 0 0 0 4px #2b3850; }
+  .landing-step-number, .landing-step-number svg, .landing-category-grid > a > svg,
+  .landing-faq summary svg { color: #a9b9d3; }
+  .landing-travel, .landing-preview-top { background: #272b33; }
+  .landing-final-cta > a { background: #3166c7; }
+  .landing-final-cta > a:hover { background: #3e76db; }
+  .landing-search .search-box { border-color: var(--line); }
+  .landing-preview-symbol { color: #9cc2ff; background: #8bb8ff14; }
+  .landing-travel .landing-kicker, .landing-travel-copy > a { color: var(--green); }
+  .landing-travel-copy > p, .landing-travel-panel-label,
+  .landing-travel-panel > p { color: var(--muted); }
+  .landing-travel-method { color: #dce5f3; }
+  .landing-travel-method svg { color: var(--green); }
+  .landing-preview-top > div > span { color: #acb6c6; }
+  .landing-category-grid > a:hover { border-color: #6785b0; }
+  .toast { background: #303846; }
+}

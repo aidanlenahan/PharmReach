@@ -1,0 +1,99 @@
+import { useEffect, useState } from 'react';
+import { ArrowRight, ArrowUpRight, Bike, BusFront, CarFront, Check, ChevronDown, Footprints, MapPin, Pill, Search, SlidersHorizontal, Sparkles, Stethoscope, Wind } from 'lucide-react';
+import { HomeSearch } from './HomeSearch';
+import { LocationPanel } from './components/LocationPanel';
+import { AppShell } from './components/AppShell';
+import { api, getOriginLabel } from './core';
+import './landing.css';
+
+const previewProducts = [
+  { id: 'cvs-ibuprofen-200-100', label: 'Ibuprofen' },
+  { id: 'cvs-pepto-original-12oz', label: 'Pepto-Bismol' },
+  { id: 'cvs-low-dose-aspirin-81-300', label: 'Aspirin' },
+];
+type PreviewData = {
+  medication: { name: string; strength: string; quantity_label?: string };
+  pharmacies: { id: string; name: string; merchant: string; address: string; price: number; stock: string }[];
+};
+type CatalogSummary = { store_count: number; product_count: number; cities: string[] };
+const waysThere = [{ label: 'Walk', Icon: Footprints }, { label: 'Cycle', Icon: Bike }, { label: 'Drive', Icon: CarFront }, { label: 'Take transit', Icon: BusFront }];
+const categories = [
+  { name: 'Pain relief', example: 'Ibuprofen, aspirin & more', Icon: Pill },
+  { name: 'Allergy relief', example: 'Cetirizine, loratadine & more', Icon: Wind },
+  { name: 'Stomach relief', example: 'Pepto-Bismol, TUMS & more', Icon: Stethoscope },
+  { name: 'Cold & cough', example: 'Cough relief, nasal sprays & more', Icon: Sparkles },
+];
+
+function PharmacyPreview() {
+  const [selected, setSelected] = useState(previewProducts[0].id);
+  const [data, setData] = useState<PreviewData | null>(null);
+  const [status, setStatus] = useState('loading');
+  useEffect(() => {
+    let active = true;
+    setStatus('loading');
+    api<PreviewData>(`/api/pharmacies?medication=${encodeURIComponent(selected)}&mode=walk&sort=Medication+cost`)
+      .then((response) => { if (active) { setData(response); setStatus('ready'); } })
+      .catch(() => { if (active) setStatus('error'); });
+    return () => { active = false; };
+  }, [selected]);
+  const stocked = data?.pharmacies.filter((item) => item.stock === 'In stock') || [];
+  const offers: PreviewData['pharmacies'] = [];
+  for (const merchant of ['CVS', 'Walgreens']) {
+    const offer = stocked.find((item) => item.merchant === merchant);
+    if (offer) offers.push(offer);
+  }
+  for (const offer of stocked) {
+    if (offers.length >= 3) break;
+    if (!offers.some((item) => item.id === offer.id)) offers.push(offer);
+  }
+  return <div className="landing-preview-scene">
+    <svg className="landing-journey-art" viewBox="0 0 500 550" fill="none" aria-hidden="true"><path d="M-40 170h130q30 0 30-30V90q0-30 30-30h230q30 0 30 30v310q0 30-30 30H230q-30 0-30 30v130" /><path d="M-40 245h160q30 0 30 30v210q0 30 30 30h360" /><circle cx="410" cy="110" r="10" /><circle cx="120" cy="110" r="8" /></svg>
+    <div className="landing-scene-note"><span className="landing-live-dot" />A clearer next stop</div>
+    <div className="landing-preview-card">
+      <div className="landing-preview-top"><span className="landing-preview-symbol"><Pill size={23} /></span><div><span>YOUR MEDICINE, NEARBY</span><h2>See your options.</h2></div><ArrowUpRight size={21} aria-hidden="true" /></div>
+      <div className="landing-preview-tabs" role="group" aria-label="Choose a product preview">{previewProducts.map((product) => <button key={product.id} className={selected === product.id ? 'selected' : ''} aria-pressed={selected === product.id} onClick={() => setSelected(product.id)}>{product.label}</button>)}</div>
+      <div className="landing-preview-body" aria-live="polite" aria-busy={status === 'loading'}>
+        {status === 'loading' ? <div className="landing-preview-loading"><span>Finding nearby options…</span>{[0, 1, 2].map((row) => <div key={row} />)}</div> : status === 'ready' && data ? <>
+          <div className="landing-preview-product"><h3>{data.medication.name}</h3><p>{[data.medication.strength, data.medication.quantity_label].filter(Boolean).join(' · ')}</p></div>
+          <div className="landing-preview-offers">{offers.map((offer) => <a href={`/results.html?medication=${encodeURIComponent(selected)}`} key={offer.id} className="landing-preview-offer"><span className="landing-store-pin"><MapPin size={18} /></span><div><strong>{offer.merchant}</strong><span>{offer.address.split(' · ')[0]}</span><small><Check size={11} aria-hidden="true" />In stock</small></div><b>${offer.price.toFixed(2)}<small>online</small></b></a>)}</div>
+          {!offers.length && <p className="landing-preview-empty">Explore this product’s nearby store options.</p>}
+        </> : <div className="landing-preview-empty"><Pill size={28} /><p>Explore nearby pharmacies and products.</p></div>}
+      </div>
+      <a className="landing-preview-link" href={`/results.html?medication=${encodeURIComponent(selected)}`}>Compare this product <ArrowRight size={17} /></a>
+    </div>
+    <div className="landing-scene-trip"><span><Footprints size={18} /><Bike size={18} /><CarFront size={18} /><BusFront size={18} /></span><p>A trip that works for you.</p></div>
+  </div>;
+}
+
+export function HomePage() {
+  const [summary, setSummary] = useState<CatalogSummary | null>(null);
+  const [originLabel, setOriginLabel] = useState(getOriginLabel());
+  useEffect(() => {
+    let active = true;
+    api<CatalogSummary>('/api/catalog-summary').then((response) => { if (active) setSummary(response); }).catch(() => {});
+    return () => { active = false; };
+  }, []);
+  return <AppShell landing><main id="homeScreen" className="screen active landing-page">
+    <section className="landing-hero" aria-labelledby="landing-title">
+      <div className="landing-hero-copy">
+        <span className="landing-kicker"><span />Over-the-counter. Around the corner.</span>
+        <h1 id="landing-title">Find your medicine.<br /><em>Make fewer stops.</em></h1>
+        <p className="landing-lead">Know where to go before you go. Compare nearby pharmacy prices, availability, and the best way to get there.</p>
+        <div id="find-medicine" className="landing-search"><label htmlFor="landing-medication">What are you looking for?</label><HomeSearch inputId="landing-medication" /></div>
+        <details className="landing-location"><summary><MapPin size={15} /><span>{originLabel ? `Starting from ${originLabel}` : 'Set your starting point'}</span><ChevronDown size={15} /></summary><LocationPanel onChange={() => setOriginLabel(getOriginLabel())} /></details>
+        <div className="landing-hero-assurance"><Check size={14} /><span>No account needed</span><span className="landing-assurance-divider" /><span>CVS &amp; Walgreens</span></div>
+      </div>
+      <PharmacyPreview />
+    </section>
+    <section className="landing-coverage" aria-label="Current coverage"><div className="landing-coverage-copy"><MapPin size={20} /><div><b>Starting close to home.</b><span>{summary?.cities.length ? summary.cities.join(' · ') : 'Hoboken & nearby Hudson County, NJ'}</span></div></div><div className="landing-coverage-stats">{summary && <><div><b>{summary.store_count}</b><span>local stores</span></div><div><b>{summary.product_count}</b><span>OTC products</span></div></>}<div><b>4</b><span>ways to get there</span></div></div></section>
+    <section id="how-it-works" className="landing-how" aria-labelledby="landing-how-title"><div className="landing-section-heading"><span className="landing-kicker">From your search to your next stop</span><h2 id="landing-how-title">A little less running around.</h2><p>The information you need, before heading out the door.</p></div><div className="landing-steps">
+      <article><span className="landing-step-number">01 <Search size={22} /></span><h3>Search a name you know.</h3><p>Type a medicine, ingredient, or familiar brand. Ibuprofen or Advil. Pepto-Bismol or TUMS.</p></article>
+      <article><span className="landing-step-number">02 <Pill size={22} /></span><h3>Compare nearby options.</h3><p>See which stores carry your product, what it costs online, and where each pharmacy is.</p></article>
+      <article><span className="landing-step-number">03 <MapPin size={22} /></span><h3>Choose your next stop.</h3><p>Find a trip that fits your day. Open the directions in Maps and get on your way.</p></article>
+    </div></section>
+    <section className="landing-travel" aria-labelledby="landing-travel-title"><div className="landing-travel-copy"><span className="landing-kicker">Your medicine. Your way there.</span><h2 id="landing-travel-title">Different ways there.<br />One place to compare.</h2><p>Going on foot? Taking the bus? Set your walking limit and choose the ways you travel. Then compare trip time, arrival time, and total cost together.</p><a href="/settings.html">Choose your travel preferences <ArrowUpRight size={18} /></a></div><div className="landing-travel-panel"><span className="landing-travel-panel-label"><SlidersHorizontal size={16} />Make the trip work for you</span><div>{waysThere.map(({ label, Icon }) => <span className="landing-travel-method" key={label}><Icon size={27} /><b>{label}</b></span>)}</div><p>Walking limits include the walk to and from transit stops.</p></div></section>
+    <section className="landing-browse" aria-labelledby="landing-browse-title"><div className="landing-browse-heading"><div><span className="landing-kicker">Everyday essentials, nearby</span><h2 id="landing-browse-title">Start with what you need.</h2></div><a href="/products.html">Browse all products <ArrowUpRight size={17} /></a></div><div className="landing-category-grid">{categories.map(({ name, example, Icon }) => <a key={name} href={`/products.html?category=${encodeURIComponent(name)}`}><span className="landing-category-icon"><Icon size={24} /></span><h3>{name}</h3><p>{example}</p><ArrowUpRight size={19} aria-hidden="true" /></a>)}</div></section>
+    <section className="landing-faq" aria-labelledby="landing-faq-title"><div><span className="landing-kicker">A few things to know</span><h2 id="landing-faq-title">Before your next stop.</h2></div><div className="landing-faq-items"><details><summary>What can I find on PharmReach?<ChevronDown size={18} /></summary><p>Over-the-counter medicines and everyday pharmacy products, searchable by common name, ingredient, or brand. Browse the product list to see what’s available.</p></details><details><summary>Where does PharmReach work?<ChevronDown size={18} /></summary><p>We’re starting with CVS and Walgreens locations around Hoboken, Jersey City, and Union City in New Jersey. Store coverage depends on the product you choose.</p></details><details><summary>Can I compare more than the price?<ChevronDown size={18} /></summary><p>Yes. Compare walking, cycling, driving, and transit by travel time, arrival time, and total cost. Your saved preferences determine which travel options you see.</p></details></div></section>
+    <section className="landing-final-cta"><div><span className="landing-kicker">A better next stop</span><h2>Your medicine is out there.<br />Let’s find your way to it.</h2></div><a href="#find-medicine">Find my medicine <ArrowRight size={20} /></a></section>
+  </main></AppShell>;
+}
