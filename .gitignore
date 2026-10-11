@@ -12,14 +12,11 @@ node_modules/
 !.yarn/releases
 !.yarn/versions
 
-# Next.js / build output
-.next/
+# Build output
 out/
 build/
 dist/
-next-env.d.ts
 *.tsbuildinfo
-.vercel
 .turbo/
 .cache/
 .eslintcache
@@ -27,6 +24,7 @@ next-env.d.ts
 # Environment / secrets
 .env
 .env.*
+.env.bak
 !.env.example
 !.env.*.example
 
@@ -94,10 +92,12 @@ desktop.ini
 
 poc/
 bigPharma/
-tmp-frontend/
 docs/
 # OTP input feeds and generated graph
 backend/otp/data/
 
 # bigPharma map rendered with the CARTO key from bigPharma/.env
 bigPharma/pharmacy_map.local.html
+
+# Runtime caches: NJT tokens (secret) and transit feed refresh status
+backend/data/cache/
