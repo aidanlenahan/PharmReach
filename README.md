@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner.jpg" alt="PharmReach" width="600">
+  <img src="banner.jpg" alt="PharmReach" width="160">
 </p>
 
 # PharmReach
