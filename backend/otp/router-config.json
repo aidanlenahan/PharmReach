@@ -1,0 +1,5 @@
+{
+  "server": {
+    "apiProcessingTimeout": "8s"
+  }
+}

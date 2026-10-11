@@ -1,11 +1,13 @@
 """Optional route service adapter. No external requests unless explicitly configured."""
+import copy
 import json
+import os
 import math
 import re
 import threading
 import time
 from collections import OrderedDict
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError, as_completed
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.error import URLError
@@ -15,12 +17,81 @@ MODES = ('walk', 'transit', 'drive', 'bike')
 class RoutingError(Exception):
     pass
 
-_CACHE = OrderedDict()
+
+class RoutingUnavailable(RoutingError):
+    """OTP answered no store in time (down, loading or overloaded); the inputs were fine."""
+
+class _SizedCache(OrderedDict):
+    """LRU store of (expires, value, size) entries that keeps a running byte total."""
+
+    def __init__(self):
+        super().__init__()
+        self.bytes = 0
+
+    def __setitem__(self, key, entry):
+        old = self.get(key)
+        if old is not None:
+            self.bytes -= old[2]
+        super().__setitem__(key, entry)
+        self.bytes += entry[2]
+
+    def __delitem__(self, key):
+        self.bytes -= self[key][2]
+        super().__delitem__(key)
+
+    def pop(self, key, *default):
+        if key in self:
+            self.bytes -= self[key][2]
+        return super().pop(key, *default)
+
+    def popitem(self, last=True):
+        key, entry = super().popitem(last=last)
+        self.bytes -= entry[2]
+        return key, entry
+
+    def clear(self):
+        super().clear()
+        self.bytes = 0
+
+
+_CACHE = _SizedCache()
 _CACHE_LOCK = threading.Lock()
 _CACHE_TTL_SECONDS = 900
 _CACHE_PARTIAL_TTL_SECONDS = 120
-_OTP_CACHE_TTL_SECONDS = 30
-_CACHE_MAX_ENTRIES = 64
+# OTP routes are cached per (origin, pharmacy) so searches for different
+# medications share the stores they have in common.
+# Street-only results (no transit types allowed) depend only on the static
+# street graph, so they can live for an hour.
+_OTP_STREET_TTL_SECONDS = 3600
+# "Leave now" transit is relative to the time of the search. A cached itinerary
+# stays the best choice until its departure passes (a later search can only
+# lose options), so hits shift the relative minutes and miss once the
+# departure is more than the grace period in the past. The TTL caps drift from
+# realtime updates and from "no route yet" answers near service changes.
+_OTP_TRANSIT_TTL_SECONDS = 600
+_OTP_DEPARTURE_GRACE_SECONDS = 60
+# A fixed leave_at is part of the key and the minutes are relative to it, so the
+# itinerary does not age. The API rejects leave_at values in the past.
+_OTP_SCHEDULED_TTL_SECONDS = 1800
+# The cache is bounded by an estimate of its size: each entry counts the length
+# of its JSON form (geometry is already a compact polyline string), measured
+# once at put time. Python's in-memory size is a few times that. Default 32 MB,
+# set with ROUTE_CACHE_MB. The entry cap is only a backstop for tiny entries.
+_CACHE_MAX_BYTES = max(1, int(float(os.environ.get('ROUTE_CACHE_MB', '32')) * 1024 * 1024))
+_CACHE_MAX_ENTRIES = 20_000
+# OTP shares the VM's 3 CPUs. Requests queue here, not inside OTP, so a burst
+# of searches can't pile up work that nobody is still waiting for.
+_OTP_MAX_CONCURRENT = max(1, int(os.environ.get('OTP_MAX_CONCURRENT', '3')))
+_OTP_SLOTS = threading.BoundedSemaphore(_OTP_MAX_CONCURRENT)
+# One search waits this long in total; stores still unrouted are reported, not guessed.
+_OTP_SEARCH_BUDGET_SECONDS = 12
+# Each search sends only this many stores to OTP, nearest to the origin first
+# (straight-line). Farther stores are still returned with price and stock,
+# marked beyond_route_limit, so the list scales to thousands of stores.
+ROUTE_STORE_LIMIT = max(1, int(os.environ.get('ROUTE_STORE_LIMIT', '25')))
+# Origins are rounded to 4 decimals (about 11 m) for both the cache key and the
+# OTP query, so a cache hit is exactly the route that was computed.
+_ORIGIN_DECIMALS = 4
 
 
 def _cache_key(service_url, payload):
@@ -33,21 +104,52 @@ def _cache_get(key):
         cached = _CACHE.get(key)
         if cached is None:
             return None
-        expires, value = cached
+        expires, value, _ = cached
         if expires <= now:
             del _CACHE[key]
             return None
         _CACHE.move_to_end(key)
-        return {**value, 'cached': True}
+    # A copy, so callers that change route dicts can't corrupt the cache.
+    value = copy.deepcopy(value)
+    value['cached'] = True
+    return value
+
+
+def _otp_cache_get(key, leave_now):
+    """Return a cached per-pharmacy OTP route, re-timed for "leave now" searches."""
+    cached = _cache_get(key)
+    if cached is None:
+        return None
+    route = cached['route']
+    if not leave_now:
+        return route
+    transit = route['methods'].get('transit') or {}
+    if not transit.get('available'):
+        return route
+    elapsed = time.time() - cached['computed_at']
+    depart = transit.get('depart_in_minutes') or 0
+    if elapsed > depart * 60 + _OTP_DEPARTURE_GRACE_SECONDS:
+        # The cached departure has passed; never show an itinerary the user missed.
+        with _CACHE_LOCK:
+            _CACHE.pop(key, None)
+        return None
+    elapsed_minutes = elapsed / 60
+    shifted = {**transit, 'depart_in_minutes': max(0, round(depart - elapsed_minutes))}
+    if transit.get('arrival_in_minutes') is not None:
+        shifted['arrival_in_minutes'] = max(0, round(transit['arrival_in_minutes'] - elapsed_minutes))
+    return {**route, 'methods': {**route['methods'], 'transit': shifted}}
 
 
 def _cache_put(key, value, ttl=None):
     if ttl is None:
         ttl = _CACHE_PARTIAL_TTL_SECONDS if value['partial'] else _CACHE_TTL_SECONDS
+    size = len(key) + len(json.dumps(value, separators=(',', ':'), default=str))
+    value = copy.deepcopy(value)  # the caller keeps (and may change) its own object
     with _CACHE_LOCK:
-        _CACHE[key] = (time.monotonic() + ttl, value)
+        _CACHE[key] = (time.monotonic() + ttl, value, size)
         _CACHE.move_to_end(key)
-        while len(_CACHE) > _CACHE_MAX_ENTRIES:
+        # Least recently used first. An entry larger than the whole budget is not kept.
+        while _CACHE and (_CACHE.bytes > _CACHE_MAX_BYTES or len(_CACHE) > _CACHE_MAX_ENTRIES):
             _CACHE.popitem(last=False)
 
 
@@ -58,7 +160,30 @@ def _coordinate_origin(origin):
     latitude, longitude = (float(value) for value in match.groups())
     if not math.isfinite(latitude) or not math.isfinite(longitude) or abs(latitude) > 90 or abs(longitude) > 180:
         raise RoutingError('The starting coordinates are outside the valid latitude/longitude range.')
-    return {'latitude': latitude, 'longitude': longitude}
+    return {'latitude': round(latitude, _ORIGIN_DECIMALS), 'longitude': round(longitude, _ORIGIN_DECIMALS)}
+
+
+def haversine_miles(latitude1, longitude1, latitude2, longitude2):
+    """Great-circle (straight-line) distance in miles."""
+    phi1, phi2 = math.radians(latitude1), math.radians(latitude2)
+    a = (math.sin((phi2 - phi1) / 2) ** 2
+         + math.cos(phi1) * math.cos(phi2) * math.sin(math.radians(longitude2 - longitude1) / 2) ** 2)
+    return 2 * 3958.8 * math.asin(min(1.0, math.sqrt(a)))
+
+
+def route_priority(origin, pharmacies, limit=None):
+    """Order stores nearest-first from the origin and split at the route limit.
+
+    Returns (to_route, beyond_limit, straight_line_miles_by_id). to_route is in
+    nearest-first order, so OTP plans the closest stores first. Raises
+    RoutingError for an origin that is not valid coordinates.
+    """
+    coordinates = _coordinate_origin(origin)
+    limit = ROUTE_STORE_LIMIT if limit is None else limit
+    miles = {pharmacy['id']: haversine_miles(coordinates['latitude'], coordinates['longitude'], pharmacy['latitude'], pharmacy['longitude'])
+             for pharmacy in pharmacies}
+    ordered = sorted(pharmacies, key=lambda pharmacy: (miles[pharmacy['id']], pharmacy['id']))
+    return ordered[:limit], ordered[limit:], miles
 
 
 def _otp_timestamp(value):
@@ -76,6 +201,22 @@ def _leg_timestamp(leg, endpoint):
     time_data = (leg.get(endpoint) or {})
     estimated = (time_data.get('estimated') or {}).get('time')
     return _otp_timestamp(estimated) or _otp_timestamp(time_data.get('scheduledTime'))
+
+
+def _encode_polyline(points):
+    """Encode [longitude, latitude] points (1e-5 precision, as decoded) back to a Google polyline."""
+    chunks = []
+    previous_latitude = previous_longitude = 0
+    for longitude, latitude in points:
+        latitude, longitude = round(latitude * 1e5), round(longitude * 1e5)
+        for delta in (latitude - previous_latitude, longitude - previous_longitude):
+            value = ~(delta << 1) if delta < 0 else delta << 1
+            while value >= 0x20:
+                chunks.append(chr((0x20 | (value & 0x1f)) + 63))
+                value >>= 5
+            chunks.append(chr(value + 63))
+        previous_latitude, previous_longitude = latitude, longitude
+    return ''.join(chunks)
 
 
 def _decode_polyline(encoded):
@@ -324,7 +465,8 @@ def _otp_query(service_url, origin, pharmacy, allowed_transit_modes, transit_far
             for point in _decode_polyline(geometry.get('points')):
                 if not points or point != points[-1]:
                     points.append(point)
-        return {'type': 'LineString', 'coordinates': points} if len(points) >= 2 else None
+        # Re-encoded as one polyline: about a third of the JSON size, decoded by the results page.
+        return {'type': 'LineString', 'polyline': _encode_polyline(points)} if len(points) >= 2 else None
 
     def route_for(alias, mode):
         result, routing_error = plan(alias)
@@ -416,39 +558,84 @@ def _otp_query(service_url, origin, pharmacy, allowed_transit_modes, transit_far
     return {'distance_miles': min(distances) if distances else None, 'methods': modes}
 
 
+def _otp_query_limited(deadline, *args):
+    """Run one store's OTP query once a slot frees up, unless the search budget runs out first."""
+    if not _OTP_SLOTS.acquire(timeout=max(0, deadline - time.monotonic())):
+        raise TimeoutError('No OpenTripPlanner slot before the search budget ran out')
+    try:
+        return _otp_query(*args)
+    finally:
+        _OTP_SLOTS.release()
+
+
+def unrouted_route(reason='route_timeout'):
+    """A store with no OTP route: unavailable with no times or costs, never mock estimates.
+
+    reason is 'route_timeout' (OTP did not answer in time) or 'beyond_route_limit'
+    (farther than the nearest ROUTE_STORE_LIMIT stores, so never sent to OTP).
+    """
+    return {'distance_miles': None, 'unrouted': True, 'methods': {
+        mode: {'available': False, 'unavailable_reason': reason, 'travel_cost': None, 'total_cost': None, 'steps': []}
+        for mode in MODES
+    }}
+
+
 def fetch_opentripplanner_routes(service_url, origin, pharmacies, transit_types=None, transit_fare=None, leave_at=None):
     """Query a self-hosted OpenTripPlanner 2 GTFS GraphQL endpoint for live itineraries."""
     coordinates = _coordinate_origin(origin)
     allowed_modes = _otp_transit_modes(transit_types)
-    payload = {
-        'origin': coordinates,
-        'destinations': [{'id': p['id'], 'coordinates': [p['longitude'], p['latitude']]} for p in pharmacies],
-        'transit_types': transit_types or [],
-        'leave_at': leave_at,
-        'departure_bucket': None if leave_at else int(time.time() // _OTP_CACHE_TTL_SECONDS),
-    }
-    key = 'otp\n' + _cache_key(service_url, payload)
-    cached = _cache_get(key)
-    if cached is not None:
-        return cached
+    leave_now = not leave_at
+    ttl = (_OTP_SCHEDULED_TTL_SECONDS if leave_at
+           else _OTP_TRANSIT_TTL_SECONDS if allowed_modes
+           else _OTP_STREET_TTL_SECONDS)
+    def key_for(pharmacy):
+        # Route results ignore transit type order, so sort it for the key.
+        return 'otp\n' + _cache_key(service_url, {
+            'origin': coordinates,
+            'destination': {'id': pharmacy['id'], 'coordinates': [pharmacy['longitude'], pharmacy['latitude']]},
+            'transit_modes': sorted(allowed_modes),
+            'transit_fare': transit_fare,
+            'leave_at': leave_at,
+        })
     routes = {}
-    try:
-        with ThreadPoolExecutor(max_workers=min(5, max(1, len(pharmacies)))) as executor:
-            futures = {
-                executor.submit(_otp_query, service_url, coordinates, pharmacy, allowed_modes, transit_fare, leave_at): pharmacy
-                for pharmacy in pharmacies
-            }
-            for future in as_completed(futures, timeout=12):
+    missing = []
+    for pharmacy in pharmacies:
+        cached = _otp_cache_get(key_for(pharmacy), leave_now)
+        if cached is None:
+            missing.append(pharmacy)
+        else:
+            routes[pharmacy['id']] = cached
+    if missing:
+        deadline = time.monotonic() + _OTP_SEARCH_BUDGET_SECONDS
+        executor = ThreadPoolExecutor(max_workers=min(_OTP_MAX_CONCURRENT, len(missing)))
+        futures = {
+            executor.submit(_otp_query_limited, deadline, service_url, coordinates, pharmacy, allowed_modes, transit_fare, leave_at): pharmacy
+            for pharmacy in missing
+        }
+        try:
+            for future in as_completed(futures, timeout=_OTP_SEARCH_BUDGET_SECONDS):
                 pharmacy = futures[future]
-                routes[pharmacy['id']] = future.result()
-    except (URLError, TimeoutError, OSError, ValueError, KeyError, TypeError) as error:
-        raise RoutingError('OpenTripPlanner could not return complete routes. Check the configured endpoint, loaded transit feed, and allowed modes.') from error
-    except Exception as error:
-        # Futures raise concurrent.futures.TimeoutError, which aliases TimeoutError on supported Python versions.
-        raise RoutingError('OpenTripPlanner did not respond in time. Try again shortly.') from error
-    result = {'routes': routes, 'partial': any(not route['methods'][mode]['available'] for route in routes.values() for mode in MODES), 'cached': False, 'provider': 'otp'}
-    _cache_put(key, result, ttl=_OTP_CACHE_TTL_SECONDS)
-    return result
+                try:
+                    route = future.result()
+                except Exception:  # noqa: BLE001 - one bad store response (cut-off read, odd JSON) must not sink the others
+                    continue
+                routes[pharmacy['id']] = route
+                # Cache each store as it arrives so a retry after a partial failure is cheaper.
+                _cache_put(key_for(pharmacy), {'route': route, 'computed_at': time.time()}, ttl=ttl)
+        except FuturesTimeoutError:
+            pass
+        finally:
+            # Don't hold the response for stragglers; queued stores never start.
+            executor.shutdown(wait=False, cancel_futures=True)
+        unrouted = [pharmacy for pharmacy in missing if pharmacy['id'] not in routes]
+        if len(unrouted) == len(pharmacies):
+            raise RoutingUnavailable('OpenTripPlanner could not return routes in time. Check the configured endpoint, or try again shortly.')
+        for pharmacy in unrouted:
+            # Never cached, so the next search retries these stores.
+            routes[pharmacy['id']] = unrouted_route()
+    routes = {pharmacy['id']: routes[pharmacy['id']] for pharmacy in pharmacies}
+    unrouted_count = sum(route.get('unrouted', False) for route in routes.values())
+    return {'routes': routes, 'partial': any(not route['methods'][mode]['available'] for route in routes.values() for mode in MODES), 'cached': not missing, 'provider': 'otp', 'unrouted': unrouted_count}
 
 
 def fetch_routes(service_url, origin, pharmacies, transit_types=None):

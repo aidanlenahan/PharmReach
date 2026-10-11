@@ -1,0 +1,581 @@
+{
+ "store": {
+  "id": "cvs-104-sip",
+  "name": "CVS Pharmacy",
+  "latitude": 40.7311906,
+  "longitude": -74.0663821,
+  "driveCost": 1.4
+ },
+ "transit_types": [
+  "bus",
+  "subway",
+  "commuter",
+  "ferry"
+ ],
+ "leave_at": null,
+ "calls": [
+  {
+   "variables": {
+    "origin": {
+     "label": "Starting location",
+     "location": {
+      "coordinate": {
+       "latitude": 40.744,
+       "longitude": -74.0324
+      }
+     }
+    },
+    "destination": {
+     "label": "CVS Pharmacy",
+     "location": {
+      "coordinate": {
+       "latitude": 40.7311906,
+       "longitude": -74.0663821
+      }
+     }
+    },
+    "walkModes": {
+     "direct": [
+      "WALK"
+     ],
+     "directOnly": true
+    },
+    "transitModes": {
+     "direct": [
+      "WALK"
+     ],
+     "transitOnly": true,
+     "transit": {
+      "access": [
+       "WALK"
+      ],
+      "egress": [
+       "WALK"
+      ],
+      "transfer": [
+       "WALK"
+      ],
+      "transit": [
+       {
+        "mode": "BUS"
+       },
+       {
+        "mode": "SUBWAY"
+       },
+       {
+        "mode": "TRAM"
+       },
+       {
+        "mode": "RAIL"
+       },
+       {
+        "mode": "FERRY"
+       }
+      ]
+     }
+    },
+    "driveModes": {
+     "direct": [
+      "CAR"
+     ],
+     "directOnly": true
+    },
+    "bikeModes": {
+     "direct": [
+      "BICYCLE"
+     ],
+     "directOnly": true
+    },
+    "dateTime": null,
+    "transitPreferences": null
+   },
+   "response": {
+    "data": {
+     "walk": {
+      "searchDateTime": "2026-10-11T04:29:27-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 3434,
+         "walkTime": 3434,
+         "walkDistance": 4268.02,
+         "legs": [
+          {
+           "mode": "WALK",
+           "transitLeg": false,
+           "duration": 3434.0,
+           "distance": 4268.02,
+           "headsign": null,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "cytwFnmzbMEd@?@?@?@??@?@@`FbA@?@?H@JB??????@@@@xAZ~@R@?@???@?@??A??HBJB??@@bFdA@???H@J@@@`FdA@?@?JBF@?@@@bF`A@?@?@??AJBF@?B@?@?jAX@?@?APALPDJB?@?@?@LzAFj@Fz@LnAHjAFh@V|CB\\@PD\\@THv@@T@N?L@P?P?LAL?PAH?HCVCTIt@?D???@???@@?ALANb@HB@@DLzAFr@AFBXDZ?BVtC?BNEJCBTBX@DF~@XjCPtB?F@D@F@@@BD@vBLl@FZ@@ACXGd@BB@H@H?L@J@HH`@BR@N?NCr@AXALGRIHGDG?SA[AK?IBIDEDCFILCFAFCJAJ?H?F@TDXBXf@zCADABBNJ@JBRDDZ`@fCDTDFf@\\`B~@p@`@zAtA??v@v@p@l@n@j@l@f@Zb@f@v@^l@r@|@VXZ\\HRGLEF@B@RALCHOVk@dAA?HLDHT\\DFFJ?@@BfA~AFHIHGLJN~@tAvB|CKNEFEBEDDHAN@HBFAHTZBDHLFL?BGDMJjArAJLDDe@p@mA~AoA`BAF|A`CEFCFADoAbBHJIJFFGFA?mAdBABEFEFAAcAzABHEPGRLF`@V^`@@@LNRRJDDB`BvABD@B@FK|ASrCCFCPAR?F@HKpA?FEb@IjACXCRCVE^CX@Ba@lGATIlA"
+           },
+           "steps": [
+            {
+             "streetName": "sidewalk",
+             "distance": 18.85,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 145.54,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 96.38,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 301.46,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 0.58,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 146.95,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 47.87,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "SLIGHTLY_LEFT"
+            },
+            {
+             "streetName": "path",
+             "distance": 14.09,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 18.11,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 433.31,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 517.14,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 1008.49,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "SLIGHTLY_RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 107.94,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "path",
+             "distance": 14.32,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 155.01,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "path",
+             "distance": 83.82,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 14.01,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 68.19,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 150.44,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 78.96,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "UTURN_LEFT"
+            },
+            {
+             "streetName": "path",
+             "distance": 72.98,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 7.09,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "Magnolia Avenue",
+             "distance": 6.38,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "East Street",
+             "distance": 5.41,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "path",
+             "distance": 157.21,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 163.86,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 433.74,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "SLIGHTLY_RIGHT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     },
+     "transit": {
+      "searchDateTime": "2026-10-11T04:29:27-04:00",
+      "routingErrors": [],
+      "edges": []
+     },
+     "drive": {
+      "searchDateTime": "2026-10-11T04:29:27-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 619,
+         "walkTime": 0,
+         "walkDistance": 0.0,
+         "legs": [
+          {
+           "mode": "CAR",
+           "transitLeg": false,
+           "duration": 619.0,
+           "distance": 4586.76,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "kytwFjmzbMEb@ADCPANMtAKz@?DCPAPYnCADCRANYpC?@CTANIv@OxA?BCRAPOtAIx@ADANCPYpC?DCRLB|EbAD?LDH@bDp@J@LBbFfALBH@jCj@j@Ll@LH@@@JBtB`@hB^D@LBJB~GvAp@NLBRB|AVNCD\\VxCBZBRFt@@PBT@J@T@PBl@JzAH~@@DBDFFFBnBNP@n@FXBR@NBVBR@x@Fx@FH@lBNTBLB~BR|@H@?T@l@BCj@AZAZ?Z?N?L@P?ZB\\Dz@x@hLB\\BZDZBXD\\`@dDPnB@XB^@Z@L?N?J?N?NAL?LALAJANALANCLCJCPEPIXIVIR{@`BIN`@l@HJFJp@`ADFFJFHlAdBhBlCLNBDt@dALTGBMFe@`@GDKHMJKFSNONm@f@q@d@WREDq@f@GDOJg@b@u@l@kA|@GDMJYT{@p@_@XOJFLjAnCBHBDf@dAFXBd@Oh@OhCGz@C`@ANCXAZALEr@?D?ZCVA^CXA^IlAAPCXIn@LHlBtAh@`@TJp@h@PJDDj@VP@|ALVEMd@_@lGCT?JG`A"
+           },
+           "steps": [
+            {
+             "streetName": "6th Street",
+             "distance": 509.65,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "Monroe Street",
+             "distance": 969.77,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "Newark Street",
+             "distance": 182.34,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Hoboken Avenue",
+             "distance": 83.48,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "CONTINUE"
+            },
+            {
+             "streetName": "Jersey Avenue",
+             "distance": 456.0,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "SLIGHTLY_LEFT"
+            },
+            {
+             "streetName": "14th Street Viaduct",
+             "distance": 440.34,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "ramp",
+             "distance": 220.35,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "CONTINUE"
+            },
+            {
+             "streetName": "Hoboken Avenue",
+             "distance": 62.39,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "CONTINUE"
+            },
+            {
+             "streetName": "Palisade Avenue",
+             "distance": 310.77,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "Newark Avenue",
+             "distance": 437.18,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Central Avenue",
+             "distance": 154.28,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "Pavonia Avenue",
+             "distance": 312.8,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "SLIGHTLY_RIGHT"
+            },
+            {
+             "streetName": "John F. Kennedy Boulevard",
+             "distance": 107.26,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "link",
+             "distance": 88.09,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "CONTINUE"
+            },
+            {
+             "streetName": "Bergen Avenue",
+             "distance": 76.29,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "SLIGHTLY_LEFT"
+            },
+            {
+             "streetName": "Sip Avenue",
+             "distance": 175.85,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "HARD_RIGHT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     },
+     "bike": {
+      "searchDateTime": "2026-10-11T04:29:27-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 1426,
+         "walkTime": 0,
+         "walkDistance": 0.0,
+         "legs": [
+          {
+           "mode": "BICYCLE",
+           "transitLeg": false,
+           "duration": 1426.0,
+           "distance": 5493.54,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "cytwFnmzbMEd@?@?@?@AN~A\\fCh@H@JBLBtCl@JBLBrB`@p@N~@RJ@HBvE`ANBJBAPYlCADCRCRIx@MrA?DCPANYrC?BCPCPKjAMjACPANYvCCPCNWnCADCTANYlCAFAPCPAFUfCADCRANADYhC?DCRYGGAEAy@Uw@OE?E@EBCBCDAFAH?FBD@DDBDBv@PALAHXFhGjAJFB@PBPBB@xFhALDzAp@FBJFJDB?B?@?BANK@CnA[XKRIROROLMNOHKBCBCBA@?B?@?B@@BBDBD@@B@@@B?BABZFXFTBFAV?R@F@FBDDBFBNAZ?l@AFBDBDH@JArE?JBDDBB@J?BB@BZ@L@HDD@PBB@BBDFjCR@?xALn@FnCT`CRZBd@D@?rALlAJZBr@HD?fCTd@BjAJJ@L@rBPJ@L@tBPN@N@vBTH?LBtBPJ@ANYfH?NAPYfHAPANObECb@Cj@AP?PAPQrF?VONgAhA]\\UTeBbBkAZWHI@k@N@NABeCdDi@r@IFGFKFGBmBhCoA~AKLILsCzD}@nAIJc@j@]f@Wf@Oh@OhCGz@C`@ANCXAZALEr@?D?ZCVA^CXA^IlAAPCXIn@LHlBtAh@`@TJp@h@PJDDj@VP@|ALVEMd@_@lGCT?JKxAKA@W"
+           },
+           "steps": [
+            {
+             "streetName": "sidewalk",
+             "distance": 18.85,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "path",
+             "distance": 7.26,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Willow Avenue",
+             "distance": 536.51,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "2nd Street",
+             "distance": 726.51,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "road",
+             "distance": 161.64,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 10.89,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "bike path",
+             "distance": 604.55,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "bike path",
+             "distance": 37.85,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "bike path",
+             "distance": 217.44,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "SLIGHTLY_RIGHT"
+            },
+            {
+             "streetName": "bike path",
+             "distance": 4.48,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Coles Street",
+             "distance": 1010.96,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "SLIGHTLY_LEFT"
+            },
+            {
+             "streetName": "7th Street",
+             "distance": 540.12,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Newark Avenue",
+             "distance": 257.2,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Pavonia Avenue",
+             "distance": 884.11,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "John F. Kennedy Boulevard",
+             "distance": 107.26,
+             "absoluteDirection": "SOUTHWEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "link",
+             "distance": 88.09,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "CONTINUE"
+            },
+            {
+             "streetName": "Bergen Avenue",
+             "distance": 76.29,
+             "absoluteDirection": "SOUTH",
+             "relativeDirection": "SLIGHTLY_LEFT"
+            },
+            {
+             "streetName": "Sip Avenue",
+             "distance": 186.34,
+             "absoluteDirection": "NORTHWEST",
+             "relativeDirection": "HARD_RIGHT"
+            },
+            {
+             "streetName": "service road",
+             "distance": 6.9,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 10.38,
+             "absoluteDirection": "EAST",
+             "relativeDirection": "RIGHT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ ]
+}

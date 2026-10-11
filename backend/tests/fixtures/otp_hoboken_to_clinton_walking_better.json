@@ -1,0 +1,547 @@
+{
+ "store": {
+  "id": "cvs-clinton",
+  "name": "CVS Pharmacy",
+  "latitude": 40.747218,
+  "longitude": -74.0325717,
+  "driveCost": 1.4
+ },
+ "transit_types": [
+  "bus",
+  "subway",
+  "commuter",
+  "ferry"
+ ],
+ "leave_at": "2026-10-12T17:00:00Z",
+ "calls": [
+  {
+   "variables": {
+    "origin": {
+     "label": "Starting location",
+     "location": {
+      "coordinate": {
+       "latitude": 40.744,
+       "longitude": -74.0324
+      }
+     }
+    },
+    "destination": {
+     "label": "CVS Pharmacy",
+     "location": {
+      "coordinate": {
+       "latitude": 40.747218,
+       "longitude": -74.0325717
+      }
+     }
+    },
+    "walkModes": {
+     "direct": [
+      "WALK"
+     ],
+     "directOnly": true
+    },
+    "transitModes": {
+     "direct": [
+      "WALK"
+     ],
+     "transitOnly": true,
+     "transit": {
+      "access": [
+       "WALK"
+      ],
+      "egress": [
+       "WALK"
+      ],
+      "transfer": [
+       "WALK"
+      ],
+      "transit": [
+       {
+        "mode": "BUS"
+       },
+       {
+        "mode": "SUBWAY"
+       },
+       {
+        "mode": "TRAM"
+       },
+       {
+        "mode": "RAIL"
+       },
+       {
+        "mode": "FERRY"
+       }
+      ]
+     }
+    },
+    "driveModes": {
+     "direct": [
+      "CAR"
+     ],
+     "directOnly": true
+    },
+    "bikeModes": {
+     "direct": [
+      "BICYCLE"
+     ],
+     "directOnly": true
+    },
+    "dateTime": {
+     "earliestDeparture": "2026-10-12T17:00:00Z"
+    },
+    "transitPreferences": null
+   },
+   "response": {
+    "data": {
+     "walk": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 355,
+         "walkTime": 355,
+         "walkDistance": 442.13,
+         "legs": [
+          {
+           "mode": "WALK",
+           "transitLeg": false,
+           "duration": 355.0,
+           "distance": 442.13,
+           "headsign": null,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "cytwFnmzbMEd@?@?@ICGA?@A???CNAJA?mAWA?A???GAIAAAAAq@KA?ICEAA??AA?KCg@KA????@A??@YnC?@?@GCKC?@A?A@A?]IcE}@A??AKCIC?@??A?A?cAS"
+           },
+           "steps": [
+            {
+             "streetName": "sidewalk",
+             "distance": 175.61,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 80.22,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 186.31,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     },
+     "transit": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [
+       {
+        "code": "WALKING_BETTER_THAN_TRANSIT",
+        "description": "Origin is within a trivial distance of the destination."
+       }
+      ],
+      "edges": []
+     },
+     "drive": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 58,
+         "walkTime": 0,
+         "walkDistance": 0.0,
+         "legs": [
+          {
+           "mode": "CAR",
+           "transitLeg": false,
+           "duration": 58.0,
+           "distance": 443.81,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "kytwFjmzbMEb@ADCPANMtAKz@?DCPICc@Kw@O[Gm@O{@OEAICMCgFcAICKCgAW"
+           },
+           "steps": [
+            {
+             "streetName": "6th Street",
+             "distance": 106.06,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "Clinton Street",
+             "distance": 337.76,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     },
+     "bike": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 165,
+         "walkTime": 0,
+         "walkDistance": 0.0,
+         "legs": [
+          {
+           "mode": "BICYCLE",
+           "transitLeg": false,
+           "duration": 165.0,
+           "distance": 458.0,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "cytwFnmzbMEd@?@?@?@ANKCANMtAKz@?DCPICc@Kw@O[Gm@O{@OEAICMCgFcAICKCBQA?A?cAS"
+           },
+           "steps": [
+            {
+             "streetName": "sidewalk",
+             "distance": 18.85,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "path",
+             "distance": 7.26,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Willow Avenue",
+             "distance": 6.39,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "6th Street",
+             "distance": 80.07,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "Clinton Street",
+             "distance": 296.91,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 7.71,
+             "absoluteDirection": "EAST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 40.79,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "LEFT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "variables": {
+    "origin": {
+     "label": "Starting location",
+     "location": {
+      "coordinate": {
+       "latitude": 40.744,
+       "longitude": -74.0324
+      }
+     }
+    },
+    "destination": {
+     "label": "CVS Pharmacy",
+     "location": {
+      "coordinate": {
+       "latitude": 40.747218,
+       "longitude": -74.0325717
+      }
+     }
+    },
+    "walkModes": {
+     "direct": [
+      "WALK"
+     ],
+     "directOnly": true
+    },
+    "transitModes": {
+     "direct": [
+      "WALK"
+     ],
+     "transitOnly": true,
+     "transit": {
+      "access": [
+       "WALK"
+      ],
+      "egress": [
+       "WALK"
+      ],
+      "transfer": [
+       "WALK"
+      ],
+      "transit": [
+       {
+        "mode": "BUS"
+       },
+       {
+        "mode": "SUBWAY"
+       },
+       {
+        "mode": "TRAM"
+       },
+       {
+        "mode": "RAIL"
+       },
+       {
+        "mode": "FERRY"
+       }
+      ]
+     }
+    },
+    "driveModes": {
+     "direct": [
+      "CAR"
+     ],
+     "directOnly": true
+    },
+    "bikeModes": {
+     "direct": [
+      "BICYCLE"
+     ],
+     "directOnly": true
+    },
+    "dateTime": {
+     "earliestDeparture": "2026-10-12T17:00:00Z"
+    },
+    "transitPreferences": {
+     "street": {
+      "walk": {
+       "reluctance": 20.0
+      }
+     }
+    }
+   },
+   "response": {
+    "data": {
+     "walk": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 355,
+         "walkTime": 355,
+         "walkDistance": 442.13,
+         "legs": [
+          {
+           "mode": "WALK",
+           "transitLeg": false,
+           "duration": 355.0,
+           "distance": 442.13,
+           "headsign": null,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "cytwFnmzbMEd@?@?@ICGA?@A???CNAJA?mAWA?A???GAIAAAAAq@KA?ICEAA??AA?KCg@KA????@A??@YnC?@?@GCKC?@A?A@A?]IcE}@A??AKCIC?@??A?A?cAS"
+           },
+           "steps": [
+            {
+             "streetName": "sidewalk",
+             "distance": 175.61,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 80.22,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 186.31,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     },
+     "transit": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [],
+      "edges": []
+     },
+     "drive": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 58,
+         "walkTime": 0,
+         "walkDistance": 0.0,
+         "legs": [
+          {
+           "mode": "CAR",
+           "transitLeg": false,
+           "duration": 58.0,
+           "distance": 443.81,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "kytwFjmzbMEb@ADCPANMtAKz@?DCPICc@Kw@O[Gm@O{@OEAICMCgFcAICKCgAW"
+           },
+           "steps": [
+            {
+             "streetName": "6th Street",
+             "distance": 106.06,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "Clinton Street",
+             "distance": 337.76,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     },
+     "bike": {
+      "searchDateTime": "2026-10-12T13:00:00-04:00",
+      "routingErrors": [],
+      "edges": [
+       {
+        "node": {
+         "duration": 165,
+         "walkTime": 0,
+         "walkDistance": 0.0,
+         "legs": [
+          {
+           "mode": "BICYCLE",
+           "transitLeg": false,
+           "duration": 165.0,
+           "distance": 458.0,
+           "from": {
+            "name": "Starting location"
+           },
+           "to": {
+            "name": "CVS Pharmacy"
+           },
+           "route": null,
+           "legGeometry": {
+            "points": "cytwFnmzbMEd@?@?@?@ANKCANMtAKz@?DCPICc@Kw@O[Gm@O{@OEAICMCgFcAICKCBQA?A?cAS"
+           },
+           "steps": [
+            {
+             "streetName": "sidewalk",
+             "distance": 18.85,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "DEPART"
+            },
+            {
+             "streetName": "path",
+             "distance": 7.26,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "Willow Avenue",
+             "distance": 6.39,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "6th Street",
+             "distance": 80.07,
+             "absoluteDirection": "WEST",
+             "relativeDirection": "LEFT"
+            },
+            {
+             "streetName": "Clinton Street",
+             "distance": 296.91,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "path",
+             "distance": 7.71,
+             "absoluteDirection": "EAST",
+             "relativeDirection": "RIGHT"
+            },
+            {
+             "streetName": "sidewalk",
+             "distance": 40.79,
+             "absoluteDirection": "NORTH",
+             "relativeDirection": "LEFT"
+            }
+           ]
+          }
+         ]
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ ]
+}
