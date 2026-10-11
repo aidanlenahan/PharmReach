@@ -81,4 +81,4 @@ journalctl -u njt-refresh -n 50
 
 ## Error responses
 
-Unknown public paths return HTTP 404 with `frontend/public/404.html`. Requests for private source, data, configuration, dotfiles, traversal paths, symlink escapes, or directory listings return HTTP 403 with `frontend/public/403.html`. Unknown API endpoints keep their JSON 404 response. All current app pages are public; no account login or role system is configured. Build after editing the error pages, then restart `hackru` after server changes.
+Pages are published without `.html` (`/results`, `/settings`, …); the `.html` URLs redirect to them with a 301. Unknown public paths return HTTP 404 with `frontend/404.html`. Requests for private source, data, configuration, dotfiles, traversal paths, symlink escapes, or directory listings return HTTP 403 with `frontend/403.html`. Unknown API endpoints keep their JSON 404 response. All current app pages are public; no account login or role system is configured. Build after editing the error pages, then restart `hackru` after server changes.

@@ -91,7 +91,7 @@ Google directions receive `origin`; Apple unified directions receive `source`. T
 
 ## Travel onboarding
 
-First visits to search or results open `onboarding.html`. The five screens collect driving ability, a walking limit (unlimited, minutes, or miles, including zero), cycling ability, and public transit with bus, subway/light rail, commuter rail, and ferry choices, then show a review. Choices are saved in local storage under `nearRxTravelPreferences`. Settings shows a summary and a restart link; restarting keeps the existing answers until the new flow is completed. An interrupted flow does not overwrite saved preferences.
+First visits to search or results open `/onboarding`. The five screens collect driving ability, a walking limit (unlimited, minutes, or miles, including zero), cycling ability, and public transit with bus, subway/light rail, commuter rail, and ferry choices, then show a review. Choices are saved in local storage under `pharmreach:travel-preferences`. Settings shows a summary and a restart link; restarting keeps the existing answers until the new flow is completed. An interrupted flow does not overwrite saved preferences.
 
 `src/core.ts` handles persistence, first-use navigation, default comparison method, and preference matching. Disallowed travel methods are removed from result columns, comparison controls, and route choices. Walking or transit routes exceeding the walking limit have no matching route; if no pharmacy has a matching method, its column is removed. The OTP transit fallback can show a walk-plus-transit option even when direct walking is faster, with the same walking time/distance limit applied. Unavailable routes remain last. The live Hoboken graph provides OSM-based walking, driving, cycling, and schedule-aware public transit routes. Apple Maps transit links include the selected transit types.
 
@@ -159,7 +159,7 @@ is set, not that the generation service is currently responding.
 
 ### Privacy
 
-`/privacy.html` describes browser storage, chat processing, external providers,
+`/privacy` describes browser storage, chat processing, external providers,
 retention limitations, and the privacy contact. Every page footer links to it;
 the helper displays its Google Gemini disclosure before any question is sent.
 The privacy page can clear saved preferences, sorting, starting location, and
@@ -172,7 +172,7 @@ Recheck provider storage behavior before changing integrations or audience.
 
 ### Homepage and search
 
-`/` is the marketing homepage; `/find-medicine.html` contains medicine search
+`/` is the marketing homepage; `/find-medicine` contains medicine search
 and starting-location controls. Homepage calls to action read saved travel
 preferences: `Try it out` opens onboarding with search as the return destination;
 `Make a search` opens search directly. Direct search visits without completed
