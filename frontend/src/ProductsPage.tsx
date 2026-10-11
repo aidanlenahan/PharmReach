@@ -69,7 +69,7 @@ export function ProductsPage() {
           <h2>{item.name}</h2>
           <p className="product-strength">{item.strength}{item.quantity_label ? ` · ${item.quantity_label}` : ''}</p>
           {!!aliases.length && <div className="product-aliases" aria-label="Also known as">{aliases.map((alias) => <span key={alias}>{alias}</span>)}</div>}
-          <a className="product-compare" href={`/results.html?medication=${encodeURIComponent(item.id)}`}>Compare pharmacies <span aria-hidden="true">→</span></a>
+          <a className="product-compare" href={`/results?medication=${encodeURIComponent(item.id)}`}>Compare pharmacies <span aria-hidden="true">→</span></a>
         </article>;
       })}
     </section> : <section className="catalog-empty"><h2>No products found</h2><p>Try another name, ingredient, brand, or category.</p><button className="text-btn" type="button" onClick={() => { setQuery(''); setCategory('All products'); }}>Clear filters</button></section>}

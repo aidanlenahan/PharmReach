@@ -40,7 +40,7 @@ async function askHelper(message: string, signal: AbortSignal): Promise<ChatRepl
 
 function safeResultsUrl(suggestion: ChatSuggestion) {
   // Only follow same-site results links; rebuild from the ID if anything looks off.
-  return suggestion.results_url.startsWith('/results.html?') ? suggestion.results_url : `/results.html?medication=${encodeURIComponent(suggestion.id)}`;
+  return suggestion.results_url.startsWith('/results?') ? suggestion.results_url : `/results?medication=${encodeURIComponent(suggestion.id)}`;
 }
 
 function safeProductUrl(url: string | null) {
@@ -213,7 +213,7 @@ export function MedicationHelper() {
         <p>Your message may be sent to Google Gemini to match products. Google’s handling of messages depends on its API terms and billing status; unpaid-service messages may be used for product improvement or reviewed by humans.</p>
         <p><b>Don’t share personal information.</b> Avoid names, email addresses, phone numbers, medical records, or other identifying details. This is not a private medical consultation.</p>
         <p>Recent chat messages are saved in this browser tab. You can clear them from the privacy page.</p>
-        <a href="/privacy.html">Read the full privacy policy →</a>
+        <a href="/privacy">Read the full privacy policy →</a>
       </div>
       {available === false ? <p className="helper-state" role="status">The medication helper is not available right now. You can still search by product name on the website.</p> : <>
         <div className="helper-thread" ref={threadRef} aria-live="polite" aria-busy={pending}>

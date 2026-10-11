@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { medicationTitle, splitStrength } from './core';
 
 type Medication = {
   id: string;
@@ -79,7 +80,7 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
 
   function choose(medication: Medication) {
     if (onSelect) onSelect(medication);
-    else window.location.href = `/results.html?medication=${encodeURIComponent(medication.id)}`;
+    else window.location.href = `/results?medication=${encodeURIComponent(medication.id)}`;
   }
 
   async function submit() {
@@ -167,7 +168,7 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
           {matches.map((medication) => (
             <button key={medication.id} className="suggestion" role="option" aria-selected="false" onClick={() => choose(medication)}>
               <span className="pill-icon" aria-hidden="true">✳</span>
-              <span><b>{medication.name}</b><small>{[medication.strength, medication.quantity_label].filter(Boolean).join(' · ')}</small></span>
+              <span><b>{medicationTitle(medication.name, medication.strength)}</b><small>{[splitStrength(medication.strength).detail, medication.quantity_label].filter(Boolean).join(' · ')}</small></span>
               <span className="suggestion-tag">{medication.category}</span>
             </button>
           ))}
