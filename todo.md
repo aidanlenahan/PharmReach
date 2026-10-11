@@ -2,19 +2,19 @@
 
 Product scope and requirements live in [PRD.md](./PRD.md); stack decisions live in [TECHSTACK.md](./TECHSTACK.md). Work through the phases in order, with the stack and shared contracts established before feature implementation.
 
-> **Status (2026-10-11):** The running app is a Python stdlib server (`backend/serve.py`) serving a Vite React frontend (`frontend/`), with OpenTripPlanner routing and real CVS/Walgreens snapshots. It replaces the Next.js/SQLite plan below. Crossed-off items that were reworded describe what was actually built. `backend/` and `frontend/` are in git; `bigPharma/` is gitignored.
+> **Status (2026-10-11):** Live at https://pharmreach.tech. The app is a Python stdlib server (`backend/serve.py`) serving a Vite + React 19 frontend (`frontend/`), with OpenTripPlanner routing and real CVS/Walgreens snapshots (34 products, 38 stores across Hudson County). It replaced the Next.js/SQLite plan. Checked items describe what was actually built. `backend/` and `frontend/` are in git. `bigPharma/`, `poc/`, and `frontend/README.md` are gitignored/local only. Remaining work is mostly demo prep (Phases 6–7).
 
 ## Phase 0 — Set up the tech stack and repository
 
-- [ ] Confirm the stack and MVP constants in `TECHSTACK.md` with the team.
-- [x] Initialize the all-TypeScript Next.js App Router application.
-- [x] Set up Node 20+, package scripts, TypeScript, and the agreed CSS approach.
-- [x] Add the core dependencies: Leaflet 1.9.4/react-leaflet, leaflet.markercluster (`react-leaflet-cluster`), Fuse.js, SQLite (`better-sqlite3`), and Gemini (`@google/genai`).
+- [ ] Update `TECHSTACK.md` to the stack we built (Vite/React + Python stdlib + OTP); it still describes the Next.js/SQLite plan.
+- [x] Initialize the Vite + React + TypeScript multi-page frontend (dropped the Next.js plan).
+- [x] Set up Node 22.12+, pnpm scripts, TypeScript, and plain CSS.
+- [x] Add the core dependencies: React, `lucide-react`, Leaflet 1.9.4 (CDN). The backend uses only the Python stdlib; Gemini goes over REST and data lives in JSON (no Fuse.js, SQLite, or `@google/genai`).
 - [x] Create the initial app/API folder structure and a working local development command.
-- [x] Add `.env.example` (`GEMINI_API_KEY`, `NEXT_PUBLIC_CARTO_KEY`); keep actual credentials in local/VM-only `.env` files.
+- [x] Add `.env.example`; keep actual credentials in local/VM-only `.env` files and `/etc/hackru.env`.
 - [x] Move the CARTO key hardcoded in `bigPharma/` scripts and HTML into `bigPharma/.env` (scripts render a gitignored `pharmacy_map.local.html`; the committed HTML keeps a `__CARTO_KEY__` placeholder).
 - [x] Restrict the CARTO key to our domain in the CARTO dashboard.
-- [ ] Add or confirm `CLAUDE.md` and `AGENTS.md` with the stack, constants, and folder ownership from `TECHSTACK.md`.
+- [ ] Add `CLAUDE.md` and `AGENTS.md` with the actual stack and folder layout (neither exists yet).
 - [x] Build the Vite frontend and run the app locally with `python3 backend/serve.py` (or `backend/otp/run_demo_with_otp.sh` for live OTP).
 - [ ] Verify a clean install from scratch using `frontend/SETUP.md`.
 
@@ -51,16 +51,18 @@ Before building on NJ Transit data, confirm we can reach the API, get the static
 - [x] Add manual address or lat/long entry, geocoded against a bundled OSM address index (`/api/geocode`) instead of Nominatim.
 - [x] Build a Leaflet results map with OSM tiles and attribution that draws the selected pharmacy's route.
 - [x] Show pharmacy markers as pins colored by stock status, with tooltips and click-to-select.
-- [ ] Show the user's starting location on the map.
+- [x] Show the user's starting location on the map (pin + legend entry).
 - [x] Implement a medication combobox that matches every search term across name, strength, aka, and search terms, plus a strength/form/amount variant picker on results.
-- [x] Add preference controls for walking, transit, and driving.
+- [x] Add preference controls for walking, transit, driving (with optional MPG), and cycling.
+- [x] Make Ctrl/⌘ + scroll zoom the maps so page scrolling isn't hijacked.
+- [x] Serve pages at clean URLs (`/results`, `/settings`, …) with 301s from `.html`.
 
 ## Phase 4 — Implement search, transportation, and ranking
 
 - [x] Derive route distance and walking miles from OTP itinerary legs, plus a check that flags when the start point is at the pharmacy.
 - [ ] Apply the preset walk, transit-stop, and driving comfort thresholds from `TECHSTACK.md`. (Only the user's own walking limit is enforced today.)
 - [x] Get walk, transit, drive, and bike ETAs from OpenTripPlanner, falling back to static per-pharmacy estimates.
-- [x] Calculate medication plus transportation cost.
+- [x] Calculate medication plus transportation cost, including gas cost from the user's MPG ($3.10/gal).
 - [x] Sort results by a user-chosen option (Best match, arrival, travel time, medication/travel/total cost, name, availability), keeping unavailable options last and hiding modes the user's preferences rule out.
 - [x] Implement `GET /api/pharmacies` (plus `/api/medications`, `/api/geocode`, `/api/catalog-summary`) with TypeScript types on the frontend mirroring the response.
 - [x] Connect the search UI to the API and show ranked pharmacy results on the map and in a list.
@@ -78,7 +80,7 @@ Goal: a user describes a symptom (for example, "headache") and gets up to 3 OTC 
 ### Stage 5.1 — Key and config
 
 - [x] ~~Load `GEMINI_API_KEY` in `serve.py` from the environment, with a small repo-root `.env` loader (`backend/envfile.py`).~~
-- [ ] Add `GEMINI_API_KEY` to `/etc/hackru.env` on the VM so `hackru.service` picks it up.
+- [x] ~~Add `GEMINI_API_KEY` to `/etc/hackru.env` on the VM so `hackru.service` picks it up.~~ (`/api/health` on prod reports `chat_configured: true`.)
 - [x] ~~Pin the Gemini Flash model ID (`gemini-3.8-flash` in `backend/chat.py`, overridable with `GEMINI_MODEL`) and confirm the key works with a test call.~~
 - [x] ~~Make `/api/health` report whether the chat helper is configured, without exposing the key.~~
 
@@ -101,7 +103,7 @@ Goal: a user describes a symptom (for example, "headache") and gets up to 3 OTC 
 ### Stage 5.4 — Chat UI
 
 - [x] ~~Build the chat UI and interactive suggestion buttons (plain text rendering only, no HTML or markdown).~~
-- [x] ~~Selecting a suggestion should populate and run the corresponding medication search (`/results.html?medication=<id>`, using saved travel preferences).~~
+- [x] ~~Selecting a suggestion should populate and run the corresponding medication search (`/results?medication=<id>`, using saved travel preferences).~~
 - [x] ~~Add a secondary link on each suggestion to the retailer product page (`product_source`).~~
 - [x] ~~Show the non-medical-advice and snapshot-data disclaimers (none exist in the UI yet).~~
 - [x] ~~Handle loading, error, rate-limited, and "helper unavailable" states.~~
@@ -111,7 +113,7 @@ Goal: a user describes a symptom (for example, "headache") and gets up to 3 OTC 
 - [x] ~~Script a test set: common symptoms (headache, allergies, heartburn, cough, can't sleep, diarrhea) map to sensible catalog products.~~
 - [x] ~~Prompt-injection tests ("ignore previous instructions", role-play, asking for the system prompt, non-catalog drugs, prescriptions) return only `no_match`/`refuse` or catalog IDs.~~
 - [x] ~~Emergency and off-topic inputs get the fixed responses.~~
-- [ ] Deploy behind the tunnel and check the chat on pharmreach.tech.
+- [ ] Check the chat end to end on pharmreach.tech (deployed and configured; not yet tried by hand).
 
 ## Phase 6 — Integrate and validate the MVP
 
@@ -138,14 +140,15 @@ Pick up in the priority order in the [PRD](./PRD.md), starting with Gemini trans
 
 ### NJ Transit API hardening (post-MVP)
 
-The MVP uses the public static GTFS zips (`njtransit.com/rail_data.zip`, `bus_data.zip`) snapshotted into SQLite, so it needs no token. These tasks only matter once we call the token API, for example for real-time data or scheduled feed refreshes. See `poc/njtransit/API_NOTES.md`.
+The MVP uses the public static GTFS zips (`njtransit.com/rail_data.zip`, `bus_data.zip`) loaded into the OTP graph, so it needs no token. These tasks only matter once we call the token API, for example for real-time data or scheduled feed refreshes. See `poc/njtransit/API_NOTES.md`.
 
 - [x] ~~**Token expiry:** cache rail and bus tokens with their issue time in `backend/data/cache/njt-tokens.json`, reuse them for 20 h, and on an `Invalid token` response get a new token once and retry (`backend/njt/api.py`).~~
 - [x] ~~Refresh tokens from a single systemd timer (`infra/systemd/njt-refresh.{service.in,timer}`, about every 20 h) that writes them to the gitignored cache, never to `.env`. Long-lived credentials stay in `.env` / `/etc/hackru.env`. Token requests are capped at 8 per rolling 24 h, with a warning from the 6th; `isValidToken` is never called.~~
 - [ ] Rate-limit and back off outgoing NJT requests (100,000/day portal cap); cache responses and have the app read from our own store, as the terms require, not proxy NJT directly.
 - [x] ~~Refresh the static GTFS on the same timer (`backend/njt/refresh.py`). New feeds replace the old ones only after they validate (zip integrity, required files, stop counts, size, and at least 7 days of service ahead); the previous feed is kept as `*.prev`.~~
 - [x] ~~Fall back to the token API when the public zips fail and the staged feeds are about to run out, and otherwise keep the existing feeds. `transit_data` in `/api/health` and `/api/pharmacies` reports the source and staleness, and the results page shows a disclaimer when schedules are stale.~~
-- [ ] Put `NJT_USERNAME`/`NJT_PASSWORD` in `/etc/hackru.env` on the VM, run `sudo bash infra/systemd/install.sh` to enable `njt-refresh.timer`, and restart `hackru`.
+- [x] ~~Run `sudo bash infra/systemd/install.sh` to enable `njt-refresh.timer` and restart `hackru`.~~ (Timer is active; prod reports fresh public-zip feeds through 2027-03-13.)
+- [ ] Put `NJT_USERNAME`/`NJT_PASSWORD` in `/etc/hackru.env` (optional; only needed for the token-API fallback).
 - [x] ~~Decided to use the public zips first (conditional downloads, so unchanged feeds cost a 304) and the token API only as a last resort, when the public zips fail and the staged feeds run out within 7 days. The API's bus feed covers about 5 days and its rail feed has no light rail.~~
 - [ ] Graph rebuilds after a feed refresh are manual (stop `otp`, run `python3 backend/njt/refresh.py --rebuild`, start `otp`), or set `NJT_REFRESH_ARGS=--rebuild` if the VM has the memory.
 - [ ] Keep real-time transit, business-data integration, crowd-sourced corrections, insurance/budgeting, accounts, and mobile/PWA work out of the hackathon MVP.

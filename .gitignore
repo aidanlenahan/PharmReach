@@ -101,3 +101,6 @@ bigPharma/pharmacy_map.local.html
 
 # Runtime caches: NJT tokens (secret) and transit feed refresh status
 backend/data/cache/
+
+# Local-only frontend notes
+frontend/README.md
