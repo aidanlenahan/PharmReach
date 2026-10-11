@@ -9,6 +9,7 @@ type Medication = {
   quantity_label?: string;
   aka?: string;
   category?: string;
+  store_count?: number;
 };
 
 export function ProductsPage() {
@@ -59,7 +60,7 @@ export function ProductsPage() {
       {visible.map((item) => {
         const aliases = (item.aka || '').split(' · ').filter(Boolean).slice(0, 3);
         return <article className="product-card" key={item.id}>
-          <div className="product-card-top"><span className="product-category">{item.category || 'OTC'}</span><span className="product-symbol" aria-hidden="true">✳</span></div>
+          <div className="product-card-top"><span className="product-category">{item.category || 'OTC'}</span>{item.store_count != null && <span className="product-store-count" title="Stores with confirmed in-stock or limited-stock availability">{item.store_count} {item.store_count === 1 ? 'store' : 'stores'}</span>}</div>
           <h2>{item.name}</h2>
           <p className="product-strength">{item.strength}{item.quantity_label ? ` · ${item.quantity_label}` : ''}</p>
           {!!aliases.length && <div className="product-aliases" aria-label="Also known as">{aliases.map((alias) => <span key={alias}>{alias}</span>)}</div>}

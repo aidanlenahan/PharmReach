@@ -194,7 +194,7 @@
 .product-card{min-width:0;display:flex;flex-direction:column;padding:17px 18px 15px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 3px 12px #18352c06}
 .product-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
 .product-category{color:var(--green);font-size:10px;font-weight:700;letter-spacing:.45px;text-transform:uppercase}
-.product-symbol{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#edf4e9;color:var(--green);font-size:15px}
+.product-store-count{color:var(--muted);font-size:11px;white-space:nowrap}
 .product-card h2{margin:0 0 5px;font:700 17px/1.35 Manrope;letter-spacing:-.25px;overflow-wrap:anywhere}
 .product-strength{min-height:34px;margin:0;color:#67776d;font-size:12px;line-height:1.5}
 .product-aliases{display:flex;gap:6px;flex-wrap:wrap;margin:11px 0 15px}
@@ -206,3 +206,6 @@
 .catalog-empty p{margin:0 0 12px;line-height:1.55}
 @media(max-width:900px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.catalog-page{margin:27px auto 55px}.catalog-heading{align-items:flex-start}.catalog-heading h1{font-size:36px}.catalog-count{gap:5px;padding:9px 11px;font-size:11px}.catalog-count b{font-size:20px}.catalog-tools{align-items:stretch}.catalog-search{height:48px}.catalog-result-count{align-self:center}.product-grid{grid-template-columns:1fr;gap:10px}.product-card{padding:15px}.product-strength{min-height:0}.catalog-categories{gap:6px}.category-chip{padding:7px 10px;font-size:11px}}
+.origin-field{position:relative;flex:1;min-width:0;display:flex}.origin-field input{width:100%}.origin-suggestions{top:calc(100% + 4px);padding:5px}.origin-suggestions .suggestion{padding:9px 10px;font-size:13px}.origin-suggestions .suggestion.active{background:var(--green2)}.origin-suggestions-credit{display:block;text-align:right;padding:4px 8px 2px;font-size:10px;color:var(--muted)}
+
+.location-panel.location-panel--embedded{margin:20px 0 0;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink)}
