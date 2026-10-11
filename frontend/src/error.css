@@ -1,0 +1,5 @@
+.error-page{max-width:760px;margin:clamp(48px,10vh,100px) auto;min-height:40vh}
+.error-code{font:800 64px/1 Manrope,sans-serif;color:var(--accent);margin-bottom:22px}
+.error-page h1{font-size:clamp(32px,5vw,44px);letter-spacing:-1.5px;margin:0 0 18px}
+.error-message{max-width:490px;color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:28px}
+.error-home{display:inline-block;text-decoration:none}
