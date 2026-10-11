@@ -1,0 +1,28 @@
+[Unit]
+Description=PharmReach OpenTripPlanner (Docker container pharmreach-otp)
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=@USER@
+WorkingDirectory=@ROOT@
+# Optional overrides: OTP_JAVA_HEAP, OTP_MEMORY_LIMIT, OTP_PORT, OTP_DATA_DIR, OTP_IMAGE.
+EnvironmentFile=-/etc/hackru.env
+# Clear a stale container left by a crash or a manual `otp.sh serve`.
+ExecStartPre=-/usr/bin/docker rm -f pharmreach-otp
+ExecStart=/bin/bash @ROOT@/backend/otp/otp.sh serve
+ExecStop=-/usr/bin/docker stop --time 20 pharmreach-otp
+ExecStopPost=-/usr/bin/docker rm -f pharmreach-otp
+Restart=always
+RestartSec=10
+TimeoutStartSec=60
+TimeoutStopSec=40
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

@@ -1,6 +1,8 @@
 [Unit]
 Description=HackRU pharmacy API and compiled frontend
-After=network.target
+After=network.target otp.service
+# OTP is optional: while it is down or loading, serve.py serves real prices and stock with routes marked unavailable (never estimated travel times).
+Wants=otp.service
 StartLimitIntervalSec=0
 
 [Service]

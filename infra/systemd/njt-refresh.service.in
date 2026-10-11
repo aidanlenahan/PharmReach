@@ -1,0 +1,24 @@
+[Unit]
+Description=PharmReach NJ TRANSIT GTFS refresh (token renewal + validated feed download)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=@USER@
+WorkingDirectory=@ROOT@
+# NJT_USERNAME / NJT_PASSWORD (optional: without them only the public zips are used).
+# NJT_REFRESH_ARGS: extra flags, e.g. --rebuild to rebuild graph.obj after a feed changes
+# (needs Docker and several GB free; stop otp.service first on a small VM).
+EnvironmentFile=-/etc/hackru.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 @ROOT@/backend/njt/refresh.py $NJT_REFRESH_ARGS
+# Exit 1 means at least one feed kept its existing data; that is reported, not fatal.
+SuccessExitStatus=1
+TimeoutStartSec=5h
+Nice=10
+IOSchedulingClass=idle
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+UMask=0022

@@ -1,0 +1,14 @@
+[Unit]
+Description=Refresh NJ TRANSIT GTFS feeds about every 20 hours
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=20h
+RandomizedDelaySec=45min
+# Persistent= catches up calendar triggers missed while the machine was off; with the
+# monotonic triggers above, OnBootSec plays that role.
+Persistent=true
+Unit=njt-refresh.service
+
+[Install]
+WantedBy=timers.target
