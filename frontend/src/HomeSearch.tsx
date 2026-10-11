@@ -36,6 +36,7 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const requestRef = useRef(0);
+  const suggestionsRequested = useRef(false);
 
   useEffect(() => {
     const value = query.trim();
@@ -54,12 +55,12 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
         const medications = await findMedications(value);
         if (requestId !== requestRef.current) return;
         setMatches(medications);
-        setOpen(true);
+        setOpen(suggestionsRequested.current);
         setStatus(medications.length ? '' : 'No products match. Try aspirin, ibuprofen, or Pepto-Bismol.');
       } catch (error) {
         if (requestId !== requestRef.current) return;
         setMatches([]);
-        setOpen(true);
+        setOpen(suggestionsRequested.current);
         setStatus(error instanceof Error ? error.message : 'Could not load medications.');
       } finally {
         if (requestId === requestRef.current) setLoading(false);
@@ -70,7 +71,7 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
 
   useEffect(() => {
     const closeOnOutsideClick = (event: MouseEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+      if (!rootRef.current?.contains(event.target as Node)) { suggestionsRequested.current = false; setOpen(false); }
     };
     document.addEventListener('mousedown', closeOnOutsideClick);
     return () => document.removeEventListener('mousedown', closeOnOutsideClick);
@@ -103,10 +104,12 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
   }
 
   function handleKeys(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === 'Escape') setOpen(false);
+    if (event.key === 'Escape') { suggestionsRequested.current = false; setOpen(false); }
     if (event.key === 'ArrowDown' && matches.length) {
       event.preventDefault();
-      rootRef.current?.querySelector<HTMLButtonElement>('.suggestion')?.focus();
+      suggestionsRequested.current = true;
+      setOpen(true);
+      window.requestAnimationFrame(() => rootRef.current?.querySelector<HTMLButtonElement>('.suggestion')?.focus());
     }
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -127,8 +130,9 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
       else buttons[current - 1]?.focus();
     }
     if (event.key === 'Escape') {
-      setOpen(false);
       inputRef.current?.focus();
+      suggestionsRequested.current = false;
+      setOpen(false);
     }
   }
 
@@ -143,7 +147,9 @@ export function HomeSearch({ initialValue = '', resultPage = false, onSelect, in
             id={inputId}
             ref={inputRef}
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onFocus={() => { suggestionsRequested.current = true; if (query.trim()) setOpen(true); }}
+            onClick={() => { suggestionsRequested.current = true; if (query.trim()) setOpen(true); }}
+            onChange={(event) => { suggestionsRequested.current = true; setQuery(event.target.value); }}
             onKeyDown={handleKeys}
             autoComplete="off"
             placeholder="Search a medication…"
