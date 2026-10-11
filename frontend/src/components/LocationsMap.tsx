@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { api } from '../core';
+import { ctrlScrollZoom } from '../mapZoom';
 
 type StoreLocation = {
   id: string; name: string; merchant: string; address: string;
@@ -86,6 +87,7 @@ export function LocationsMap() {
     let active = true;
     let map: any;
     let resize: ResizeObserver | undefined;
+    let stopCtrlZoom: (() => void) | undefined;
     setStatus('Loading locations…');
     Promise.all([loadLeaflet(), api<{ locations: StoreLocation[] }>('/locations.json')])
       .then(([L, response]) => {
@@ -94,6 +96,7 @@ export function LocationsMap() {
         if (!locations.length) throw new Error('No locations available.');
         setStores(locations);
         map = L.map(mapNodeRef.current, { scrollWheelZoom: false }).setView([40.744, -74.0324], 12);
+        stopCtrlZoom = ctrlScrollZoom(map, mapNodeRef.current);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>',
@@ -120,7 +123,7 @@ export function LocationsMap() {
         setStatus('');
       })
       .catch(() => { if (active) setStatus('The map could not load.'); });
-    return () => { active = false; resize?.disconnect(); map?.remove(); };
+    return () => { active = false; resize?.disconnect(); stopCtrlZoom?.(); map?.remove(); };
   }, [visible, request]);
 
   return <section ref={sectionRef} className="landing-locations" aria-labelledby="locations-title">
