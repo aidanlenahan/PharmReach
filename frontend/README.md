@@ -111,7 +111,7 @@ The OTP endpoint must have a graph loaded from OpenStreetMap. Street-only graphs
 
 CVS inventory is read from `cvs-data.json`; Walgreens and Duane Reade matches are read from `walgreens-data.json` and merged at request time. Results send the tab’s saved `origin` to `/api/pharmacies`; origin is omitted from the browser URL. Changing origin reloads results. Medication, inventory, and pricing are excluded from upstream route requests. Pharmacy addresses and coordinates come from their respective branch records in the two retailer data files. The OTP integration sends origin coordinates and pharmacy coordinates/names. The Hoboken graph combines New Jersey OSM data and NJ TRANSIT bus/rail GTFS feeds for street routes, transit schedules, and route geometry.
 
-Expected response: `{routes: {PHARMACY_ID: {distance_miles: NUMBER, methods: {MODE: {available: BOOLEAN, duration_minutes: NUMBER, depart_in_minutes: NUMBER, travel_cost: NUMBER | null, travel_cost_type?: "otp" | "estimated_max" | "configured", walking_minutes: NUMBER, walking_miles: NUMBER, steps: [{title: STRING, detail: STRING}], geometry?: {type: "LineString", coordinates: [[longitude, latitude], ...]}}}}}}`. Missing pharmacies or modes are treated as unavailable and returned as partial results; malformed available routes still return HTTP 502. Unavailable methods can return only `{available: false}`. Numbers must be nonnegative and finite. Transit walking minutes/miles must cover the whole journey. Route geometry is optional and, when returned, must be a GeoJSON LineString with at least two valid coordinates. The adapter derives arrival and total price, preserves medication stock availability. Upstream failures return HTTP 502 instead of silently substituting fixed times. Custom-provider requests time out after eight seconds; custom successful routes cache for 15 minutes and partial responses for two. OTP requests time out after eight seconds per pharmacy (12 seconds overall) and cache for 30 seconds. Custom-provider `routing_source` values are `live`, `partial`, `cached_live`, and `cached_partial`; OTP reports `otp` or `cached_otp`; without a provider it reports `mock`. No upstream network requests occur unless configured and an origin is provided.
+Expected response: `{routes: {PHARMACY_ID: {distance_miles: NUMBER, methods: {MODE: {available: BOOLEAN, duration_minutes: NUMBER, depart_in_minutes: NUMBER, travel_cost: NUMBER | null, travel_cost_type?: "otp" | "estimated_max" | "configured", walking_minutes: NUMBER, walking_miles: NUMBER, steps: [{title: STRING, detail: STRING}], geometry?: {type: "LineString", coordinates: [[longitude, latitude], ...]}}}}}}`. Missing pharmacies or modes are treated as unavailable and returned as partial results; malformed available routes still return HTTP 502. Unavailable methods can return only `{available: false}`. Numbers must be nonnegative and finite. Transit walking minutes/miles must cover the whole journey. Route geometry is optional and, when returned, must be a GeoJSON LineString with at least two valid coordinates. The adapter derives arrival and total price, preserves medication stock availability. Upstream failures return HTTP 502 instead of silently substituting fixed times. Custom-provider requests time out after eight seconds; custom successful routes cache for 15 minutes and partial responses for two. OTP requests time out after eight seconds per pharmacy (12 seconds overall). OTP routes are cached per origin and pharmacy, so searches for different medications share stores: street-only results (no transit types) for an hour, scheduled `leave_at` results for 30 minutes, and "leave now" transit results for up to 10 minutes, with depart/arrival minutes re-timed on each hit and the entry dropped once its departure is more than a minute in the past. Custom-provider `routing_source` values are `live`, `partial`, `cached_live`, and `cached_partial`; OTP reports `otp` or `cached_otp`; without a provider it reports `mock`. No upstream network requests occur unless configured and an origin is provided.
 
 The generic adapter remains available for a custom provider. OpenTripPlanner provides live street and scheduled transit routing from the local OSM and official GTFS feeds. NJ TRANSIT publishes separate bus and rail feed ZIPs; this local workflow downloads and serves them through OTP, without portal credentials or browser-to-NJT data requests. Refresh them using the instructions in `backend/otp/README.md`. Rebuild the local Hoboken address index from the OSM extract with `python3 -m pip install osmium` followed by `python3 backend/scripts/build_address_index.py`. The runtime app uses only the generated JSON, with address points attributed to OpenStreetMap contributors under ODbL 1.0. For an attended CVS inventory pass, run `python3 backend/scripts/cvs_attended_capture.py backend/data/cvs-data.json` from the repository root. It lists stores with the most `Unknown` items first, then products still unknown at the selected store(s), opens each product page in the default browser, and saves a separate review candidate after explicit confirmation. For Walgreens and Duane Reade, run `python3 backend/scripts/walgreens_attended_capture.py backend/data/walgreens-data.json backend/data/cvs-data.json`; it uses the same store-first workflow and guides the operator through Walgreens' visible Pickup/store ZIP lookup. Match the exact branch address before recording its result. Status `n` means the exact product was directly searched for at that selected store and returned no listing; the candidate records `Out of stock` plus evidence. Status `u` is reserved for unchecked, blocked, or ambiguous lookups, including a branch absent from a broad nearby list. Neither helper writes into the active catalog automatically.
 
@@ -124,3 +124,58 @@ Responsive styles keep phone results as cards, constrain long names and method c
 ## Current inventory coverage
 
 On 2026-10-10, the site included 34 OTC products (27 CVS listings and seven Walgreens-only listings), nine New Jersey CVS locations, and seven Walgreens/Duane Reade locations. Product-specific direct searches with no listing are `Out of stock` for that store; unchecked, blocked, or unclear store searches remain `Unknown`. Search accepts familiar names such as Pepto-Bismol, ibuprofen, Advil, and Tylenol; CVS and Walgreens appear as sellers rather than prefixes in medication names. Walgreens pins for Shipyard Lane, River Drive South, and Central Avenue are approximate demo coordinates and are labeled in the source data. Verify inventory and prices with the retailer before relying on them.
+
+
+### Medication helper
+
+The floating Medication helper button appears on every page. Click it to open
+the popup; use the expand button for a centered modal, and minimize to return
+to the popup. Escape or the close button dismisses it. The last five questions,
+replies, draft, and open/expanded state are kept in `sessionStorage` for this
+browser tab and restored after same-origin page navigation. Storage failures
+do not prevent chatting. A request still loading during navigation is marked
+interrupted on the next page and can be retried. Each backend request evaluates
+one question independently; previous turns are displayed but are not sent to Gemini.
+
+The server reads `GEMINI_API_KEY` from the repository-root `.env`. Existing
+environment variables take precedence, including systemd's optional
+`/etc/hackru.env`. `GEMINI_MODEL` optionally overrides the default in
+`backend/chat.py`. Restart `hackru` after changing server configuration.
+`/api/health` reports `chat_configured`; the browser sends questions to
+`POST /api/chat` and never receives the API key. Rebuild with
+`npm run build --prefix frontend` to update the website's static assets.
+
+
+The chat's `Disclaimer` button closes the popup or expanded chat and opens
+a centered disclaimer modal. Escape or the close button dismisses it. The
+footer retains the privacy policy link without the disclaimer text. The popup reserves its message
+area and composer space to avoid shifting while a request is loading.
+
+If `/api/chat` returns 502 while `/api/health` is healthy, inspect the backend
+journal: `journalctl -u hackru --no-pager -n 50`. Gemini generation failures
+are separate from tunnel availability; `chat_configured` indicates that a key
+is set, not that the generation service is currently responding.
+
+
+### Privacy
+
+`/privacy.html` describes browser storage, chat processing, external providers,
+retention limitations, and the privacy contact. Every page footer links to it;
+the helper displays its Google Gemini disclosure before any question is sent.
+The privacy page can clear saved preferences, sorting, starting location, and
+this tab's chat. Application logs omit chat text, IPs, selected product IDs,
+and request query strings. Historical logs are not deleted by this change.
+No blanket cookie banner is added: the application has no advertising or
+analytics integration, and third-party services are disclosed in the policy.
+Recheck provider storage behavior before changing integrations or audience.
+
+
+### Homepage and search
+
+`/` is the marketing homepage; `/find-medicine.html` contains medicine search
+and starting-location controls. Homepage calls to action read saved travel
+preferences: `Try it out` opens onboarding with search as the return destination;
+`Make a search` opens search directly. Direct search visits without completed
+preferences also open onboarding. Completing setup without an explicit return
+path now opens search. Product-result links retain the selected medication
+through onboarding, and new-search links return to the search page.

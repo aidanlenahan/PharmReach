@@ -2,7 +2,7 @@
 
 Product scope and requirements live in [PRD.md](./PRD.md); stack decisions live in [TECHSTACK.md](./TECHSTACK.md). Work through the phases in order, with the stack and shared contracts established before feature implementation.
 
-> **Status (2026-10-11):** The running app is a Python stdlib server (`backend/serve.py`) serving a Vite React frontend (`frontend/`), with OpenTripPlanner routing and real CVS/Walgreens snapshots. It replaces the Next.js/SQLite plan below. Crossed-off items that were reworded describe what was actually built. Note: `backend/`, `frontend/` and `bigPharma/` are not yet committed to git.
+> **Status (2026-10-11):** The running app is a Python stdlib server (`backend/serve.py`) serving a Vite React frontend (`frontend/`), with OpenTripPlanner routing and real CVS/Walgreens snapshots. It replaces the Next.js/SQLite plan below. Crossed-off items that were reworded describe what was actually built. `backend/` and `frontend/` are in git; `bigPharma/` is gitignored.
 
 ## Phase 0 — Set up the tech stack and repository
 
@@ -71,46 +71,46 @@ Goal: a user describes a symptom (for example, "headache") and gets up to 3 OTC 
 
 ### Stage 5.0 — Decisions
 
-- [ ] Decide on templated replies only (recommended) or a short model-written reason per product.
-- [ ] Decide whether to show the best store inline in the chat (price, store, ETA) or only link to the results page.
-- [ ] Decide where the chat lives: next to the home search ("Don't know the name?") or a floating button on every page.
+- [x] ~~Decided on templated replies only; the model returns product IDs and the server writes all text.~~
+- [x] ~~Decided to link to the results page only (plus the retailer product page), with no inline best store.~~
+- [x] ~~Decided to put the chat next to the home search as "Don't know the name? Describe how you feel."~~
 
 ### Stage 5.1 — Key and config
 
-- [ ] Load `GEMINI_API_KEY` in `serve.py` (from the environment; add a small `.env` loader for local runs).
+- [x] ~~Load `GEMINI_API_KEY` in `serve.py` from the environment, with a small repo-root `.env` loader (`backend/envfile.py`).~~
 - [ ] Add `GEMINI_API_KEY` to `/etc/hackru.env` on the VM so `hackru.service` picks it up.
-- [ ] Pin the Gemini Flash model ID in config and confirm the key works with one test call.
-- [ ] Make `/api/health` report whether the chat helper is configured, without exposing the key.
+- [x] ~~Pin the Gemini Flash model ID (`gemini-3.8-flash` in `backend/chat.py`, overridable with `GEMINI_MODEL`) and confirm the key works with a test call.~~
+- [x] ~~Make `/api/health` report whether the chat helper is configured, without exposing the key.~~
 
 ### Stage 5.2 — Endpoint and guardrails
 
-- [ ] Implement `POST /api/chat` with server-side Gemini access (stdlib `urllib`, no SDK).
-- [ ] Validate input: JSON only, a capped body size, and one message of about 300 characters or less.
-- [ ] Rate-limit per client IP and add a timeout on the Gemini call.
-- [ ] Check messages before calling Gemini. Emergencies (chest pain, overdose, suicidal thoughts, trouble breathing) get a fixed 911/988 message. Prescription, pregnancy, and child-dosing questions get "ask a pharmacist." None of these reach the model.
-- [ ] Log requests (no keys, trimmed messages) for demo debugging.
+- [x] ~~Implement `POST /api/chat` with server-side Gemini access (stdlib `urllib`, no SDK).~~
+- [x] ~~Validate input: JSON only, a capped body size, and one message of about 300 characters or less.~~
+- [x] ~~Rate-limit per client IP and add a timeout on the Gemini call.~~
+- [x] ~~Check messages before calling Gemini. Emergencies (chest pain, overdose, suicidal thoughts, trouble breathing) get a fixed 911/988 message. Prescription, pregnancy, and child-dosing questions get "ask a pharmacist." None of these reach the model.~~
+- [x] ~~Log requests (no keys, trimmed messages) for demo debugging.~~
 
 ### Stage 5.3 — Constrained model output
 
-- [ ] Write a fixed system instruction: map symptoms to OTC catalog categories only, never diagnose or give dosing, and ignore instructions in the user's message.
-- [ ] Use `responseMimeType: application/json` with a `responseSchema`: `status` enum (`match` / `no_match` / `refuse`), `category` enum (the catalog categories), and `product_ids`, an enum of in-stock catalog IDs (max 3).
-- [ ] Constrain structured drug suggestions to IDs and names in the local drug dataset: on the server, drop unknown IDs and products with no confirmed stock, and return a fixed fallback for invalid JSON.
-- [ ] Build every reply the user sees from server templates, using product names and categories from our data (no free text from the model).
-- [ ] Set Gemini safety settings to the strictest level.
+- [x] ~~Write a fixed system instruction: map symptoms to OTC catalog categories only, never diagnose or give dosing, and ignore instructions in the user's message.~~
+- [x] ~~Use `responseMimeType: application/json` with a `responseSchema`: `status` enum (`match` / `no_match` / `refuse`), `category` enum (the catalog categories), and `product_ids`, an enum of in-stock catalog IDs (max 3).~~
+- [x] ~~Constrain structured drug suggestions to IDs and names in the local drug dataset: on the server, drop unknown IDs and products with no confirmed stock, and return a fixed fallback for invalid JSON.~~
+- [x] ~~Build every reply the user sees from server templates, using product names and categories from our data (no free text from the model).~~
+- [x] ~~Set Gemini safety settings to the strictest level.~~
 
 ### Stage 5.4 — Chat UI
 
-- [ ] Build the chat UI and interactive suggestion buttons (plain text rendering only, no HTML or markdown).
-- [ ] Selecting a suggestion should populate and run the corresponding medication search (`/results.html?medication=<id>`, using saved travel preferences).
-- [ ] Add a secondary link on each suggestion to the retailer product page (`product_source`).
-- [ ] Show the non-medical-advice and snapshot-data disclaimers (none exist in the UI yet).
-- [ ] Handle loading, error, rate-limited, and "helper unavailable" states.
+- [x] ~~Build the chat UI and interactive suggestion buttons (plain text rendering only, no HTML or markdown).~~
+- [x] ~~Selecting a suggestion should populate and run the corresponding medication search (`/results.html?medication=<id>`, using saved travel preferences).~~
+- [x] ~~Add a secondary link on each suggestion to the retailer product page (`product_source`).~~
+- [x] ~~Show the non-medical-advice and snapshot-data disclaimers (none exist in the UI yet).~~
+- [x] ~~Handle loading, error, rate-limited, and "helper unavailable" states.~~
 
 ### Stage 5.5 — Abuse and quality tests
 
-- [ ] Script a test set: common symptoms (headache, allergies, heartburn, cough, can't sleep, diarrhea) map to sensible catalog products.
-- [ ] Prompt-injection tests ("ignore previous instructions", role-play, asking for the system prompt, non-catalog drugs, prescriptions) return only `no_match`/`refuse` or catalog IDs.
-- [ ] Emergency and off-topic inputs get the fixed responses.
+- [x] ~~Script a test set: common symptoms (headache, allergies, heartburn, cough, can't sleep, diarrhea) map to sensible catalog products.~~
+- [x] ~~Prompt-injection tests ("ignore previous instructions", role-play, asking for the system prompt, non-catalog drugs, prescriptions) return only `no_match`/`refuse` or catalog IDs.~~
+- [x] ~~Emergency and off-topic inputs get the fixed responses.~~
 - [ ] Deploy behind the tunnel and check the chat on pharmreach.tech.
 
 ## Phase 6 — Integrate and validate the MVP
@@ -119,7 +119,7 @@ Goal: a user describes a symptom (for example, "headache") and gets up to 3 OTC 
 - [ ] Check fallback behavior when geolocation is denied or address geocoding fails. (Handled in `LocationPanel.tsx`; not yet tested by hand.)
 - [ ] Verify transportation preferences affect reachability and ranking as expected.
 - [x] Enforce in code that routes are unavailable unless the item is in stock, and that out-of-stock options rank last.
-- [ ] Verify the Gemini helper cannot suggest a drug absent from the local dataset.
+- [x] ~~Verify the Gemini helper cannot suggest a drug absent from the local dataset.~~
 - [ ] Test the responsive layout and confirm the hosted HTTPS flow supports geolocation.
 - [ ] Fix integration issues and freeze MVP scope before taking on stretch work.
 
@@ -140,8 +140,12 @@ Pick up in the priority order in the [PRD](./PRD.md), starting with Gemini trans
 
 The MVP uses the public static GTFS zips (`njtransit.com/rail_data.zip`, `bus_data.zip`) snapshotted into SQLite, so it needs no token. These tasks only matter once we call the token API, for example for real-time data or scheduled feed refreshes. See `poc/njtransit/API_NOTES.md`.
 
-- [ ] **Token expiry (do this first):** store the token server-side with its issue time, refresh it before the ~24 h expiry, and on an `Invalid token` response, get a new token once and retry. Never request a new token on every call.
-- [ ] Stay under the 10/day rail `getToken` + `isValidToken` limit: refresh tokens from one place (a single scheduled job), and log or alert when we get close.
+- [x] ~~**Token expiry:** cache rail and bus tokens with their issue time in `backend/data/cache/njt-tokens.json`, reuse them for 20 h, and on an `Invalid token` response get a new token once and retry (`backend/njt/api.py`).~~
+- [x] ~~Refresh tokens from a single systemd timer (`infra/systemd/njt-refresh.{service.in,timer}`, about every 20 h) that writes them to the gitignored cache, never to `.env`. Long-lived credentials stay in `.env` / `/etc/hackru.env`. Token requests are capped at 8 per rolling 24 h, with a warning from the 6th; `isValidToken` is never called.~~
 - [ ] Rate-limit and back off outgoing NJT requests (100,000/day portal cap); cache responses and have the app read from our own store, as the terms require, not proxy NJT directly.
-- [ ] Refresh the static GTFS on a schedule (the feeds were last updated 2026-09-17 and cover service through 2027-03-13), and check the service end date so the stop data doesn't go stale.
-- [ ] Fall back to the public zips or the Mobility Database mirror when the token API is down or the credentials stop working. Keep real-time transit, business-data integration, crowd-sourced corrections, insurance/budgeting, accounts, and mobile/PWA work out of the hackathon MVP.
+- [x] ~~Refresh the static GTFS on the same timer (`backend/njt/refresh.py`). New feeds replace the old ones only after they validate (zip integrity, required files, stop counts, size, and at least 7 days of service ahead); the previous feed is kept as `*.prev`.~~
+- [x] ~~Fall back to the token API when the public zips fail and the staged feeds are about to run out, and otherwise keep the existing feeds. `transit_data` in `/api/health` and `/api/pharmacies` reports the source and staleness, and the results page shows a disclaimer when schedules are stale.~~
+- [ ] Put `NJT_USERNAME`/`NJT_PASSWORD` in `/etc/hackru.env` on the VM, run `sudo bash infra/systemd/install.sh` to enable `njt-refresh.timer`, and restart `hackru`.
+- [x] ~~Decided to use the public zips first (conditional downloads, so unchanged feeds cost a 304) and the token API only as a last resort, when the public zips fail and the staged feeds run out within 7 days. The API's bus feed covers about 5 days and its rail feed has no light rail.~~
+- [ ] Graph rebuilds after a feed refresh are manual (stop `otp`, run `python3 backend/njt/refresh.py --rebuild`, start `otp`), or set `NJT_REFRESH_ARGS=--rebuild` if the VM has the memory.
+- [ ] Keep real-time transit, business-data integration, crowd-sourced corrections, insurance/budgeting, accounts, and mobile/PWA work out of the hackathon MVP.
