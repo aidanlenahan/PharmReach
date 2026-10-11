@@ -3,14 +3,14 @@ import { Bike, BusFront, CarFront, ChevronRight, Footprints, Ship, TrainFront } 
 import { AppShell } from './components/AppShell';
 import { HomeSearch } from './HomeSearch';
 import { LocationPanel } from './components/LocationPanel';
-import { allowedModes, api, defaultMode, escapeHtml, getDefaultSort, getOrigin, getOriginLabel, getPreferences, modeLabels, money, normalizeSort, preferenceNote, sortOptions, transitTypes, toast, type Mode, type PharmacyRecord, type SortOption, type TravelPreferences } from './core';
+import { allowedModes, api, defaultMode, getDefaultSort, getOrigin, getOriginLabel, getPreferences, modeLabels, money, normalizeSort, preferenceNote, sortOptions, type Mode, type PharmacyRecord, type SortOption, type TransitDataStatus, type TravelPreferences } from './core';
 
 const allSortOptions = [...sortOptions];
 type RouteData = {
   available: boolean; duration_minutes: number; depart_in_minutes: number; arrival_in_minutes: number;
   travel_cost?: number | null; travel_cost_type?: 'otp' | 'estimated_max' | 'configured'; total_cost?: number | null; steps?: { title: string; detail: string }[]; walking_minutes?: number;
   walking_miles?: number; at_destination?: boolean; transit_types?: string[]; unavailable_reason?: string; walk_is_faster?: boolean;
-  geometry?: { type: string; coordinates: number[][] };
+  geometry?: { type: string; coordinates: number[][]; polyline?: string };
 };
 type Pharmacy = PharmacyRecord & {
   name: string; address: string; tag: string; merchant?: string; stock: string; stock_count?: number | null; pickup_available?: boolean | null; price: number; regular_price?: number; price_type?: string; product_source?: string; price_source?: string; availability_source?: string; map_number: number; latitude: number; longitude: number;
@@ -20,7 +20,7 @@ type Pharmacy = PharmacyRecord & {
 type PharmacyResponse = {
   source_info?: { checked_on?: string; inventory_note?: string; price_note?: string; walgreens_checked_on?: string; walgreens_inventory_note?: string; walgreens_price_note?: string };
   medication: { id: string; name: string; strength: string; quantity: number | null; quantity_label: string; aka: string; product_source?: string; variants: { id: string; strength: string; form: string; quantity: number | null; quantity_label: string }[]; selected_variant_id: string };
-  pharmacies: Pharmacy[]; scheduling_supported?: boolean; routing_source?: string; origin?: string; origin_is_default?: boolean;
+  pharmacies: Pharmacy[]; scheduling_supported?: boolean; routing_source?: string; unrouted_count?: number; beyond_limit_count?: number; origin?: string; origin_is_default?: boolean; transit_data?: TransitDataStatus;
 };
 const labels = modeLabels;
 const applePlatform = /iPhone|iPad|iPod|Macintosh|Mac OS X/i.test(navigator.userAgent) || /^Mac/i.test(navigator.platform);
@@ -29,6 +29,34 @@ type RouteIconName = 'walk' | 'bus' | 'rail' | 'ferry' | 'drive' | 'bike';
 const routeIcons = { walk: Footprints, bus: BusFront, rail: TrainFront, ferry: Ship, drive: CarFront, bike: Bike };
 const routeIconLabels: Record<RouteIconName, string> = { walk: 'Walking', bus: 'Bus', rail: 'Train', ferry: 'Ferry', drive: 'Driving', bike: 'Cycling' };
 
+/** A store whose route OTP has not finished, or a farther store that was not route-planned: keep it and its mode columns visible. */
+const routePending = (route?: RouteData) => route?.unavailable_reason === 'route_timeout' || route?.unavailable_reason === 'beyond_route_limit';
+/** Route distance when routed; otherwise the labeled straight-line distance, never a made-up trip. */
+const distanceText = (pharmacy: Pharmacy) => typeof pharmacy.distance === 'number' ? `${pharmacy.distance} mi` : typeof pharmacy.straight_line_miles === 'number' ? `${pharmacy.straight_line_miles} mi straight-line` : 'Distance unavailable';
+/** Decode a Google-encoded polyline (1e-5 precision) into GeoJSON [longitude, latitude] points. */
+function decodePolyline(encoded: string): number[][] {
+  const points: number[][] = [];
+  let index = 0, latitude = 0, longitude = 0;
+  while (index < encoded.length) {
+    const deltas = [0, 0].map(() => {
+      let result = 0, shift = 0, value: number;
+      do { value = encoded.charCodeAt(index++) - 63; result |= (value & 0x1f) << shift; shift += 5; } while (value >= 0x20);
+      return result & 1 ? ~(result >> 1) : result >> 1;
+    });
+    latitude += deltas[0]; longitude += deltas[1];
+    points.push([longitude / 1e5, latitude / 1e5]);
+  }
+  return points;
+}
+/** The API sends route lines as polylines to keep responses small; the map needs coordinates. */
+function withRouteCoordinates(pharmacy: Pharmacy): Pharmacy {
+  const methods = { ...pharmacy.methods };
+  for (const mode of Object.keys(methods) as Mode[]) {
+    const geometry = methods[mode]?.geometry;
+    if (geometry?.polyline) methods[mode] = { ...methods[mode], geometry: { type: geometry.type, coordinates: decodePolyline(geometry.polyline) } };
+  }
+  return { ...pharmacy, methods };
+}
 function routeSketch(mode: Mode, route: RouteData) {
   const transitIcon: RouteIconName = route.transit_types?.includes('ferry') ? 'ferry' : route.transit_types?.some((type) => type === 'commuter' || type === 'subway') ? 'rail' : 'bus';
   const icons: RouteIconName[] = mode === 'transit' ? ['walk', transitIcon, 'walk'] : [mode];
@@ -65,9 +93,11 @@ function fareText(route: RouteData, value = route.travel_cost) {
 function totalText(route: RouteData, value = route.total_cost) {
   return route.travel_cost_type === 'estimated_max' ? `Estimated max total ${money(value)}` : `Total ${money(value)}`;
 }
-function unavailable(route: RouteData, mode: Mode, stock: string) {
+function unavailable(route: RouteData, mode: Mode, stock: string, straightLineMiles?: number | null) {
   if (stock === 'Out of stock') return { title: 'Out of stock', detail: 'This medication is unavailable at this pharmacy' };
   if (stock === 'Unknown') return { title: 'Availability unknown', detail: 'No store-specific availability result was verified for this product.' };
+  if (route.unavailable_reason === 'route_timeout') return { title: 'Route not ready', detail: 'Route planning timed out. Try again.' };
+  if (route.unavailable_reason === 'beyond_route_limit') return { title: 'Farther away', detail: `${typeof straightLineMiles === 'number' ? `Straight-line ${straightLineMiles} mi` : 'Straight-line distance unknown'} · not route-planned` };
   if (mode === 'transit' && route.unavailable_reason === 'walking_faster_no_alternative') return { title: 'No transit alternative', detail: 'Walking to and from transit stops was considered, but walking directly is faster.' };
   if (mode === 'transit' && route.unavailable_reason === 'walking_faster') return { title: 'Walking is faster', detail: 'Transit planning already includes walking to and from stops.' };
   if (mode === 'transit') return { title: 'No transit route', detail: 'No walk-plus-transit itinerary was available at this time.' };
@@ -88,7 +118,7 @@ function todayHours(hours?: Pharmacy['pharmacy_hours']) {
   if (!schedule) return '';
   if (schedule.status === 'unspecified' || !schedule.open || !schedule.close) return 'Today: hours not listed';
   const short = (value: string) => value.replace(/^0?(\d+):(\d{2}) (AM|PM)$/i, (_match, hour, mins, meridiem) => `${Number(hour)}${mins === '00' ? '' : `:${mins}`} ${meridiem}`);
-  return `Today: ${short(schedule.open)}–${short(schedule.close)}${schedule.break_start && schedule.break_end ? ` · lunch ${short(schedule.break_start)}–${short(schedule.break_end)}` : ''}`;
+  return `Today: ${short(schedule.open)}–${short(schedule.close)}`;
 }
 function localDateTimeValue(iso: string) {
   if (!iso) return '';
@@ -105,7 +135,7 @@ function validLeaveAt(iso: string) {
 function hoursPanel(pharmacy: Pharmacy) {
   const hours = pharmacy.pharmacy_hours;
   if (!hours?.days?.length) return null;
-  return <section className="pharmacy-hours"><h4>Pharmacy hours</h4><p>{todayHours(hours)}</p><details><summary>Weekly hours</summary><ul>{hours.days.map((day) => <li key={day.day}><span>{day.day}</span><b>{day.status === 'unspecified' ? 'Hours not listed' : day.open && day.close ? `${day.open}–${day.close}${day.break_start && day.break_end ? ` · lunch ${day.break_start}–${day.break_end}` : ''}` : 'Closed'}</b></li>)}</ul><a href={hours.source} target="_blank" rel="noreferrer">View store hours ↗</a></details></section>;
+  return <section className="pharmacy-hours"><h4>Pharmacy hours</h4><p>{todayHours(hours)}</p><details><summary>Weekly hours</summary><ul>{hours.days.map((day) => <li key={day.day}><span>{day.day}</span><b>{day.status === 'unspecified' ? 'Hours not listed' : day.open && day.close ? `${day.open}–${day.close}` : 'Closed'}</b></li>)}</ul><a href={hours.source} target="_blank" rel="noreferrer">View store hours ↗</a></details></section>;
 }
 
 function PharmacyMap({ pharmacies, selected, selectedMode, onSelect }: { pharmacies: Pharmacy[]; selected?: Pharmacy; selectedMode: Mode; onSelect: (id: string, mode: Mode) => void }) {
@@ -174,9 +204,9 @@ function PharmacyMap({ pharmacies, selected, selectedMode, onSelect }: { pharmac
   }, [mapReady, selected, selectedMode]);
 
   return <section className="map-section" aria-label="Pharmacy locations map">
-    <div className="map-head"><strong>{pharmacies.length === 1 && selected ? 'Planned route' : 'Nearby pharmacies'}</strong><span>{pharmacies.length === 1 && selected ? labels[selectedMode] : 'Hudson County, NJ'}</span></div>
+    <div className="map-head"><strong>{pharmacies.length === 1 && selected ? 'Planned route' : 'Nearby pharmacies'}</strong><span>{pharmacies.length === 1 && selected ? labels[selectedMode] : null}</span></div>
     <div className="map-illustration" ref={nodeRef} role="region" aria-label="Interactive map with pharmacy locations"><p className="map-status" role="status" hidden={!mapStatus}>{mapStatus}</p></div>
-    <div className="map-legend"><span><i className="legend-dot" />In stock</span><span><i className="legend-dot unavailable" />Out of stock</span><span className="map-route-note">{selected ? `Showing ${labels[selectedMode].toLowerCase()} route for ${selected.name}.` : 'Select a pharmacy to see its details.'}</span></div>
+    <div className="map-legend"><span><i className="legend-dot" />In stock</span><span><i className="legend-dot unavailable" />Out of stock</span></div>
   </section>;
 }
 
@@ -225,7 +255,7 @@ export function ResultsPage() {
       // The backend applies the same filter and the source JSON stays intact.
       const visibleResult = {
         ...result,
-        pharmacies: result.pharmacies.filter((pharmacy) => String(pharmacy.stock || 'Unknown').trim().toLowerCase() !== 'unknown'),
+        pharmacies: result.pharmacies.filter((pharmacy) => String(pharmacy.stock || 'Unknown').trim().toLowerCase() !== 'unknown').map(withRouteCoordinates),
       };
       setData(visibleResult);
       if (!result.scheduling_supported && leaveAt) setLeaveAt('');
@@ -245,9 +275,9 @@ export function ResultsPage() {
   }, [medicationId, mode, sort, direction, variant, leaveAt, currentOrigin, originRevision, prefsKey, requestVersion]);
 
   const permittedModes = useMemo(() => allowedModes(preferences), [prefsKey]);
-  const visibleModes = useMemo(() => data ? permittedModes.filter((candidate) => data.pharmacies.some((pharmacy) => pharmacy.methods[candidate]?.available && !preferenceNote(pharmacy, candidate, preferences))) : permittedModes, [data, permittedModes, prefsKey]);
+  const visibleModes = useMemo(() => data ? permittedModes.filter((candidate) => data.pharmacies.some((pharmacy) => routePending(pharmacy.methods[candidate]) || (pharmacy.methods[candidate]?.available && !preferenceNote(pharmacy, candidate, preferences)))) : permittedModes, [data, permittedModes, prefsKey]);
   const selectedPharmacy = data?.pharmacies.find((pharmacy) => pharmacy.id === activeId);
-  const hasMatches = !!data?.pharmacies.some((pharmacy) => visibleModes.some((candidate) => pharmacy.methods[candidate]?.available && !preferenceNote(pharmacy, candidate, preferences)));
+  const hasMatches = !!data?.pharmacies.some((pharmacy) => visibleModes.some((candidate) => routePending(pharmacy.methods[candidate]) || (pharmacy.methods[candidate]?.available && !preferenceNote(pharmacy, candidate, preferences))));
 
   useEffect(() => {
     if (!activeId) return;
@@ -286,10 +316,10 @@ export function ResultsPage() {
   const maxLeave = localDateTimeValue(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString());
 
   return <AppShell active="home"><main id="resultsScreen" className="screen active results">
-    <div className="results-toolbar"><div className="result-search"><HomeSearch key={`med-${medicationId}-${data?.medication.name || ''}`} initialValue={data?.medication.name || medicationId} resultPage onSelect={selectMedication} /></div><a className="text-btn" href="/">← New search</a></div>
+    <div className="results-toolbar"><div className="result-search"><HomeSearch key={`med-${medicationId}-${data?.medication.name || ''}`} initialValue={data?.medication.name || medicationId} resultPage onSelect={selectMedication} /></div><a className="text-btn" href="/find-medicine.html">← New search</a></div>
     <LocationPanel onChange={() => { setOriginRevision((value) => value + 1); closeDetails(); }} />
-    {data?.origin_is_default && <p className="comparison-note">Trips start from central Hoboken (40.744, −74.0324). Set your location to compare trips from you.</p>}
-    <div className="results-meta"><div className="results-heading"><h2>{data ? `${data.medication.name} near Hudson County, NJ` : 'Nearby pharmacy options'}</h2><p>{data ? [data.medication.strength, data.medication.quantity_label, `${data.pharmacies.length} pharmacies`].filter(Boolean).join(' · ') : ''}</p></div>
+    {data?.origin_is_default && <p className="comparison-note">Starting from central Hoboken.</p>}
+    <div className="results-meta"><div className="results-heading"><h2>{data ? data.medication.name : 'Nearby pharmacy options'}</h2><p>{data ? [data.medication.strength, data.medication.quantity_label, `${data.pharmacies.length} pharmacies`].filter(Boolean).join(' · ') : ''}</p></div>
       <div className="result-controls">
         {!!data && data.medication.variants.length > 1 && <label className="sort-wrap variant-picker">Strength, form &amp; amount<select value={variant || data.medication.selected_variant_id} onChange={(event) => setVariant(event.target.value)}>{data.medication.variants.map((item) => <option value={item.id} key={item.id}>{item.strength} {item.form} · {item.quantity_label}</option>)}</select></label>}
         <label className="sort-wrap mobile-control">Compare using<select value={mode} disabled={!visibleModes.length} onChange={(event) => { setMode(event.target.value as Mode); setDirection('asc'); }} aria-label="Compare using">{visibleModes.map((candidate) => <option value={candidate} key={candidate}>{labels[candidate]}</option>)}</select></label>
@@ -299,9 +329,11 @@ export function ResultsPage() {
       </div>
     </div>
     {status && <p className="status-message" role="status">{status}{status !== 'Checking pharmacy availability…' && <button className="text-btn" onClick={() => setRequestVersion((value) => value + 1)}>Try again</button>}</p>}
-    {!!data && !hasMatches && <section className="empty-results" aria-live="polite"><div className="eyebrow">Nearby pharmacies</div><h2>No in-stock options found</h2><p>Try another product or adjust your travel preferences.</p><a href="/settings.html" className="restart-setup">Adjust travel preferences →</a><a href="/" className="text-btn">Search another product</a></section>}
+    {!!data && !hasMatches && <section className="empty-results" aria-live="polite"><h2>No in-stock options found</h2><p>Try another product or adjust your travel preferences.</p><a href="/settings.html" className="restart-setup">Adjust travel preferences →</a><a href="/find-medicine.html" className="text-btn">Search another product</a></section>}
     {!!data && hasMatches && <>
-      <p className="comparison-note" aria-live="polite">Comparing {labels[mode]?.toLowerCase()} · {sort} · {direction === 'asc' ? 'Ascending' : 'Descending'}</p>
+      <p className="visually-hidden" aria-live="polite">Comparing {labels[mode]?.toLowerCase()} · {sort} · {direction === 'asc' ? 'Ascending' : 'Descending'}</p>
+      {permittedModes.includes('transit') && (data.transit_data?.stale || data.transit_data?.fallback) && data.transit_data.message && <p className="snapshot-note" role="note">{data.transit_data.message}</p>}
+      {!!data.unrouted_count && <p className="snapshot-note" role="note">{data.unrouted_count + (data.beyond_limit_count || 0) >= data.pharmacies.length ? 'Travel routes are temporarily unavailable.' : `Routes to ${data.unrouted_count} ${data.unrouted_count === 1 ? 'pharmacy' : 'pharmacies'} took too long to plan.`}<button className="text-btn" onClick={() => setRequestVersion((value) => value + 1)}>Try again</button></p>}
       <section className="table-shell"><div className="table-scroll"><table className="table" style={tableStyle}><thead><tr>
         <th scope="col" aria-sort={sort === 'Pharmacy' ? direction === 'asc' ? 'ascending' : 'descending' : 'none'}><button className={`sort-header${sort === 'Pharmacy' ? ' active-sort-button' : ''}`} onClick={() => clickSort('Pharmacy')}>Pharmacy<span className="sort-arrow">{sort === 'Pharmacy' ? direction === 'asc' ? '↑' : '↓' : '↕'}</span></button></th>
         <th scope="col" aria-sort={sort === 'Medication cost' ? direction === 'asc' ? 'ascending' : 'descending' : 'none'}><button className={`sort-header${sort === 'Medication cost' ? ' active-sort-button' : ''}`} onClick={() => clickSort('Medication cost')}>Medication<span className="sort-arrow">{sort === 'Medication cost' ? direction === 'asc' ? '↑' : '↓' : '↕'}</span></button></th>
@@ -310,8 +342,8 @@ export function ResultsPage() {
         <th scope="col"><span className="visually-hidden">Details</span></th>
       </tr></thead><tbody>
         {data.pharmacies.map((pharmacy) => <tr key={pharmacy.id} onClick={() => openDetails(pharmacy.id)}>
-          <td><span className="pharmacy-name"><span className="ph-number">{pharmacy.map_number}</span> {pharmacy.name}<span className="brand-tag">{pharmacy.tag}</span></span><span className="pharmacy-address">{pharmacy.address} · {typeof pharmacy.distance === 'number' ? `${pharmacy.distance} mi` : 'Distance unavailable'}</span><span className="hours-today">{todayHours(pharmacy.pharmacy_hours)}</span></td>
-          <td><span className="mobile-cell-label" aria-hidden="true">Medication</span><span className="med-price">{money(pharmacy.price)}<small>{pharmacy.merchant || 'CVS'} online{data.medication.quantity_label ? ` · ${data.medication.quantity_label}` : ''}</small></span></td>
+          <td><span className="pharmacy-name"><span className="ph-number">{pharmacy.map_number}</span> {pharmacy.name}</span><span className="pharmacy-address">{pharmacy.address} · {distanceText(pharmacy)}</span><span className="hours-today">{todayHours(pharmacy.pharmacy_hours)}</span></td>
+          <td><span className="mobile-cell-label" aria-hidden="true">Medication</span><span className="med-price">{money(pharmacy.price)}</span></td>
           <td><span className="mobile-cell-label" aria-hidden="true">Availability</span><span className={`availability ${stockClass(pharmacy.stock)}`}>{stockLabel(pharmacy.stock)}</span></td>
           {visibleModes.map((candidate) => <MethodCell key={candidate} pharmacy={pharmacy} mode={candidate} preferences={preferences} onClick={() => openDetails(pharmacy.id, candidate)} />)}
           <td><button className="row-detail" onClick={(event) => { event.stopPropagation(); openDetails(pharmacy.id); }}>Details →</button></td>
@@ -329,10 +361,10 @@ export function ResultsPage() {
 function MethodCell({ pharmacy, mode, preferences, onClick }: { pharmacy: Pharmacy; mode: Mode; preferences: TravelPreferences | null; onClick: () => void }) {
   const route = pharmacy.methods[mode];
   const note = preferenceNote(pharmacy, mode, preferences);
-  const reason = unavailable(route, mode, pharmacy.stock);
-  if (!route.available || note) return <td className="method" data-label={labels[mode]} onClick={(event) => { event.stopPropagation(); onClick(); }}><strong>{pharmacy.stock === 'Out of stock' ? 'Out of stock' : note ? '—' : reason.title}</strong><small>{pharmacy.stock === 'Out of stock' ? '' : note || reason.detail}</small></td>;
+  const reason = unavailable(route, mode, pharmacy.stock, pharmacy.straight_line_miles);
+  if (!route.available || note) return <td className="method" data-label={labels[mode]} title={note || reason.detail} onClick={(event) => { event.stopPropagation(); onClick(); }}><strong>{pharmacy.stock === 'Out of stock' || note ? '—' : reason.title}</strong></td>;
   const time = route.at_destination ? 'Here' : `${route.duration_minutes} min`;
-  const notes = route.at_destination ? 'Your starting point is here.' : mode === 'transit' ? `${transitSummary(route)} - Estimated Cost ${money(route.travel_cost)}` : mode === 'drive' ? `Est. trip ${money(route.travel_cost)}` : '';
+  const notes = route.at_destination ? '' : mode === 'transit' ? `${transitSummary(route)} - Estimated Cost ${money(route.travel_cost)}` : mode === 'drive' ? `Est. trip ${money(route.travel_cost)}` : '';
   return <td className="method" data-label={labels[mode]} onClick={(event) => { event.stopPropagation(); onClick(); }}>{!route.at_destination && routeSketch(mode, route)}<strong>{time}</strong>{notes && <small>{notes}</small>}{mode !== 'transit' && <small>{route.travel_cost_type === 'estimated_max' ? 'Max total' : 'Total'} <em>{money(route.total_cost)}</em></small>}</td>;
 }
 
@@ -340,7 +372,7 @@ function DetailContent({ pharmacy, response, mode, modes, leaveAt, originLabel, 
   const routeModes = modes.filter((candidate) => !preferenceNote(pharmacy, candidate, preferences));
   const selectedMode = routeModes.includes(mode) ? mode : routeModes[0];
   const route = pharmacy.methods[selectedMode];
-  const failure = selectedMode ? unavailable(route, selectedMode, pharmacy.stock) : { title: 'No matching route', detail: 'Your current travel choices do not provide a route to this pharmacy.' };
+  const failure = selectedMode ? unavailable(route, selectedMode, pharmacy.stock, pharmacy.straight_line_miles) : { title: 'No matching route', detail: 'Your current travel choices do not provide a route to this pharmacy.' };
   const destination = `${pharmacy.name}, ${pharmacy.address.replaceAll(' · ', ', ')}`;
   const googleModes: Record<string, string> = { walk: 'walking', transit: 'transit', drive: 'driving', bike: 'bicycling' };
   const appleModes: Record<string, string> = { walk: 'walking', transit: 'transit', drive: 'driving', bike: 'cycling' };
@@ -354,27 +386,26 @@ function DetailContent({ pharmacy, response, mode, modes, leaveAt, originLabel, 
   const arrivalText = leaveAt ? `Planned departure ${new Date(leaveAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })} · Estimated arrival at ${arrivalLabel(route, leaveAt)}` : `Estimated arrival in ${route?.arrival_in_minutes ?? '—'} min`;
 
   return <div className="detail-body">
-    <h3>{pharmacy.name}</h3><div className="detail-sub">{pharmacy.address} · {typeof pharmacy.distance === 'number' ? `${pharmacy.distance} mi` : 'Distance unavailable'}</div>
+    <h3>{pharmacy.name}</h3><div className="detail-sub">{pharmacy.address} · {distanceText(pharmacy)}</div>
     {pharmacy.location_source && <a className="source-link" href={pharmacy.location_source} target="_blank" rel="noreferrer">View {pharmacy.merchant || 'CVS'} store ↗</a>}
     {hoursPanel(pharmacy)}
-    <div className="detail-price"><div><b>{money(pharmacy.price)}</b><small>{[response.medication.name, response.medication.quantity_label].filter(Boolean).join(' · ')}</small></div><span className={`availability ${stockClass(pharmacy.stock)}`}>{stockLabel(pharmacy.stock)}</span></div>
+    <div className="detail-price"><div><b>{money(pharmacy.price)}</b><small>{response.medication.name}</small></div><span className={`availability ${stockClass(pharmacy.stock)}`}>{stockLabel(pharmacy.stock)}</span></div>
     {(pharmacy.product_source || response.medication.product_source) && <a className="source-link" href={pharmacy.product_source || response.medication.product_source} target="_blank" rel="noreferrer">View product at {pharmacy.merchant || 'CVS'} ↗</a>}
-    {!routeModes.length ? <><h3>No matching route</h3><p className="detail-sub">Your current travel choices do not provide a route to this pharmacy.</p><a className="restart-setup" href="/settings.html">Adjust travel preferences →</a></> : <>
-      <div className="route-title">Choose a route</div>
+    {!routeModes.length ? <><h3>No matching route</h3><a className="restart-setup" href="/settings.html">Adjust travel preferences →</a></> : <>
       <div className="detail-modes">{routeModes.map((candidate) => {
         const item = pharmacy.methods[candidate];
-        const reason = unavailable(item, candidate, pharmacy.stock);
-        return <button key={candidate} className={`mode-card${selectedMode === candidate ? ' selected' : ''}`} onClick={() => onModeChange(candidate)}><b>{labels[candidate]} · {item.available ? item.at_destination ? 'Here' : `${item.duration_minutes} min` : reason.title}</b><span>{item.at_destination ? 'Your starting point is here.' : item.available ? `${fareText(item)} · ${totalText(item)}` : reason.detail}</span></button>;
+        const reason = unavailable(item, candidate, pharmacy.stock, pharmacy.straight_line_miles);
+        return <button key={candidate} className={`mode-card${selectedMode === candidate ? ' selected' : ''}`} onClick={() => onModeChange(candidate)}><b>{labels[candidate]} · {item.available ? item.at_destination ? 'Here' : `${item.duration_minutes} min` : reason.title}</b>{!item.at_destination && <span>{item.available ? `${fareText(item)} · ${totalText(item)}` : reason.detail}</span>}</button>;
       })}</div>
       <div className="cost-breakdown"><div><span>Medication</span><b>{money(pharmacy.price)}</b></div><div><span>{route.travel_cost_type === 'estimated_max' ? 'Estimated max transit fare' : 'Travel cost'}</span><b>{route.available ? money(route.travel_cost) : '—'}</b></div><div className="cost-total"><span>{route.travel_cost_type === 'estimated_max' ? 'Estimated max total' : `Total for ${labels[selectedMode].toLowerCase()}`}</span><b>{route.available ? money(route.total_cost) : 'Unavailable'}</b></div></div>
       {route.available && route.travel_cost_type === 'estimated_max' && <p className="detail-sub"><a className="source-link" href={njtFaresUrl} target="_blank" rel="noreferrer">NJ TRANSIT fare guide ↗</a></p>}
-      <div className="route-title">{labels[selectedMode]} route preview</div>
+      <div className="route-title">Directions</div>
       {!route.available ? <p className="detail-sub">{failure.detail}</p> : <>
         <div className="eta-summary">{route.at_destination ? 'You are already at this pharmacy.' : `${arrivalText}${selectedMode === 'transit' ? ` · ${departureNote(route, leaveAt)}${route.walk_is_faster ? ` · Walking is faster overall; this route includes ${route.walking_minutes} min on foot (${Number(route.walking_miles).toFixed(1)} mi)` : ''}` : ''}`}</div>
         {route.geometry && <PharmacyMap pharmacies={[pharmacy]} selected={pharmacy} selectedMode={selectedMode} onSelect={() => {}} />}
         <div className="route-steps">{route.steps?.map((step, index) => <div className="step" key={`${step.title}-${index}`}><i>{index + 1}</i><span><b>{step.title}</b>{step.detail}</span></div>)}</div>
       </>}
-      {mapsAvailable && <><div className="maps-links"><a href={googleUrl} target="_blank" rel="noreferrer">Google Maps ↗</a>{applePlatform && <a href={appleUrl}>Apple Maps ↗</a>}</div><p className="maps-help">Opens {labels[selectedMode].toLowerCase()} directions {originLabel ? `from ${originLabel}` : 'with a starting point chosen in Maps'}.</p></>}
+      {mapsAvailable && <div className="maps-links"><a href={googleUrl} target="_blank" rel="noreferrer">Google Maps ↗</a>{applePlatform && <a href={appleUrl}>Apple Maps ↗</a>}</div>}
     </>}
   </div>;
 }
