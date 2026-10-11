@@ -4,7 +4,7 @@
 
 # PharmReach
 
-[pharmreach.tech](https://pharmreach.tech) · [GitHub Repo](https://github.com/aidanlenahan/PharmReach)
+[pharmreach.tech](https://pharmreach.tech)
 
 ## What it does
 
@@ -30,22 +30,20 @@ We then researched and compiled 6 databases of pharmacies, along with specific d
 - Python
 - React
 
-## Accomplishments that we're proud of
+## Accomplishments
 
-- We are proud of the Open Trip Planner (OTP) capability, where it will find the best route based on transportation needs. It is consistent with Google and Apple Maps.
-- We are also proud of the Gemini chat integration, which allows users to talk to it about their symptoms, which it will then recommend certain medications and the specific links of that medication on local pharmacy websites.
-- We are also very proud of the efficient interactive map that shows pharmacy locations.
+- Open Trip Planner (OTP) capability finds the best route based on transportation needs. It is consistent with Google and Apple Maps.
+- Gemini chat integration, which allows users to talk to it about their symptoms, which it will then recommend certain medications and the specific links of that medication on local pharmacy websites.
+- Efficient interactive map that shows pharmacy locations.
 
-The website is very easy to use and provides a seamless user experience.
+## Challenges
 
-## Challenges we ran into
-
-Getting the data for the stock of medicines/products in each pharmacy. Also the prices, it took a long time to get that data then eventually add it into the website.
+Getting the data for the stock of medicines/products in each pharmacy. It took a long time to get price data then eventually add it into the website.
 
 ## What we learned
 
 Lack of API availability for pharmacies like CVS and Walgreens made it difficult to gather data for their stock and prices. So, we had to gather our own data looking through their websites to check the prices and stock of each of the medicines we wanted PharmReach to show in this early stage.
 
-## What's next for PharmReach
+## PharmReach potential
 
 Expanding the scope–right now it is limited to a small number of pharmacies, so adding more into our dataset would be the next step as it has limited use.
