@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AppShell } from './components/AppShell';
+import { COORDS_KEY, ORIGIN_KEY, PREFERENCES_KEY, SORT_KEY } from './core';
 import './privacy.css';
 
 export function PrivacyPage() {
@@ -7,9 +8,9 @@ export function PrivacyPage() {
   const [error, setError] = useState(false);
   function clearData() {
     try {
-      localStorage.removeItem('nearRxTravelPreferences');
-      localStorage.removeItem('nearRxDefaultSort');
-      for (const key of ['nearRxStartingLocation', 'nearRxStartingCoordinates', 'pharmreach:helper:v1']) sessionStorage.removeItem(key);
+      localStorage.removeItem(PREFERENCES_KEY);
+      localStorage.removeItem(SORT_KEY);
+      for (const key of [ORIGIN_KEY, COORDS_KEY, 'pharmreach:helper:v1']) sessionStorage.removeItem(key);
       setCleared(true);
       window.dispatchEvent(new Event('pharmreach:clear-chat'));
     } catch { setError(true); }
