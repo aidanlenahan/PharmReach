@@ -1,0 +1,472 @@
+{
+  "source_info": {
+    "dataset": "Additive Walgreens OTC product and inventory research",
+    "merchant": "Walgreens / Duane Reade",
+    "region": "New Jersey",
+    "search_zip": "07030",
+    "checked_on": "2026-10-10",
+    "source_method": "Products, online prices, and inventory counts were read manually from visible Walgreens product pages and the Check other stores inventory drawer. No automated scraping was used.",
+    "inventory_note": "Counts are point-in-time quantities shown by Walgreens in the visible store inventory drawer. The seven requested NJ stores are represented for every product. fexofenadine at Willow Ave was explicitly shown Out of stock with the in-stock filter disabled. Other entries were shown with positive counts.",
+    "price_note": "Prices are Walgreens online product-page prices at check time. They may vary in store and may change; displayed promotional offers are not included in the base price.",
+    "sources": [
+      "https://www.walgreens.com/search/results.jsp?Ntt=fexofenadine%20180%20mg&analyticsTag=global",
+      "https://www.walgreens.com/search/results.jsp?Ntt=melatonin%205%20mg&analyticsTag=global",
+      "https://www.walgreens.com/search/results.jsp?Ntt=oxymetazoline%20nasal%20spray&analyticsTag=global"
+    ],
+    "unknowns": []
+  },
+  "products": [
+    {
+      "id": "walgreens-mucinex-guaifenesin-1200-28",
+      "name": "Mucinex 12 Hour Maximum Strength Tablets",
+      "generic_name": "Mucinex",
+      "active_ingredient": "guaifenesin",
+      "strength": "1200 mg extended release",
+      "form": "tablet",
+      "package_size": "28 tablets",
+      "price": 31.99,
+      "price_currency": "USD",
+      "price_basis": "Walgreens online product page",
+      "product_id": "300409460",
+      "product_url": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product",
+      "checked_on": "2026-10-10"
+    },
+    {
+      "id": "walgreens-diphenhydramine-25-caps-365",
+      "name": "Walgreens Allergy Relief Diphenhydramine HCl 25 mg Capsules",
+      "generic_name": "diphenhydramine",
+      "active_ingredient": "diphenhydramine hydrochloride",
+      "strength": "25 mg",
+      "form": "capsule",
+      "package_size": "365 capsules",
+      "price": 25.99,
+      "price_currency": "USD",
+      "price_basis": "Walgreens online product page",
+      "product_id": "300472122",
+      "product_url": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product",
+      "checked_on": "2026-10-10"
+    },
+    {
+      "id": "walgreens-fexofenadine-180-tablets-30",
+      "name": "Walgreens 24 Hour Allergy Relief Fexofenadine Hydrochloride 180 mg Tablets",
+      "generic_name": "fexofenadine",
+      "active_ingredient": "fexofenadine hydrochloride",
+      "strength": "180 mg",
+      "form": "tablet",
+      "package_size": "30 tablets",
+      "price": 17.99,
+      "price_currency": "USD",
+      "price_basis": "Walgreens online product page",
+      "product_id": "300448265",
+      "product_url": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product",
+      "checked_on": "2026-10-10"
+    },
+    {
+      "id": "walgreens-melatonin-5-tablets-150",
+      "name": "Walgreens Dye-Free Melatonin 5 mg Tablets (150 days) Natural Cherry",
+      "generic_name": "melatonin",
+      "active_ingredient": "melatonin",
+      "strength": "5 mg",
+      "form": "quick-dissolving tablet",
+      "package_size": "150 tablets",
+      "product_type": "dietary supplement",
+      "price": 14.99,
+      "price_currency": "USD",
+      "price_basis": "Walgreens online product page",
+      "product_id": "300417744",
+      "product_url": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product",
+      "checked_on": "2026-10-10"
+    },
+    {
+      "id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "name": "Afrin Original Maximum Strength Nasal Spray",
+      "generic_name": "Afrin",
+      "active_ingredient": "oxymetazoline hydrochloride",
+      "strength": "0.05% (maximum strength)",
+      "form": "nasal pump spray",
+      "package_size": "0.5 fl oz",
+      "price": 8.99,
+      "price_currency": "USD",
+      "price_basis": "Walgreens online product page; selected 0.5 fl oz size",
+      "product_id": "prod6325307",
+      "product_url": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518",
+      "checked_on": "2026-10-10"
+    }
+  ],
+  "pharmacies": [
+    {
+      "id": "walgreens-shipyard",
+      "merchant": "Walgreens",
+      "store_id": "19822",
+      "name": "Walgreens",
+      "address": "1320 Shipyard Ln, Hoboken, NJ 07030",
+      "state": "NJ"
+    },
+    {
+      "id": "walgreens-willow",
+      "merchant": "Walgreens",
+      "store_id": "19963",
+      "name": "Walgreens",
+      "address": "1300 Willow Ave, Hoboken, NJ 07030",
+      "state": "NJ"
+    },
+    {
+      "id": "duane-reade-river",
+      "merchant": "Duane Reade",
+      "store_id": "14306",
+      "name": "Duane Reade",
+      "address": "52 River Dr S, Jersey City, NJ 07310",
+      "state": "NJ"
+    },
+    {
+      "id": "walgreens-central",
+      "merchant": "Walgreens",
+      "store_id": "19517",
+      "name": "Walgreens",
+      "address": "337 Central Ave, Jersey City, NJ 07307",
+      "state": "NJ"
+    },
+    {
+      "id": "walgreens-summit-jc",
+      "merchant": "Walgreens",
+      "store_id": "17847",
+      "name": "Walgreens",
+      "address": "1212 Summit Ave, Jersey City, NJ 07307",
+      "state": "NJ"
+    },
+    {
+      "id": "walgreens-park-uc",
+      "merchant": "Walgreens",
+      "store_id": "5333",
+      "name": "Walgreens",
+      "address": "3333 Park Ave, Union City, NJ 07087",
+      "state": "NJ"
+    },
+    {
+      "id": "duane-reade-newark-jc",
+      "merchant": "Duane Reade",
+      "store_id": "14402",
+      "name": "Duane Reade",
+      "address": "110 Newark Ave, Jersey City, NJ 07302",
+      "state": "NJ"
+    }
+  ],
+  "inventory_by_store": [
+    {
+      "product_id": "walgreens-mucinex-guaifenesin-1200-28",
+      "store_id": "19822",
+      "store_ref": "walgreens-shipyard",
+      "status": "in_stock",
+      "quantity": 5,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product"
+    },
+    {
+      "product_id": "walgreens-mucinex-guaifenesin-1200-28",
+      "store_id": "19963",
+      "store_ref": "walgreens-willow",
+      "status": "in_stock",
+      "quantity": 1,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product"
+    },
+    {
+      "product_id": "walgreens-mucinex-guaifenesin-1200-28",
+      "store_id": "14306",
+      "store_ref": "duane-reade-river",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product"
+    },
+    {
+      "product_id": "walgreens-mucinex-guaifenesin-1200-28",
+      "store_id": "19517",
+      "store_ref": "walgreens-central",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product"
+    },
+    {
+      "product_id": "walgreens-mucinex-guaifenesin-1200-28",
+      "store_id": "17847",
+      "store_ref": "walgreens-summit-jc",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product"
+    },
+    {
+      "product_id": "walgreens-mucinex-guaifenesin-1200-28",
+      "store_id": "5333",
+      "store_ref": "walgreens-park-uc",
+      "status": "in_stock",
+      "quantity": 5,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product"
+    },
+    {
+      "product_id": "walgreens-mucinex-guaifenesin-1200-28",
+      "store_id": "14402",
+      "store_ref": "duane-reade-newark-jc",
+      "status": "in_stock",
+      "quantity": 4,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product"
+    },
+    {
+      "product_id": "walgreens-diphenhydramine-25-caps-365",
+      "store_id": "19822",
+      "store_ref": "walgreens-shipyard",
+      "status": "in_stock",
+      "quantity": 7,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product"
+    },
+    {
+      "product_id": "walgreens-diphenhydramine-25-caps-365",
+      "store_id": "19963",
+      "store_ref": "walgreens-willow",
+      "status": "in_stock",
+      "quantity": 3,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product"
+    },
+    {
+      "product_id": "walgreens-diphenhydramine-25-caps-365",
+      "store_id": "14306",
+      "store_ref": "duane-reade-river",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product"
+    },
+    {
+      "product_id": "walgreens-diphenhydramine-25-caps-365",
+      "store_id": "19517",
+      "store_ref": "walgreens-central",
+      "status": "in_stock",
+      "quantity": 1,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product"
+    },
+    {
+      "product_id": "walgreens-diphenhydramine-25-caps-365",
+      "store_id": "17847",
+      "store_ref": "walgreens-summit-jc",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product"
+    },
+    {
+      "product_id": "walgreens-diphenhydramine-25-caps-365",
+      "store_id": "5333",
+      "store_ref": "walgreens-park-uc",
+      "status": "in_stock",
+      "quantity": 1,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product"
+    },
+    {
+      "product_id": "walgreens-diphenhydramine-25-caps-365",
+      "store_id": "14402",
+      "store_ref": "duane-reade-newark-jc",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product"
+    },
+    {
+      "product_id": "walgreens-fexofenadine-180-tablets-30",
+      "store_id": "19822",
+      "store_ref": "walgreens-shipyard",
+      "status": "in_stock",
+      "quantity": 8,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product"
+    },
+    {
+      "product_id": "walgreens-fexofenadine-180-tablets-30",
+      "store_id": "19963",
+      "store_ref": "walgreens-willow",
+      "status": "out_of_stock",
+      "quantity": 0,
+      "checked_on": "2026-10-10",
+      "status_note": "Explicitly shown Out of stock with Walgreens in-stock filter disabled.",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product"
+    },
+    {
+      "product_id": "walgreens-fexofenadine-180-tablets-30",
+      "store_id": "14306",
+      "store_ref": "duane-reade-river",
+      "status": "in_stock",
+      "quantity": 6,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product"
+    },
+    {
+      "product_id": "walgreens-fexofenadine-180-tablets-30",
+      "store_id": "19517",
+      "store_ref": "walgreens-central",
+      "status": "in_stock",
+      "quantity": 8,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product"
+    },
+    {
+      "product_id": "walgreens-fexofenadine-180-tablets-30",
+      "store_id": "17847",
+      "store_ref": "walgreens-summit-jc",
+      "status": "in_stock",
+      "quantity": 4,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product"
+    },
+    {
+      "product_id": "walgreens-fexofenadine-180-tablets-30",
+      "store_id": "5333",
+      "store_ref": "walgreens-park-uc",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product"
+    },
+    {
+      "product_id": "walgreens-fexofenadine-180-tablets-30",
+      "store_id": "14402",
+      "store_ref": "duane-reade-newark-jc",
+      "status": "in_stock",
+      "quantity": 7,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product"
+    },
+    {
+      "product_id": "walgreens-melatonin-5-tablets-150",
+      "store_id": "19822",
+      "store_ref": "walgreens-shipyard",
+      "status": "in_stock",
+      "quantity": 6,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product"
+    },
+    {
+      "product_id": "walgreens-melatonin-5-tablets-150",
+      "store_id": "19963",
+      "store_ref": "walgreens-willow",
+      "status": "in_stock",
+      "quantity": 2,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product"
+    },
+    {
+      "product_id": "walgreens-melatonin-5-tablets-150",
+      "store_id": "14306",
+      "store_ref": "duane-reade-river",
+      "status": "in_stock",
+      "quantity": 5,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product"
+    },
+    {
+      "product_id": "walgreens-melatonin-5-tablets-150",
+      "store_id": "19517",
+      "store_ref": "walgreens-central",
+      "status": "in_stock",
+      "quantity": 1,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product"
+    },
+    {
+      "product_id": "walgreens-melatonin-5-tablets-150",
+      "store_id": "17847",
+      "store_ref": "walgreens-summit-jc",
+      "status": "in_stock",
+      "quantity": 5,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product"
+    },
+    {
+      "product_id": "walgreens-melatonin-5-tablets-150",
+      "store_id": "5333",
+      "store_ref": "walgreens-park-uc",
+      "status": "in_stock",
+      "quantity": 3,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product"
+    },
+    {
+      "product_id": "walgreens-melatonin-5-tablets-150",
+      "store_id": "14402",
+      "store_ref": "duane-reade-newark-jc",
+      "status": "in_stock",
+      "quantity": 3,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product"
+    },
+    {
+      "product_id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "store_id": "19822",
+      "store_ref": "walgreens-shipyard",
+      "status": "in_stock",
+      "quantity": 7,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518"
+    },
+    {
+      "product_id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "store_id": "19963",
+      "store_ref": "walgreens-willow",
+      "status": "in_stock",
+      "quantity": 5,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518"
+    },
+    {
+      "product_id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "store_id": "14306",
+      "store_ref": "duane-reade-river",
+      "status": "in_stock",
+      "quantity": 8,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518"
+    },
+    {
+      "product_id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "store_id": "19517",
+      "store_ref": "walgreens-central",
+      "status": "in_stock",
+      "quantity": 9,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518"
+    },
+    {
+      "product_id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "store_id": "17847",
+      "store_ref": "walgreens-summit-jc",
+      "status": "in_stock",
+      "quantity": 5,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518"
+    },
+    {
+      "product_id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "store_id": "5333",
+      "store_ref": "walgreens-park-uc",
+      "status": "in_stock",
+      "quantity": 13,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518"
+    },
+    {
+      "product_id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "store_id": "14402",
+      "store_ref": "duane-reade-newark-jc",
+      "status": "in_stock",
+      "quantity": 1,
+      "checked_on": "2026-10-10",
+      "availability_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518"
+    }
+  ]
+}

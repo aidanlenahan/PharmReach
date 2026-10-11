@@ -1,0 +1,4012 @@
+{
+  "source_info": {
+    "merchant": "CVS Pharmacy",
+    "region": "New Jersey",
+    "checked_on": "2026-10-10",
+    "inventory_note": "Availability is a point-in-time store snapshot. A product-specific store search with no listing is recorded as “Out of stock” per user guidance; the store may not carry the item or it may be unavailable. “Unknown” means the lookup was blocked, not completed, or has no recorded store-specific result.",
+    "price_note": "Prices are current online product-page prices checked 2026-10-10. CVS notes that in-store prices may vary.",
+    "availability_note": "Pickup status is shown only when CVS provided it. In-stock with pickup unavailable means CVS showed the item in store but not for pickup.",
+    "friend_cvs_additions_checked_on": "2026-10-10",
+    "walgreens_additions_checked_on": "2026-10-10",
+    "new_cvs_research_checked_on": "2026-10-10"
+  },
+  "medications": [
+    {
+      "id": "cvs-low-dose-aspirin-81-300",
+      "name": "Aspirin",
+      "strength": "81 mg enteric-coated tablets",
+      "aka": "baby aspirin · low-dose aspirin · aspirin 81 mg",
+      "category": "Pain relief",
+      "quantity": 300,
+      "quantity_label": "300 tablets",
+      "product_id": "1012279",
+      "product_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+      "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-low-dose-aspirin-81-300",
+          "strength": "81 mg enteric-coated tablets",
+          "form": "",
+          "quantity": 300,
+          "quantity_label": "300 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "baby aspirin",
+        "low dose aspirin",
+        "aspirin 81 mg"
+      ]
+    },
+    {
+      "id": "cvs-pepto-original-12oz",
+      "name": "Pepto-Bismol",
+      "strength": "Original liquid, twin pack",
+      "aka": "Pepto Bismol · bismuth subsalicylate · upset stomach · diarrhea relief",
+      "category": "Stomach relief",
+      "quantity": 2,
+      "quantity_label": "2 × 12 fl oz",
+      "product_id": "408322",
+      "product_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+      "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-pepto-original-12oz",
+          "strength": "Original liquid, twin pack",
+          "form": "",
+          "quantity": 2,
+          "quantity_label": "2 × 12 fl oz",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "pepto bismol",
+        "bismuth subsalicylate",
+        "stomach relief",
+        "diarrhea medicine"
+      ]
+    },
+    {
+      "id": "cvs-tums-ultra-160",
+      "name": "TUMS",
+      "strength": "Ultra Strength assorted berries chewable tablets",
+      "aka": "Tums · calcium carbonate · antacid · heartburn relief",
+      "category": "Stomach relief",
+      "quantity": 160,
+      "quantity_label": "160 tablets",
+      "product_id": "350352",
+      "product_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+      "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-tums-ultra-160",
+          "strength": "Ultra Strength assorted berries chewable tablets",
+          "form": "",
+          "quantity": 160,
+          "quantity_label": "160 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "tums",
+        "calcium carbonate",
+        "antacid",
+        "heartburn medicine"
+      ]
+    },
+    {
+      "id": "cvs-omeprazole-20-42",
+      "name": "Omeprazole",
+      "strength": "20 mg delayed-release tablets",
+      "aka": "omeprazole · Prilosec OTC · acid reducer · heartburn",
+      "category": "Stomach relief",
+      "quantity": 42,
+      "quantity_label": "42 tablets",
+      "product_id": "1280155",
+      "product_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+      "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-omeprazole-20-42",
+          "strength": "20 mg delayed-release tablets",
+          "form": "",
+          "quantity": 42,
+          "quantity_label": "42 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "omeprazole",
+        "prilosec",
+        "acid reducer"
+      ]
+    },
+    {
+      "id": "cvs-acetaminophen-500",
+      "name": "Acetaminophen",
+      "strength": "500 mg caplets",
+      "aka": "acetaminophen · Tylenol · pain reliever · fever reducer",
+      "category": "Pain relief",
+      "quantity": null,
+      "quantity_label": "",
+      "product_id": "273823",
+      "product_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+      "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-acetaminophen-500",
+          "strength": "500 mg caplets",
+          "form": "",
+          "quantity": null,
+          "quantity_label": "",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "acetaminophen",
+        "tylenol",
+        "fever reducer"
+      ],
+      "research_notes": [
+        "Count unclear: PDP title says 1000 ct; details say 500 caplets"
+      ]
+    },
+    {
+      "id": "cvs-ibuprofen-200-100",
+      "name": "Ibuprofen",
+      "strength": "200 mg coated tablets",
+      "aka": "ibuprofen · Advil · Motrin · pain reliever · fever reducer",
+      "category": "Pain relief",
+      "quantity": 100,
+      "quantity_label": "100 tablets",
+      "product_id": "2808",
+      "product_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+      "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-ibuprofen-200-100",
+          "strength": "200 mg coated tablets",
+          "form": "",
+          "quantity": 100,
+          "quantity_label": "100 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "ibuprofen",
+        "advil",
+        "motrin"
+      ]
+    },
+    {
+      "id": "cvs-aspirin-325-500",
+      "name": "Aspirin",
+      "strength": "325 mg coated tablets",
+      "aka": "aspirin · Bayer · pain reliever",
+      "category": "Pain relief",
+      "quantity": 500,
+      "quantity_label": "500 tablets",
+      "product_id": "303693",
+      "product_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+      "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-aspirin-325-500",
+          "strength": "325 mg coated tablets",
+          "form": "",
+          "quantity": 500,
+          "quantity_label": "500 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "aspirin",
+        "bayer aspirin",
+        "325 mg aspirin"
+      ]
+    },
+    {
+      "id": "cvs-aspirin-325-100",
+      "name": "Aspirin",
+      "strength": "325 mg coated tablets",
+      "aka": "aspirin · Bayer · pain reliever",
+      "category": "Pain relief",
+      "quantity": 100,
+      "quantity_label": "100 tablets",
+      "product_id": "152314",
+      "product_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+      "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-aspirin-325-100",
+          "strength": "325 mg coated tablets",
+          "form": "",
+          "quantity": 100,
+          "quantity_label": "100 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "aspirin",
+        "bayer aspirin",
+        "325 mg aspirin"
+      ]
+    },
+    {
+      "id": "cvs-naproxen-220-500",
+      "name": "Naproxen sodium",
+      "strength": "220 mg tablets",
+      "aka": "naproxen · Aleve · pain reliever",
+      "category": "Pain relief",
+      "quantity": 500,
+      "quantity_label": "500 tablets",
+      "product_id": "1090326",
+      "product_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+      "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-naproxen-220-500",
+          "strength": "220 mg tablets",
+          "form": "",
+          "quantity": 500,
+          "quantity_label": "500 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "naproxen",
+        "aleve",
+        "naproxen sodium"
+      ]
+    },
+    {
+      "id": "cvs-triple-antibiotic-2oz",
+      "name": "Triple-antibiotic ointment",
+      "strength": "Maximum-strength pain-relieving ointment",
+      "aka": "triple antibiotic · Neosporin · first aid ointment",
+      "category": "First aid",
+      "quantity": null,
+      "quantity_label": "2 oz",
+      "product_id": "262643",
+      "product_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+      "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-triple-antibiotic-2oz",
+          "strength": "Maximum-strength pain-relieving ointment",
+          "form": "",
+          "quantity": null,
+          "quantity_label": "2 oz",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "triple antibiotic",
+        "neosporin",
+        "antibiotic ointment"
+      ]
+    },
+    {
+      "id": "cvs-hydrocortisone-1-1oz",
+      "name": "Hydrocortisone cream",
+      "strength": "1% anti-itch cream",
+      "aka": "hydrocortisone · Cortizone-10 · anti-itch cream",
+      "category": "First aid",
+      "quantity": null,
+      "quantity_label": "1 oz",
+      "product_id": "340113",
+      "product_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+      "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-hydrocortisone-1-1oz",
+          "strength": "1% anti-itch cream",
+          "form": "",
+          "quantity": null,
+          "quantity_label": "1 oz",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "hydrocortisone",
+        "cortizone 10",
+        "anti itch cream"
+      ]
+    },
+    {
+      "id": "cvs-budesonide-32mcg-120",
+      "name": "Budesonide nasal spray",
+      "strength": "32 mcg per spray",
+      "aka": "Rhinocort · allergy nasal spray · nasal steroid",
+      "category": "Allergy relief",
+      "quantity": 120,
+      "quantity_label": "120 sprays",
+      "product_id": "1170019",
+      "product_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+      "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+      "price_checked_on": "2026-10-10",
+      "online_price": 21.49,
+      "variants": [
+        {
+          "id": "cvs-budesonide-32mcg-120",
+          "strength": "32 mcg per spray",
+          "form": "",
+          "quantity": 120,
+          "quantity_label": "120 sprays",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "budesonide",
+        "rhinocort",
+        "allergy spray"
+      ]
+    },
+    {
+      "id": "cvs-guaifenesin-dextromethorphan-er-20",
+      "name": "Guaifenesin + dextromethorphan",
+      "strength": "600 mg / 30 mg extended-release tablets",
+      "aka": "Mucus DM · Mucinex DM · cough and chest congestion",
+      "category": "Cold and flu",
+      "quantity": 20,
+      "quantity_label": "20 tablets",
+      "product_id": "655381",
+      "product_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+      "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+      "price_checked_on": "2026-10-10",
+      "online_price": 15.99,
+      "variants": [
+        {
+          "id": "cvs-guaifenesin-dextromethorphan-er-20",
+          "strength": "600 mg / 30 mg extended-release tablets",
+          "form": "",
+          "quantity": 20,
+          "quantity_label": "20 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "guaifenesin",
+        "dextromethorphan",
+        "mucinex dm",
+        "mucus dm"
+      ]
+    },
+    {
+      "id": "cvs-dextromethorphan-guaifenesin-liquid-8oz",
+      "name": "Dextromethorphan + guaifenesin liquid",
+      "strength": "20 mg / 200 mg per 10 mL liquid",
+      "aka": "Tussin DM · cough syrup · chest congestion",
+      "category": "Cold and flu",
+      "quantity": 8,
+      "quantity_label": "8 fl oz",
+      "product_id": "477060",
+      "product_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+      "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+      "price_checked_on": "2026-10-10",
+      "online_price": 10.29,
+      "variants": [
+        {
+          "id": "cvs-dextromethorphan-guaifenesin-liquid-8oz",
+          "strength": "20 mg / 200 mg per 10 mL liquid",
+          "form": "",
+          "quantity": 8,
+          "quantity_label": "8 fl oz",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "tussin dm",
+        "cough medicine",
+        "guaifenesin cough syrup"
+      ]
+    },
+    {
+      "id": "cvs-loperamide-softgels-24",
+      "name": "Loperamide",
+      "strength": "2 mg softgels",
+      "aka": "Imodium A-D · anti-diarrheal · diarrhea relief",
+      "category": "Stomach relief",
+      "quantity": 24,
+      "quantity_label": "24 softgels",
+      "product_id": "1011786",
+      "product_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786",
+      "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786",
+      "price_checked_on": "2026-10-10",
+      "online_price": 10.49,
+      "variants": [
+        {
+          "id": "cvs-loperamide-softgels-24",
+          "strength": "2 mg softgels",
+          "form": "",
+          "quantity": 24,
+          "quantity_label": "24 softgels",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "loperamide",
+        "imodium",
+        "anti diarrheal"
+      ]
+    },
+    {
+      "id": "cvs-saline-nasal-spray-1-5oz",
+      "name": "Saline nasal spray",
+      "strength": "Moisturizing spray",
+      "aka": "nasal saline · sinus rinse · congestion",
+      "category": "Allergy relief",
+      "quantity": 1,
+      "quantity_label": "1.5 fl oz",
+      "product_id": "173301",
+      "product_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+      "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+      "price_checked_on": "2026-10-10",
+      "online_price": 5.49,
+      "variants": [
+        {
+          "id": "cvs-saline-nasal-spray-1-5oz",
+          "strength": "Moisturizing spray",
+          "form": "",
+          "quantity": 1,
+          "quantity_label": "1.5 fl oz",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "saline spray",
+        "nasal spray",
+        "nasal saline"
+      ]
+    },
+    {
+      "id": "cvs-polyethylene-glycol-3350-4-1oz",
+      "name": "Polyethylene glycol 3350",
+      "strength": "17 g per dose powder",
+      "aka": "Purelax · MiraLAX · constipation relief",
+      "category": "Stomach relief",
+      "quantity": 7,
+      "quantity_label": "4.1 oz · 7 doses",
+      "product_id": "713635",
+      "product_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+      "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+      "price_checked_on": "2026-10-10",
+      "online_price": 10.29,
+      "variants": [
+        {
+          "id": "cvs-polyethylene-glycol-3350-4-1oz",
+          "strength": "17 g per dose powder",
+          "form": "",
+          "quantity": 7,
+          "quantity_label": "4.1 oz · 7 doses",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "polyethylene glycol",
+        "miralax",
+        "purelax",
+        "laxative"
+      ]
+    },
+    {
+      "id": "cvs-magnesium-citrate-10oz",
+      "name": "Magnesium citrate",
+      "strength": "1.745 g per fl oz · lemon",
+      "aka": "saline laxative · constipation relief",
+      "category": "Stomach relief",
+      "quantity": 10,
+      "quantity_label": "10 fl oz",
+      "product_id": "231183",
+      "product_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+      "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+      "price_checked_on": "2026-10-10",
+      "online_price": 4.19,
+      "variants": [
+        {
+          "id": "cvs-magnesium-citrate-10oz",
+          "strength": "1.745 g per fl oz · lemon",
+          "form": "",
+          "quantity": 10,
+          "quantity_label": "10 fl oz",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "magnesium citrate",
+        "saline laxative"
+      ]
+    },
+    {
+      "id": "cvs-famotidine-20-75",
+      "name": "Famotidine",
+      "strength": "20 mg tablets",
+      "aka": "Pepcid AC · heartburn relief · acid reducer",
+      "category": "Stomach relief",
+      "quantity": 75,
+      "quantity_label": "75 tablets",
+      "product_id": "623816",
+      "product_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+      "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+      "price_checked_on": "2026-10-10",
+      "online_price": 23.99,
+      "variants": [
+        {
+          "id": "cvs-famotidine-20-75",
+          "strength": "20 mg tablets",
+          "form": "",
+          "quantity": 75,
+          "quantity_label": "75 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "famotidine",
+        "pepcid",
+        "acid reducer"
+      ]
+    },
+    {
+      "id": "cvs-docusate-sodium-100-30",
+      "name": "Docusate sodium",
+      "strength": "100 mg softgels",
+      "aka": "stool softener · Colace · constipation relief",
+      "category": "Stomach relief",
+      "quantity": 30,
+      "quantity_label": "30 softgels",
+      "product_id": "689614",
+      "product_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+      "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+      "price_checked_on": "2026-10-10",
+      "online_price": 8.89,
+      "variants": [
+        {
+          "id": "cvs-docusate-sodium-100-30",
+          "strength": "100 mg softgels",
+          "form": "",
+          "quantity": 30,
+          "quantity_label": "30 softgels",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "docusate",
+        "colace",
+        "stool softener"
+      ]
+    },
+    {
+      "id": "walgreens-loratadine-10-30",
+      "name": "Loratadine",
+      "strength": "10 mg tablets",
+      "aka": "Claritin · 24-hour allergy relief · non-drowsy allergy medicine",
+      "category": "Allergy relief",
+      "quantity": 30,
+      "quantity_label": "30 tablets",
+      "product_id": "300449592",
+      "product_source": "https://www.walgreens.com/store/c/walgreens-free-&-pure-24-hour-allergy-relief-loratadine-10-mg-tablets/ID=300449592-product",
+      "price_source": "https://www.walgreens.com/store/c/walgreens-free-&-pure-24-hour-allergy-relief-loratadine-10-mg-tablets/ID=300449592-product",
+      "price_checked_on": "2026-10-10",
+      "online_price": 17.99,
+      "variants": [
+        {
+          "id": "walgreens-loratadine-10-30",
+          "strength": "10 mg tablets",
+          "form": "",
+          "quantity": 30,
+          "quantity_label": "30 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "loratadine",
+        "claritin",
+        "allergy medicine"
+      ]
+    },
+    {
+      "id": "walgreens-cetirizine-10-30",
+      "name": "Cetirizine",
+      "strength": "10 mg tablets",
+      "aka": "Zyrtec · 24-hour allergy relief · non-drowsy allergy medicine",
+      "category": "Allergy relief",
+      "quantity": 30,
+      "quantity_label": "30 tablets",
+      "product_id": "300463396",
+      "product_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-cetirizine-hydrochloride-10-mg-tablets/ID=300463396-product",
+      "price_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-cetirizine-hydrochloride-10-mg-tablets/ID=300463396-product",
+      "price_checked_on": "2026-10-10",
+      "online_price": 16.99,
+      "variants": [
+        {
+          "id": "walgreens-cetirizine-10-30",
+          "strength": "10 mg tablets",
+          "form": "",
+          "quantity": 30,
+          "quantity_label": "30 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "cetirizine",
+        "zyrtec",
+        "allergy medicine"
+      ]
+    },
+    {
+      "id": "cvs-chlorpheniramine-4mg-100-tablets",
+      "name": "Chlorpheniramine maleate",
+      "strength": "4 mg tablets",
+      "aka": "Chlor-Trimeton · allergy relief",
+      "category": "Allergy relief",
+      "quantity": 100,
+      "quantity_label": "100 tablets",
+      "product_id": "1170247",
+      "product_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+      "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-chlorpheniramine-4mg-100-tablets",
+          "strength": "4 mg tablets",
+          "form": "",
+          "quantity": 100,
+          "quantity_label": "100 tablets",
+          "price_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "cvs-docosanol-10pct-2g-pump",
+      "name": "Docosanol",
+      "strength": "10% cream pump",
+      "aka": "Abreva · cold sore treatment",
+      "category": "Cold sore treatment",
+      "quantity": 1,
+      "quantity_label": "2 g (0.07 oz)",
+      "product_id": "340457",
+      "product_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+      "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-docosanol-10pct-2g-pump",
+          "strength": "10% cream pump",
+          "form": "",
+          "quantity": 1,
+          "quantity_label": "2 g (0.07 oz)",
+          "price_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "walgreens-mucinex-guaifenesin-1200-28",
+      "name": "Guaifenesin",
+      "strength": "1200 mg extended-release tablets",
+      "aka": "Mucinex · expectorant · chest congestion",
+      "category": "Cold & cough",
+      "quantity": 28,
+      "quantity_label": "28 tablets",
+      "product_id": "300409460",
+      "product_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product",
+      "price_source": "https://www.walgreens.com/store/c/mucinex-12-hour-maximum-strength-tablets/ID=300409460-product",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "walgreens-mucinex-guaifenesin-1200-28",
+          "strength": "1200 mg extended-release tablets",
+          "form": "",
+          "quantity": 28,
+          "quantity_label": "28 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "guaifenesin",
+        "mucinex",
+        "expectorant"
+      ]
+    },
+    {
+      "id": "walgreens-diphenhydramine-25-caps-365",
+      "name": "Diphenhydramine",
+      "strength": "25 mg capsules",
+      "aka": "Benadryl · allergy relief · antihistamine",
+      "category": "Allergy relief",
+      "quantity": 365,
+      "quantity_label": "365 capsules",
+      "product_id": "300472122",
+      "product_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product",
+      "price_source": "https://www.walgreens.com/store/c/walgreens-allergy-relief-diphenhydramine-hci-25-mg-capsules/ID=300472122-product",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "walgreens-diphenhydramine-25-caps-365",
+          "strength": "25 mg capsules",
+          "form": "",
+          "quantity": 365,
+          "quantity_label": "365 capsules",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "diphenhydramine",
+        "benadryl",
+        "antihistamine"
+      ]
+    },
+    {
+      "id": "walgreens-fexofenadine-180-tablets-30",
+      "name": "Fexofenadine",
+      "strength": "180 mg tablets",
+      "aka": "Allegra · 24-hour allergy relief · antihistamine",
+      "category": "Allergy relief",
+      "quantity": 30,
+      "quantity_label": "30 tablets",
+      "product_id": "300448265",
+      "product_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product",
+      "price_source": "https://www.walgreens.com/store/c/walgreens-24-hour-allergy-relief-fexofenadine-hydrochloride-180-mg-tablets/ID=300448265-product",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "walgreens-fexofenadine-180-tablets-30",
+          "strength": "180 mg tablets",
+          "form": "",
+          "quantity": 30,
+          "quantity_label": "30 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "fexofenadine",
+        "allegra",
+        "antihistamine"
+      ]
+    },
+    {
+      "id": "walgreens-melatonin-5-tablets-150",
+      "name": "Melatonin",
+      "strength": "5 mg quick-dissolving tablets",
+      "aka": "sleep support · natural cherry",
+      "category": "Sleep support",
+      "quantity": 150,
+      "quantity_label": "150 tablets",
+      "product_id": "300417744",
+      "product_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product",
+      "price_source": "https://www.walgreens.com/store/c/walgreens-dye-free-melatonin-5-mg-tablets-(150-days)-natural-cherry/ID=300417744-product",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "walgreens-melatonin-5-tablets-150",
+          "strength": "5 mg quick-dissolving tablets",
+          "form": "",
+          "quantity": 150,
+          "quantity_label": "150 tablets",
+          "price_multiplier": 1
+        }
+      ],
+      "product_type": "dietary supplement",
+      "search_terms": [
+        "melatonin",
+        "sleep support"
+      ]
+    },
+    {
+      "id": "afrin-oxymetazoline-nasal-spray-05oz",
+      "name": "Oxymetazoline nasal spray",
+      "strength": "0.05% maximum-strength nasal spray",
+      "aka": "Afrin · nasal decongestant · congestion",
+      "category": "Cold & cough",
+      "quantity": 0.5,
+      "quantity_label": "0.5 fl oz",
+      "product_id": "prod6325307",
+      "product_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518",
+      "price_source": "https://www.walgreens.com/store/c/afrin-original-maximum-strength-nasal-spray/ID=prod6325307-product?skuId=sku6273518",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "afrin-oxymetazoline-nasal-spray-05oz",
+          "strength": "0.05% maximum-strength nasal spray",
+          "form": "",
+          "quantity": 0.5,
+          "quantity_label": "0.5 fl oz",
+          "price_multiplier": 1
+        }
+      ],
+      "search_terms": [
+        "oxymetazoline",
+        "afrin",
+        "nasal decongestant"
+      ]
+    },
+    {
+      "id": "cvs-diphenhydramine-25mg-48-capsules",
+      "name": "Diphenhydramine",
+      "strength": "25 mg capsules",
+      "aka": "Benadryl · allergy relief · diphenhydramine",
+      "category": "Allergy relief",
+      "quantity": 48,
+      "quantity_label": "48 capsules",
+      "product_id": "1011716",
+      "product_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+      "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-diphenhydramine-25mg-48-capsules",
+          "strength": "25 mg capsules",
+          "form": "",
+          "quantity": 48,
+          "quantity_label": "48 capsules",
+          "price_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "cvs-olopatadine-02pct-25ml-eye-drops",
+      "name": "Olopatadine eye drops",
+      "strength": "0.2% ophthalmic solution",
+      "aka": "Pataday · allergy eye drops · olopatadine",
+      "category": "Allergy relief",
+      "quantity": 2.5,
+      "quantity_label": "2.5 mL bottle",
+      "product_id": "321773",
+      "product_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+      "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-olopatadine-02pct-25ml-eye-drops",
+          "strength": "0.2% ophthalmic solution",
+          "form": "",
+          "quantity": 2.5,
+          "quantity_label": "2.5 mL bottle",
+          "price_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "cvs-fexofenadine-60mg-12-tablets",
+      "name": "Fexofenadine",
+      "strength": "60 mg tablets",
+      "aka": "Allegra · non-drowsy allergy relief · fexofenadine",
+      "category": "Allergy relief",
+      "quantity": 12,
+      "quantity_label": "12 tablets",
+      "product_id": "847262",
+      "product_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+      "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-fexofenadine-60mg-12-tablets",
+          "strength": "60 mg tablets",
+          "form": "",
+          "quantity": 12,
+          "quantity_label": "12 tablets",
+          "price_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "cvs-melatonin-5mg-120-tablets",
+      "name": "Melatonin",
+      "strength": "5 mg tablets",
+      "aka": "sleep aid · melatonin",
+      "category": "Sleep support",
+      "quantity": 120,
+      "quantity_label": "120 tablets",
+      "product_id": "710791",
+      "product_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+      "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-melatonin-5mg-120-tablets",
+          "strength": "5 mg tablets",
+          "form": "",
+          "quantity": 120,
+          "quantity_label": "120 tablets",
+          "price_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "cvs-cetirizine-10mg-14-tablets",
+      "name": "Cetirizine",
+      "strength": "10 mg tablets",
+      "aka": "Zyrtec · 24-hour allergy relief · cetirizine",
+      "category": "Allergy relief",
+      "quantity": 14,
+      "quantity_label": "14 tablets",
+      "product_id": "1170281",
+      "product_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+      "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+      "price_checked_on": "2026-10-10",
+      "variants": [
+        {
+          "id": "cvs-cetirizine-10mg-14-tablets",
+          "strength": "10 mg tablets",
+          "form": "",
+          "quantity": 14,
+          "quantity_label": "14 tablets",
+          "price_multiplier": 1
+        }
+      ]
+    }
+  ],
+  "pharmacies": [
+    {
+      "id": "cvs-clinton",
+      "name": "CVS Pharmacy",
+      "tag": "CVS · Hoboken",
+      "address": "811 Clinton St · Hoboken, NJ 07030",
+      "latitude": 40.747218,
+      "longitude": -74.0325717,
+      "coordinates_source": "https://www.openstreetmap.org/way/27830017",
+      "distance": 0.3,
+      "walk": 16,
+      "transit": 10,
+      "depart": 5,
+      "drive": 4,
+      "driveCost": 1.4,
+      "bike": 4,
+      "phone": "201-420-4825",
+      "location_source": "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/811-clinton-street-hoboken-nj-07030/storeid=2209",
+      "location_verified_on": "2026-10-10",
+      "pharmacy_hours": {
+        "timezone": "America/New_York",
+        "source": "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/811-clinton-street-hoboken-nj-07030/storeid=2209",
+        "checked_on": "2026-10-10",
+        "days": [
+          {
+            "day": "Monday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Tuesday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Wednesday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Thursday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Friday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Saturday",
+            "open": "09:00 AM",
+            "close": "06:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Sunday",
+            "open": "10:00 AM",
+            "close": "05:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          }
+        ]
+      },
+      "state": "NJ",
+      "city": "Hoboken",
+      "zip": "07030",
+      "cvs_store_id": "2209",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-washington",
+      "name": "CVS Pharmacy",
+      "tag": "CVS · Hoboken",
+      "address": "59 Washington St · Hoboken, NJ 07030",
+      "latitude": 40.736657,
+      "longitude": -74.0309537,
+      "coordinates_source": "https://www.openstreetmap.org/node/296568108",
+      "distance": 0.5,
+      "walk": 4,
+      "transit": 8,
+      "depart": 2,
+      "drive": 2,
+      "driveCost": 0.7,
+      "bike": 2,
+      "phone": "201-798-1889",
+      "location_source": "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/59-washington-st-court-street-plaza-hoboken-nj-07030/storeid=1928",
+      "location_verified_on": "2026-10-10",
+      "pharmacy_hours": {
+        "timezone": "America/New_York",
+        "source": "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/59-washington-st-court-street-plaza-hoboken-nj-07030/storeid=1928",
+        "checked_on": "2026-10-10",
+        "days": [
+          {
+            "day": "Monday",
+            "open": "08:00 AM",
+            "close": "10:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Tuesday",
+            "open": "08:00 AM",
+            "close": "10:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Wednesday",
+            "open": "08:00 AM",
+            "close": "10:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Thursday",
+            "open": "08:00 AM",
+            "close": "10:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Friday",
+            "open": "08:00 AM",
+            "close": "10:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Saturday",
+            "open": "09:00 AM",
+            "close": "08:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Sunday",
+            "open": "10:00 AM",
+            "close": "09:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          }
+        ]
+      },
+      "state": "NJ",
+      "city": "Hoboken",
+      "zip": "07030",
+      "cvs_store_id": "1928",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-14th",
+      "name": "CVS Pharmacy",
+      "tag": "CVS · Hoboken",
+      "address": "210 14th St · Hoboken, NJ 07030",
+      "latitude": 40.753668,
+      "longitude": -74.0280346,
+      "coordinates_source": "https://www.openstreetmap.org/way/420620243",
+      "distance": 0.7,
+      "walk": 25,
+      "transit": 14,
+      "depart": 8,
+      "drive": 6,
+      "driveCost": 2.2,
+      "bike": 7,
+      "phone": "201-420-3286",
+      "location_source": "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/210-14th-st-hoboken-nj-07030/storeid=4443",
+      "location_verified_on": "2026-10-10",
+      "pharmacy_hours": {
+        "timezone": "America/New_York",
+        "source": "https://www.cvs.com/store-locator/hoboken-nj-pharmacies/210-14th-st-hoboken-nj-07030/storeid=4443",
+        "checked_on": "2026-10-10",
+        "days": [
+          {
+            "day": "Monday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Tuesday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Wednesday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Thursday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Friday",
+            "open": "09:00 AM",
+            "close": "07:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Saturday",
+            "open": "09:00 AM",
+            "close": "05:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          },
+          {
+            "day": "Sunday",
+            "open": "10:00 AM",
+            "close": "05:00 PM",
+            "break_start": "01:30 PM",
+            "break_end": "02:00 PM"
+          }
+        ]
+      },
+      "state": "NJ",
+      "city": "Hoboken",
+      "zip": "07030",
+      "cvs_store_id": "4443",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-100-14th-jc",
+      "name": "CVS Pharmacy at Target",
+      "tag": "CVS · Jersey City",
+      "address": "100 14th St · Jersey City, NJ 07310",
+      "city": "Jersey City",
+      "state": "NJ",
+      "zip": "07310",
+      "cvs_store_id": "17006",
+      "latitude": 40.732831,
+      "longitude": -74.035759,
+      "coordinates_source": "https://www.openstreetmap.org/way/27111256#map=19/40.732831/-74.035759",
+      "distance": 0.8,
+      "walk": 16,
+      "transit": 18,
+      "depart": 3,
+      "drive": 7,
+      "driveCost": 1.0,
+      "bike": 6,
+      "phone": "201-499-0018",
+      "location_source": "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/100-14th-st-jersey-city-nj-07310/storeid=17006",
+      "location_verified_on": "2026-10-10",
+      "note": "CVS pharmacy listed inside Target; no separate CVS point in OSM, so routing uses the mapped Target building.",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-714-summit",
+      "name": "CVS Pharmacy",
+      "tag": "CVS · Union City",
+      "address": "714 Summit Ave · Union City, NJ 07087",
+      "city": "Union City",
+      "state": "NJ",
+      "zip": "07087",
+      "cvs_store_id": "4615",
+      "latitude": 40.7586648,
+      "longitude": -74.043264,
+      "coordinates_source": "https://www.openstreetmap.org/node/5383252190#map=18/40.7586648/-74.043264",
+      "distance": 1.3,
+      "walk": 26,
+      "transit": 16,
+      "depart": 4,
+      "drive": 8,
+      "driveCost": 1.6,
+      "bike": 7,
+      "phone": "201-866-2892",
+      "location_source": "https://www.cvs.com/store-locator/union-city-nj-pharmacies/714-summit-ave-union-city-nj-07087/storeid=4615",
+      "location_verified_on": "2026-10-10",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-88-morgan",
+      "name": "CVS Pharmacy",
+      "tag": "CVS · Jersey City",
+      "address": "88 Morgan St · Jersey City, NJ 07302",
+      "city": "Jersey City",
+      "state": "NJ",
+      "zip": "07302",
+      "cvs_store_id": "11088",
+      "latitude": 40.7197406,
+      "longitude": -74.035376,
+      "coordinates_source": "https://www.openstreetmap.org/node/7613531293#map=18/40.7197406/-74.035376",
+      "distance": 1.7,
+      "walk": 34,
+      "transit": 22,
+      "depart": 5,
+      "drive": 10,
+      "driveCost": 2.0,
+      "bike": 10,
+      "phone": "201-433-3510",
+      "location_source": "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/88-morgan-street-jersey-city-nj-07302/storeid=11088",
+      "location_verified_on": "2026-10-10",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-70-hudson",
+      "name": "CVS Pharmacy",
+      "tag": "CVS · Jersey City",
+      "address": "70 Hudson St · Jersey City, NJ 07302",
+      "latitude": 40.7147504,
+      "longitude": -74.0341866,
+      "coordinates_source": "https://www.openstreetmap.org/node/9659314878",
+      "coordinates_note": "OpenStreetMap CVS pharmacy feature.",
+      "phone": "201-748-5593",
+      "location_source": "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/70-hudson-st-jersey-city-nj-07302/storeid=11135",
+      "cvs_store_id": "11135",
+      "city": "Jersey City",
+      "zip": "07302",
+      "walk": 41,
+      "transit": 19,
+      "depart": 5,
+      "drive": 8,
+      "driveCost": 2.0,
+      "bike": 12,
+      "distance": 2.0,
+      "state": "NJ",
+      "location_verified_on": "2026-10-10",
+      "coordinates_verified_on": "2026-10-10",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-104-sip",
+      "name": "CVS Pharmacy at Target",
+      "tag": "CVS · Jersey City",
+      "address": "104 Sip Ave · Jersey City, NJ 07306",
+      "latitude": 40.7311906,
+      "longitude": -74.0663821,
+      "coordinates_source": "https://www.openstreetmap.org/way/11631168",
+      "coordinates_note": "OpenStreetMap address/building point; CVS location is listed at this address, not as a separate mapped pharmacy point.",
+      "phone": "201-748-0002",
+      "location_source": "https://www.cvs.com/store-locator/jersey-city-nj-pharmacies/104-sip-ave-jersey-city-nj-07306/storeid=17919",
+      "cvs_store_id": "17919",
+      "city": "Jersey City",
+      "zip": "07306",
+      "walk": 41,
+      "transit": 21,
+      "depart": 6,
+      "drive": 9,
+      "driveCost": 2.2,
+      "bike": 12,
+      "distance": 2.0,
+      "state": "NJ",
+      "location_verified_on": "2026-10-10",
+      "coordinates_verified_on": "2026-10-10",
+      "merchant": "CVS"
+    },
+    {
+      "id": "cvs-4700-bergenline",
+      "name": "CVS Pharmacy y más",
+      "tag": "CVS · Union City",
+      "address": "4700 Bergenline Ave · Union City, NJ 07087",
+      "latitude": 40.7813122,
+      "longitude": -74.0218307,
+      "coordinates_source": "https://www.openstreetmap.org/node/12896672569",
+      "coordinates_note": "OpenStreetMap CVS pharmacy feature; CVS locator confirms the street address and 07087 ZIP.",
+      "phone": "201-867-5900",
+      "location_source": "https://www.cvs.com/store-locator/union-city-nj-pharmacies/4700-bergenline-ave-union-city-nj-07087/storeid=7400",
+      "cvs_store_id": "7400",
+      "city": "Union City",
+      "zip": "07087",
+      "walk": 55,
+      "transit": 23,
+      "depart": 6,
+      "drive": 11,
+      "driveCost": 2.7,
+      "bike": 16,
+      "distance": 2.6,
+      "state": "NJ",
+      "location_verified_on": "2026-10-10",
+      "coordinates_verified_on": "2026-10-10",
+      "merchant": "CVS"
+    }
+  ],
+  "inventory": {
+    "cvs-low-dose-aspirin-81-300": {
+      "cvs-clinton": {
+        "price": 12.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 12.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 12.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 12.49,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "This store was omitted from the CVS product-specific Check more stores results. Classified as Out of stock per user guidance; omission may mean unavailable or not carried at lookup time."
+      },
+      "cvs-714-summit": {
+        "price": 12.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 12.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 12.49,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "availability_note": "CVS Check more stores explicitly displayed Out of stock at 70 Hudson St; no pickup available.",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 12.49,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "availability_note": "Direct CVS product-page Pickup lookup at the selected 104 SIP AVE branch showed “Out of stock 104 SIP AVE” and “0 in stock.”",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 12.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-pepto-original-12oz": {
+      "cvs-clinton": {
+        "price": 18.39,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 18.39,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 18.39,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 18.39,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-714-summit": {
+        "price": 18.39,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS product-specific Check more stores result; selected store status and pickup availability confirmed."
+      },
+      "cvs-88-morgan": {
+        "price": 18.39,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS product-specific Check more stores result; selected store status and pickup availability confirmed."
+      },
+      "cvs-70-hudson": {
+        "price": 18.39,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "availability_note": "Visible CVS product-specific Check more stores result; selected store status and pickup availability confirmed.",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 18.39,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 18.39,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "availability_note": "CVS Check store availability panel showed In Stock and In-store pickup available at 4700 Bergenline Ave, Union City, NJ 07087.",
+        "price_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-tums-ultra-160": {
+      "cvs-clinton": {
+        "price": 12.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 12.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 12.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 12.99,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Direct Pickup product page for the selected exact store, 100 14th St, showed Out of stock and 0 in stock.",
+        "notes": "Direct product page with 100 14th St selected as the CVS store showed “Out of stock 100 14TH ST” and 0 in stock."
+      },
+      "cvs-714-summit": {
+        "price": 12.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch."
+      },
+      "cvs-88-morgan": {
+        "price": 12.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch."
+      },
+      "cvs-70-hudson": {
+        "price": 12.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch.",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 12.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 12.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-omeprazole-20-42": {
+      "cvs-clinton": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 25.49,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Direct Pickup product page for the selected exact store, 100 14th St, showed Out of stock and 0 in stock.",
+        "notes": "Direct product page with 100 14th St selected as the CVS store showed “Out of stock 100 14TH ST” and 0 in stock."
+      },
+      "cvs-714-summit": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch."
+      },
+      "cvs-88-morgan": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch."
+      },
+      "cvs-70-hudson": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch.",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 25.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 25.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch.",
+        "price_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-acetaminophen-500": {
+      "cvs-clinton": {
+        "price": 29.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 29.49,
+        "stock": "In stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 29.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 29.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-714-summit": {
+        "price": 29.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-88-morgan": {
+        "price": 29.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-70-hudson": {
+        "price": 29.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 29.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 29.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-extra-strength-acetaminophen-pain-relief-500-mg-caplets-1000-ct-prodid-273823",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-ibuprofen-200-100": {
+      "cvs-clinton": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 8.99,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 8.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-714-summit": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch."
+      },
+      "cvs-88-morgan": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch."
+      },
+      "cvs-70-hudson": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch.",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 8.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 8.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-aspirin-325-500": {
+      "cvs-clinton": {
+        "price": 12.79,
+        "stock": "In stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-14th": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-100-14th-jc": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-714-summit": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-88-morgan": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-70-hudson": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 12.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-aspirin-coated-tablets-325-mg-500-ct-prodid-303693",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-aspirin-325-100": {
+      "cvs-clinton": {
+        "price": 4.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-14th": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-100-14th-jc": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-714-summit": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-88-morgan": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-70-hudson": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 4.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-regular-strength-aspirin-325-mg-coated-tablets-100-ct-prodid-152314",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-naproxen-220-500": {
+      "cvs-clinton": {
+        "price": 30.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-14th": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-100-14th-jc": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-714-summit": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-88-morgan": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-70-hudson": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 30.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-naproxen-sodium-tablets-220-mg-500-ct-prodid-1090326?skuId=454594",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-triple-antibiotic-2oz": {
+      "cvs-clinton": {
+        "price": 17.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 17.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 17.49,
+        "stock": "In stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 17.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-714-summit": {
+        "price": 17.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-88-morgan": {
+        "price": 17.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10",
+        "availability_note": "No completed store-specific inventory result is recorded for this product at this store."
+      },
+      "cvs-70-hudson": {
+        "price": 17.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 17.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 17.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "Store is verified, but item-level inventory was not confirmed in CVS check-inventory.",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-triple-antibiotic-pain-relieving-ointment-2-oz-prodid-262643",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-hydrocortisone-1-1oz": {
+      "cvs-clinton": {
+        "price": 5.79,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 5.79,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 5.79,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 5.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 5.79,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 5.79,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 5.79,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "availability_note": "Visible CVS Check more stores result showed In Stock and pickup available at this named branch.",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 5.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 5.79,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-budesonide-32mcg-120": {
+      "cvs-clinton": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 21.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-budesonide-allergy-nasal-spray-120-sprays-prodid-1170019?skuId=179283",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-guaifenesin-dextromethorphan-er-20": {
+      "cvs-clinton": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 15.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-mucus-dm-extended-release-guaifenesin-tablets-600-mg-20-ct-prodid-655381",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-dextromethorphan-guaifenesin-liquid-8oz": {
+      "cvs-clinton": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-tussin-dm-adult-cough-chest-congestion-8-oz-prodid-477060",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-loperamide-softgels-24": {
+      "cvs-clinton": {
+        "price": 10.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 10.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 10.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 10.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 10.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 10.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 10.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 10.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 10.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-saline-nasal-spray-1-5oz": {
+      "cvs-clinton": {
+        "price": 5.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 5.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 5.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 5.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 5.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 5.49,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 5.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 5.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 5.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-polyethylene-glycol-3350-4-1oz": {
+      "cvs-clinton": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 10.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-purelax-constipation-relief-power-unflavored-prodid-713635",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-magnesium-citrate-10oz": {
+      "cvs-clinton": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 4.19,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-magnesium-citrate-oral-saline-laxative-10-oz-prodid-231183",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-famotidine-20-75": {
+      "cvs-clinton": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 23.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-health-famotidine-20-mg-tablets-75-ct-prodid-623816",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-docusate-sodium-100-30": {
+      "cvs-clinton": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 8.89,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "CVS online price is listed; store-specific availability was not verified.",
+        "price_source": "https://www.cvs.com/shop/cvs-stool-softener-softgels-30-ct-prodid-689614",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-chlorpheniramine-4mg-100-tablets": {
+      "cvs-washington": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-clinton": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 8.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 8.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 8.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 8.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 8.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-docosanol-10pct-2g-pump": {
+      "cvs-washington": {
+        "price": 18.49,
+        "stock": "In stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-clinton": {
+        "price": 18.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 18.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 18.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 18.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 18.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 18.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 18.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 18.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "availability_note": "This store was not included in the product-specific CVS lookup.",
+        "price_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-diphenhydramine-25mg-48-capsules": {
+      "cvs-clinton": {
+        "price": 9.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 9.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 9.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 9.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 9.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 9.99,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 9.99,
+        "stock": "Out of stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 9.99,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 9.99,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-olopatadine-02pct-25ml-eye-drops": {
+      "cvs-clinton": {
+        "price": 16.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 16.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 16.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 16.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 16.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 16.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 16.49,
+        "stock": "In stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 16.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 16.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-fexofenadine-60mg-12-tablets": {
+      "cvs-clinton": {
+        "price": 11.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 11.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 11.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 11.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 11.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 11.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 11.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 11.49,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 11.49,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-melatonin-5mg-120-tablets": {
+      "cvs-clinton": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 11.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 11.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+        "price_checked_on": "2026-10-10"
+      }
+    },
+    "cvs-cetirizine-10mg-14-tablets": {
+      "cvs-clinton": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-washington": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-14th": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-100-14th-jc": {
+        "price": 11.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-714-summit": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-88-morgan": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": false,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-70-hudson": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-104-sip": {
+        "price": 11.29,
+        "stock": "Unknown",
+        "pickup_available": null,
+        "checked_on": null,
+        "availability_source": null,
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      },
+      "cvs-4700-bergenline": {
+        "price": 11.29,
+        "stock": "In stock",
+        "pickup_available": true,
+        "checked_on": "2026-10-10",
+        "availability_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+        "price_checked_on": "2026-10-10"
+      }
+    }
+  },
+  "research_evidence": [
+    {
+      "medication_id": "cvs-hydrocortisone-1-1oz",
+      "cvs_title": "CVS Maximum Strength Anit-Itch Relief Hydrocortisone Cream, 1 OZ",
+      "cvs_product_id": "340113",
+      "cvs_item_sku": "340113",
+      "product_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+      "online_price": 5.79,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores, search 07030. Stock wording normalized In Stock to In stock.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-loperamide-softgels-24",
+      "cvs_title": "CVS Anti-Diarrheal Softgels, 24 CT",
+      "cvs_product_id": "1011786",
+      "cvs_item_sku": "690041",
+      "product_source": "https://www.cvs.com/shop/cvs-anti-diarrheal-softgels-24-ct-prodid-1011786?skuId=690041",
+      "online_price": 10.49,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores, search 07030. Stock wording normalized In Stock to In stock.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-saline-nasal-spray-1-5oz",
+      "cvs_title": "CVS Nasal Spray Saline Liquid, 1.5 OZ",
+      "cvs_product_id": "173301",
+      "cvs_item_sku": "173301",
+      "product_source": "https://www.cvs.com/shop/cvs-nasal-spray-saline-liquid-1-5-oz-prodid-173301",
+      "online_price": 5.49,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores, search 07030. Stock wording normalized In Stock to In stock.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-chlorpheniramine-4mg-100-tablets",
+      "cvs_title": "CVS 4HR Allergy Relief Chlorpheniramine Maleate, 100 CT",
+      "cvs_product_id": "1170247",
+      "cvs_item_sku": "477082",
+      "product_source": "https://www.cvs.com/shop/cvs-4hr-allergy-relief-chlorpheniramine-maleate-100-ct-prodid-1170247?skuId=477082",
+      "online_price": 8.99,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores, search 07030. Stock wording normalized In Stock to In stock.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-docosanol-10pct-2g-pump",
+      "cvs_title": "CVS Docosanol 10% Cream Pump, 0.07 OZ",
+      "cvs_product_id": "340457",
+      "cvs_item_sku": "340457",
+      "product_source": "https://www.cvs.com/shop/cvs-docosanol-10-cream-pump-0-07-oz-prodid-340457",
+      "online_price": 18.49,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores, search 07030. Stock wording normalized In Stock to In stock.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-diphenhydramine-25mg-48-capsules",
+      "cvs_title": "CVS Allergy Relief Diphenhydramine Capsules, 48 Count",
+      "cvs_product_id": "1011716",
+      "cvs_item_sku": "477071",
+      "product_source": "https://www.cvs.com/shop/cvs-allergy-relief-diphenhydramine-capsules-prodid-1011716",
+      "online_price": 9.99,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores. Explicitly verified five In Stock stores and two Out of stock stores; two target stores were not listed and remain Unknown.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-olopatadine-02pct-25ml-eye-drops",
+      "cvs_title": "CVS Olopatadine HCl Eye Allergy Relief, Ophthalmic Solution USP, 0.2%, 2.5mL",
+      "cvs_product_id": "321773",
+      "cvs_item_sku": "321773",
+      "product_source": "https://www.cvs.com/shop/cvs-olopatadine-hcl-eye-allergy-relief-ophthalmic-solution-usp-0-2-2-5ml-prodid-321773",
+      "online_price": 16.49,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores. Seven target stores were listed In Stock; at 70 Hudson the panel said in-store pickup not available. Two target stores were not listed and remain Unknown.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-fexofenadine-60mg-12-tablets",
+      "cvs_title": "CVS Non-Drowsy 12HR Allergy Relief Fexofenadine HCl 60mg, 12 CT",
+      "cvs_product_id": "847262",
+      "cvs_item_sku": "847262",
+      "product_source": "https://www.cvs.com/shop/cvs-non-drowsy-12hr-allergy-relief-fexofenadine-hcl-60mg-12-ct-prodid-847262",
+      "online_price": 11.49,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores. Seven target stores were listed In Stock; two target stores were not listed and remain Unknown.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-melatonin-5mg-120-tablets",
+      "cvs_title": "CVS Melatonin 5mg Tablets, 120 CT",
+      "cvs_product_id": "710791",
+      "cvs_item_sku": "710791",
+      "product_source": "https://www.cvs.com/shop/cvs-melatonin-5mg-tablets-120-ct-prodid-710791",
+      "online_price": 11.29,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores. Seven target stores were listed In Stock; two target stores were not listed and remain Unknown.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-cetirizine-10mg-14-tablets",
+      "cvs_title": "CVS 24HR Allergy Relief Tablets, 10mg Cetirizine HCl, 14 CT",
+      "cvs_product_id": "1170281",
+      "cvs_item_sku": "444236",
+      "product_source": "https://www.cvs.com/shop/cvs-24hr-allergy-relief-tablets-10mg-cetirizine-hcl-14-ct-prodid-1170281",
+      "online_price": 11.29,
+      "price_type": "Standard online single-item price; no coupons, membership discount or multi-buy applied",
+      "observed_on": "2026-10-10",
+      "method": "Visible CVS product page and Check more stores. Seven target stores were listed In Stock; at 88 Morgan the panel said in-store pickup not available. Two target stores were not listed and remain Unknown.",
+      "exact_stock_count_at_target_stores": null
+    },
+    {
+      "medication_id": "cvs-pepto-original-12oz",
+      "cvs_title": "Pepto Bismol 5-Symptom Stomach Relief, Original, Twin Pack, 12 FL OZ",
+      "product_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; opened Check more stores, turned off the available-only filter, and recorded exact named NJ branch statuses.",
+      "store_observations": {
+        "cvs-714-summit": {
+          "stock": "Out of stock",
+          "pickup_available": false
+        },
+        "cvs-88-morgan": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-70-hudson": {
+          "stock": "In stock",
+          "pickup_available": true
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-low-dose-aspirin-81-300",
+      "cvs_title": "CVS Low Dose Aspirin 81 MG Enteric Coated Tablets, 300 Count",
+      "product_source": "https://www.cvs.com/shop/cvs-low-dose-aspirin-81-mg-enteric-coated-tablets-prodid-1012279?skuId=126623",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; selected 104 Sip Ave, Jersey City as the exact CVS store, chose Pickup, and read the store-specific stock status on the product page.",
+      "store_observations": {
+        "cvs-70-hudson": {
+          "stock": "Out of stock",
+          "pickup_available": false
+        },
+        "cvs-104-sip": {
+          "stock": "Out of stock",
+          "pickup_available": false,
+          "visible_evidence": "Out of stock 104 SIP AVE; 0 in stock"
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-tums-ultra-160",
+      "cvs_title": "TUMS Ultra Strength Antacid Chewable Tablets, Assorted Berries, 160 Count",
+      "product_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; opened Check more stores, turned off available-only filter, and recorded named NJ branch statuses.",
+      "store_observations": {
+        "cvs-714-summit": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-88-morgan": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-70-hudson": {
+          "stock": "In stock",
+          "pickup_available": true
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-ibuprofen-200-100",
+      "cvs_title": "CVS Ibuprofen Pain & Fever Relief (NSAID) 200 MG Coated Tablets, 100 CT",
+      "product_source": "https://www.cvs.com/shop/cvs-ibuprofen-pain-fever-relief-nsaid-200-mg-coated-tablets-100-ct-prodid-2808",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; opened Check more stores and recorded exact named NJ branch statuses.",
+      "store_observations": {
+        "cvs-714-summit": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-88-morgan": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-70-hudson": {
+          "stock": "In stock",
+          "pickup_available": true
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-hydrocortisone-1-1oz",
+      "cvs_title": "CVS Maximum Strength Anit-Itch Relief Hydrocortisone Cream, 1 OZ",
+      "product_source": "https://www.cvs.com/shop/cvs-maximum-strength-anit-itch-relief-hydrocortisone-cream-1-oz-prodid-340113",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; opened Check more stores and recorded exact named NJ branch statuses.",
+      "store_observations": {
+        "cvs-70-hudson": {
+          "stock": "In stock",
+          "pickup_available": true
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-omeprazole-20-42",
+      "cvs_title": "CVS Omeprazole Delayed Release Acid Reducer Tablets, 20 MG, 42 CT",
+      "product_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; opened Check more stores, turned off the available-only filter, and searched nearby CVS locations (including ZIP 07087). Recorded exact named NJ branch results.",
+      "store_observations": {
+        "cvs-714-summit": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-88-morgan": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-70-hudson": {
+          "stock": "In stock",
+          "pickup_available": true
+        },
+        "cvs-4700-bergenline": {
+          "stock": "In stock",
+          "pickup_available": true
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-pepto-original-12oz",
+      "cvs_title": "Pepto Bismol 5-Symptom Stomach Relief, Original, Twin Pack, 12 FL OZ",
+      "product_source": "https://www.cvs.com/shop/pepto-bismol-5-symptom-stomach-relief-original-twin-pack-12-fl-oz-prodid-408322",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; opened Check more stores, turned off the available-only filter, searched ZIP 07087, and matched the exact 4700 Bergenline Ave branch.",
+      "store_observations": {
+        "cvs-4700-bergenline": {
+          "stock": "In stock",
+          "pickup_available": true
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-tums-ultra-160",
+      "cvs_title": "TUMS Antacid Chewable Tablets for Heartburn Relief, Ultra Strength, Assorted Berries, 160 Tablets",
+      "product_source": "https://www.cvs.com/shop/tums-antacid-chewable-tablets-for-heartburn-relief-ultra-strength-assorted-berries-160-tablets-prodid-350352",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; selected 100 14th St, Jersey City as the exact CVS store, chose Pickup, and read the store-specific stock status on the product page.",
+      "store_observations": {
+        "cvs-100-14th-jc": {
+          "stock": "Out of stock",
+          "pickup_available": false,
+          "visible_evidence": "Out of stock 100 14TH ST; 0 in stock"
+        }
+      }
+    },
+    {
+      "medication_id": "cvs-omeprazole-20-42",
+      "cvs_title": "CVS Omeprazole Delayed Release Acid Reducer Tablets, 20 MG, 42 CT",
+      "product_source": "https://www.cvs.com/shop/cvs-omeprazole-acid-reducer-tablets-delayed-release-42-ct-prodid-1280155?skuId=451305",
+      "observed_on": "2026-10-10",
+      "method": "Attended visible CVS product page; selected 100 14th St, Jersey City as the exact CVS store, chose Pickup, and read the store-specific stock status on the product page.",
+      "store_observations": {
+        "cvs-100-14th-jc": {
+          "stock": "Out of stock",
+          "pickup_available": false,
+          "visible_evidence": "Out of stock 100 14TH ST; 0 in stock"
+        }
+      }
+    }
+  ],
+  "archived_products_no_store": []
+}
