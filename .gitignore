@@ -96,3 +96,8 @@ poc/
 bigPharma/
 tmp-frontend/
 docs/
+# OTP input feeds and generated graph
+backend/otp/data/
+
+# bigPharma map rendered with the CARTO key from bigPharma/.env
+bigPharma/pharmacy_map.local.html
