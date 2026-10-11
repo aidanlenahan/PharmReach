@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 712 712">
+  <title>PharmReach</title>
+  <defs>
+    <linearGradient id="p" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#587eac"/>
+      <stop offset="1" stop-color="#4d719d"/>
+    </linearGradient>
+    <linearGradient id="r" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#a8cfed"/>
+      <stop offset="1" stop-color="#8dbbdd"/>
+    </linearGradient>
+  </defs>
+  <rect width="712" height="712" rx="112" fill="#2b3340"/>
+  <path fill="url(#p)" d="M122 182h159c63 0 111 48 111 113s-48 115-111 115h-67c-14 0-21 9-21 22v99h-71V424c0-43 40-78 91-78h57c30 0 51-22 51-51s-21-51-51-51h-77v79c-28 4-53 17-71 37Z"/>
+  <path fill="url(#r)" d="M362 182h117c64 0 113 47 113 113 0 46-26 85-71 103l71 133h-78l-60-121h-55v121h-70V425c38-15 64-42 78-78h70c28 0 45-23 45-52s-18-51-46-51h-68c-10-25-25-46-46-62Z"/>
+</svg>
