@@ -1,7 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
+import { searchEntry } from '../core';
 
 export function AppShell({ children, active = 'home', onboarding = false, landing = false }: { children: ReactNode; active?: string; onboarding?: boolean; landing?: boolean }) {
   const [notice, setNotice] = useState('');
+  const entry = searchEntry();
   useEffect(() => {
     const handler = (event: Event) => {
       const message = (event as CustomEvent<string>).detail;
@@ -18,9 +20,9 @@ export function AppShell({ children, active = 'home', onboarding = false, landin
         {onboarding ? <span className="setup-header">Make it work for you</span> : landing ? <nav className="nav landing-nav" aria-label="Main navigation">
           <a href="#how-it-works">How it works</a>
           <a href="/products.html">Browse products</a>
-          <a className="landing-nav-cta" href="#find-medicine">Find medicine <span aria-hidden="true">↗</span></a>
+          <a className="landing-nav-cta" href={entry.href}>{entry.label} <span aria-hidden="true">↗</span></a>
         </nav> : <nav className="nav" aria-label="Main navigation">
-          <a className={active === 'home' ? 'current' : ''} href="/">Find medication</a>
+          <a className={active === 'home' ? 'current' : ''} href="/find-medicine.html">Find medication</a>
           <a className={active === 'products' ? 'current' : ''} href="/products.html">Products</a>
           <a className={active === 'settings' ? 'current' : ''} href="/settings.html">Settings</a>
         </nav>}
@@ -28,6 +30,6 @@ export function AppShell({ children, active = 'home', onboarding = false, landin
       {children}
     </div>
     {notice && <div className="toast show" role="status">{notice}</div>}
-    {landing ? <footer className="landing-footer"><div><a className="brand" href="/"><span className="brand-mark">✳</span>PharmReach</a><p>Over-the-counter medicine. Closer to home.</p></div><nav aria-label="Footer navigation"><a href="/products.html">Products</a><a href="/settings.html">Travel preferences</a><a href="#find-medicine">Find medicine ↗</a></nav><span>Hoboken &amp; nearby Hudson County, NJ</span></footer> : <footer className="demo-footer">PharmReach</footer>}
+    {landing ? <footer className="landing-footer"><div><a className="brand" href="/"><span className="brand-mark">✳</span>PharmReach</a><p>Over-the-counter medicine. Closer to home.</p></div><nav aria-label="Footer navigation"><a href="/products.html">Products</a><a href="/settings.html">Travel preferences</a><a href={entry.href}>{entry.label} ↗</a></nav><span>Hoboken &amp; nearby Hudson County, NJ</span></footer> : <footer className="demo-footer">PharmReach</footer>}
   </>;
 }

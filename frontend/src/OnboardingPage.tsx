@@ -24,10 +24,10 @@ export function OnboardingPage() {
     try { savePreferences(preferences); }
     catch { setError('Your browser could not save preferences. Allow site storage and try again.'); return; }
     toast('Travel preferences saved.');
-    const next = new URLSearchParams(location.search).get('next') || '/';
+    const next = new URLSearchParams(location.search).get('next') || '/find-medicine.html';
     let target: URL;
-    try { target = new URL(next, location.origin); } catch { target = new URL('/', location.origin); }
-    location.href = target.origin === location.origin && ['/', '/index.html', '/results.html', '/settings.html'].includes(target.pathname) ? target.href : '/';
+    try { target = new URL(next, location.origin); } catch { target = new URL('/find-medicine.html', location.origin); }
+    location.href = target.origin === location.origin && ['/', '/index.html', '/find-medicine.html', '/results.html', '/settings.html'].includes(target.pathname) ? target.href : '/find-medicine.html';
   }
   function back() { setError(''); setStep(Math.max(0, step - 1)); }
   const typeNames = (preferences.transitTypes as TransitType[]).map((type) => transitTypes[type]).join(', ');

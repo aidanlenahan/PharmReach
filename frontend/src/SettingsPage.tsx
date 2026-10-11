@@ -57,7 +57,7 @@ export function SettingsPage() {
       <div className="setting-section"><h2>Default sort</h2><p>This is the starting sort each time you run a new search. Changing sort on the results page only applies to that search.</p>
         <div className="sort-card"><div><b>Sort new searches by</b><small>{explanation}</small></div><select aria-label="Default sort" value={sort} onChange={(event) => setSort(event.target.value as SortOption)}>{defaultSortOptions.map((option) => <option key={option}>{option}</option>)}</select></div>
       </div>
-      <div className="settings-actions"><a className="text-btn" href="/">Back to search</a><button className="primary" onClick={saveSort}>Save default</button></div>
+      <div className="settings-actions"><a className="text-btn" href="/find-medicine.html">Back to search</a><button className="primary" onClick={saveSort}>Save default</button></div>
     </div>
   </section></main></AppShell>;
 }

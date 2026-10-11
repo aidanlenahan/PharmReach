@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, ArrowUpRight, Bike, BusFront, CarFront, Check, ChevronDown, Footprints, MapPin, Pill, Search, SlidersHorizontal, Sparkles, Stethoscope, Wind } from 'lucide-react';
-import { HomeSearch } from './HomeSearch';
-import { LocationPanel } from './components/LocationPanel';
 import { AppShell } from './components/AppShell';
-import { api, getOriginLabel } from './core';
+import { api, searchEntry } from './core';
 import './landing.css';
 
 const previewProducts = [
@@ -67,7 +65,7 @@ function PharmacyPreview() {
 
 export function HomePage() {
   const [summary, setSummary] = useState<CatalogSummary | null>(null);
-  const [originLabel, setOriginLabel] = useState(getOriginLabel());
+  const entry = searchEntry();
   useEffect(() => {
     let active = true;
     api<CatalogSummary>('/api/catalog-summary').then((response) => { if (active) setSummary(response); }).catch(() => {});
@@ -79,8 +77,8 @@ export function HomePage() {
         <span className="landing-kicker"><span />Over-the-counter. Around the corner.</span>
         <h1 id="landing-title">Find your medicine.<br /><em>Make fewer stops.</em></h1>
         <p className="landing-lead">Know where to go before you go. Compare nearby pharmacy prices, availability, and the best way to get there.</p>
-        <div id="find-medicine" className="landing-search"><label htmlFor="landing-medication">What are you looking for?</label><HomeSearch inputId="landing-medication" /></div>
-        <details className="landing-location"><summary><MapPin size={15} /><span>{originLabel ? `Starting from ${originLabel}` : 'Set your starting point'}</span><ChevronDown size={15} /></summary><LocationPanel onChange={() => setOriginLabel(getOriginLabel())} /></details>
+        <div className="landing-actions"><a className="primary landing-primary-cta" href={entry.href}>{entry.label} <ArrowRight size={19} /></a><a className="landing-secondary-cta" href="#how-it-works">See how it works</a></div>
+        <p className="landing-start-note">{entry.label === 'Try it out' ? 'Set your travel preferences, then find your medicine.' : 'Your travel preferences are saved. Start your next search.'}</p>
         <div className="landing-hero-assurance"><Check size={14} /><span>No account needed</span><span className="landing-assurance-divider" /><span>CVS &amp; Walgreens</span></div>
       </div>
       <PharmacyPreview />
@@ -94,6 +92,6 @@ export function HomePage() {
     <section className="landing-travel" aria-labelledby="landing-travel-title"><div className="landing-travel-copy"><span className="landing-kicker">Your medicine. Your way there.</span><h2 id="landing-travel-title">Different ways there.<br />One place to compare.</h2><p>Going on foot? Taking the bus? Set your walking limit and choose the ways you travel. Then compare trip time, arrival time, and total cost together.</p><a href="/settings.html">Choose your travel preferences <ArrowUpRight size={18} /></a></div><div className="landing-travel-panel"><span className="landing-travel-panel-label"><SlidersHorizontal size={16} />Make the trip work for you</span><div>{waysThere.map(({ label, Icon }) => <span className="landing-travel-method" key={label}><Icon size={27} /><b>{label}</b></span>)}</div><p>Walking limits include the walk to and from transit stops.</p></div></section>
     <section className="landing-browse" aria-labelledby="landing-browse-title"><div className="landing-browse-heading"><div><span className="landing-kicker">Everyday essentials, nearby</span><h2 id="landing-browse-title">Start with what you need.</h2></div><a href="/products.html">Browse all products <ArrowUpRight size={17} /></a></div><div className="landing-category-grid">{categories.map(({ name, example, Icon }) => <a key={name} href={`/products.html?category=${encodeURIComponent(name)}`}><span className="landing-category-icon"><Icon size={24} /></span><h3>{name}</h3><p>{example}</p><ArrowUpRight size={19} aria-hidden="true" /></a>)}</div></section>
     <section className="landing-faq" aria-labelledby="landing-faq-title"><div><span className="landing-kicker">A few things to know</span><h2 id="landing-faq-title">Before your next stop.</h2></div><div className="landing-faq-items"><details><summary>What can I find on PharmReach?<ChevronDown size={18} /></summary><p>Over-the-counter medicines and everyday pharmacy products, searchable by common name, ingredient, or brand. Browse the product list to see what’s available.</p></details><details><summary>Where does PharmReach work?<ChevronDown size={18} /></summary><p>We’re starting with CVS and Walgreens locations around Hoboken, Jersey City, and Union City in New Jersey. Store coverage depends on the product you choose.</p></details><details><summary>Can I compare more than the price?<ChevronDown size={18} /></summary><p>Yes. Compare walking, cycling, driving, and transit by travel time, arrival time, and total cost. Your saved preferences determine which travel options you see.</p></details></div></section>
-    <section className="landing-final-cta"><div><span className="landing-kicker">A better next stop</span><h2>Your medicine is out there.<br />Let’s find your way to it.</h2></div><a href="#find-medicine">Find my medicine <ArrowRight size={20} /></a></section>
+    <section className="landing-final-cta"><div><span className="landing-kicker">A better next stop</span><h2>Your medicine is out there.<br />Let’s find your way to it.</h2></div><a href={entry.href}>{entry.label} <ArrowRight size={20} /></a></section>
   </main></AppShell>;
 }

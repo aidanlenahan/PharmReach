@@ -64,8 +64,10 @@ export function defaultMode(preferences = getPreferences()): Mode {
   const modes = allowedModes(preferences);
   return (['transit', 'drive', 'bike', 'walk'] as Mode[]).find((mode) => modes.includes(mode)) || 'walk';
 }
-export type Route = { available?: boolean; walking_minutes?: number; walking_miles?: number; duration_minutes?: number; transit_types?: TransitType[] };
-export type PharmacyRecord = { id: string; distance?: number; methods: Record<Mode, Route>; [key: string]: any };
+export type Route = { available?: boolean; unavailable_reason?: string; walking_minutes?: number; walking_miles?: number; duration_minutes?: number; transit_types?: TransitType[] };
+export type PharmacyRecord = { id: string; distance?: number; straight_line_miles?: number | null; methods: Record<Mode, Route>; [key: string]: any };
+/** Freshness of the NJ TRANSIT GTFS feeds behind transit routing (backend/njt/status.py). */
+export type TransitDataStatus = { updated_at: string | null; source: 'njt-api' | 'public-zip' | 'existing' | 'manual' | null; stale: boolean; fallback: boolean; service_end?: string | null; rebuild_pending?: boolean | null; message: string | null };
 export function preferenceNote(pharmacy: PharmacyRecord, mode: Mode, preferences = getPreferences()): string {
   if (!preferences) return '';
   if (mode === 'drive' && !preferences.drive) return 'Driving is off in your preferences';
@@ -73,6 +75,8 @@ export function preferenceNote(pharmacy: PharmacyRecord, mode: Mode, preferences
   if (mode === 'transit' && (!preferences.transit || (pharmacy.methods.transit.transit_types || ['bus']).some((type) => !preferences.transitTypes.includes(type)))) return 'Transit types are off in your preferences';
   if (mode === 'walk' || mode === 'transit') {
     const route = pharmacy.methods[mode];
+    // A route OTP did not finish (or a farther store that was not route-planned) has no walking figures; don't call that over the limit.
+    if (route.unavailable_reason === 'route_timeout' || route.unavailable_reason === 'beyond_route_limit') return '';
     const time = route.walking_minutes ?? (mode === 'transit' ? 8 : pharmacy.methods.walk.duration_minutes ?? Number.POSITIVE_INFINITY);
     const distance = route.walking_miles ?? (mode === 'transit' ? 0.4 : pharmacy.distance ?? Number.POSITIVE_INFINITY);
     if (preferences.walkLimit === 'time' && time > preferences.walkValue) return 'Exceeds your walking time limit';
@@ -106,4 +110,10 @@ export function summary(preferences = getPreferences()): string {
   if (!preferences) return 'Travel preferences have not been set yet.';
   const types = preferences.transitTypes.map((type) => transitTypes[type]).join(', ');
   return [preferences.drive ? 'Driving allowed' : 'No driving', preferences.walkLimit === 'none' ? 'Walking: no limit' : `Walking: up to ${preferences.walkValue} ${preferences.walkLimit === 'time' ? 'minutes' : 'miles'}`, preferences.bike ? 'Cycling allowed' : 'No cycling', preferences.transit ? `Transit: ${types}` : 'No public transit'].join(' · ');
+}
+
+export function searchEntry() {
+  return getPreferences()
+    ? { label: 'Make a search', href: '/find-medicine.html' }
+    : { label: 'Try it out', href: '/onboarding.html?next=%2Ffind-medicine.html' };
 }
