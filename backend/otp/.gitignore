@@ -1,0 +1,4 @@
+data/
+*.gtfs.zip
+*.osm.pbf
+graph.obj
