@@ -1,6 +1,8 @@
-# Pharmacy Searcher — Implementation TODO
+# PharmReach — Implementation TODO
 
 Product scope and requirements live in [PRD.md](./PRD.md); stack decisions live in [TECHSTACK.md](./TECHSTACK.md). Work through the phases in order, with the stack and shared contracts established before feature implementation.
+
+> **Status (2026-10-11):** The running app is a Python stdlib server (`backend/serve.py`) serving a Vite React frontend (`frontend/`), with OpenTripPlanner routing and real CVS/Walgreens snapshots. It replaces the Next.js/SQLite plan below. Crossed-off items that were reworded describe what was actually built. Note: `backend/`, `frontend/` and `bigPharma/` are not yet committed to git.
 
 ## Phase 0 — Set up the tech stack and repository
 
@@ -10,9 +12,11 @@ Product scope and requirements live in [PRD.md](./PRD.md); stack decisions live 
 - [x] Add the core dependencies: Leaflet 1.9.4/react-leaflet, leaflet.markercluster (`react-leaflet-cluster`), Fuse.js, SQLite (`better-sqlite3`), and Gemini (`@google/genai`).
 - [x] Create the initial app/API folder structure and a working local development command.
 - [x] Add `.env.example` (`GEMINI_API_KEY`, `NEXT_PUBLIC_CARTO_KEY`); keep actual credentials in local/VM-only `.env` files.
-- [ ] Move the CARTO key hardcoded in `bigPharma/` scripts and HTML into `.env` before committing `bigPharma/`, and restrict the key to our domain.
+- [x] Move the CARTO key hardcoded in `bigPharma/` scripts and HTML into `bigPharma/.env` (scripts render a gitignored `pharmacy_map.local.html`; the committed HTML keeps a `__CARTO_KEY__` placeholder).
+- [x] Restrict the CARTO key to our domain in the CARTO dashboard.
 - [ ] Add or confirm `CLAUDE.md` and `AGENTS.md` with the stack, constants, and folder ownership from `TECHSTACK.md`.
-- [ ] Verify a clean install and that the starter app runs locally.
+- [x] Build the Vite frontend and run the app locally with `python3 backend/serve.py` (or `backend/otp/run_demo_with_otp.sh` for live OTP).
+- [ ] Verify a clean install from scratch using `frontend/SETUP.md`.
 
 ## Phase 1 — Proof of concept: NJ Transit API
 
@@ -31,59 +35,100 @@ Before building on NJ Transit data, confirm we can reach the API, get the static
 
 ## Phase 2 — Define shared contracts and prepare data
 
-- [ ] Implement `lib/types.ts` as the shared source of truth for pharmacy, drug, inventory, search request/result, and transport mode types.
-- [ ] Create the SQLite schema and database initialization/seeding path.
-- [ ] Build the drug JSON dataset with generic names, brand names, and strengths.
-- [ ] Import New Jersey pharmacy locations into the database, starting from the data already pulled in `bigPharma/` (OSM `pharmacies_osm.csv` or geocoded NPPES `nj_pharmacies_geocoded.csv`).
-- [ ] Import NJ Transit static GTFS bus and rail stops from `stops.txt`, using the public `rail_data.zip`/`bus_data.zip` snapshot (Phase 1 go/no-go: no token needed). Reuse `poc/njtransit/src/gtfs.ts` and `download.ts`.
-- [ ] Pick one pharmacy source or remove duplicates (OSM and NPPES overlap, e.g. 303 George St).
-- [ ] Transit heuristic: compute bus-only and rail-only estimates and take the faster feasible one (combined nearest-stop snapping almost always picks bus).
-- [ ] Generate deterministic simulated inventory and prices with a fixed seed.
-- [ ] Verify seeded data covers the rehearsed demo drugs and locations.
+- [x] Define the frontend types (`Mode`, `TransitType`, `TravelPreferences`, `Route`, `PharmacyRecord`) in `frontend/src/core.ts`.
+- [x] Store pharmacy, product, and inventory snapshots as JSON in `backend/data/`, loaded by `serve.py` on each request.
+- [x] Build the OTC product catalog with names, brand aliases (`aka`), strengths, and quantity variants.
+- [x] Record verified Hoboken-area CVS (9) and Walgreens/Duane Reade (7) branches with sourced coordinates in the retailer snapshots.
+- [x] Stage the NJ TRANSIT bus and rail GTFS zips into the OpenTripPlanner graph (`backend/otp/`).
+- [x] Use the retailer store locators as the single pharmacy source, with one record per branch (no OSM/NPPES overlap).
+- [x] Use OTP schedule-aware transit routing, filtered by the user's allowed transit types, with local estimates as the fallback.
+- [x] Capture real CVS/Walgreens availability and online prices as dated snapshots with the attended capture scripts (`backend/scripts/`).
+- [x] Curate the snapshot data around the Hoboken demo area and demo search terms (Pepto-Bismol, ibuprofen, Advil, Tylenol).
 
 ## Phase 3 — Build location, map, and medication search
 
-- [ ] Implement current-location lookup with browser geolocation.
-- [ ] Add manual address entry and Nominatim geocoding as the fallback.
-- [ ] Port the `bigPharma/pharmacy_map.html` prototype to a client-only react-leaflet component with CARTO Voyager tiles and OSM/CARTO attribution.
-- [ ] Display pharmacy markers as clustered canvas circle markers, plus the selected user location.
-- [ ] Implement drug autocomplete with fuzzy matching and strength selection.
-- [ ] Add preference controls for walking, transit, and driving.
+- [x] Implement current-location lookup with browser geolocation.
+- [x] Add manual address or lat/long entry, geocoded against a bundled OSM address index (`/api/geocode`) instead of Nominatim.
+- [x] Build a Leaflet results map with OSM tiles and attribution that draws the selected pharmacy's route.
+- [x] Show pharmacy markers as pins colored by stock status, with tooltips and click-to-select.
+- [ ] Show the user's starting location on the map.
+- [x] Implement a medication combobox that matches every search term across name, strength, aka, and search terms, plus a strength/form/amount variant picker on results.
+- [x] Add preference controls for walking, transit, and driving.
 
 ## Phase 4 — Implement search, transportation, and ranking
 
-- [ ] Implement distance and radius calculations, including nearest transit-stop lookup.
-- [ ] Apply the preset walk, transit-stop, and driving comfort thresholds from `TECHSTACK.md`.
-- [ ] Estimate walking, driving, and heuristic transit ETAs.
-- [ ] Calculate medication plus transportation cost.
-- [ ] Rank in-stock pharmacy results by preferred-mode reachability, cost, and ETA.
-- [ ] Implement `POST /api/search` with the shared request/result types.
-- [ ] Connect the search UI to the API and show ranked pharmacy results on the map and in a list.
+- [x] Derive route distance and walking miles from OTP itinerary legs, plus a check that flags when the start point is at the pharmacy.
+- [ ] Apply the preset walk, transit-stop, and driving comfort thresholds from `TECHSTACK.md`. (Only the user's own walking limit is enforced today.)
+- [x] Get walk, transit, drive, and bike ETAs from OpenTripPlanner, falling back to static per-pharmacy estimates.
+- [x] Calculate medication plus transportation cost.
+- [x] Sort results by a user-chosen option (Best match, arrival, travel time, medication/travel/total cost, name, availability), keeping unavailable options last and hiding modes the user's preferences rule out.
+- [x] Implement `GET /api/pharmacies` (plus `/api/medications`, `/api/geocode`, `/api/catalog-summary`) with TypeScript types on the frontend mirroring the response.
+- [x] Connect the search UI to the API and show ranked pharmacy results on the map and in a list.
 
-## Phase 5 — Add the Gemini medication helper
+## Phase 5 — Gemini medication helper (chatbot)
 
-- [ ] Implement `POST /api/chat` with server-side Gemini access.
-- [ ] Constrain structured drug suggestions to IDs and names in the local drug dataset.
-- [ ] Build the chat UI and interactive suggestion buttons.
-- [ ] Selecting a suggestion should populate and run the corresponding medication search.
-- [ ] Show the non-medical-advice and simulated-stock disclaimers.
+Goal: a user describes a symptom (for example, "headache") and gets up to 3 OTC products from our catalog, each linking to the results page, which already ranks stores by their travel preferences. It is not a diagnosis tool. The model's output is locked down: it can only return product IDs from our catalog, and the server writes all text the user sees.
+
+### Stage 5.0 — Decisions
+
+- [ ] Decide on templated replies only (recommended) or a short model-written reason per product.
+- [ ] Decide whether to show the best store inline in the chat (price, store, ETA) or only link to the results page.
+- [ ] Decide where the chat lives: next to the home search ("Don't know the name?") or a floating button on every page.
+
+### Stage 5.1 — Key and config
+
+- [ ] Load `GEMINI_API_KEY` in `serve.py` (from the environment; add a small `.env` loader for local runs).
+- [ ] Add `GEMINI_API_KEY` to `/etc/hackru.env` on the VM so `hackru.service` picks it up.
+- [ ] Pin the Gemini Flash model ID in config and confirm the key works with one test call.
+- [ ] Make `/api/health` report whether the chat helper is configured, without exposing the key.
+
+### Stage 5.2 — Endpoint and guardrails
+
+- [ ] Implement `POST /api/chat` with server-side Gemini access (stdlib `urllib`, no SDK).
+- [ ] Validate input: JSON only, a capped body size, and one message of about 300 characters or less.
+- [ ] Rate-limit per client IP and add a timeout on the Gemini call.
+- [ ] Check messages before calling Gemini. Emergencies (chest pain, overdose, suicidal thoughts, trouble breathing) get a fixed 911/988 message. Prescription, pregnancy, and child-dosing questions get "ask a pharmacist." None of these reach the model.
+- [ ] Log requests (no keys, trimmed messages) for demo debugging.
+
+### Stage 5.3 — Constrained model output
+
+- [ ] Write a fixed system instruction: map symptoms to OTC catalog categories only, never diagnose or give dosing, and ignore instructions in the user's message.
+- [ ] Use `responseMimeType: application/json` with a `responseSchema`: `status` enum (`match` / `no_match` / `refuse`), `category` enum (the catalog categories), and `product_ids`, an enum of in-stock catalog IDs (max 3).
+- [ ] Constrain structured drug suggestions to IDs and names in the local drug dataset: on the server, drop unknown IDs and products with no confirmed stock, and return a fixed fallback for invalid JSON.
+- [ ] Build every reply the user sees from server templates, using product names and categories from our data (no free text from the model).
+- [ ] Set Gemini safety settings to the strictest level.
+
+### Stage 5.4 — Chat UI
+
+- [ ] Build the chat UI and interactive suggestion buttons (plain text rendering only, no HTML or markdown).
+- [ ] Selecting a suggestion should populate and run the corresponding medication search (`/results.html?medication=<id>`, using saved travel preferences).
+- [ ] Add a secondary link on each suggestion to the retailer product page (`product_source`).
+- [ ] Show the non-medical-advice and snapshot-data disclaimers (none exist in the UI yet).
+- [ ] Handle loading, error, rate-limited, and "helper unavailable" states.
+
+### Stage 5.5 — Abuse and quality tests
+
+- [ ] Script a test set: common symptoms (headache, allergies, heartburn, cough, can't sleep, diarrhea) map to sensible catalog products.
+- [ ] Prompt-injection tests ("ignore previous instructions", role-play, asking for the system prompt, non-catalog drugs, prescriptions) return only `no_match`/`refuse` or catalog IDs.
+- [ ] Emergency and off-topic inputs get the fixed responses.
+- [ ] Deploy behind the tunnel and check the chat on pharmreach.tech.
 
 ## Phase 6 — Integrate and validate the MVP
 
 - [ ] Exercise the end-to-end flow for location, medication/strength selection, and ranked results.
-- [ ] Check fallback behavior when geolocation is denied or address geocoding fails.
+- [ ] Check fallback behavior when geolocation is denied or address geocoding fails. (Handled in `LocationPanel.tsx`; not yet tested by hand.)
 - [ ] Verify transportation preferences affect reachability and ranking as expected.
-- [ ] Verify unavailable/out-of-stock inventory cannot appear as an in-stock match.
+- [x] Enforce in code that routes are unavailable unless the item is in stock, and that out-of-stock options rank last.
 - [ ] Verify the Gemini helper cannot suggest a drug absent from the local dataset.
 - [ ] Test the responsive layout and confirm the hosted HTTPS flow supports geolocation.
 - [ ] Fix integration issues and freeze MVP scope before taking on stretch work.
 
 ## Phase 7 — Prepare and ship the demo
 
-- [ ] Prepare the fixed New Brunswick demo location and rehearse 2–3 drug searches.
-- [ ] Configure the Proxmox VM, Node runtime, and process manager.
-- [ ] Configure Cloudflare Tunnel, the `.tech` domain, and HTTPS.
-- [ ] Add and verify the deployment script and production environment configuration.
+- [ ] Prepare the fixed Hoboken demo location (backend default origin) and rehearse 2–3 product searches.
+- [x] Configure the VM with the Python runtime and a systemd service (`hackru.service`) running `backend/otp/run_demo_with_otp.sh` with auto-restart.
+- [x] Configure Cloudflare Tunnel, the `.tech` domain (pharmreach.tech), and HTTPS.
+- [x] Add `infra/systemd/install.sh` and the `hackru.service.in` template with `/etc/hackru.env` overrides, documented in `frontend/SETUP.md`.
 - [ ] Take a Proxmox snapshot after setup and confirm the app remains runnable locally.
 - [ ] Record a demo video and complete the Devpost submission.
 

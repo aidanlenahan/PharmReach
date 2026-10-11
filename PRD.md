@@ -1,8 +1,8 @@
-# Pharmacy Searcher — Product Requirements
+# PharmReach — Product Requirements
 
 ## Overview
 
-Pharmacy Searcher helps someone find a nearby pharmacy that has their prescription in stock, then compare the easiest and cheapest ways to get there.
+PharmReach helps someone find a nearby pharmacy that has their prescription in stock, then compare the easiest and cheapest ways to get there.
 
 The HackRU 2026 MVP uses simulated inventory and heuristic transportation estimates. It is a demo and is not a source of medical advice or a guarantee of pharmacy stock.
 

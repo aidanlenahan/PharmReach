@@ -1,4 +1,4 @@
-# Tech Stack — Pharmacy Searcher (HackRU 2026)
+# Tech Stack — PharmReach (HackRU 2026)
 
 ## Overview
 All-TypeScript Next.js app, self-hosted on a Proxmox Linux VM, exposed via Cloudflare Tunnel on our `.tech` domain.
@@ -10,7 +10,7 @@ All-TypeScript Next.js app, self-hosted on a Proxmox Linux VM, exposed via Cloud
 | **Vanilla CSS** | Styling, mobile-responsive layout |
 | **Leaflet 1.9.4 + react-leaflet** | Map (client-only component; Leaflet can't render server-side). Matches the `bigPharma/` prototype. |
 | **leaflet.markercluster 1.5.3** (via `react-leaflet-cluster`) | Clusters thousands of pharmacy markers; render as canvas `circleMarker`s (`preferCanvas`) |
-| **CARTO Voyager raster tiles** | Basemap (`basemaps.cartocdn.com/rastertiles/voyager`), keyed via `NEXT_PUBLIC_CARTO_KEY`; OSM + CARTO attribution required. Key is browser-visible, so restrict it by domain. |
+| **CARTO Voyager raster tiles** | Basemap (`basemaps.cartocdn.com/rastertiles/voyager`), used only by the `bigPharma/` prototype map, keyed via `CARTO_KEY` in `bigPharma/.env`; OSM + CARTO attribution required. Key is browser-visible, so restrict it by domain. |
 | **Fuse.js** | Client-side fuzzy autocomplete over drug list |
 | **Browser Geolocation API** | Current location (requires HTTPS — provided by Cloudflare) |
 | **Nominatim** | Address → lat/lng fallback when location is denied |
@@ -80,7 +80,7 @@ Out-of-stock results filtered out or pushed to bottom. `totalCost = rxPrice + tr
 | Public access | Cloudflare Tunnel (`cloudflared` as systemd service) → `localhost:3000` |
 | Domain | `.tech` domain, nameservers on Cloudflare |
 | Deploy | `deploy.sh`: `git pull && npm ci && npm run build && pm2 restart pharm` |
-| Secrets | `.env` on VM only (`GEMINI_API_KEY`, `NEXT_PUBLIC_CARTO_KEY`); `.env.example` committed |
+| Secrets | `.env` on VM only (`GEMINI_API_KEY`; `CARTO_KEY` in `bigPharma/.env`); `.env.example` committed |
 | Team access | VS Code Live Share; fallback: per-person SSH keys, each person edits only their owned files |
 | Backup | Proxmox snapshot after setup; app runnable locally on a laptop; pre-recorded demo video |
 
