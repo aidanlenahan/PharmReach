@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = dirname(fileURLToPath(import.meta.url));
 
 // Serve /results etc. from results.html in dev and preview, the way GitHub Pages does.
-const cleanPages = new Set(['find-medicine', 'results', 'settings', 'privacy', 'onboarding', 'products']);
+const cleanPages = new Set(['find-medicine', 'results', 'settings', 'privacy', 'disclaimer', 'about', 'onboarding', 'products']);
 function cleanUrls(): Plugin {
   const rewrite = (middlewares: { use: (handler: (request: { url?: string }, response: unknown, next: () => void) => void) => void }) => {
     middlewares.use((request, _response, next) => {
@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => {
       outDir: resolve(rootDir, 'dist'),
       emptyOutDir: true,
       rollupOptions: {
-        input: Object.fromEntries(['index', 'find-medicine', 'results', 'settings', 'privacy', 'onboarding', 'products']
+        input: Object.fromEntries(['index', 'find-medicine', 'results', 'settings', 'privacy', 'disclaimer', 'about', 'onboarding', 'products']
           .map((name) => [name, resolve(rootDir, `${name}.html`)])),
       },
     },

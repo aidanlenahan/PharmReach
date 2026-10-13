@@ -9,6 +9,8 @@ export function AppFooter() {
   return <footer className="app-footer">
     <div><Brand /><p>Over-the-counter medicine. Closer to home.</p></div>
     <nav aria-label="Footer navigation">
+      <a href={href('/about')}>About</a>
+      <a href={href('/disclaimer')}>Disclaimer</a>
       <a href={href('/privacy')}>Privacy &amp; browser storage</a>
       <a href={href('/products')}>Products</a>
       <a href={href('/settings')}>Travel preferences</a>
