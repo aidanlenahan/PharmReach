@@ -22,7 +22,6 @@ const NOT_ACCIDENT = '(?! (shaving|cooking|baking|ironing|lifting|playing|workin
   + '|at (the )?(gym|work|practice|game|park)|in (the )?(kitchen|yard|garden|gym)|by accident|accidentally|doing|while|during|trying to (lift|move|open|carry|fix)'
   + '|if (i|he|she|they|you) (lift|lifts|run|runs|play|plays|work out|works out|exercise|exercises|train|trains|move|carry|ski|skate|jump|go running|go to the gym)))';
 // Medicine words for lethality questions ("can benadryl kill you", "how much tylenol is fatal").
-const MED = '(pills?|pils|meds?|medicines?|medications?|drugs?|tablets?|capsules?|gummies|otc|over the counter|tylenol|advil|aspirin|ibuprofen|acetaminophen|motrin|aleve|naproxen|benadryl|diphenhydramine|melatonin|nyquil|zzzquil|unisom|sleeping pills?|sleep aids?|xanax|insulin|oxy\\w*|percocet|vicodin|antidepressants?|dose)';
 // Chest soreness blamed on a coughing fit is not a cardiac warning ("pain in my chest from coughing too much").
 // Plain "chest pain and coughing" / "my chest hurts when i cough" still screens (pneumonia, clot).
 const NOT_COUGH = '^(?!.*\\b(from|after) (all (the|this|my) |so much |too much |the )?(cough\\w*|coff\\w*)|.*\\bcough\\w* (so|too) (much|hard)\\b)';
@@ -33,19 +32,91 @@ const NOT_VITAMIN_OD = '^(?!.*\\bover ?dos\\w* on (vitamins?|fiber|water|gummy v
 // Gate for vague distress ("i can't take it anymore"): only counts when no symptom is mentioned ("i can't take this headache anymore").
 const NO_SYMPTOM = '^(?!.*\\b(pain|pains|ache|aches|aching|headache|migraine|hurts?|hurting|sore|itch\\w*|cough\\w*|sneez\\w*|congest\\w*|stuffy|runny|cramps?|heartburn|nause\\w*|diarrh\\w*|constipat\\w*|allerg\\w*|rash|fever|cold|flu|insomnia|sleep|tooth|toothache|back|stomach|throat|nose|head)\\b)';
 
+
+// ---------------------------------------------------------------------------------------------
+// Concept word lists for the mental-health, overdose and harm-to-others rules.
+// The rules combine these lists (wish + death, means + intent, question + medicine + outcome...)
+// instead of listing whole sentences, so filler words, slang and word order matter less.
+// ---------------------------------------------------------------------------------------------
+const raw = String.raw;
+/** All of these concepts appear in one sentence (no . ! ? ; between them), in any order, and none of the `none` ones do. */
+function inSentence(all: string[], none: string[] = []) {
+  return new RegExp(`(?:^|[.!?;])\\s*${none.map((c) => `(?![^.!?;]*\\b(?:${c})(?![a-z]))`).join('')}${all.map((c) => `(?=[^.!?;]*\\b(?:${c})(?![a-z]))`).join('')}`);
+}
+/** All of these concepts appear somewhere in the message, and none of the `none` ones do. */
+function inMessage(all: string[], none: string[] = []) {
+  return new RegExp(`^${none.map((c) => `(?!.*\\b(?:${c})(?![a-z]))`).join('')}${all.map((c) => `(?=.*\\b(?:${c})(?![a-z]))`).join('')}`);
+}
+
+// Word gap inside the core phrases: spaces, or "i_want_to_die" / "i.want.to.die".
+const S = raw`[\s_.*~-]+`;
+// "to" and its slips: "want 2 die", "want ti die", "want yo die".
+const TO = raw`(?:to|2|ta|tp|ti|yo|t0|too|tu|t)`;
+// Filler between a wish and the act: "i honestly just really want to die", "lowkey wanna die".
+const FILL = raw`(?:(?:just|really|so|so bad|badly|honestly|literally|actually|seriously|lowkey|highkey|lowk|kinda|kind of|fr|truly|genuinely|simply|already|still|even|sometimes|always|deadass|rn|right now|tonight|today|now|please|pls|fucking|fuckin|freaking|damn|finally|again|more than anything|i|i could|i would|i'?d|could|would|to just|for once|go)${S})*`;
+// A negation right before the wish: "i don't want to die from this flu", "never wanted to hurt myself".
+const NOT_BEFORE = raw`(?<!\b(?:don'?t|dont|do not|didn'?t|didnt|never|not|won'?t|wouldn'?t|doesn'?t|ion)(?:\s(?:really|even|ever|actually))?\s)`;
+// Self reference: "myself" plus typos and number slips ("my slef", "nyself", "mysef"), and third person.
+const MYSELF = raw`(?:[mn]y ?s(?:el|le|e)l?f|myslf|meself)`;
+const SELF2 = raw`(?:${MYSELF}|him ?self|her ?self|them ?sel(?:f|ves)|themself)`;
+// Someone else: pronouns, "people", and people in the person's life (not "my headache", "my back").
+const PERSON = raw`(?:ex|ex[- ]?(?:wife|husband|boyfriend|girlfriend|bf|gf)|wife|husband|partner|spouse|fianc[eé]e?|boyfriend|girlfriend|bf|gf|bae|baby (?:daddy|mama)|mom|mum|mother|dad|father|parents?|stepdad|stepmom|stepfather|stepmother|step ?(?:dad|mom)|sister|brother|siblings?|cousin|aunt|uncle|grandma|grandpa|grandmother|grandfather|kids?|son|daughter|child|children|baby|babies|family|roommate|roomie|neighbou?r|landlord|boss|manager|supervisor|coworkers?|co-workers?|teacher|professor|classmates?|students?|friend|best ?friend|bestie|bully|bullies|ex's (?:new )?\w+)`;
+const OTHERS = raw`(?:him|her|them|someone|somebody|some ?one|people|everyone|everybody|others|other people|a (?:person|kid|child|baby|girl|guy|man|woman)|this (?:guy|girl|person|man|woman|dude|kid)|my ${PERSON}|${PERSON})`;
+
+// Death as something wished for. DIE_STATE: being dead; DEATH_ACT: ending one's life.
+const DIE = raw`(?:die|dei|diw|fie|d1e|dye|di)`;
+const DIE_STATE = raw`(?:${DIE}|b(?:e)? (?:dead|ded)|be gone(?! (?:from|for|to|on|at|by|this|the|a|all|in|over|after|out|with))|not (?:be )?(?:alive|exist(?:ing)?)|not be (?:here|around)(?= ?(?:[.!?,]|$| any ?more| no more| anymore))|stop (?:living|existing|being alive)|cease to exist|disappear forever|leave this (?:world|earth|life)|sleep forever|go to sleep forever|(?:never|not) wake up(?! (?:early|late|groggy|tired|at|in|with|for|on|until|till|during|feeling|so|sick|congested|stuffy|coughing)))`;
+const DEATH_ACT = raw`(?:end (?:it|it all|things|everything|my life|my own life|this life|my ?self)(?! (?:with|between|for (?:him|her|them)|off))|end this(?= ?(?:[.!?,]|$))|(?:kill|k1ll|kil|klll|unalive) ${MYSELF}|unalive|off ${MYSELF}|take my (?:own )?life|ctb|kms|commit(?: suicide)?(?= ?(?:[.!?,]|$| (?:tonight|today|soon|now|tomorrow|this weekend|lol|fr|ngl|tbh|already|again|bc|because|so|and|but)))|sewer ?slide)`;
+// "dye my hair": the act is a color, not death. "i'd rather die than sit through this migraine" is a figure of speech.
+const DIE_GUARD = raw`(?! (?:my|his|her|the|their|our|your|some|it|them|a|this)? ?(?:hair|beard|roots|eyebrows?|brows|clothes|shirt|shoes|jeans|tips|bangs|lashes|nails|fabric|eggs|wool|yarn|dress|pants|hoodie|blue|red|black|pink|purple|green|blonde|brown|white|orange|yellow|silver|platinum)\b)(?! (?:for(?! (?:weeks|days|months|years|hours|ages|so long|a (?:while|week|month|year|long time)|the (?:past|last)|a few))|of|from|laughing|trying)\b)(?! than [^.!?]*\b(?:migraines?|headaches?|cramps?|hangovers?|cold|flu|cough|heartburn|period|tests?|exams?|meetings?|class|work|dentist|homework)\b)`;
+// Wishes and intent that lead into death or self-harm.
+const WISH = raw`(?:want(?:ed|s|ing)?|wanna|wana|wanta|wan|wnt|wnat|wamt|wabt|wish(?:ed|es|ing)?|ready|plan(?:s|ned|ning)?|tryna|trying|tried|decided|made up my mind|deserve[sd]?|i (?:just |really )?(?:have|need|got|gotta|hafta)|need|needs|should|rather|like|love|hope|hoping|thinking (?:about|of)|thought (?:about|of)|thoughts (?:of|about)|urges?|tempted|considering|contemplating|fantasi[sz]ing about|longing|craving|might as well|may as well)`;
+// Near future, used for acts ("bout to end it", "gonna kill nyself"), not for "die" ("my phone is gonna die").
+const SOON = raw`(?:going|goin|gonna|gon|gunna|finna|fixing|bout|about|i'?ll|ill|i will|will|might|may|could|i'?m)`;
+const SOON_DIE_GUARD = raw`(?! (?:of|from) (?:boredom|embarrass\w*|laugh\w*|cringe|hunger|thirst|curiosity|excitement|cuteness)| laughing| if i don'?t (?:get|have|eat))`;
+// Non-person things that "die": phones, batteries, plants.
+const THING_DIES = raw`(?<!\b(?:phone|battery|laptop|computer|car|plants?|tv|charger|headphones|airpods|ipad|tablet|controller|fish|flowers?|it|this|that|vape|pen|mouse|keyboard|tamagotchi|character|game)\b.{0,15})`;
+
+// Self-harm verbs ("hurt", "cut") and their -ing forms; body parts used in self-harm talk.
+const SH_BODY = raw`(?:arms?|wrists?|legs?|thighs?|skin|stomach|belly|hips?|ankles?|body|forearms?|veins?|chest)`;
+// Tools of self-harm, and words that make an injury an everyday accident.
+const SH_TOOL = raw`(?:lighters?|cigarettes?|blades?|razors?|compass|sharpener|scissors|glass|shards?|box ?cutter|knife|knives|hot (?:spoon|knife|metal))`;
+const ACCIDENT = raw`(?:cook\w*|kitchen|shav\w*|accident\w*|chopp\w*|dinner|food|vegetables|onions?|slipped|oven|stove|pan|grill|iron(?:ing)?|curling|straightener|work|job|while|razor burn|ingrown|bumps?|nick(?:ed)?|bandage)`;
+// Habit or intent words that make a cut or burn deliberate.
+const SH_INTENT = raw`(?:keep|keeps|kept|been|started|again|on purpose|intentionally|deliberately|every (?:night|day)|habit|to feel|to cope|so i can|want|wanna|urges?|relaps\w*|can'?t stop)`;
+
+// Medicines and other means at hand.
+const MED = raw`(?:pills?|pils|meds?|medicines?|medications?|drugs?|tablets?|capsules?|caps|tabs|gummies|otc|over the counter|tylenol|advil|aspirin|ibuprofen|acetaminophen|paracetamol|motrin|aleve|naproxen|excedrin|benadryl|diphenhydramine|melatonin|nyquil|dayquil|zzzquil|unisom|robitussin|delsym|mucinex|dramamine|zyrtec|claritin|allegra|sudafed|cough (?:syrup|medicine)|syrup|sleeping pills?|sleep aids?|painkillers?|pain ?killers?|antihistamines?|xanax|xans|xannies|benzos?|klonopin|valium|ativan|ambien|seroquel|trazodone|gabapentin|tramadol|hydrocodone|codeine|morphine|lithium|prozac|zoloft|lexapro|adderall|insulin|oxy\w*|percocet|percs?|vicodin|antidepressants?|opioids?|prescription|script|dose)`;
+const MEANS = raw`(?:${MED}|bottles?|rope|noose|gun|pistol|revolver|shotgun|rifle|knife|knives|razors?|blades?)`;
+// Lethality outcomes in a question about a medicine.
+const LETHAL = raw`(?:(?:to|and|make (?:me|you|u|someone|a person)|would i|will i|could i|can i|you|u|someone|a person) die|death|kill (?:me|${MYSELF}|you|u|someone|somebody|a person|people|him|her|an adult)|end (?:it|it all|my life|things)|fatal|lethal|deadly|(?:to|and|would|will) (?:od|o\.d|overdose)|liver failure|(?:kidney|organ|heart) failure|shut down (?:my|your|the) (?:liver|kidneys|organs|heart)|destroy (?:my|your) liver|to (?:cause|get|give (?:me|myself)) liver damage|(?:hurt|harm|damage|injure) (?:me|${MYSELF}|someone|him|her) (?:badly|bad|seriously|really bad|permanently|for real)|stop (?:my|your|his|her|the|a) heart|(?:not|never) wake(?: up)?(?![a-z])(?! (?:up )?(?:groggy|tired|early|late|at|in the|during|every|feeling|with|so|drowsy|hungover|foggy))|knock (?:${OTHERS}) out|knock out (?:${OTHERS})|put (?:${OTHERS}) (?:to sleep|under) (?:for good|forever|permanently))`;
+// The question side: "how many", "what dose", "enough", "which".
+const ASK = raw`(?:how (?:much|many)|what (?:dose|amount|number|quantity|(?:is|'?s) (?:a|the) (?:lethal|fatal|deadly|dose|amount))|which|enough|amount of|number of)`;
+// "Safely": the question is about avoiding harm, which a pharmacist answers.
+const SAFE_ASK = raw`(?:without|avoid\w*|so (?:i|it) (?:don'?t|doesn'?t|won'?t)|to prevent|prevent\w*|safe|safely|not to|before it (?:causes|gets)|risk of|protect)`;
+
 export const EMERGENCY_PATTERNS = [
   // --- General: 911, ambulance, "emergency", dying ---
-  /\b(call(ing|ed)?|dial(ing|ed)?|phone|ring) (9-?1-?1|nine one one)\b/, /\b911\b/,
+  // Calling or asking about 911 ("should i call 911", "is this a 911 situation"), not "i'm a 911 dispatcher" or "911 lyrics".
+  /\b(call(ing|ed|s)?|dial(ing|ed|s)?|phone|ring|text(ing)?|contact|need|get|got|via|hit up) (9-?1-?1|nine one one)\b/,
+  /\b(9-?1-?1|nine one one)(?= ?([.!?,]|$| (now|asap|please|pls|right now|situation|emergency|call|worthy|level|or (the )?(er|hospital))\b))/,
+  /^(9-?1-?1|nine one one)\b(?! (dispatch\w*|operator|call ?center|lyrics|song|porsche|truck|memorial|attacks?|day|anniversary|truther|show|episode|series)\b)/,
   /\b(an?|the|call an?|need an?|get an?|send an?) ?am?bul[ae]n[cs]e?s?\b/, /\bambulance\b/, /\bambulence\b/, /\bambulanse\b/, /\bamblance\b/,
-  /\b(this is|it'?s|its|having|i'?m having|we have|there'?s|medical) an? (medical )?emergen[cs]y\b/, /\bmedical emergen[cs]y\b/, /\bemerg[ae]n[cs]y\b(?! (contracept\w*|pill|kit|supplies|supply|fund|preparedness|plan|brake|exit|alert|food|blanket|use only))/, /\bemergancy\b/, /\bemergeny\b/,
+  /\b(this is|it'?s|its|having|i'?m having|we have|there'?s|medical) an? (medical )?emergen[cs]y\b/, /\bmedical emergen[cs]y\b(?!( [a-z]+){0,2} (kits?|supplies|bags?|plans?|fund|bracelet|id|card))/, /(?<!\bmedical )\bemerg[ae]n[cs]y\b(?!( [a-z]+){0,2} (contracept\w*|pills?|kits?|supplies|supply|funds?|preparedness|plans?|brake|exits?|alerts?|food|blankets?|use only|contacts?|numbers?|savings|stash|bags?|box|packs?|lights?|radio|water|candles|vet|dentist|contraception|broadcast|services? (number|dispatcher)|room (bill|visit cost|wait)))/, /\bemergancy\b/, /\bemergeny\b/,
   /\bemergen[cs]y room\b/, /\bgo(ing)? to (the )?(er|e\.r\.|emergency)\b/, /\b(need|get) (to )?(the )?(er|emergency room)\b/,
   /\b(i'?m|im|i am|i think i'?m|i feel like i'?m|he'?s|he is|she'?s|she is|someone is|my (mom|dad|mother|father|wife|husband|son|daughter|friend|brother|sister|grandma|grandpa|baby|partner) is) (dying|dieing)\b(?! (of|from|to|for|laughing|inside|with laughter|lol|lmao|haha|xd|here|over here|with|my (hair|clothes|shirt|beard|eyebrows|roots))\b)/,
-  /\b(going to|gonna|about to|i will|i'?ll|i might|i'?m going to) die\b(?! (of|from) (boredom|embarrass|laugh|cringe|hunger|thirst|curiosity|excitement)| laughing)/,
   /^(please |pls |someone |somebody )?help( me)?( please| pls| now)?( ?!+)?$/, /^(sos|mayday)!*$/,
   /\bnear death\b/, /\blife or death\b/, /\blife[- ]threatening\b/,
   /\b(no|can'?t find (a|his|her)|without a) pulse\b/, /\bheart (has )?stopped\b/, /\b(doing|start|give|giving|need) cpr\b/, /\bcpr\b/, /\bdefibrillat/, /\b(an? |the )?aed\b/,
 
   // --- Heart attack / cardiac ---
+  // Chest discomfort + a cardiac sign anywhere in the sentence: "tight chest and sweating", "heavy feeling in my chest and my jaw hurts".
+  inSentence([raw`chest`, raw`(?:pain|pains|hurts?|hurting|tight|tightness|heavy|heaviness|pressure|squeez\w*|crush\w*|clench\w*|ache|aching|discomfort|stabbing)`,
+    raw`(?:sweat\w*|clammy|cold sweat|arm|jaw|nause\w*|dizz\w*|light ?headed|faint\w*|short(?:ness)? of breath|breathless|can'?t breathe|out of breath|fell|collaps\w*|pass(?:ed)? out)`],
+    [raw`(?:mucus|phlegm|congest\w*|cough\w*|coff\w*|cold|flu|bronchitis|heartburn|reflux|after (?:i )?(?:eat|ate|eating)|workout|work out|lifting|bench)`]),
+  // Squeezed or clutched: "my chest feels like it's being squeezed", "he grabbed his chest and fell".
+  /\bchest\b[^.!?]{0,30}\b(being (squeezed|crushed|compressed|sat on|stepped on)|in a (vice|vise)|(squeezed|crushed) (tight|hard))\b/,
+  /\b(clutch|clutching|clutched|clutches|grab|grabbing|grabbed|grabs|clasping|clasped|clenching|clenched) (at )?(my|his|her|their) chest\b(?![^.!?]*\b(cough\w*|laugh\w*|joke|lol|lmao|haha)\b)/,
   new RegExp(`${NOT_COUGH}.*chest (pain|pressure|tightness|hurts?)`), /heart attack/,
   new RegExp(`${NOT_COUGH}.*\\b(chest|chset|chets|chesst|cheast|chst|ches) (pain|pian|pane|pains|pian|pai|hurts?|hurting|pressure|presure|pressur|tightness|tighness|tight|squeez\\w*|heaviness|heavy|crushing|discomfort|ache|aching)\\b`),
   new RegExp(`${NOT_COUGH}.*\\b(pain|pressure|tightness|squeezing|crushing|heaviness|weight) (in|on|across) (my |his |her |the )?(chest|chset|chets)\\b`),
@@ -65,6 +136,9 @@ export const EMERGENCY_PATTERNS = [
   /\b(jaw|arm) pain (and|with) (chest|sweating|shortness)/,
 
   // --- Stroke / FAST signs ---
+  // Half the body: "i lost feeling in half my body", "half my body went numb".
+  /\b(lost|losing|loss of|no|can'?t feel|cant feel)( any| all)? (feeling|sensation|movement|control|strength|feel)( in| of| on| down)( the)? (half|one side|left side|right side|(my|his|her|their) (left|right) side)\b/,
+  /\b(half|one side|left side|right side|(left|right) half) (of )?(my|his|her|their|the) (body|face)\b[^.!?]{0,25}\b(numb|weak|dead|paraly[sz]ed|limp|tingl\w*|droop\w*|went|gone|heavy|can'?t move|won'?t move|stopped working)\b/,
   /stroke(?! of (\w+ )?(luck|genius|midnight|the pen|fate|brilliance|inspiration|fortune))/, /\bstroak/, /\bstrok\b/, /\bstrock\b/, /\bmini[- ]?stroke\b/, /\btia\b/,
   /\b(face|mouth|smile|lip|eyelid|side of (my|his|her|their) face) (is |are |has |looks |seems |started |starts )?(drooping|droop|droops|droopy|drooped|sagging|lopsided|uneven|crooked|fallen)\b/,
   /\bdroop(ing|y)? (face|mouth|smile)\b/,
@@ -88,13 +162,17 @@ export const EMERGENCY_PATTERNS = [
   /^(?=.*\b(sudden|suddenly|all of a sudden|out of nowhere)\b).*\b(blurry vision|blurred vision|double vision|vision (suddenly )?(went|goes|is going|turned|is|got) (black|dark|white|blurry|blurred|double)|(can'?t|cannot) (walk|stand) (straight|up|properly)|(can'?t|cannot) (move|feel|lift|use) (my|his|her) (arm|leg|hand|face)|lost (my )?balance|can'?t see)\b/,
 
   // --- Breathing emergencies ---
+  // Air not getting in: "can barely get air in", "struggling to pull a breath" (not through a stuffy nose).
+  /\b(can'?t|cannot|cant|barely|hardly|struggling to|struggle to|unable to|not able to|can'?t seem to) (get|getting|pull|pulling|draw|drawing|suck|sucking) (any |enough |in |a )?(air|breath|breaths|oxygen)( in)?\b(?![^.!?]*\b(nose|nostrils?|nasal|stuffy|stuffed|congested|congestion|sinus)\b)/,
+  // Gasping: "he's gasping and can't talk" (not "i gasped when i saw the bill").
+  /\b(i'?m|im|he'?s|she'?s|they'?re|is|are|keeps?|started|been|was|were|baby|he|she|i|and|now|still) (\w+ )?gasp(ing|s|ed)\b(?! (in|at|with|when|because|over|out loud)\b)(?![^.!?]*\b(lol|lmao|haha|price|bill|surprise|shock|news)\b)/,
   /\b(can'?t|cant|cnt|cnat|cna'?t|catn|cnat|cannot|can not|couldn'?t|unable to|trouble|difficulty|difficult to|struggling to|struggle to|hard to|hard time|having a hard time|having trouble|having difficulty|barely|not able to) (breath|breathe|brethe|breth|breate|breathe|breahte|brathe|breathing|breating|brething|breahting|breethe|breeth)\b(?<!\b(nose|nostrils?|nasal|stuffy|stuffed|congested|congestion|sinus(es)?)\b.*)(?![^.!?]*\b(nose|nostrils?|nasal|stuffy|stuffed|congested|congestion|sinus|blocked up|through (my|the|it|either)))/,
   /\b(can'?t|cant|cannot) (get|catch) (my |enough )?(breath|breth|air)\b/, /\b(can'?t|cannot|not) get(ting)? (any |enough )?air\b/,
   // Not "a bit short of breath after running up stairs" / "when i'm congested" / "from allergies".
   /(?<!\b(a (bit|little|tad)|slight(ly)?|little|mild(ly)?|bit) )\bshort(ness|nes)? (of|o) (breath|breth|breathe)\b(?! (after|from|when|while|during|if) (i |i'?m |im |i get |going |walking |running |climbing )?(running|run|ran|jogging|exercis\w*|working out|work out|climbing|stairs|walking up|up (the )?stairs|the gym|congest\w*|allerg\w*|a cold|my cold|stuffy|sick|hiking|a workout))/, /\bsob and chest\b/,
   /not breathing/, /\b(stopped|stop|isn'?t|is not|aren'?t|wasn'?t|not|no longer) (breathing|breathin|breating|brething)\b/,
   /\bgasp(ing|s|ed)? (for )?(air|breath|breth)\b/, /\bstruggling (for|to get) (air|breath)\b/, /\bsuffocat/, /\bsufocat/, /\bsmother(ing|ed)\b/,
-  /\b(i'?m|im|i am|he'?s|she'?s|he is|she is|they'?re|baby is|someone is|is) chok(ing|in)\b(?! (up|hazard))/, /\bchok(ing|in) on\b/, /\bchoked on\b.{0,40}\b((can'?t|cannot|not|isn'?t) (breathe|breath|breathing|talk|speak|cough)|still stuck|turning blue)/, /^(help |help! )?(i'?m |he'?s |she'?s |baby )?chok(ing|in)\b(?! (up|hazard))/, /\bchocking\b(?! hazard)/, /\bheimlich\b/,
+  /\b(i'?m|im|i am|he'?s|she'?s|he is|she is|they'?re|baby is|someone is|is) chok(ing|in)\b(?! (up|hazard))(?![^.!?]*\b(mucus|phlegm|snot|post ?nasal|drainage|my (own )?spit|saliva|cough\w*|laugh\w*|tears|cold|flu|allerg\w*|sinus\w*)\b)/, /\bchok(ing|in) on\b(?![^.!?]*\b(mucus|phlegm|snot|post ?nasal|drainage|my (own )?spit|saliva|cough\w*|laugh\w*|tears|cold|flu|allerg\w*|sinus\w*)\b)/, /\bchoked on\b.{0,40}\b((can'?t|cannot|not|isn'?t) (breathe|breath|breathing|talk|speak|cough)|still stuck|turning blue)/, /^(help |help! )?(i'?m |he'?s |she'?s |baby )?chok(ing|in)\b(?! (up|hazard))(?![^.!?]*\b(mucus|phlegm|snot|post ?nasal|drainage|my (own )?spit|saliva|cough\w*|laugh\w*|tears|cold|flu|allerg\w*|sinus\w*)\b)/, /\bchocking\b(?! hazard)(?![^.!?]*\b(mucus|phlegm|snot|post ?nasal|drainage|my (own )?spit|saliva|cough\w*|laugh\w*|tears|cold|flu|allerg\w*|sinus\w*)\b)/, /\bheimlich\b/,
   /\b(lips?|face|skin|fingers?|fingernails|nails) (are |is |turning |turned |went |going |look |looks )+(blue|bluish|purple|gray|grey)\b/, /\blips (are |look |turning |turned )?(blue|bluish|purple)\b/, /\bturning (blue|purple)\b/, /\bblue lips\b/, /\bcyanos/,
   /\basthma attack\b/, /\basthma atta?ck?\b/, /\basma attack\b/, /\bazma attack\b/, /\bsevere (asthma|asma|wheez)/, /\bwheez\w* (really|so|very|super) (bad|badly|hard)\b/, /\bhyperventilat/, /\bbreathing (really |so |very )?fast\b.{0,30}\bcan'?t (slow|stop|calm)/,
   /\binhaler (is |isn'?t|is not|not|doesn'?t|does not|didn'?t|did not|won'?t)( working| helping| work| help)\b/, /\b(rescue|albuterol) inhaler (not|isn'?t|doesn'?t)/,
@@ -115,6 +193,14 @@ export const EMERGENCY_PATTERNS = [
   /\bhives\b.{0,40}\b(trouble breath\w*|can'?t breathe|difficulty breath\w*|short(ness)? of breath|wheez\w*|dizzy|faint\w*|(face|lips?|tongue|throat) (is |are )?swell\w*|swelling of (my |the )?(face|lips?|tongue|throat))/,
 
   // --- Overdose / poisoning ---
+  // Took a large number: "i took 8 extra strength tylenol", "accidentally took 12 advil" (not "took 800 mg", "6 advil today").
+  new RegExp(`\\b(?:took|tooken|taken|tok|swallowed|ate|eaten|popped|downed|drank|drunk|chugged|had)(?: like| about| around| maybe| almost| over| at least)? (?:[6-9]|[1-9]\\d|\\d{3,}|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|a hundred)(?![\\d.,])(?! ?(?:mg|milligrams?|ml|mls|units?|mcg|hours?|hrs?|minutes?|mins?|days?|am|pm|o'?clock|times? a)\\b)(?: [a-z-]+){0,3}? ${MED}(?![a-z])(?! (?:today|over|throughout|in (?:a|one|the) (?:day|week)|a day|per day|this week|spread|across))`),
+  // Took a large amount: "took a bunch of xanax", "drank a bottle of cough syrup", "she took her whole prescription".
+  new RegExp(`\\b(?:took|tooken|taken|tok|swallowed|ate|eaten|popped|downed|drank|drunk|chugged|had|did)(?: like| maybe| almost| just)? (?:a bunch|bunch|a lot|alot|lots|a ton|tons|a handful|handfuls|a fistful|way too many|too many|to many|way too much|too much|(?:a|the|an|my|his|her|their) (?:whole|entire|full)|every one|every last one|the rest|half (?:a|the) (?:bottle|box|pack)|a (?:full |whole |big )?(?:bottle|box|pack|sleeve|jar|blister pack)|(?:two|three|2|3|several|a few) (?:bottles|boxes|packs))(?: of)?(?: (?:my|his|her|their|the|a|those|these|our))?(?: [a-z-]+){0,2}? (?:${MED}|bottle|pack|box|supply|stash|refill)(?![a-z])(?! (?:at the same time|together|in the morning|at night|at bedtime|with (?:food|water|breakfast|dinner|me)|before|after|every|each|daily|on time|as prescribed|this (?:morning|week|month)|today|over))`),
+  // Medicine taken on purpose or to die: "he took all his meds at once on purpose".
+  inSentence([raw`(?:took|taken|swallowed|popped|downed|ate|drank|overdosed)`, MED, raw`(?:on purpose|intentionally|deliberately|to (?:die|end it|not wake up|hurt (?:my|him|her|them)sel(?:f|ves)))`]),
+  // Took something and now won't wake up or respond.
+  inMessage([raw`(?:took|taken|swallowed|popped|ate|drank|had|overdid|downed)`, raw`(?:won'?t|wont|will not|can'?t|cant|isn'?t|isnt|is not|not|doesn'?t|aren'?t) (?:wake|waking|be woken|respond\w*)(?! (?:up )?(?:early|in the morning|on time|for|until|till|without|easily|at|to (?:my|the) alarm))`]),
   // "can i overdose on vitamin c" is a supplement question, not an overdose.
   new RegExp(`${NOT_VITAMIN_OD}.*(over ?dos|\\bover ?(dose|does|doce|doze|dosed|dosing|dosage on|dossed|dosse)\\b|\\bovr ?dos|\\bovedos|\\bovredos|\\boverdoes\\b)`),
   /\bod('?ed|'d|ing)?\b/, /\bodd? on (pills|pils|meds|my meds|tylenol|advil|benadryl|melatonin|sleeping pills|xanax|heroin|fentanyl|drugs)\b/, /took (too many|too much|a whole bottle|the whole bottle)/, /\bo\.d\.?\b/,
@@ -134,44 +220,137 @@ export const EMERGENCY_PATTERNS = [
   /\bpoison control\b/, /\bpoisen(ed|ing)\b(?! ivy)/, /\bpoisn(ed|ing)\b/, /\bposion(ed|ing)\b/, /\bpoisoining\b/,
   /\bcarbon mon[oa]xide\b/, /\bcarbon monoxid/, /\bco (detector|alarm|poisoning)\b/, /\bgas leak\b/, /\bsmell(s|ing)? gas\b/, /\binhaled (fumes|smoke|chemicals?|gas|bleach)\b/, /\bsmoke inhalation\b/, /\bmixed bleach (and|with) ammonia\b/,
 
-  // --- Suicide / self-harm / wanting to die ---
-  /suicid/, /kill myself/, /end (my life|it all)/, /want to die/, /self[- ]?harm/, /cut(ting)? myself\b(?! (shaving|while|on (a |the |my |some )?(\w+ )?(paper|knife|glass|can|razor|edge|corner)|on (a|the|my)|with (a|the) (knife|razor|paper)|cooking|by accident|accidentally))/,
-  /\bsu(i|ic|ici|e|a|ia)?[cs]{1,2}i?d(e|es|al|ally|ing)\b/, /\bsuicde/, /\bsuacide/, /\bsewer ?s(l)?ide\b/, /\bs ?u ?[i1!] ?c ?[i1!] ?d ?e\b/, /\bsu[i1]c[i1]de\b/,
-  /(?<!s)\bk ?[i1!*|] ?[l1|] ?[l1|]+ ?(in|ing)? ?my ?s(el|le)f/, /(?<![a-z])kill ?my ?s(el|le)f/, /kil+(ing)?my ?self/, /\bsuicid?al\b/, /\bsuisidal\b/,
-  /\bkill(ing|ed)? ?(my ?self|myslef|mysef|mysel|my sef)\b/, /\bkill me now\b(?![^.!?]*\b(hangover|cramps?|headaches?|migraines?|cold|flu|cough\w*|heartburn|period|allerg\w*|sinus\w*|stomach ?ache|toothache|sore throat|congestion|hay fever)\b)/, /\bkil+ (my ?self|myslef)\b/, /\bkms\b/, /\bkys\b/, /\bunaliv/, /\bun-alive/, /\bself[- ]?(harm|harming|harmed|hurt|injur\w*|mutilat\w*)/, /\bselfharm/,
-  /\b(take|taking|end|ending|ended) (my|his|her) (own )?(life|lif)\b/, /\bend(ing)? it all\b/,
-  /\b(want(ed)?|wanna|going|gonna|ready|about|plan(ning)?|planned|decided|thinking (about|of)|think about|deserve) (to )?(just )?(end|ending) (it|things|everything|my life|this|it now)\b/,
-  /\b(want|wanna|wish i could|wish to|ready to|i'?d rather|i would rather|rather|deserve to|i should|need to|might as well|may as well|might just as well) (to )?(just )?(die|be dead|go to sleep forever|sleep forever|not wake up|never wake up|disappear forever|stop existing|not exist|not be alive)\b(?! than [^.!?]*\b(migraines?|headaches?|cramps?|hangovers?|cold|flu|cough|heartburn|period|tests?|exams?|meetings?|class|work|dentist|homework)\b)/,
-  /\bwant(ing|s)? to di(e|ed)\b/, /\bwant 2 die\b/, /\bwanna die\b/,
-  // Typos and spacing: "i wan to die", "i want tp die", "i want to dei", "i want todie", "wanttodie", "i.want.to.die", "i wanna dye".
-  /(want|wanna|wan|wnt|wamt|wnat|wan'?t)\W{0,3}(to|tp|t0|2|ta)?\W{0,3}(die|dei|d ?i ?e|di)\b(?! for)/, /\b(want|wanna|wan|wnt) ?(to |2 )?dye(?= ?([.!?,]|$))/,
+  // =============================================================================================
+  // --- Suicide and self-harm: concept rules (see the concept lists at the top) ---
+  // =============================================================================================
+  // Wish or intent + death: "i honestly just want to die", "ready to stop living", "i have to die", "wanted to die all day",
+  // "thinking about ctb", "i want 2 b dead", "i_want_to_die". Not after a negation ("i don't want to die from this flu").
+  new RegExp(`${NOT_BEFORE}\\b${WISH}${S}${FILL}(?:${TO}${S})?${FILL}(?:${DIE_STATE}|${DEATH_ACT})(?![a-z])${DIE_GUARD}`),
+  // Near future + an act: "bout to end it", "finna end it all", "gonna kill nyself", "im going to commit tonight".
+  new RegExp(`${NOT_BEFORE}\\b${SOON}${S}${FILL}(?:${TO}${S})?${FILL}${DEATH_ACT}(?![a-z])`),
+  // Near future + die, with a person as the subject: "i'm going to die", "i think i'm about to die" (not "my phone is about to die").
+  new RegExp(`${THING_DIES}(?:^|\\b(?:i|i'?m|im|i am|we'?re|he'?s|she'?s|they'?re|he|she|they|feel like|think|literally|actually|really|just))${S}${FILL}(?:going${S}to|gonna|gon|goin${S}to|about${S}to|bout${S}to|finna|will|'ll|might)${S}${FILL}die(?![a-z])${SOON_DIE_GUARD}`),
+  new RegExp(`${THING_DIES}\\b(?:i'?ll|ill|i will|i might|i may)${S}${FILL}die(?![a-z])${SOON_DIE_GUARD}`),
+  /^(going to|gonna|about to) die\b/,
+  // Typed run together or with symbols: "wanttodie", "i.want.to.die", "i wanna dye".
+  new RegExp(`${NOT_BEFORE}(want|wanna|wan|wnt|wamt|wnat|wan'?t)[\\W_]{0,3}(to|tp|t0|2|ta|ti|yo)?[\\W_]{0,3}(die|dei|d ?i ?e|di|diw|fie)\\b(?! for)${DIE_GUARD}`),
+  /\b(want|wanna|wan|wnt) ?(to |2 )?dye(?= ?([.!?,]|$))/,
+  // Not wanting to live: "ion wanna live no more", "i don't really want to be alive anymore", "no longer want to exist".
+  new RegExp(`\\b(?:don'?t|dont|do not|ion|i ont|dnt|doesn'?t|didn'?t|no longer|never)${S}${FILL}(?:want|wanna|wana|wish|feel like|care|like|need)${S}(?:${TO}${S})?(?:live|be alive|be here|exist|keep (?:living|going|existing|breathing)|go on(?: living| any ?more| no more)|wake up|be around|stay alive|continue (?:living|on)|survive|be on this earth|be in this world)(?![a-z])(?! (?:early|at|in the|with|tomorrow|so|for|on|until|till|without|sick|feeling|groggy|tired|congested|every|to (?:a|the|my)|through|near|by|in (?:a|the|this|my) (?:city|place|town|house|apartment|state|country|room|class|office)|here|there|like this(?! any)|people|anyone|others|him|her|them|my|crowds|when|if|in pain))`),
+  // "i want my life to be over", "need it all to end".
+  /\b(want|wanna|wish|need|ready for)( for)? (my life|it all|everything|all of (it|this)|my existence|this life) to (be over|end|stop|be done)\b/,
+  // Hoping not to wake: "i hope i dont wake up tomorrow morning".
+  /\b(hope|wish|pray|praying|hoping)( that)? (i|i'?ll|ill) (just )?(never|don'?t|do not|won'?t|wont|wouldn'?t|didn'?t|not) wake( up)?(?![a-z])(?! (up )?(with|early|late|in time|on time|at|groggy|tired|sick|feeling|sore|congested|stuffy|in pain|coughing|sneezing|until|till|before|during))/,
+  // Plans and timelines: "made up my mind ... tonight", "planning how to do it", "set a date", "won't be around much longer",
+  // "you won't hear from me after tonight", "saying my goodbyes", "already wrote my note".
+  inMessage([raw`made up my mind|my mind is made up|mind'?s made up`], [raw`made up my mind (?:to|about|on) (?:try|take|buy|get|go|see|start|stop|quit|switch|use|call)`]),
+  /\bplan(ning|ned)? (out )?(how|when|where)( exactly)? (i'?ll |i'?m going to |i'?m gonna |im gonna |i will |i would |to |i'?d )?(do it|end it|go|die|kill my ?self|end (my life|things|everything))\b/,
+  inSentence([raw`(?:set|picked|chose|chosen|choose) (?:a|the) (?:date|day|time)`, raw`(?:do it|go through with it|end it|end things|die|kill ${MYSELF})`]),
+  /\b(won'?t|wont|will not|not gonna|not going to|might not|may not|probably won'?t|wouldn'?t) be (around|here|alive|on this earth|in this world|on earth)( (much|for (much|very)) longer| (for )?(much )?longer| (for )?long| any ?more| after (tonight|today|this week(end)?)| by (tomorrow|morning|next week)| (to|for) see (tomorrow|the morning|next year|christmas|my birthday))\b/,
+  /\b(won'?t|will not|wont|never|not gonna) (hear|see) (from )?(me|my face)( (again|ever again|after (tonight|today|this)|any ?more))\b/, /\blast time (you'?ll|you will|anyone will|you|anybody will) (hear from|see) me\b/,
+  /\b(say|saying|said|wanted to say|want to say|wanna say|this is|here'?s|leaving)( my| a)?( final| last)? (goodbyes?|byes|farewells?)( to (everyone|everybody|you all|y'?all|all of you|you guys|the world|this world|my (family|friends|loved ones|kids|parents|mom|dad)|everything|you|all))?(?= ?([.!?,]|$| (forever|for good|now|tonight|i love|love you|thank|thanks|i'?m sorry|sorry)))/,
+  /\b(wrote|written|writing|finished|left|leaving) (my (suicide |goodbye |final |last )?note|my (final|last|goodbye) letters?|(a|the) (suicide|goodbye|final|last) (note|letter))\b/,
+  new RegExp(`${NO_SYMPTOM}(?!.*\\b${MED}\\b).*\\b(?:going to|gonna|will|i'?ll|gon|finna|bout to|about to|ready to) (?:finally )?do it (?:tonight|today|tomorrow|this weekend|now|soon)\\b`),
+  inMessage([raw`(?:have|got) everything (?:ready|planned|set|in place)|everything is (?:ready|planned|set)`, raw`(?:tonight|do it|end|die|goodbye|it'?s time)`]),
+  // Burden: "they'd be happier if i was dead", "easier for everyone if i wasnt here", "people would be happier without me".
+  inSentence([raw`(?:better|happier|easier|relieved|glad|best|free|lighter|celebrate)`, raw`(?:if|when|once|after) (?:i|i'?m|im)(?: was| were| am| just| finally| died| die)?(?: just| finally)? (?:dead|gone|died|not (?:here|around|alive|in the picture)|wasn'?t (?:here|around|alive)|weren'?t (?:here|around|alive)|never (?:born|existed)|disappeared|killed ${MYSELF}|out of the picture)(?! (?:from|for|to|on|at|by|out|this|the|a|all|with|today|tomorrow))`]),
+  /\b(better|happier|easier|fine|good|best|relieved)( off)?( \w+){0,2} without me\b(?! (there|at|on|in the|for (the|a|this)|this|today|tonight|tomorrow|for a (day|week|while)|at (work|school|practice)))/,
+  // Slang and abbreviations: "having SI thoughts", "si ideation", "ctb", "kms", "kys", "unalive".
+  /\b(si|s\.i\.?|sh) (thoughts?|ideation|urges?|feelings?)\b/, /\b(having|have|had|been having|dealing with|struggling with|bad|passive|active) (si|s\.i)\b(?! joint)/, /\bsuicidal ideation\b/,
+  /\bctb\b/, /\bkms\b/, /\bkys\b/, /\bunaliv/, /\bun-alive/, /\bsewer ?s(l)?ide\b/,
+
+  // --- Suicide: direct words and their misspellings ---
+  /suicid/, /\bsu(i|ic|ici|e|a|ia)?[cs]{1,2}i?d(e|es|al|ally|ing)\b/, /\bsuicde/, /\bsuacide/, /\bs ?u ?[i1!] ?c ?[i1!] ?d ?e\b/, /\bsu[i1]c[i1]de\b/, /\bsuicid?al\b/, /\bsuisidal\b/,
+  /kill myself/, /(?<!s)\bk ?[i1!*|] ?[l1|] ?[l1|]+ ?(in|ing)? ?[mn]y ?s(el|le)f/, /(?<![a-z])kill ?my ?s(el|le)f/, /kil+(ing)?my ?self/, /\bkill(ing|ed)? ?(my ?self|myslef|mysef|mysel|my sef|nyself)\b/, /\bkil+ (my ?self|myslef)\b/,
+  /end (my life|it all)/, /\b(take|taking|end|ending|ended) (my|his|her) (own )?(life|lif)\b/, /\bend(ing)? it all\b/,
+  /self[- ]?harm/, /\bself[- ]?(harm|harming|harmed|hurt|injur\w*|mutilat\w*)/, /\bselfharm/,
+  /\b(want(ed)?|wanna|going|gonna|ready|about|plan(ning)?|planned|decided|thinking (about|of)|think about|deserve) (to )?(just )?(end|ending) (it|things|everything|my life|this|it now)\b(?! with)/,
+  /\bkill me now\b(?![^.!?]*\b(hangover|cramps?|headaches?|migraines?|cold|flu|cough\w*|heartburn|period|allerg\w*|sinus\w*|stomach ?ache|toothache|sore throat|congestion|hay fever)\b)/,
+  /\b(please|pls|plz|just|someone|somebody|(want|need|wish) (someone|somebody|you) (to|would)|god|might as well) kill me\b(?![^.!?]*\b(hangover|cramps?|headaches?|migraines?|cold|flu|cough\w*|heartburn|period|allerg\w*|sinus\w*|stomach ?ache|toothache|sore throat|congestion|hay fever)\b)/,
+  // Someone else's ideation: "my sister said she wants to die", "he keeps talking about killing himself".
   /\b(he|she|they|someone|somebody|my \w+)( (said|says|told me|texted|thinks|keeps saying))?( that)? (\w+ )?(wants?|wanna|is going to|is gonna|are going to|plans to|is planning to|might|threatened to|tried to|is trying to) (to )?(die|end (his|her|their) life|kill (him|her|them)sel(f|ves))\b/,
   /\b(talking|talks|talked|texting|posting|posted) about (suicide|killing (him|her|them)sel(f|ves)|wanting to die|dying|ending (it|his life|her life|their life)|not wanting to live)\b/,
-  /\b(wish|wishing) (i|i'?d|i had) (was|were|had|could) (never been born|dead|die|not alive|not here)/, /\bwish i (was|were|had|had been) never (been )?born\b/, /\bwish i (was|were) dead\b/, /\bwish i'?d never been born\b/, /\bwish i (would|could) (just )?(die|disappear)\b/,
-  /\bbetter off (dead|without me|if i (was|were) (dead|gone)|if i died)\b/, /\b(everyone|they|people|my family|the world) (would be|is|are) better (off )?without me\b/,
-  /\b(don'?t|do not|dont|doesn'?t|no longer|dnt) (want|wanna) (to )?(be here|be here anymore|live|be alive|exist|wake up|keep living|keep going|live anymore)\b/,
+  // Wishing never to have lived; better off dead; nobody would miss me.
+  /\b(wish|wishing) (i|i'?d|i had) (was|were|had|could) (never been born|dead|die|not alive|not here)/, /\bwish i (was|were|had|had been) never (been )?born\b/, /\bwish i'?d never been born\b/, /\bwish i (would|could) (just )?(die|disappear)\b/,
+  /\bbetter off (dead|without me|if i (was|were) (dead|gone(?! (from|for|to|on|at|this|the|a|all|with|today|tomorrow)))|if i died)\b/, /\b(everyone|they|people|my family|the world) (would be|is|are) better (off )?without me\b/,
+  /\b(don'?t|do not|dont|doesn'?t|no longer|dnt) (want|wanna) (to )?(be here|be here anymore|live|be alive|exist|wake up|keep living|keep going|live anymore)\b(?! (early|at|in the|with|tomorrow|so|for|on|until|till|without|sick|feeling|groggy|tired|congested|every|like this(?! any)))/,
   /\b(no|not any|nothing|no point|no reason) (reason )?(to|in|for) (live|living|keep going|be alive)\b/, /\bnothing (left )?to live for\b/, /\bno point (in )?(living|life|being alive|going on)\b/, /\blife (is not|isn'?t) worth living\b/,
   /\b(can'?t|cannot|can not) (go on|keep going|live like this) any ?more\b/, /\b(can'?t|cannot) go on living\b/,
+  /\b(no ?one|nobody|noone|no body) (would|will|is going to|gonna|wouldn'?t)( even)? (miss me|notice if i (died|was gone|disappeared)|care if i (die|died|was gone|were gone|disappeared|was dead))\b/,
+  // Methods: hanging, wrists, jumping, guns.
   /\b(hang|hanging|hanged|hung) (my|him|her)self\b/, /\bnoose\b/, /\b(slit|slitting|cut|cutting|slice|slicing|sever|severing|slash|slashing) (my|his|her) (wrists?|throat|veins?)\b/,
   /\b(jump|jumping|throw myself|throwing myself) (off|from|in front of) (a|the|this) (bridge|building|roof|cliff|train|car|bus|balcony|overpass)\b/,
   /\b(shoot|shooting) (my|him|her)self\b/, /\bgun to my (head|mouth)\b/,
   /\bsuicide (note|letter|plan|hotline|thoughts?)\b/, /\b988\b/, /\bcrisis (line|hotline|text)\b/, /\b(writing|wrote|written) (a|my) (goodbye|farewell) (note|letter)\b/,
   /\bgiving away (all )?my (stuff|things|belongings)\b/, /\bhow (many|much) .{0,30}(to|would) (die|kill|be fatal|be lethal|od|overdose)\b/, /\b(lethal|fatal|deadly) (dose|amount|overdose)\b/,
 
-  // --- Self-harm intent: modals, urges, ongoing self-harm ---
-  // "i might / could / will / want to / am going to / tried to ... hurt myself" (not after "don't" / "never").
-  new RegExp(`(?<!\\b(don'?t|do not|didn'?t|did not|never|not|won'?t|wouldn'?t|shouldn'?t) )\\b(might|mite|may|could|will|would|shall|should|i'?ll|ill|i'?d|going to|gonna|gona|about to|want to|wnat to|wnt to|wan to|wamt to|wanna|wants to|wanted to|feel like|felt like|tempted to|urges? to|need to|gotta|plan to|plans to|planning to|planned to|try to|trying to|tried to|attempt to|attempted to|attempting to|decided to|ready to|deserve to|might as well)( just| really| actually| seriously| end up| go)? (${SELF_VERB}) ${SELF}\\b${NOT_ACCIDENT}`),
+  // --- Self-harm: wish or intent + a self-harm verb + myself ---
+  // "i might / could / will / want to / am going to / tried to ... hurt myself" (not after "don't" / "never"), "i want 2 hurt myself".
+  new RegExp(`(?<!\\b(don'?t|do not|didn'?t|did not|never|not|won'?t|wouldn'?t|shouldn'?t) )\\b(might|mite|may|could|will|would|shall|should|i'?ll|ill|i'?d|going|gonna|gona|finna|bout|about|want|wnat|wnt|wan|wamt|wanna|wants|wanted|feel like|felt like|tempted|urges?|need|gotta|plan|plans|planning|planned|try|trying|tried|tryna|attempt|attempted|attempting|decided|ready|deserve|might as well)( ${TO})?( just| really| actually| seriously| end up| go)? (${SELF_VERB}) ${SELF2}\\b${NOT_ACCIDENT}`),
   // "thinking about / feel like / urge to / keep / been ... hurting myself".
-  new RegExp(`\\b(thinking (about|of)|thought (about|of)|thoughts (about|of)|think about|feel like|felt like|feeling like|urges? (to|of)|tempted (to|by)|keep|keeps|kept|been|started|start|can'?t stop|couldn'?t stop|stop myself from|addicted to|considering|contemplating|fantasi[sz]ing about|dreaming about|obsessing over|relapsed( on| into)?|caught myself|back to|went back to|i'?m|i am|was) (just |really |seriously |constantly |always )?(${SELF_VERBING}) ${SELF}\\b${NOT_ACCIDENT}`),
+  new RegExp(`\\b(thinking (about|of)|thought (about|of)|thoughts (about|of)|think about|feel like|felt like|feeling like|urges? (to|of)|tempted (to|by)|keep|keeps|kept|been|started|start|can'?t stop|couldn'?t stop|stop myself from|addicted to|considering|contemplating|fantasi[sz]ing about|dreaming about|obsessing over|relapsed( on| into)?|caught myself|back to|went back to|i'?m|i am|was) (just |really |seriously |constantly |always )?(${SELF_VERBING}) ${SELF2}\\b${NOT_ACCIDENT}`),
   /\b(hurting|harming|cutting|burning|starving|hitting|punching|scratching) my ?self (again|more|every day|every night|daily|lately)\b/,
-  // On purpose: "i cut myself on purpose", "i scratch my arms until they bleed on purpose".
-  /\b(hurt|harm|cut|burn|hit|scratch|punch|bruise|starve|stab|injure)\w* (my ?self|my (arms?|legs?|wrists?|thighs?|skin|stomach|body|hands?))\b.{0,30}\b(on purpose|intentionally|deliberately)\b/,
-  /\b(hurt|harm|cut|burn|hit|scratch|punch|starve)\w* my ?self to (cope|feel (something|better|better)|punish|calm down|get through)\b/,
+  /^(i )?(hurt|harm|kill|cut|harming|hurting|cutting|killing) ?my ?s(el|le)f ?([.!?]|$)/, /(?<!\b(not|never|without|avoid) )\bharming my ?s(el|le)f\b/,
+  // On purpose: "i cut myself on purpose", "my friend burns herself on purpose", "i scratch my arms until they bleed on purpose".
+  new RegExp(`\\b(hurt|harm|cut|burn|hit|scratch|punch|bruise|starve|stab|injure)\\w* (${SELF2}|(my|his|her|their) ${SH_BODY})\\b.{0,30}\\b(on purpose|intentionally|deliberately)\\b`),
+  /\b(hurt|harm|cut|burn|hit|scratch|punch|starve)\w* my ?self to (cope|feel (something|better)|punish|calm down|get through)\b/,
   // Cutting with no object: "i've been cutting again", "i started cutting", "keep cutting my arms".
   /\b(been|started|start|keep|kept|i'?m|i am|back to|stop|quit|stopped|relapsed|relapsed and started|urges? to|want to|wanna|miss|went back to|resisting) cutting( again| my (arms?|legs?|wrists?|thighs?|skin|stomach|hips?))?(?= ?([.!?,]|$| again| and| but| so| since| lately| every| because| for))/,
-  /\brelaps\w* (on |into |with )?(self[- ]?harm|cutting|hurting myself)/,
+  /\brelaps\w* (on |into |with )?(self[- ]?harm|cutting|hurting myself)/, /\brelaps\w*\b.{0,20}\b(cut|cutting|sh|self ?harm|hurt myself)\b/, /\bsh (relapse\w*|urges?|again|scars?)\b/, /\b(want|wanna|urges?) to sh ?([.!?,]|$)/,
+  // A blade held to the body: "holding a knife to my wrist", "razor against my wrist right now".
+  inSentence([raw`(?:knife|knives|razors?|blades?|box ?cutter|scissors|shards?|glass)`, raw`(?:to|against|on|at|over|across|into) (?:my|his|her|their) (?:wrists?|throat|veins?)`], [ACCIDENT]),
+  // Bleeding and pain wanted: "i want to bleed out", "watch myself bleed", "cut deeper", "i need to feel physical pain".
+  new RegExp(`${NOT_BEFORE}\\b(?:want|wanna|wish|need|let (?:my ?self|me)|watch (?:my ?self|me)|hope|ready|deserve)(?: ${TO})?(?: just| my ?self)? bleed(?: out| to death| more| everywhere| dry)?\\b`),
+  new RegExp(`\\b(?:cut|cuts|cutting|slice|slicing|carv\\w*)(?: ${SELF2}| it| them| my ${SH_BODY})? (?:deeper|deep enough|vertical(?:ly)?|longways|long ?ways|the long way)\\b`),
+  new RegExp(`${NOT_BEFORE}\\b(?:want|wanna|need|needed|crave|craving|deserve|like|love|have) (?:${TO} )?(?:feel|be in|cause my ?self|inflict|give my ?self)(?: physical| real| some| more| the)? (?:pain|hurt)\\b(?! (?:relief|reliever|meds|medicine|free|after|from|in my|when|go|less))`),
+  /\b(feel|cause|inflict|giv\w*|caus\w*) (my ?self )?(pain|hurt)\b[^.!?]{0,20}\b(on purpose|intentionally|deliberately)\b/,
+  // Burning or cutting the body with a tool, as a habit: "i keep burning my arm with a lighter".
+  inSentence([raw`(?:burn\w*|cut\w*|carv\w*|scratch\w*|slic\w*)`, raw`(?:my|his|her|their) ${SH_BODY}`, SH_TOOL, SH_INTENT], [ACCIDENT]),
+  new RegExp(`\\bcarv\\w* (?:into |words into |letters into )?(?:my|her|his|their) ${SH_BODY}\\b`),
+  /\b(i'?m|im|i am|i feel like (i'?m )?) (a )?(danger|threat|dangerous) to (my ?self|others|myself and others)\b/,
+  /\b(i )?deserve to (hurt|suffer|be hurt|be punished|feel pain|be in pain|bleed)\b/, /\bi (starve|purge|punish) my ?self\b/,
+  /\b(scratch|cut|hit|punch|bite|pick|claw)\w* (at )?my ?self (until|till|til|'til) (i |it )?(bleed|bleeds|bled|bruise)/,
+  new RegExp(`\\b(hit|punch|bang|scratch|bite|beat)\\w* ${SELF2} (until|till|til|'til) (i|it|they|he|she) (bleed|bruise)`),
+  /\b(punch\w*|hit\w*|bang\w*|scratch\w*|burn\w*|cut\w*|starv\w*|bit\w*) [^.!?]{0,25}\bto (hurt|harm|punish|injure) my ?self\b/,
 
-  // --- Self-harm / suicide: indirect ideation ---
+  // --- Means at hand: stockpiled or staged pills, a loaded gun, a rope, a ledge ---
+  inSentence([raw`(?:stockpil\w*|hoard\w*|been saving|saving up|saved up|squirrel+(?:ing|ed) away|been hiding|hiding|hid|hidden|stash(?:ed|ing)?)`, MED], [raw`saving up for`]),
+  inSentence([MED, raw`(?:lined up|counted out|laid out|sorted out|spread out|poured out|in front of me|in my (?:hand|hands|palm)|right here|next to me|ready to go|all ready)`, raw`(?:all|every one|every last|whole|entire|enough|tonight|do it|end it|die|i'?m ready|ready now|finally|goodbye|them all|it all)`]),
+  new RegExp(`\\b(?:want|wanna|going|gonna|about|bout|finna|thinking about|ready|plan(?:ning)?|tempted)(?: ${TO})? (?:just )?(?:take|swallow|down|pop|eat|drink|chug) (?:all|every one|every last one|the whole|whole|the entire|the rest)(?: of)? (?:it|them|that|this|the bottle)\\b(?=.*\\b(?:${MED}|bottle)\\b)(?! (?:in the morning|at night|at bedtime|with (?:food|water|breakfast|dinner|me)|before|after|every|each|daily|on time|as prescribed))`),
+  /\b(thinking (about|of)|thought about|want to|wanna|going to|gonna|about to|plan(ning)? to|urges? to|tempted to|might|could|i'?ll) (just )?(take|taking|swallow|swallowing|down|downing|pop|popping|eat|eating|overdose on|overdosing on) (all|every one|every single one|the whole bottle|a whole bottle|the entire bottle|the rest|a handful|handfuls|a bunch|tons) (of )?(my |the |these |those |his |her )?(\w+ )?(pills|meds|medications?|medicines?|tablets|capsules|bottle|tylenol|advil|aspirin|ibuprofen|acetaminophen|benadryl|melatonin|sleeping pills|xanax|insulin)\b(?! (at once|at the same time|together|in the morning|at night|at bedtime|with (food|water|breakfast|dinner|me)|before|after|every|each|daily|on time|as prescribed))/,
+  /\b(loaded|loading|cocked|cocking) (a |the |my |his |her )?(gun|pistol|revolver|rifle|shotgun)\b/, /\b(gun|pistol|revolver|barrel) (in|to|against) my (mouth|head|temple|chin)\b/,
+  inSentence([raw`(?:holding|have|got|grabbed|bought|found|took) (?:a|my|the|dad'?s|his|her) (?:gun|pistol|revolver|shotgun)`, raw`(?:tonight|end|die|do it|${MYSELF}|head|ready|goodbye|use it)`]),
+  /^(?=.*\b(gun|pistol|rifle|knife|blade|razor|rope)\b).*\buse (it|them|this|that|the gun|a gun|the knife) on my ?self\b/,
+  /(?<!\bjump )\b(bought|buy|buying|got|have|tied|tying) (a |the |some )?rope\b(?! (lights?|toy|burn|swing|ladder|for (camping|climbing|the boat|my (boat|dog|tent))))/,
+  /\b(i'?m|im|i am) (standing |sitting )?(on|at) (a|the|this|top of (a|the)) (bridge|ledge|edge|roof|rooftop|cliff|overpass)\b/, /\b(roof|bridge|ledge|building|cliff|balcony|overpass)\b.{0,40}\b(gonna|going to|about to|want to|wanna|will|ready to) jump\b/,
+  /\b(standing|sitting|perched|stood|sat) (on|at) (the |a |this )?(ledge|edge of (the|a|my|this) (roof|bridge|building|cliff|balcony)|railing of (the|a) (bridge|balcony|roof)|rooftop|bridge|overpass)\b/,
+  /\b(drive|driving|crash|crashing|steer|swerve) (my car |the car |it |myself )?(off (a|the) (cliff|bridge|road)|into (a |the )?(wall|tree|traffic|oncoming traffic|river|lake|semi|truck))\b/,
+
+  // --- Lethality and harm questions about medicines ---
+  // "how many tylenol to end it", "how much acetaminophen causes liver failure", "how much ibuprofen would hurt me badly",
+  // "how much melatonin to knock someone out" (not "how much tylenol can i take without liver damage").
+  inSentence([ASK, MED, LETHAL], [SAFE_ASK]),
+  // "can benadryl kill you", "how much tylenol is fatal", "what pill will make me not wake up".
+  new RegExp(`^(?=.*\\b${MED}\\b).*\\b((can|could|would|will|do|does|did|is it possible to|possible to)( \\w+){0,4} (die|od|overdose|kill (you|me|u|a person|someone|people|somebody))\\b|(fatal|lethal|deadl(y|iest)|kill (you|u|a person|someone|people|somebody)|enough to (die|kill))\\b|(not|never) wake up\\b(?! (groggy|tired|early|late|at|in the|during|every|feeling|with|so|drowsy|hungover|foggy)))`),
+  /\b(die|died|dies|dying) (from|of) (taking |swallowing )?(too (much|many)|an? overdose|\d+ )/,
+  /\b(\d+|ten|twenty|thirty|fifty|a hundred|bottle|enough|pills?|tablets?|tylenol|advil|aspirin|ibuprofen|acetaminophen|motrin|aleve|benadryl|melatonin|nyquil|insulin)\b.{0,25}\b(would|enough to|to) kill (me|myself|a person|someone)\b/,
+  /\b(would|will|could|can|does|do) (\d+|ten|twenty|thirty|fifty|a hundred|a (whole )?bottle( of)?|all( of)? my|enough)( \w+){0,3} kill (me|myself|a person|someone)\b/,
+  // Painless, easiest, quickest way: "most painless way to die", "quickest way to kill myself", "painless ways to go".
+  inSentence([raw`(?:painless(?:ly)?|least painful|peaceful(?:ly)?|without (?:pain|feeling (?:it|anything)|suffering))`, raw`(?:die|death|dying|go(?! (?:to|back|about|out|for|on|with|from|in|into|off|up|down|over|through|away|home|outside))|kill ${MYSELF}|end it|end my life|suicide|do it|not wake up|od|overdose|exit|unalive)`]),
+  new RegExp(`\\b(?:easiest|easy|quickest|quick|fastest|best|surest|simplest|most (?:effective|reliable)|effective|reliable|good|sure ?fire|cleanest|guaranteed)\\b[^.!?]{0,20}\\b(?:ways?|methods?|means|options?|how)\\b[^.!?]{0,15}\\b(?:${TO} )?(?:${DIE}|kill ${MYSELF}|end (?:it all|my life|it)(?! with)|commit suicide|unalive(?: ${MYSELF})?|off ${MYSELF}|ctb|kms|overdose|od)(?![a-z])${DIE_GUARD}`),
+  new RegExp(`\\bhow (?:to|do i|can i|could i|should i|would i|do you|does one|do people) (?:${DIE}|kill ${MYSELF}|end my life|commit suicide|end it all|unalive(?: ${MYSELF})?|off ${MYSELF}|ctb|kms)(?![a-z])${DIE_GUARD}`),
+  // Drugging someone: "put benadryl in someone's drink", "how to drug someone", "slip something into my roommate's drink".
+  new RegExp(`\\b(?:put|putting|slip\\w*|sneak\\w*|mix\\w*|add\\w*|crush\\w*|dissolv\\w*|spik\\w*|lac\\w*|drop\\w*|pour\\w*)\\b[^.!?]{0,40}\\b(?:in|into) (?:(?:someone|somebody|some ?one|people)(?:'?s)?|his|her|their|a (?:girl|guy|person|woman|man|date)'?s?|my (?!(?:son|daughter|kid|baby|toddler|child|dog|cat|puppy|kitten|pet|grandma|grandpa|mom|dad|mother|father)'s)\\w+'s|people'?s|(?:${PERSON})'s)(?:'?s)?'? ?(?:drink|drinks|food|coffee|tea|water|soda|cup|glass|juice|meal|beer|wine|dinner|smoothie)\\b`),
+  new RegExp(`(?<!\\b(?:the|a|an|this|that|what|which|new|any|some|otc|prescription|street|illegal|recreational|of|my|his|her|their|your)\\s)\\b(?:drug|drugging|roofie|roofy|roofied|spike|spiking) (?:${OTHERS}|(?:his|her|their|someone'?s|somebody'?s) drink)(?![a-z])`),
+
+  // --- Harm to others ---
+  // "i'm going to kill my ex", "gonna stab my ex", "i want to poison my roommate", "i wanna murder my neighbor".
+  new RegExp(`(?<!\\b(?:don'?t|do not|didn'?t|never|not|won'?t|wouldn'?t) )\\b(?:want|wanna|going|gonna|finna|bout|plan(?:ning)?|about|thinking (?:about|of)|urge|urges|feel like|tempted|i will|i'?ll|i'?m going to|might|may|could|would|i'?d|ready|decided)(?: ${TO})?(?: just| really| actually| seriously| fucking)? (?:kill|killing|murder|murdering|hurt|hurting|stab|stabbing|shoot|shooting|strangle|strangling|choke|beat up|harm|harming|poison|poisoning|shake|shaking|smother|smothering|drown|drowning|slaughter|slaughtering|attack|attacking|run over) (?:${OTHERS})(?![a-z])(?!'s|s'| feelings| chances| pride| ego| career| reputation| business| vibe)`),
+  // Thoughts of harming others: "i keep having thoughts of killing people", "intrusive thoughts about hurting my baby".
+  new RegExp(`\\b(?:thoughts?|thinking|fantasi[sz]\\w*|dream\\w*|urges?|impulses?|obsess\\w*) (?:of|about|to|over) (?:killing|hurting|murdering|stabbing|shooting|strangling|harming|drowning|smothering|poisoning|kill|hurt|murder|stab|shoot|harm|poison) (?:${OTHERS})(?![a-z])`),
+  /\b(hurt|harm|kill|poison|murder) (someone|somebody|others|other people|people|a person)\b/, /\bhow (to|do i|can i|would i|do you) (poison|kill|murder) (him|her|them|my \w+)\b/,
+  /\bshoot (up )?(my|the|a|our) (school|class|work|office|church|mall|workplace|job)\b/, /\bslaughter\b.{0,20}\b(my|the|his|her) (family|kids|wife|husband|parents)\b/, /\bhomicid/, /\bmass shooting\b/, /\bactive shooter\b/,
+  // --- Suicide: indirect ideation (specific phrasings) ---
   /\b(i'?m|i am|im|i feel like i'?m|i'?ve become) (a )?(danger|threat|dangerous) to (my ?self|others|myself and others)\b/,
   /\b(don'?t|do not|no longer|not|never) feel(ing)? safe( (with|around|by|being (alone )?with) my ?self| alone| by myself| being alone| at home alone| in my own (head|mind|body))\b/, /\b(i'?m|i am) not safe( (with|around|by) my ?self| alone| right now| tonight)\b/,
   /\b(don'?t|do not|can'?t|cannot|no longer) trust my ?self( (right now|anymore|any more|tonight|alone))? ?([.!?,]|$)/,
@@ -187,47 +366,25 @@ export const EMERGENCY_PATTERNS = [
   /\b(might|may|could|will|i'?ll|ill|should|gonna|going to) (just )?end (it|it all|things|everything|my life)( (tonight|today|now|soon|for good))? ?([.!?,]|$)/,
   /\b(i'?m|im|i am) (ending|going to end|gonna end|about to end) (it|it all|things|everything|my life)( (tonight|today|now|soon|for good|this weekend))? ?([.!?,]|$)/,
   /\b(i )?(can'?t|cannot|can not|cant) go on( (like this|living|any ?more|with life))? ?([.!?,]|$)/,
-  new RegExp(`${NO_SYMPTOM}.*\\bfeel(s|ing)? like (dying|death)\\b`),
+  new RegExp(`${NO_SYMPTOM}.*\\bfeel(s|ing)? like (i'?m )?dying\\b`),
   /\b(keep|always|constantly|been|can'?t stop|i) (thinking|think|thought) (about|of) (dying|death|being dead|not being alive|not existing|ending it)\b(?! (my|her|his) hair)/,
   /\b(hope|wish|pray|praying)( that)? i (just )?(die|died|was dead|were dead|get to die)\b/, /\b(die|pass away) in my sleep\b(?! (apnea|study|schedule))/,
-  /^(?=.*\b(gun|pistol|rifle|knife|blade|razor|rope)\b).*\buse (it|them|this|that|the gun|a gun|the knife) on my ?self\b/,
   /\b(i'?m|im|i am|i feel like (i'?m )?) (just |such )?(a|such a) burden\b/, /\b(go away|disappear|be gone) forever\b/,
   /\b(don'?t|do not|dont|can'?t|cant) see (the|a|any) point( (any ?more|in (living|life|anything|going on|trying|being alive|being here)))? ?([.!?,]|$)/,
   /\b(i'?m|im|i am) (so |just |completely |totally )?done with (everything|it all|life|this life|living|all of this|this world)\b/,
   /\b(tonight|today) is my last (night|day)( alive| on earth| here| ever)? ?([.!?,]|$)/, /\bmy last (night|day) (alive|on earth)\b/,
   /\b(wrote|written|writing|left|leaving) (a |my )?(goodbye |final |last |suicide )?(note|letter)s? (for|to) (my )?(family|everyone|parents|kids|children|loved ones)\b/,
   /\b(given|gave|giving) away (all )?(of )?my (stuff|things|belongings|possessions|pets?)\b/,
-  /(?<!\bjump )\b(bought|buy|buying|got|have|tied|tying) (a |the |some )?rope\b(?! (lights?|toy|burn|swing|ladder|for (camping|climbing|the boat|my (boat|dog|tent))))/,
-  /\b(i'?m|im|i am) (standing |sitting )?(on|at) (a|the|this|top of (a|the)) (bridge|ledge|edge|roof|rooftop|cliff|overpass)\b/, /\b(roof|bridge|ledge|building|cliff|balcony|overpass)\b.{0,40}\b(gonna|going to|about to|want to|wanna|will|ready to) jump\b/,
-  /\b(drive|driving|crash|crashing|steer|swerve) (my car |the car |it |myself )?(off (a|the) (cliff|bridge|road)|into (a |the )?(wall|tree|traffic|oncoming traffic|river|lake|semi|truck))\b/,
   /\bwant out of (this |my )?(life|world|existence)\b/, /\bhate my life\b.{0,30}\bwant (out|to go)\b/, /\b(is|isn'?t) (it|life|living) (even |really )?worth (living|it any ?more|being alive|staying alive)\b/,
   /\bi want death\b/, /\bdeath would be (better|easier|a relief|a mercy)\b/, /\b(wish for|welcome|long for|crave) death\b/,
   // Sleep that means death: "sleep aid that will let me sleep forever", "pills so i never wake up".
   /\b(let|make|help|helps|allow) (me|you|someone) (to )?(sleep (forever|permanently|for good)|never wake( up)?|not wake( up)?)\b(?! (at|in the|during|early|late|tired|groggy|every|feeling|so|with|drowsy|foggy))/,
   /\bso (that )?i (can|could|will|would|'?ll|never|don'?t|won'?t)( \w+)? (sleep forever|sleep permanently|never wake up|not wake up|wake up)( again| ever)? ?([.!?,]|$)/, /\bso (that )?i (can|could|will|would) (sleep forever|sleep permanently)\b/,
   /\bsleep permanently\b/, /\bsleep forever\b.{0,20}\b(never|not|don'?t) wake\b/, /\b(eternal|permanent) sleep\b/,
-  // Self-harm without a modal: "harming myself", "hurt my self" (whole message), "punching walls to hurt myself".
-  /^(i )?(hurt|harm|kill|cut|harming|hurting|cutting|killing) ?my ?s(el|le)f ?([.!?]|$)/, /(?<!\b(not|never|without|avoid) )\bharming my ?s(el|le)f\b/,
-  /\b(i )?deserve to (hurt|suffer|be hurt|be punished|feel pain|be in pain|bleed)\b/, /\bi (starve|purge|punish) my ?self\b/,
-  /\b(scratch|cut|hit|punch|bite|pick|claw)\w* (at )?my ?self (until|till|til|'til) (i |it )?(bleed|bleeds|bled|bruise)/,
-  /\b(punch\w*|hit\w*|bang\w*|scratch\w*|burn\w*|cut\w*|starv\w*|bit\w*) [^.!?]{0,25}\bto (hurt|harm|punish|injure) my ?self\b/,
-  /\brelaps\w*\b.{0,20}\b(cut|cutting|sh|self ?harm|hurt myself)\b/, /\bsh (relapse\w*|urges?|again|scars?)\b/, /\b(want|wanna|urges?) to sh ?([.!?,]|$)/,
-  // Lethality questions: "can benadryl kill you", "how much tylenol is fatal", "what pill will make me not wake up".
-  new RegExp(`^(?=.*\\b${MED}\\b).*\\b((can|could|would|will|do|does|did|is it possible to|possible to)( \\w+){0,4} (die|od|overdose|kill (you|me|u|a person|someone|people|somebody))\\b|(fatal|lethal|deadl(y|iest)|kill (you|u|a person|someone|people|somebody)|enough to (die|kill))\\b|(not|never) wake up\\b(?! (groggy|tired|early|late|at|in the|during|every|feeling|with|so|drowsy|hungover|foggy)))`),
-  /\b(die|died|dies|dying) (from|of) (taking |swallowing )?(too (much|many)|an? overdose|\d+ )/,
   // Spanish.
   /\b(me )?quiero morir(me)?\b/, /\bquiero matarme\b/, /\bmatarme\b/, /\bno puedo respirar\b/, /\b(dolor (de|en el) pecho|(me )?duele el pecho|mi pecho (me )?duele)\b/, /\bsuicidarme\b/,
   /\bgoodbye (forever|everyone|world|cruel world|for good)\b/, /\b(final|last) goodbye\b/, /\bthis is (my )?goodbye\b/,
-  // Pills as a method: "thinking about taking all my pills", "would 30 advil kill me".
-  /\b(thinking (about|of)|thought about|want to|wanna|going to|gonna|about to|plan(ning)? to|urges? to|tempted to|might|could|i'?ll) (just )?(take|taking|swallow|swallowing|down|downing|pop|popping|eat|eating|overdose on|overdosing on) (all|every one|every single one|the whole bottle|a whole bottle|the entire bottle|the rest|a handful|handfuls|a bunch|tons) (of )?(my |the |these |those |his |her )?(\w+ )?(pills|meds|medications?|medicines?|tablets|capsules|bottle|tylenol|advil|aspirin|ibuprofen|acetaminophen|benadryl|melatonin|sleeping pills|xanax|insulin)\b(?! (at once|at the same time|together|in the morning|at night|at bedtime|with (food|water|breakfast|dinner|me)|before|after|every|each|daily|on time|as prescribed))/,
-  /\b(\d+|ten|twenty|thirty|fifty|a hundred|bottle|enough|pills?|tablets?|tylenol|advil|aspirin|ibuprofen|acetaminophen|motrin|aleve|benadryl|melatonin|nyquil|insulin)\b.{0,25}\b(would|enough to|to) kill (me|myself|a person|someone)\b/,
-  /\b(would|will|could|can|does|do) (\d+|ten|twenty|thirty|fifty|a hundred|a (whole )?bottle( of)?|all( of)? my|enough)( \w+){0,3} kill (me|myself|a person|someone)\b/,
-  /\b(please|pls|plz|just|someone|somebody|(want|need|wish) (someone|somebody|you) (to|would)|god|might as well) kill me\b(?![^.!?]*\b(hangover|cramps?|headaches?|migraines?|cold|flu|cough\w*|heartburn|period|allerg\w*|sinus\w*|stomach ?ache|toothache|sore throat|congestion|hay fever)\b)/,
 
-  // --- Harm to others / violence / assault ---
-  /(?<!\b(don'?t|do not|didn'?t|never|not|won'?t|wouldn'?t) )\b(want|wanna|going|gonna|plan(ning)?|about|thinking (about|of)|urge|urges|feel like|tempted|i will|i'?ll|i'?m going to|might|may|could|would|i'?d) (to )?(just )?(kill|killing|murder|murdering|hurt|hurting|stab|stabbing|shoot|shooting|strangle|choke|beat up|harm|harming|poison|poisoning|shake|shaking|smother|smothering|drown|drowning|slaughter|slaughtering) (him|her|them|someone|somebody|people|everyone|my (wife|husband|mom|dad|mother|father|boss|partner|girlfriend|boyfriend|roommate|neighbor|kids?|child|children|family|sister|brother|coworker|teacher|baby|babies|son|daughter))\b(?!'s|s'| feelings| chances| pride| ego| career| reputation| business)/,
-  /\b(hurt|harm|kill|poison|murder) (someone|somebody|others|other people|people|a person)\b/, /\bhow (to|do i|can i|would i|do you) (poison|kill|murder) (him|her|them|my \w+)\b/,
-  /\bshoot (up )?(my|the|a|our) (school|class|work|office|church|mall|workplace|job)\b/, /\bslaughter\b.{0,20}\b(my|the|his|her) (family|kids|wife|husband|parents)\b/, /\bhomicid/, /\bmass shooting\b/, /\bactive shooter\b/,
   /\b(been|got|was|i'?m|im|he'?s|she'?s|he was|she was|just got|been) (shot|stabbed|stabed|stab(b)?ed)\b/, /\bgun ?shot\b/, /\bgunshot\b/, /\bstab(bed|bing)? wound\b/, /\bstabbed\b/, /\bbullet wound\b/,
   /\b(being|been|was|got|i'?m being) (attacked|assaulted|raped|beaten|beat up|strangled|choked by|kidnapped|abducted|threatened with)\b(?! by (mosquito|bug|bee|allerg))/, /\braped\b/, /\bsexual(ly)? assault/,
   /\b(he|she|they|my (husband|wife|boyfriend|girlfriend|partner|dad|father|mom|mother)) (is|keeps|are|has been|was) (hitting|beating|choking|strangling|threatening|hurting|hits|beats|chokes|abusing|abuses) (me|us|my)\b/,
@@ -253,7 +410,7 @@ export const EMERGENCY_PATTERNS = [
   /\b(hit|bumped|banged|smashed|hurt|injured|struck|whacked|cracked) (my|his|her|their) head\b.{0,60}\b(passed out|pased out|blacked out|knocked out|lost consciousness|unconscious|unconcious|throwing up|threw up|vomit\w*|confus\w*|can'?t remember|seizure|bleeding|won'?t wake|drowsy|sleepy)/,
   // Not "benadryl knocked me out" / "knocked out cold after melatonin" (fell asleep), "blacked out the window".
   /(?<!\b(melatonin|benadryl|nyquil|zzzquil|unisom|pills?|meds|medicine|it|that|which|sleep aid|tea) )\bknocked (out|unconscious|unconcious|me out|him out|her out|them out)\b(?! (cold )?(after|from|by|on) (the |my |some |a |that )?(melatonin|benadryl|nyquil|zzzquil|unisom|sleeping pills?|sleep aids?|pills?|meds|tea))/,
-  /\bblack(ed|ing)? out\b(?! (the |my |all the |some )?(windows?|room|curtains|blinds|screen|text|names?|parts|lines|details|info|faces?))/, /\blost consciousness\b/, /\bloss of consciousness\b/, /\blost conciousness\b/,
+  /\bblack(ed|ing)? out\b(?! (the|my|our|all|all the|some|those|these|that|his|her|their|your|a|an) (?!(moment|second|minute|instant|whole|night|first|last|time|for|again|briefly|completely|twice)\b))/, /\blost consciousness\b/, /\bloss of consciousness\b/, /\blost conciousness\b/,
   /\b(serious|severe|bad|major|traumatic) (head|brain|skull|spinal|spine|neck) (injury|injuries|trauma)\b/, /\b(skull|spinal) fracture\b/, /\bfractured (my |his |her )?skull\b/, /\bbrain (bleed|hemorrhage|haemorrhage)\b/,
   /\bconcussion\b.{0,40}\b(vomit|throwing up|confus|passed out|unconscious|seizure|worse)/, /\bfell (off|from|down) .{0,40}\b(can'?t move|unconscious|not moving|head)\b/,
   /\b(can'?t|cannot|can not) (move|feel) (my|his|her|their) (legs|arms|body)\b/, /\bhead (injury|trauma|wound)\b.{0,30}\b(vomit\w*|throwing up|threw up|confus\w*|drowsy|passed out|bleeding)/,
@@ -271,7 +428,7 @@ export const EMERGENCY_PATTERNS = [
   /\bun ?c[ao]n\w{0,3}(ious|ous|ius|us|hus|cious|scious|chus|shus)\b/, /\bunconcious\b/, /\bunconsious\b/, /\bunconscous\b/, /\bunconcsious\b/,
   /\bunrespon\w*/, /\bun-respon\w*/, /\b(he|she|they|baby|someone|person|patient|(my )?(mom|dad|mother|father|wife|husband|son|daughter|friend|grandma|grandpa))('s| is| isn'?t| are| aren'?t)? (not )?(responding|responsive|respond)\b/, /\bnon[- ]?respon(sive|ding)\b/,
   new RegExp(`\\b(pass(es|ed|ing)?|pased|past|pasing|passt) out\\b${NOT_ASLEEP}`), /\b(keep|keeps|kept) (passing|pasing) out\b/,
-  /\b(faint(ed|ing|s)|feint(ed|ing)|fainte?d|fanted|fainded)\b/, /\bfaint(ing)? spell/, /\b(feel|feeling|feels|about to|going to|gonna|might|think i'?ll|so) (so |really |very |like i'?m (going to|gonna|about to) )?faint\b/,
+  /\b(faint(ed|ing|s)|feint(ed|ing)|fainte?d|fanted|fainded)\b/, /\bfaint(ing)? spell/, /\b(feel|feeling|feels|about to|going to|gonna|might|think i'?ll|so) (so |really |very |like i'?m (going to|gonna|about to) )?faint\b(?! (from|because of|due to|with|when i'?m) (hunger|not eating|being hungry|hungry|skipping \w+))/,
   /\b(he|she|they|baby|someone|(my )?(mom|dad|mother|father|wife|husband|son|daughter|friend|grandma|grandpa)) (won'?t|wont|will not|isn'?t|is not|doesn'?t|can'?t|cant|is) (wake|waking) up\b/, /\b(can'?t|cannot|cant) wake (him|her|them|my \w+)( up)?\b/, /\bcollaps(ed|ing|es)?\b/, /\bcolapsed\b/, /\bcollasped\b/,
   /\bfound (him|her|them|someone|my \w+) (on the (floor|ground)|unconscious|not moving|not breathing)\b/, /\bnot (moving|waking) (and|or) not breathing\b/,
   /\b(in|went into|going into) (a )?coma\b/, /\bcomatose\b/,
@@ -292,6 +449,10 @@ export const EMERGENCY_PATTERNS = [
   /\b(leg|arm|bone|wrist|ankle) (is )?(bent|pointing) (the )?(wrong way|backwards|sideways|at a weird angle)\b/, /\bdislocated (hip|knee|neck)\b/,
 
   // --- Sudden severe headache ---
+  // "worst headache i've ever had", "worst migraine of my whole life".
+  /\bworst (head ?aches?|head pain|migraines?|headach\w*)\b[^.!?]{0,30}\b(ever|life|lifetime|imaginable|of all time|had|experienced|felt)\b/,
+  // Headache + stiff neck + a red flag (worst, sudden, fever, vomiting, confusion, light): not a tension headache from sleeping wrong.
+  inMessage([raw`(?:head ?aches?|migraines?|head (?:pain|hurts))`, raw`(?:stiff(?:ness)? (?:neck|nek)|neck (?:is |feels )?(?:really |very )?(?:stiff|rigid)|can'?t (?:bend|move|touch) (?:my )?(?:neck|chin))`, raw`(?:worst|sudden\w*|thunderclap|fever\w*|vomit\w*|throwing up|confus\w*|light|explod\w*|out of nowhere)`]),
   /worst headache of my life/,
   /\bworst (head ?ache|headach|headace|headake|hedache|haedache|hedake|headahce|head pain|migraine|migrane|migrain)s? (of|in) (my|his|her) (entire |whole )?(life|lif|lifetime)\b/,
   /\bworst (head ?ache|headach|headace|hedache|haedache|head pain|migraine|migrane)s? (ever|i'?ve ever|i have ever|ive ever|i ever|of all time)\b/,
@@ -308,6 +469,8 @@ export const EMERGENCY_PATTERNS = [
   /\brash (that )?(doesn'?t|does not|won'?t|wont|isn'?t|didn'?t) (fade|go away|disappear|blanch) (when|under|with) (i )?(press|a glass|glass)/, /\bglass test\b/, /\bnon[- ]?blanching rash\b/, /\bpurple (spots|rash|blotches) (and|with) (fever|feverish)\b/, /\bpetechia/,
 
   // --- Coughing / vomiting blood, black or bloody stool ---
+  // "throwing up coffee grounds", "my vomit looks like coffee grounds".
+  /\b(vomit\w*|puk\w*|throw\w* up|threw up|barf\w*|spit\w* up|hurl\w*|vomm?it\w*)\b[^.!?]{0,30}\bcoffee[- ]?grounds?\b/, /\bcoffee[- ]?grounds?\b[^.!?]{0,30}\b(vomit\w*|puk\w*|throw\w* up|threw up)\b/,
   /coughing (up )?blood/, /vomiting blood/,
   /\b(cough|caugh|coff|cof|cogh)\w* (up )?(blood|bloood|blod|bloody|blood clots)\b/, /\b(spit|spitting|spat|spiting) (up |out )?(blood|blod)\b/,
   /\b(throw|throwing|threw|throws|puk(e|ing|ed)|vomit(ing|ting|ed|s)?|vommit(ing)?|vomitt(ing)?|vomm?it\w*|barf(ing|ed)?|hurl(ing|ed)?) (up )?(blood|blod|bloody|blood clots)\b/,
