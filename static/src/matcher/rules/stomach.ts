@@ -37,6 +37,11 @@ export function stomachRules(t: string, picks: Picks) {
     picks.add(4, P.famotidine, P.omeprazole, P.tums);
   }
 
+  // Burning throat or sour mouth after meals is reflux, not a sore throat.
+  if (has(t, 'sour taste in mouth', 'sour taste in my mouth', 'bitter taste in mouth after eating', 'sour taste after eating', 'acid taste in my mouth',
+    'burning in my throat after eat*', 'burning in my throat when i eat', 'burning in my throat when i lie down', 'throat burns after eat*', 'burning throat after eat*', 'throat is burning after eat*', 'after eating my throat burns', 'after i eat my throat burns')) {
+    picks.add(4, P.famotidine, P.tums, P.omeprazole);
+  }
   // ---- Sour / acid stomach and indigestion ----
   if (has(t, 'sour stomach', 'acid stomach', 'acidy stomach', 'acidic stomach', 'stomach acid', 'too much acid', 'excess acid', 'excess stomach acid', 'hyperacidity', 'acid indigestion', 'acidy', 'acidity', 'acidic', 'sour tummy', 'sour belly', 'sour gut')) {
     picks.add(4, P.tums, P.famotidine, P.pepto);
@@ -73,6 +78,14 @@ export function stomachRules(t: string, picks: Picks) {
     picks.add(2, P.pepto, P.tums);
   }
 
+  // Hangover stomach: Pepto / Tums ranked above the hangover pain relievers (NSAIDs can upset the stomach more).
+  if (has(t, 'hungover stomach', 'hangover stomach', 'stomach hangover', 'hungover and nauseous', 'hangover nausea', 'nauseous hangover', 'hungover and queasy', 'hangover queasy', 'stomach is wrecked from drinking', 'stomach hurts from drinking', 'upset stomach from drinking')) {
+    picks.add(4, P.pepto, P.tums);
+  }
+  // Motion sickness: diphenhydramine is the motion sickness antihistamine we carry (Dramamine is a form of it); Pepto for the queasiness.
+  if (has(t, 'carsick*', 'car sick*', 'car sickness', 'motion sick*', 'motionsick*', 'seasick*', 'sea sick*', 'airsick*', 'air sick*', 'travel sickness', 'sick on boats', 'sick in the car', 'sick on the bus', 'sick on planes')) {
+    picks.add(3, P.diphenhydramine, P.pepto);
+  }
   // ---- Nausea and queasiness ----
   if (has(t, 'nause*', 'nausi*', 'nausou*', 'nausus', 'nausua', 'nautious', 'nautius', 'nautous', 'nauscious', 'naucious', 'naseous', 'naseus', 'nasea', 'naseau*', 'nasua', 'nashus', 'nawsea', 'nasious', 'nausha', 'nuasea', 'nuaseous', 'neausea', 'neaseous', 'nasuea', 'nauesa', 'naueseous',
     'queas*', 'quesy', 'queezy', 'queesy', 'quezy', 'quesey', 'queazy', 'qweasy', 'qeasy', 'queasey',
@@ -113,12 +126,21 @@ export function stomachRules(t: string, picks: Picks) {
     picks.add(5, P.loperamide, P.pepto);
   }
 
+  // "The runs" (bare "runs" only as the whole message: "my nose runs").
+  if (has(t, 'the runs', 'got the runs', 'have the runs', 'the trots', 'the squirts') || /^(the )?runs[.!?]*$/.test(t)) {
+    picks.add(4, P.loperamide, P.pepto);
+  }
   // ---- Constipation ----
   if (has(t, 'constipat*', 'constapat*', 'constpat*', 'consipat*', 'consitpat*', 'contipat*', 'constipt*', 'constopat*', 'consapat*', 'constiapt*', 'constapait*', 'constipait*', 'conspiated', 'constiptaed', 'cinstipated', 'constiapted', 'constepated', 'constepation', 'constupated', 'constapted', 'constapaited', 'conistpated', 'constipatd', 'constpiated',
     "can't poop", 'cant poop', 'cannot poop', 'can not poop', "can't go poop", 'cant go poop', "can't go number two", 'cant go number two', "can't go number 2", 'cant go number 2', "can't go to the bathroom", 'cant go to the bathroom', "can't have a bowel movement", 'cant have a bowel movement', "can't take a dump", 'cant take a dump', "can't shit", 'cant shit', 'unable to poop', 'trouble going to the bathroom',
     "haven't pooped", 'havent pooped', 'have not pooped', 'not pooping', 'no poop', 'no bowel movement*', "haven't gone in days", 'havent gone in days', "haven't gone in a few days", 'havent gone in a few days', "haven't gone in a week", 'havent gone in a week', "haven't gone in a while", 'havent gone in a while', "haven't gone number two", 'havent gone number two',
     "haven't been to the bathroom in days", 'havent been to the bathroom in days', "haven't had a bm", 'havent had a bm', "haven't had a bowel movement", 'havent had a bowel movement', "haven't shit", 'havent shit', "haven't taken a dump", 'havent taken a dump', 'backed up down there', "i'm backed up", "i'm all backed up", 'feel backed up', 'feeling backed up', 'so backed up', 'all backed up down there', 'bowels are backed up', 'bowels are blocked', 'blocked bowels',
     'irregularity', 'occasional irregularity', 'irregular bowel*', 'stay regular', 'staying regular', 'regularity')) {
+    picks.add(4, P.miralax, P.docusate, P.magnesiumCitrate);
+  }
+  // "Backed up" / "irregular" alone (noses, sinuses, periods, heartbeats and traffic are something else).
+  if (!has(t, 'nose', 'nasal', 'sinus*', 'ears', 'ear', 'head', 'traffic', 'work', 'email*', 'drain', 'sink', 'toilet', 'period*', 'cycle', 'menstru*', 'heart*', 'pulse', 'breathing', 'sleep*', 'schedule')
+    && (has(t, 'am backed up', 'im backed up', 'been backed up', 'feel so backed up', 'been irregular', 'am irregular', 'im irregular', "i'm irregular", 'feeling irregular', 'bit irregular') || /^(i'?m |im |so |all |kinda |kind of )?(backed up|irregular)[.!?]*$/.test(t))) {
     picks.add(4, P.miralax, P.docusate, P.magnesiumCitrate);
   }
   // Hard stools and straining: a stool softener first.

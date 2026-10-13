@@ -2,7 +2,8 @@ import { P, has, type Picks } from '../shared';
 
 // Products asked for by name, brand or a misspelling of either ("tylenol", "tylenal", "advil").
 // Exact catalog names and aliases are also matched separately in symptomMatcher.ts; these rules catch the rest.
-// Names score 6 so they outrank the symptom rules (1-5). Brands are only listed when they hold the same ingredient.
+// Names score 6 so they outrank the symptom rules (1-5). Brands are listed at 6 when they hold the same ingredient;
+// brands we do not carry (Sudafed, Flonase, NyQuil) point to the closest product at a lower score.
 export function productsRules(t: string, picks: Picks) {
   // Acetaminophen: Tylenol, paracetamol (UK), Panadol, Mapap, Tempra, Feverall.
   if (has(t,
@@ -162,6 +163,10 @@ export function productsRules(t: string, picks: Picks) {
   )) {
     picks.add(6, P.tums);
   }
+  // Plain "tums" (also matched against the catalog in symptomMatcher.ts).
+  if (has(t, 'tums')) {
+    picks.add(6, P.tums);
+  }
   // Omeprazole: Prilosec, Prilosec OTC.
   if (has(t,
     'omepraz*', 'omeprez*', 'prilos*', 'prilosec otc', 'prilocec', 'prilosek otc', 'prilsec', 'prylosec',
@@ -201,6 +206,10 @@ export function productsRules(t: string, picks: Picks) {
     'phamotodine', 'epcid', 'eppcid', 'papcid', 'pecid', 'pecpid', 'peepcid', 'pepccid', 'pepcd', 'pepcdi', 'pepced',
     'pepci', 'pepciid', 'pepcyd', 'pepicd', 'pepid', 'pepkid', 'peppcid', 'pipcid', 'ppcid', 'ppecid', 'ppepcid',
   )) {
+    picks.add(6, P.famotidine);
+  }
+  // Zantac 360 is famotidine now (the old ranitidine Zantac was withdrawn).
+  if (has(t, 'zantac*', 'zantec', 'zantack', 'ranitidine')) {
     picks.add(6, P.famotidine);
   }
   // Loperamide: Imodium, Imodium A-D, Diamode.
@@ -288,6 +297,10 @@ export function productsRules(t: string, picks: Picks) {
   )) {
     picks.add(6, P.docusate);
   }
+  // Single and double antibiotic ointments: bacitracin, Polysporin. Triple antibiotic is the closest we carry.
+  if (has(t, 'bacitracin', 'bacitracin ointment', 'bacitracin zinc', 'bacitrasin', 'bacitracine', 'bacatracin', 'polysporin', 'poly sporin', 'double antibiotic')) {
+    picks.add(6, P.tripleAntibiotic);
+  }
   // Triple antibiotic ointment: Neosporin and its misspellings (neosporin itself is in skin.ts).
   if (has(t,
     'neosporins', 'neosporin\'s', 'neospirin', 'neosporen', 'neosproin', 'nesporin', 'neosperin', 'neosoporin',
@@ -371,6 +384,10 @@ export function productsRules(t: string, picks: Picks) {
   )) {
     picks.add(6, P.budesonide);
   }
+  // Other nasal steroid sprays (Flonase / fluticasone, Nasacort / triamcinolone): budesonide is the one we carry.
+  if (has(t, 'flonase*', 'flonaise', 'flonace', 'flownase', 'fluticasone', 'nasacort*', 'triamcinolone')) {
+    picks.add(5, P.budesonide, P.saline);
+  }
   // Saline nasal spray: Ocean, Simply Saline, Ayr.
   if (has(t,
     'ocean nasal', 'ocean nasal spray', 'ocean saline', 'ocean spray nasal', 'ocean mist', 'simply saline',
@@ -393,6 +410,10 @@ export function productsRules(t: string, picks: Picks) {
     'afrrin', 'efrin', 'ofrin',
   )) {
     picks.add(6, P.oxymetazoline);
+  }
+  // Sudafed (pseudoephedrine / phenylephrine) is a decongestant we do not carry: show the decongestant spray, lower.
+  if (has(t, 'sudafed*', 'sudafed pe', 'sudofed', 'sudaphed', 'pseudoephedrine', 'phenylephrine')) {
+    picks.add(4, P.oxymetazoline, P.saline);
   }
   // Guaifenesin + dextromethorphan tablets: Mucinex DM, Mucus DM.
   if (has(t,
@@ -460,6 +481,14 @@ export function productsRules(t: string, picks: Picks) {
     'dxtromethorphin', 'edxtromethorphin', 'extromethorphin',
   )) {
     picks.add(6, P.coughSyrup, P.mucinexDm);
+  }
+  // NyQuil / DayQuil are cold combos (pain reliever + cough suppressant, plus an antihistamine at night).
+  // We carry the pieces separately; show them a bit lower than an exact name.
+  if (has(t, 'nyquil*', 'ny quil', 'niquil', 'nyquill', 'nightquil', 'vicks nyquil')) {
+    picks.add(4, P.coughSyrup, P.acetaminophen, P.diphenhydramine);
+  }
+  if (has(t, 'dayquil*', 'day quil', 'dayquill', 'daquil', 'vicks dayquil')) {
+    picks.add(4, P.coughSyrup, P.acetaminophen, P.mucinexDm);
   }
   // Loratadine: Claritin, Alavert, Wal-itin. Claritin-D is a different product.
   if (has(t,
@@ -603,6 +632,14 @@ export function productsRules(t: string, picks: Picks) {
     'bbanophen', 'benophen', 'bnaophen', 'bnophen', 'bonophen',
   )) {
     picks.add(6, P.diphenhydramine, P.diphenhydramineSmall);
+  }
+  // Unisom SleepGels and other diphenhydramine sleep aids (Unisom SleepTabs are doxylamine, which we do not carry).
+  if (has(t, 'unisom*', 'unisome', 'unisum')) {
+    picks.add(4, P.diphenhydramine, P.diphenhydramineSmall, P.melatonin);
+  }
+  // Motion sickness pills (Dramamine is a form of diphenhydramine; meclizine / Bonine we do not carry).
+  if (has(t, 'dramamine*', 'dramamin', 'dimenhydrinate', 'meclizine', 'bonine')) {
+    picks.add(4, P.diphenhydramine, P.diphenhydramineSmall);
   }
   // Olopatadine eye drops: Pataday, Patanol, Pazeo.
   if (has(t,

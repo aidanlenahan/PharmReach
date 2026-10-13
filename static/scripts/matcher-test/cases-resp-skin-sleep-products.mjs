@@ -210,8 +210,8 @@ export const CASES = [
   ['cortizone 10', 'hydrocortisone'],
   ['hydrocortizone cream', 'hydrocortisone'],
   ['zzzquil', 'diphenhydramine'],
-  ['nyquil', 'none'],
-  ['flonase', 'none'],
+  ['nyquil', 'coughSyrup'],
+  ['flonase', 'budesonide'],
 
   // --- Negatives (should not trigger these rules) ---
   ['its cold outside', 'none'],

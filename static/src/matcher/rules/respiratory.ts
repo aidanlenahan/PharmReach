@@ -49,6 +49,10 @@ export function respiratoryRules(t: string, picks: Picks) {
     'cold symptom*', 'cold medicine', 'cold medicines', 'cold meds', 'cold medication', 'cold remedy', 'cold remedies', 'cold relief', 'cold pills', 'cold tablets', 'cold virus', 'cold season', 'cold and flu', 'cold n flu', 'cold & flu', 'cold/flu', 'cold or flu', 'flu or cold', 'flu or a cold', 'cold or the flu', 'colds and flu', 'coldd', 'a coldd', 'sniffles', 'the sniffles', 'sniffly', 'snuffles', 'rhinovirus', 'the cold that is going around')) {
     picks.add(2, P.mucinexDm, P.acetaminophen, P.oxymetazoline);
   }
+  // Just "cold" (or "a cold") as the whole message.
+  if (/^(a |the |my )?colds?[.!?]*$/.test(t)) {
+    picks.add(2, P.mucinexDm, P.acetaminophen, P.oxymetazoline);
+  }
   // Head cold specifically comes with a blocked head; the nasal decongestant ranks a bit higher there.
   if (has(t, 'stuffy head cold', 'cold in my head', 'cold in my nose', 'cold with a runny nose', 'cold with a stuffy nose', 'cold and runny nose', 'cold and stuffy nose', 'cold and congestion', 'cold congestion', 'congestion from my cold', 'congested from my cold', 'blocked up with a cold', 'bunged up', 'full of cold')) {
     picks.add(2, P.oxymetazoline, P.mucinexDm, P.acetaminophen);

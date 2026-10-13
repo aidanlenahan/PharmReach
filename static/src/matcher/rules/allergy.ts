@@ -104,6 +104,17 @@ export function allergyRules(t: string, picks: Picks) {
   if (has(t, 'pressure in my face', 'face pressure', 'facial pressure', 'pressure in my cheeks', 'cheek pressure', 'pressure around my eyes', 'pressure around my nose', 'pressure in my nose', 'nose pressure', 'nasal pressure', 'stuffy head', 'head feels stuffed', 'head feels full', 'blocked ears from congestion', 'ears feel plugged from congestion')) {
     picks.add(3, P.oxymetazoline, P.saline, P.budesonide);
   }
+  // Backed-up nose or sinuses.
+  if (has(t, 'nose is backed up', 'nose is all backed up', 'backed up nose', 'nose backed up', 'sinuses are backed up', 'sinuses backed up', 'backed up sinuses')) {
+    picks.add(3, P.saline, P.oxymetazoline, P.budesonide);
+  }
+  // Post-nasal drip and sinus headaches: a saline rinse or decongestant spray alongside the antihistamines / pain relievers.
+  if (has(t, 'post nasal drip', 'postnasal drip', 'post nasal', 'postnasal', 'sinus drip', 'sinus drainage', 'drip down my throat', 'dripping down the back of my throat')) {
+    picks.add(3, P.saline, P.budesonide);
+  }
+  if (has(t, 'sinus headache*', 'sinus head ache*', 'sinus pressure headache*', 'headache from my sinus*', 'headache from sinus*')) {
+    picks.add(3, P.saline, P.oxymetazoline);
+  }
   // A sinus infection may need a doctor; only the gentle saline rinse is ranked first here.
   if (has(t, 'sinus infection*', 'sinus infecton', 'sinus infektion', 'sinus infeccion', 'sinusitis', 'sinusitus', 'sinusites', 'sinisitis', 'sinusitis*', 'synusitis', 'sinus infection again')) {
     picks.add(2, P.saline, P.budesonide);

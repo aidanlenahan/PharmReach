@@ -43,6 +43,19 @@ export function skinRules(t: string, picks: Picks) {
     picks.add(3, P.hydrocortisone, P.diphenhydramine);
   }
 
+  // Itchy scalp (dandruff shampoo is not in the catalog; hydrocortisone for the itch).
+  if (has(t, 'itchy scalp', 'scalp itch*', 'scalp is itchy', 'scalp is so itchy', 'itchy head', 'scalp keeps itching', 'scalp irritat*')) {
+    picks.add(4, P.hydrocortisone, P.diphenhydramine);
+  }
+  // Jellyfish stings (rinse with vinegar or sea water first; hydrocortisone for the itch afterwards).
+  if (has(t, 'jellyfish*', 'jelly fish*', 'man of war', 'sea lice', 'stung by a jelly*')) {
+    picks.add(4, P.hydrocortisone, P.diphenhydramine);
+  }
+  // Bumps on the skin (not the face: acne is not a hydrocortisone job).
+  if (has(t, 'bumps on my arm*', 'bumps on my leg*', 'bumps on my skin', 'bumps on my hand*', 'bumps on my chest', 'bumps on my back', 'bumps on my neck', 'bumps on my stomach', 'bumps on my thigh*', 'bumps on my feet', 'bumps on my foot', 'bumps on my body', 'skin bumps', 'red bumps', 'itchy bumps', 'little bumps on my', 'small bumps on my')) {
+    picks.add(3, P.hydrocortisone, P.diphenhydramine);
+  }
+
   // ---- Chafing ----
   if (has(t, 'chafe*', 'chafing', 'chaff*', 'chaif*', 'chaffing', 'chafin', 'chafeing', 'thigh rub', 'thighs rubbing', 'inner thigh irritation', 'rubbed raw', 'skin rubbed raw', 'runners chafe', 'jogger nipple*', 'monkey butt')) {
     picks.add(3, P.hydrocortisone);
@@ -68,6 +81,10 @@ export function skinRules(t: string, picks: Picks) {
     picks.add(5, P.tripleAntibiotic);
   }
 
+  // A single first-aid word as the whole message ("cut", "scratch", "burn").
+  if (/^(a |small |minor |little )?(cuts?|scratch(es)?|scrapes?|burns?|grazes?|nicks?|papercut|paper cut)[.!?]*$/.test(t)) {
+    picks.add(5, P.tripleAntibiotic);
+  }
   // ---- Minor wound care / first aid ----
   if (has(t, 'wound*', 'woond*', 'wond on my', 'first aid', 'firstaid', 'frist aid', 'first aide', 'first aid kit', 'antibiotic ointment', 'antibiotic cream', 'antibacterial ointment', 'antibacterial cream', 'triple antibiotic', 'tripple antibiotic', 'neosporin', 'band aid*', 'bandaid*', 'bandage*', 'boo boo*', 'booboo*', 'keep it from getting infected', 'prevent infection', 'so it doesnt get infected', "so it doesn't get infected", 'infection on my skin', 'clean a cut', 'scab', 'scabs', 'scabbed', 'open sore on my', 'raw skin', 'skin is raw', 'bleeding a little', 'little bit of blood', 'minor bleeding')) {
     picks.add(5, P.tripleAntibiotic);
