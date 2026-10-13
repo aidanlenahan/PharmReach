@@ -1,0 +1,54 @@
+# Builds static/ (the serverless copy of the site) and publishes it to GitHub Pages.
+# Repo settings → Pages → Source: "GitHub Actions".
+name: Static site
+
+on:
+  push:
+    branches: [static-site]
+    paths: ['static/**', 'backend/data/**', '.github/workflows/static-pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: static
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      # Runs scripts/build_data.py (backend/data -> public/data), type-checks, then vite build.
+      - run: pnpm build
+        env:
+          # Browser key, restricted by HTTP referrer in Google Cloud. Optional: without it,
+          # address autocomplete is off and the local address index is still used.
+          VITE_GOOGLE_MAPS_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: static/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
