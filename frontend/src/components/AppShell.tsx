@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { searchEntry } from '../core';
 import { AppFooter } from './AppFooter';
 import { Brand } from './Brand';
+import { InfoMenu } from './InfoMenu';
 
 export function AppShell({ children, active = 'home', onboarding = false, landing = false }: { children: ReactNode; active?: string; onboarding?: boolean; landing?: boolean }) {
   const [notice, setNotice] = useState('');
@@ -20,14 +21,16 @@ export function AppShell({ children, active = 'home', onboarding = false, landin
     <div className="shell">
       <header className="topbar">
         <Brand />
-        {onboarding ? <span className="setup-header">Make it work for you</span> : landing ? <nav className="nav landing-nav" aria-label="Main navigation">
+        {onboarding ? <div className="setup-header-group"><span className="setup-header">Make it work for you</span><InfoMenu /></div> : landing ? <nav className="nav landing-nav" aria-label="Main navigation">
           <a href="#how-it-works">How it works</a>
           <a href="/products">Browse products</a>
           <a className="landing-nav-cta" href={entry.href}>{entry.label} <ArrowUpRight size={16} aria-hidden="true" /></a>
+          <InfoMenu />
         </nav> : <nav className="nav" aria-label="Main navigation">
           <a className={active === 'home' ? 'current' : ''} href="/find-medicine">Find medication</a>
           <a className={active === 'products' ? 'current' : ''} href="/products">Products</a>
           <a className={active === 'settings' ? 'current' : ''} href="/settings">Settings</a>
+          <InfoMenu />
         </nav>}
       </header>
       {children}
