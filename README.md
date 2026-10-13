@@ -4,6 +4,7 @@
 
 # PharmReach
 HackRU 2026 at Rutgers University, developed in 24 hours<br>
+This branch is the static version of `main`, adapted for GitHub Pages.<br>
 [pharmreach.tech](https://pharmreach.tech)
 
 ## What it does
