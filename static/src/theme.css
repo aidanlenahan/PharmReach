@@ -1,0 +1,105 @@
+/* Every component reads these tokens, regardless of stylesheet load order. */
+:root {
+  color-scheme: light;
+  --ink: #242933;
+  --muted: #6f7785;
+  --placeholder: #9199a8;
+  --accent: #2d62bb;
+  --accent-solid: #2d62bb;
+  --accent-hover: #24529d;
+  --accent-soft: #edf2fb;
+  --accent-line: #c4d3ec;
+  --accent-muted: #6c86ad;
+  --line: #e0e4eb;
+  --paper: #f7f8fa;
+  --white: #fff;
+  --surface-subtle: #f2f4f7;
+  --surface-hover: #fafbfc;
+  --selected-surface: #fff;
+  --cta-surface: #edf0f5;
+  --feature-bg: #2b3340;
+  --feature-ink: #e4eaf4;
+  --feature-muted: #bec6d2;
+  --feature-label: #bac6d8;
+  --feature-accent: #b5d1ff;
+  --feature-icon-bg: #ffffff0d;
+  --detail-gradient-start: #edf2fb;
+  --detail-gradient-end: #d8e5f8;
+  --shadow-rgb: 38 54 77;
+  --shadow: 0 12px 35px rgb(var(--shadow-rgb) / 7%);
+  --focus-ring: #2d62bb20;
+  --scrim: rgb(18 20 24 / 24%);
+  /* Inventory and route status colors retain their meaning. */
+  --stock-green: #25804a;
+  --gold: #957332;
+  --goldbg: #fbf5e4;
+  --warning-line: #f0e6c7;
+  --warning-dot: #bb9140;
+  --danger: #9b6f6b;
+  --danger-solid: #b83c35;
+  --danger-hover: #a3332d;
+  --danger-line: #bd766c;
+  --danger-dot: #b97870;
+  --unknown-dot: #9199a8;
+  --route-walk: #3767ae;
+  --route-walk-bg: #edf2fb;
+  --route-drive: #285fc2;
+  --route-drive-bg: #e6edfc;
+  --route-bike: #8a6a2e;
+  --route-bike-bg: #f7f1e6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink: #edf0f5;
+    --muted: #a6adba;
+    --accent: #8bb8ff;
+    --accent-solid: #3166c7;
+    --accent-hover: #3e76db;
+    --accent-soft: #242d3d;
+    --accent-line: #475c7b;
+    --accent-muted: #a9b9d3;
+    --line: #343840;
+    --paper: #141518;
+    --white: #1e2025;
+    --surface-subtle: #25272d;
+    --surface-hover: #2b2e36;
+    --selected-surface: #303b50;
+    --cta-surface: #202227;
+    --feature-bg: #272b33;
+    --feature-ink: #dce5f3;
+    --feature-muted: #a6adba;
+    --feature-label: #acb6c6;
+    --feature-accent: #9cc2ff;
+    --feature-icon-bg: #8bb8ff14;
+    --detail-gradient-start: #262b35;
+    --detail-gradient-end: #303846;
+    --shadow-rgb: 0 0 0;
+    --shadow: 0 12px 35px rgb(var(--shadow-rgb) / 25%);
+    --focus-ring: #8bb8ff30;
+    --scrim: rgb(0 0 0 / 35%);
+    --stock-green: #85d5a0;
+    --gold: #e0bc74;
+    --goldbg: #382f1e;
+    --warning-line: #5a4b2a;
+    --warning-dot: #9c7834;
+    --danger: #e4a79e;
+    --danger-solid: #c64740;
+    --danger-hover: #b83c35;
+    --danger-line: #a4655e;
+    --danger-dot: #a4655e;
+    --route-walk: #9abfff;
+    --route-walk-bg: #273143;
+    --route-drive: #a5c5ff;
+    --route-drive-bg: #2c3c5a;
+    --route-bike: #e6c686;
+    --route-bike-bg: #403821;
+  }
+}
+
+.availability:not(.unavailable):not(.limited):not(.unknown) { color: var(--stock-green); }
+.route-visual.transit, .route-visual.walk {
+  --route-color: var(--route-walk);
+  --route-background: var(--route-walk-bg);
+}

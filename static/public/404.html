@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+  <title>404 · Page not found · PharmReach</title>
+  <style>
+    :root { color-scheme: light dark; --bg: #f7f8fa; --text: #17181c; --muted: #5d6270; --accent: #397bd7; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #141518; --text: #f1f2f5; --muted: #a3a8b5; --accent: #6ea2ec; } }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 16px; box-sizing: border-box; }
+    main { max-width: 32rem; text-align: center; }
+    .code { font-size: 4rem; font-weight: 800; margin: 0; color: var(--accent); }
+    h1 { margin: .25rem 0 .5rem; }
+    p { color: var(--muted); }
+    a { display: inline-block; margin-top: 1rem; padding: .7rem 1.2rem; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }
+  </style>
+</head><body><main>
+  <p class="code">404</p>
+  <h1>Page not found</h1>
+  <p>We couldn’t find this page. Check the address or search for medicine nearby.</p>
+  <a id="home" href="/">Back to home</a>
+</main>
+<script>
+  // GitHub Pages serves this file for any missing path, so work out where the site is mounted:
+  // project sites live under /<repo>/ on *.github.io; custom domains (pharmreach.tech, ...) at the root.
+  if (/\.github\.io$/.test(location.hostname)) {
+    var segment = location.pathname.split('/')[1];
+    if (segment) document.getElementById('home').href = '/' + segment + '/';
+  }
+</script>
+</body></html>

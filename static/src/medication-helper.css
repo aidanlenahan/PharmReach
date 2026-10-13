@@ -1,0 +1,83 @@
+.helper-panel{margin-top:12px;padding:18px;background:var(--white);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px rgb(var(--shadow-rgb) / 0.031)}
+.helper-intro{font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 14px}
+.helper-thread{display:flex;flex-direction:column;gap:14px;max-height:420px;overflow-y:auto;margin-bottom:14px;padding-right:2px}
+.helper-turn{display:flex;flex-direction:column;gap:8px}
+.helper-question{align-self:flex-end;max-width:85%;margin:0;padding:9px 12px;border-radius:12px 12px 3px 12px;background:var(--accent-soft);color:var(--ink);font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.helper-reply{display:flex;gap:9px;max-width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px 12px 12px 3px;background:var(--paper);font-size:13px;line-height:1.55;color:var(--ink)}
+.helper-reply>div{min-width:0;flex:1}
+.helper-reply p{margin:0}
+.helper-reply .helper-reply-note{margin-top:10px;font-size:11px;color:var(--muted)}
+.helper-reply.urgent{border-color:#e2a59b;background:#fdf1ee;color:#7d2a1d}
+.helper-reply.urgent .helper-reply-icon{color:#c0392b;margin-top:2px}
+.helper-reply.pharmacist{border-color:#e6d6ad;background:#fbf6e8}
+.helper-suggestions{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+.helper-suggestions li{display:flex;flex-direction:column;gap:5px}
+.helper-panel .helper-suggestion{display:flex;align-items:center;gap:10px;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);text-decoration:none;transition:border-color .12s,background .12s}
+.helper-panel .helper-suggestion:hover,.helper-panel .helper-suggestion:focus-visible{border-color:var(--accent);background:var(--accent-soft);outline:0}
+.helper-suggestion-icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:9px;background:var(--accent-soft);color:var(--accent)}
+.helper-suggestion-text{flex:1;min-width:0}
+.helper-suggestion-text b{display:block;font-size:13px}
+.helper-suggestion-text small{display:block;margin-top:2px;font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+.helper-suggestion-cta{display:inline-flex;align-items:center;gap:4px;flex:none;font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap}
+.helper-panel .helper-retailer{display:inline-flex;align-items:center;gap:3px;width:fit-content;margin-left:53px;font-size:11px;color:var(--muted)}
+.helper-panel .helper-retailer:hover{color:var(--accent);text-decoration:underline}
+.helper-state{display:flex;align-items:center;gap:7px;margin:0;font-size:12px;color:var(--muted);line-height:1.5}
+.helper-state.error{color:#a3402f}
+.helper-state.loading svg,.helper-spin{animation:helper-spin 1s linear infinite}
+@keyframes helper-spin{to{transform:rotate(360deg)}}
+.helper-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.helper-input{display:flex;align-items:flex-end;gap:8px;padding:6px 6px 6px 13px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+.helper-input:focus-within{border-color:var(--accent)}
+.helper-input textarea{flex:1;min-width:0;border:0;outline:0;resize:none;background:transparent;color:var(--ink);font:inherit;font-size:14px;line-height:1.5;padding:7px 0;field-sizing:content;max-height:120px}
+.helper-input .primary{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;font-size:12px}
+.helper-input .primary:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.helper-form-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:20px}
+.helper-form-meta .popular{margin-top:10px;font-size:11px;gap:6px}
+.helper-form-meta .popular button{font-size:11px;padding:5px 9px;background:transparent}
+.helper-form-meta small{font-size:10px;color:var(--muted);white-space:nowrap}
+.helper-disclaimer{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:10.5px;line-height:1.6;color:var(--muted)}
+.helper-disclaimer b{color:var(--ink)}
+@media (prefers-color-scheme: dark){
+  .helper-reply.urgent{border-color:#7a3a30;background:#2c1d1a;color:#f3c6bd}
+  .helper-reply.urgent .helper-reply-icon{color:#f08a78}
+  .helper-reply.pharmacist{border-color:#5a4b2a;background:#2a2519}
+  .helper-state.error{color:#f0a090}
+}
+@media (max-width:600px){
+  .helper-panel{padding:14px}
+  .helper-suggestion-cta{font-size:0;gap:0}
+  .helper-panel .helper-retailer{margin-left:0}
+  .helper-input .primary span{display:none}
+  .helper-input textarea{font-size:16px}
+  .helper-question{max-width:92%}
+}
+
+.helper-launcher{position:fixed;right:24px;bottom:24px;z-index:1100;display:flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:15px 20px;background:var(--accent-solid);color:#fff;box-shadow:0 8px 28px #0003;cursor:pointer;font:inherit;font-weight:600}
+.helper-window{position:fixed;inset:auto 24px 94px auto;margin:0;width:min(420px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 120px);padding:0;border:1px solid var(--line);border-radius:18px;background:var(--white);color:var(--ink);box-shadow:0 16px 60px #0003;z-index:1101;overflow:auto}
+.helper-window.expanded{inset:0;margin:auto;width:min(960px,calc(100vw - 40px));height:calc(100dvh - 48px);max-height:none}
+.helper-window::backdrop{background:#10182099;backdrop-filter:blur(4px)}
+.helper-header{display:flex;align-items:center;gap:8px;padding:16px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--white);z-index:1}
+.helper-header>div{flex:1}.helper-header strong{display:block;font-size:15px}.helper-header small{display:block;margin-top:4px;color:var(--muted);font-size:11px}
+.helper-header button{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);cursor:pointer}
+.helper-window .helper-panel{margin:0;border:0;box-shadow:none;background:transparent}
+.helper-window.expanded .helper-thread{max-height:calc(100dvh - 350px);min-height:180px}
+.helper-launcher:focus-visible,.helper-header button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:600px){.helper-launcher{right:16px;bottom:16px;padding:14px}.helper-launcher span{display:none}.helper-window{right:16px;bottom:78px;max-height:calc(100dvh - 100px)}.helper-window.expanded{width:calc(100vw - 16px);height:calc(100dvh - 16px)}.helper-form-meta .popular{flex-wrap:wrap}}
+
+/* Keep the bottom-anchored popup and composer stationary as replies arrive. */
+.helper-window{height:min(640px,calc(100dvh - 120px));overflow:hidden}
+.helper-window[open]{display:flex;flex-direction:column}
+.helper-header{flex-shrink:0}
+.helper-window .helper-panel{display:flex;flex:1;flex-direction:column;min-height:0;overflow:hidden}
+.helper-window .helper-intro,.helper-window .helper-form,.helper-window .helper-disclaimer{flex-shrink:0}
+.helper-window .helper-thread,.helper-window.expanded .helper-thread{flex:1;min-height:0;max-height:none;overflow-y:auto;overflow-anchor:none;scrollbar-gutter:stable}
+.helper-turn{flex-shrink:0}
+.helper-state.loading{min-height:24px}
+.helper-state.loading svg,.helper-spin{display:block;flex-shrink:0;transform-origin:center}
+.helper-window .helper-input textarea{field-sizing:fixed;height:58px;max-height:58px}
+.helper-window .helper-form-meta{min-height:40px}
+.helper-disclaimer a{color:var(--accent);font-weight:600;text-underline-offset:3px}
+@media(max-width:600px){.helper-window{height:min(600px,calc(100dvh - 100px))}}
+@media(prefers-reduced-motion:reduce){.helper-state.loading svg,.helper-spin{animation:none}}
+
+.helper-launcher{width:52px;height:52px;padding:0;justify-content:center}
