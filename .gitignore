@@ -104,3 +104,7 @@ backend/data/cache/
 
 # Local-only frontend notes
 frontend/README.md
+
+# Only the root README is tracked; READMEs in subfolders stay local
+**/README.md
+!/README.md
