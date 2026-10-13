@@ -10,6 +10,9 @@ const common = new Set(COMMON_WORDS.split(/\s+/).filter(Boolean));
 const vocab = new Set<string>();
 // Vocabulary words grouped by length, so a lookup only compares words of a similar size.
 const byLength = new Map<number, string[]>();
+// Stems of "prefix*" phrases ("sneez*"): any word starting with one is known, and typos are fixed against the stem.
+const stems = new Set<string>();
+const stemsByLength = new Map<number, string[]>();
 const cache = new Map<string, string>();
 
 // Texting shorthand, expanded before the rules run.
@@ -18,14 +21,20 @@ const SHORTHAND: Record<string, string> = {
   dont: "don't", cant: "can't", wont: "won't", didnt: "didn't", doesnt: "doesn't", isnt: "isn't", couldnt: "couldn't",
   idk: "i don't know", rn: 'right now', bc: 'because', cuz: 'because', coz: 'because', abt: 'about', pls: 'please', plz: 'please',
   w: 'with', wo: 'without', smth: 'something', sth: 'something', rly: 'really', rlly: 'really', srsly: 'seriously',
-  tmrw: 'tomorrow', tho: 'though', thru: 'through', ppl: 'people', bf: 'boyfriend', gf: 'girlfriend',
+  r: 'are', n: 'and', y: 'why', tmrw: 'tomorrow', tho: 'though', thru: 'through', ppl: 'people', bf: 'boyfriend', gf: 'girlfriend',
   myslf: 'myself', meself: 'myself', mysef: 'myself', myslef: 'myself', mysefl: 'myself', mysel: 'myself',
 };
 
-/** Add every word of these phrases to the known vocabulary. A trailing * (prefix match) is dropped. */
+/** Add every word of these phrases to the known vocabulary. A trailing * (prefix match) also adds a stem. */
 export function addVocab(...phrases: string[]) {
   cache.clear();
   for (const phrase of phrases) {
+    const stem = phrase.toLowerCase().match(/([a-z]{4,})\*$/)?.[1];
+    if (stem && !stems.has(stem)) {
+      stems.add(stem);
+      if (!stemsByLength.has(stem.length)) stemsByLength.set(stem.length, []);
+      stemsByLength.get(stem.length)!.push(stem);
+    }
     for (const word of phrase.toLowerCase().replace(/\*/g, '').split(/[^a-z']+/)) {
       const key = word.replace(/'/g, '');
       if (key.length < 3 || vocab.has(key)) continue;
@@ -64,21 +73,54 @@ function distance(a: string, b: string, max: number) {
   return rows[a.length][b.length];
 }
 
-const known = (word: string) => vocab.has(word) || common.has(word);
+// Endings that turn a common word into another real word ("text" -> "texting", "point" -> "pointless").
+const ENDINGS = /(s|es|ed|d|ing|er|ers|ly|ment|ments|ness|less|ful|able|y)$/;
 
-/** Closest vocabulary word within max edits, or null. Ties go to the word with the same first, then last letter. */
+function known(word: string) {
+  if (vocab.has(word) || common.has(word)) return true;
+  const ending = word.match(ENDINGS)?.[0];
+  if (!ending) return false;
+  const base = word.slice(0, -ending.length);
+  // Also "hoping" -> "hope" and "stopped" -> "stop".
+  return base.length >= 4 && (common.has(base) || common.has(base + 'e') || (base.length >= 5 && base.at(-1) === base.at(-2) && common.has(base.slice(0, -1))));
+}
+
+/** Length of the longest "prefix*" stem the word starts with (0 if none). */
+function stemLength(word: string) {
+  for (let i = word.length; i >= 4; i--) if (stems.has(word.slice(0, i))) return i;
+  return 0;
+}
+
+/** How likely "candidate" is the word meant by "typed", d edits apart (lower is better), or null to rule it out. */
+function score(typed: string, candidate: string, d: number) {
+  const transposed = typed.length === candidate.length && [...typed].sort().join('') === [...candidate].sort().join('');
+  // The first letter is rarely the typo: only change it in long words or by swapping the first two letters.
+  if (typed[0] !== candidate[0] && (d === 2 || (typed.length < 7 && !(typed[0] === candidate[1] && typed[1] === candidate[0])))) return null;
+  // A dropped or swapped letter is a likelier slip than a wrong one ("bloting" is bloating, not blowing).
+  const substituted = typed.length === candidate.length && !transposed;
+  // An extra typed letter is a little less likely than a dropped one or a swap ("congetsion" is congestion, not congesion).
+  return d * 4 + (typed[0] === candidate[0] ? 0 : 2) + (typed.at(-1) === candidate.at(-1) ? 0 : 1) + (substituted ? 0.5 : 0) + (candidate.length < typed.length ? 0.25 : 0);
+}
+
+/** Closest vocabulary word (or stem plus the typed ending) within max edits, or null. */
 function closest(word: string, max: number) {
   let best: string | null = null;
   let bestScore = Infinity;
+  const consider = (typed: string, candidate: string, result: string) => {
+    const d = distance(typed, candidate, max);
+    const s = d > max || d === 0 ? null : score(typed, candidate, d);
+    if (s !== null && s < bestScore) { best = result; bestScore = s; }
+  };
   for (let length = word.length - max; length <= word.length + max; length++) {
-    for (const candidate of byLength.get(length) || []) {
-      if (candidate.length < 4) continue;
-      const d = distance(word, candidate, max);
-      if (d > max) continue;
-      // Two edits only when the first letter matches; the first letter is rarely the typo.
-      if (d === 2 && candidate[0] !== word[0]) continue;
-      const score = d * 4 + (candidate[0] === word[0] ? 0 : 2) + (candidate.at(-1) === word.at(-1) ? 0 : 1);
-      if (score < bestScore) { best = candidate; bestScore = score; }
+    for (const candidate of byLength.get(length) || []) if (candidate.length >= 4) consider(word, candidate, candidate);
+  }
+  // "scaped" against the stem "scrape*" -> "scraped": compare the start of the word with each stem.
+  for (let length = 4; length <= word.length + max; length++) {
+    for (const stem of stemsByLength.get(length) || []) {
+      // Only short endings after the stem, so "hurtmyself" isn't read as the stem "hurt" plus "yself".
+      for (let cut = Math.max(length - max, 4, word.length - 3); cut <= Math.min(length + max, word.length); cut++) {
+        consider(word.slice(0, cut), stem, stem + word.slice(cut));
+      }
     }
   }
   return best;
@@ -93,10 +135,12 @@ function doubling(word: string) {
   return null;
 }
 
-/** "hurtmyself" -> "hurt myself" when both halves are known words (one at least 4 letters). */
+/** "hurtmyself" -> "hurt myself" when both halves are known words (one at least 4 letters).
+ *  Never splits inside a stem the rules already match ("sunburn*" keeps "sunburn"). */
 function split(word: string) {
-  for (let i = 2; i <= word.length - 2; i++) {
+  for (let i = Math.max(2, stemLength(word)); i <= word.length - 2; i++) {
     const left = word.slice(0, i), right = word.slice(i);
+    if (new RegExp(`^${ENDINGS.source}`).test(right)) continue; // "embarrassment" is not "embarrass ment"
     if (known(left) && known(right) && Math.max(left.length, right.length) >= 4 && (vocab.has(left) || vocab.has(right))) return `${left} ${right}`;
   }
   return null;
@@ -107,7 +151,8 @@ function fixWord(word: string) {
   if (SHORTHAND[key]) return SHORTHAND[key];
   if (key.length < 4 || known(key)) return word;
   if (cache.has(key)) return cache.get(key)!;
-  const fixed = doubling(key) || closest(key, 1) || split(key) || (key.length >= 7 ? closest(key, 2) : null) || word;
+  // Words a "prefix*" phrase already matches ("sneezin") only get the one-letter fixes.
+  const fixed = doubling(key) || closest(key, 1) || (key.length >= 7 && !stemLength(key) ? closest(key, 2) : null) || split(key) || word;
   cache.set(key, fixed);
   return fixed;
 }

@@ -59,11 +59,20 @@ export class Picks {
 let recorder: ((phrases: string[]) => void) | null = null;
 export function recordPhrases(record: typeof recorder) { recorder = record; }
 
+// Each phrase's regex is built once and reused (the rules check thousands of phrases per message).
+const compiled = new Map<string, RegExp>();
+function phraseRegex(phrase: string) {
+  let regex = compiled.get(phrase);
+  if (!regex) {
+    const source = phrase.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\\?\*$/, '\\w*').replace(/ /g, "[\\s-]+");
+    regex = new RegExp(`(^|[^a-z0-9])${source}(?![a-z0-9])`);
+    compiled.set(phrase, regex);
+  }
+  return regex;
+}
+
 /** True when any phrase appears in the text as whole words. A trailing * allows any ending ("sneez*"). */
 export function has(text: string, ...phrases: string[]) {
   if (recorder) { recorder(phrases); return false; }
-  return phrases.some((phrase) => {
-    const source = phrase.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\\?\*$/, '\\w*').replace(/ /g, "[\\s-]+");
-    return new RegExp(`(^|[^a-z0-9])${source}(?![a-z0-9])`).test(text);
-  });
+  return phrases.some((phrase) => phraseRegex(phrase).test(text));
 }
