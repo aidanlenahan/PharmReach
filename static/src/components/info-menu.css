@@ -1,0 +1,14 @@
+.info-menu{position:relative;display:flex;align-items:center;flex:none}
+.info-menu-button{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:var(--white);color:var(--muted);transition:color .15s,border-color .15s,background .15s}
+.info-menu-button:hover,.info-menu-button[aria-expanded="true"]{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+.info-menu-list{position:absolute;z-index:40;top:calc(100% + 8px);right:0;min-width:210px;padding:6px;background:var(--white);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);display:none}
+.info-menu-list.open{display:block}
+/* Keeps the menu open while the mouse crosses the gap below the button. */
+.info-menu-list::before{content:'';position:absolute;left:0;right:0;top:-10px;height:10px}
+.info-menu-list a{display:flex;align-items:center;gap:10px;padding:10px 11px;border-radius:9px;color:var(--ink);text-decoration:none;font-size:13px;white-space:nowrap}
+.info-menu-list a svg{color:var(--muted);flex:none}
+.info-menu-list a:hover,.info-menu-list a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:0}
+.info-menu-list a:hover svg,.info-menu-list a:focus-visible svg{color:var(--accent)}
+@media(max-width:600px){.info-menu-button{width:34px;height:34px}}
+.setup-header-group{display:flex;align-items:center;gap:12px}
+.landing-nav .info-menu{margin-left:8px}
