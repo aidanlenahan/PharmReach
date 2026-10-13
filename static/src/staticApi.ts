@@ -29,6 +29,13 @@ function loadJson<T>(name: string): Promise<T> {
 }
 export const loadCatalog = () => loadJson<Catalog>('catalog.json');
 
+let wordList: Promise<string> | null = null;
+/** Large English word list for the helper's typo fixer (public/english-words.txt); '' if it can't load. */
+export function loadWordList() {
+  return wordList ??= fetch(href('english-words.txt')).then((response) => (response.ok ? response.text() : ''))
+    .catch(() => { wordList = null; return ''; });
+}
+
 const stockOf = (item?: Json) => String(item?.stock ?? 'Unknown').trim().toLowerCase();
 const STOCKED = ['in stock', 'limited stock'];
 

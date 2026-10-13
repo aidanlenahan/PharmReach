@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { AlertTriangle, ArrowRight, ArrowUpRight, Maximize2, Minimize2, X, Loader2, MessageCircleQuestion, Pill, RotateCcw, Send } from 'lucide-react';
 import './medication-helper.css';
 
-import { answer, type ChatReply, type ChatSuggestion } from './symptomMatcher';
+import { answer, warmUp, type ChatReply, type ChatSuggestion } from './symptomMatcher';
 
 // Static build: replies come from the keyword matcher in symptomMatcher.ts, not from Gemini.
 type Turn = { id: number; question: string; reply?: ChatReply; failed?: string };
@@ -116,8 +116,9 @@ export function MedicationHelper() {
   useEffect(() => {
     if (!open || available !== null) return;
     let active = true;
-    // The keyword matcher runs in the browser, so it is always available.
+    // The keyword matcher runs in the browser, so it is always available. Warm it up while the user types.
     Promise.resolve().then(() => { if (active) setAvailable(true); });
+    warmUp().catch(() => { /* answer() retries the word list. */ });
     return () => { active = false; };
   }, [open, available]);
 

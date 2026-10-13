@@ -6,6 +6,10 @@ register('./hooks.mjs', import.meta.url);
 
 const { screen, matchSymptoms, clean } = await import('../../src/symptomMatcher.ts');
 const { P } = await import('../../src/matcher/shared.ts');
+// The browser loads the big English word list on the first message (answer()); do the same here.
+const { addCommonWords } = await import('../../src/matcher/typos.ts');
+const { loadWordList } = await import('./stub-staticApi.mjs');
+addCommonWords(await loadWordList());
 import { readdirSync } from 'node:fs';
 const CASES = [];
 for (const file of readdirSync(new URL('.', import.meta.url)).filter((f) => /^cases.*\.mjs$/.test(f)).sort()) {

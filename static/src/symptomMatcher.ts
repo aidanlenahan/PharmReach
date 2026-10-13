@@ -2,10 +2,10 @@
 // if-statements that look for symptom words in the message and point to catalog products.
 // The safety screens (emergency / ask a pharmacist) are ported from backend/chat.py and run first,
 // and every reply is built from the same templates the Gemini helper used.
-import { inStockCatalog, loadCatalog } from './staticApi';
+import { inStockCatalog, loadCatalog, loadWordList } from './staticApi';
 import { Picks, has, recordPhrases } from './matcher/shared';
 import { EMERGENCY_PATTERNS, EMERGENCY_WORDS } from './matcher/emergency';
-import { addRegexVocab, addVocab, fixTypos } from './matcher/typos';
+import { addCommonWords, addRegexVocab, addVocab, fixTypos } from './matcher/typos';
 import { coldSoreRules, skinRules } from './matcher/rules/skin';
 import { painRules } from './matcher/rules/pain';
 import { stomachRules } from './matcher/rules/stomach';
@@ -38,14 +38,64 @@ const TEMPLATES = {
 
 // --- Safety screens (ported from backend/chat.py; emergency list in matcher/emergency.ts) ---
 
+// Over-the-counter medicines by name, for the dosing, mixing and alcohol checks below.
+const OTC = String.raw`(tylenol|acetaminophen|paracetamol|advil|motrin|ibuprofen|aleve|naproxen|aspirin|excedrin|benadryl|diphenhydramine`
+  + String.raw`|zyrtec|cetirizine|claritin|loratadine|allegra|fexofenadine|xyzal|chlor\w*|sudafed|pseudoephedrine|phenylephrine`
+  + String.raw`|nyquil|dayquil|zzzquil|unisom|mucinex|guaifenesin|robitussin|delsym|dextromethorphan|pepto|imodium|loperamide`
+  + String.raw`|tums|rolaids|pepcid|famotidine|zantac|prilosec|omeprazole|nexium|miralax|colace|dulcolax|melatonin|afrin|flonase`
+  + String.raw`|antihistamines?|painkillers?|pain ?relievers?|sleeping pills?|sleep aids?|cold medicine|allergy (pills?|meds?|medicine))`;
+// Prescription medicines (and kinds of them) people mention alongside an OTC question.
+const RX = String.raw`\b(warfarin|coumadin|eliquis|apixaban|xarelto|rivaroxaban|plavix|clopidogrel|heparin|blood thinners?`
+  + String.raw`|sertraline|zoloft|prozac|fluoxetine|lexapro|escitalopram|citalopram|celexa|paxil|paroxetine|wellbutrin|bupropion`
+  + String.raw`|effexor|venlafaxine|cymbalta|duloxetine|trazodone|antidepressants?|ssris?|maois?|lithium|seroquel|abilify|lamictal`
+  + String.raw`|lisinopril|losartan|amlodipine|metoprolol|atenolol|hydrochlorothiazide|hctz|diuretics?|water pills?`
+  + String.raw`|metformin|ozempic|atorvastatin|lipitor|simvastatin|rosuvastatin|crestor|statins?|levothyroxine|synthroid`
+  + String.raw`|prednisone|amoxicillin|augmentin|azithromycin|z ?pack|cipro|ciprofloxacin|doxycycline|keflex|cephalexin|penicillin`
+  + String.raw`|gabapentin|lyrica|tramadol|oxy|oxys|oxycontin|percocet|vicodin|hydrocodone|codeine|morphine|fentanyl|suboxone|methadone`
+  + String.raw`|alprazolam|klonopin|clonazepam|valium|diazepam|ativan|lorazepam|benzos?|ambien|zolpidem|ritalin|vyvanse|adderall`
+  + String.raw`|birth control|chemo|chemotherapy)\b`;
 const PHARMACIST_PATTERNS = [
-  /prescri/, /\brx\b/, /refill/, /antibiotics?\b(?! ointment)/, /opioid/, /oxycodone/, /adderall/, /xanax/, /insulin/,
-  /pregnan/, /breast ?feed/, /nursing/, /trying to conceive/,
-  /\b(child|children|kid|kids|baby|babies|infant|toddler|newborn|son|daughter|teen|teenager)\b/, /\b\d{1,2}[- ]?(year|yr|month)s?[- ]?old\b/,
-  /\bdos(e|es|age|ing)\b/, /how (much|many) (should|can|do)/, /\bmg (should|can|do)\b/, /max(imum)? (dose|amount)/,
-  /interact/, /mix(ing)? (with|it|them)/, /together with/, /with alcohol/, /while drinking/,
+  /prescri/, /\brx\b/, /refill/, /antibiotics?\b(?! (ointment|cream))/, /opioid/, /oxycodone/, /adderall/, /xanax/, /insulin/,
+  new RegExp(RX), /\b(blood pressure|bp|heart|thyroid|diabetes|cholesterol|seizure|anxiety|depression|adhd|psych) (med|meds|medication|medications|medicine|pills?)\b/,
+  /\b(on|taking|take) (other|any|some|my|regular|daily|prescription) (meds|medications?)\b/,
+  /pregnan/, /\bpreg(?!am)/, /\bpragn/, /breast ?feed/, /\bnursing\b(?! (a|an|this|the|my) (hangover|cold|sore|cough|headache|migraine|fever|flu|injury|wound|bruise|sprain|stomach|back|knee|ankle|throat))/, /trying to conceive/,
+  /\b(child|children|kid|kids|baby|babies|infant|toddler|newborn|son|daughter|teen|teenager|teething)\b/,
+  /\b([0-9]|1[0-7]|[6-9][0-9]|1[0-9][0-9])[- ]?(year|yr)s?[- ]?old\b/, /\b\d{1,2}[- ]?(month|week|day)s?[- ]?old\b/,
+  // Stomach ulcers: NSAIDs and Pepto (a salicylate) can make them worse. Mouth ulcers are removed in SAFE_PHRASES.
+  /\bulcers?\b/,
+  // Infected wounds or piercings need someone to look at them, not just a cream.
+  /\b(infected|infection is spreading)\b/,
+  // Dosing: how much, how often, how many at once, more than the label.
+  /\bdos(e|es|age|ages|ing)\b/, /how (much|many)\b.{0,40}\b(should|can|could|do|to|is it ok to|is it safe to) (i|we|you|he|she|they|one|take|give)\b/,
+  /how (much|many) \w+ (is|are) (safe|ok|okay|too much|too many)/, /how (much|many) (mg|milligrams?|ml|pills?|tablets?|capsules?|caps)\b/,
+  /\bmg (should|can|do)\b/, /max(imum)? (dose|amount)/, /how often\b/, /\bevery how many\b/, /how many (hours|times)\b/,
+  /how (long|soon)\b.{0,30}\b(between|apart|before i can|until i can|can i take|to wait|should i wait)\b/, /\b(hours|time) apart\b/,
+  /\b(\d+|two|three|four|five|six|several|a few) \w+( \w+)? (at once|at a time|in one go)\b/,
+  /\b((can|could|should|may) i|(ok|okay|safe|fine|alright) to) (take|have|use|give)\b.{0,20}\b(\d+|two|three|four|five|six|another|more|a second|extra|double)\b(?! (days?|weeks?|hours?|minutes?|times? a))/,
+  /\bdouble (up|dose)\b/, /\b\d+ ?(mg|milligrams?|ml|pills?|tablets?|capsules?|caps)\b.{0,30}\b(too much|too many|safe|ok|okay|at once|at a time)\b/,
+  /\b(too much|too many|more than)\b.{0,30}\b\d+ ?(mg|milligrams?|ml|pills?|tablets?|capsules?|caps)\b/,
+  // Mixing medicines: "take tylenol and advil together", "zyrtec with benadryl", "pepto after taking imodium".
+  /interact/, /\bmix(ing)? (with|it|them|\w+ (and|with))\b/, /\b(take|taking|took|mix|mixing|combine|combining|use|using)\b.{0,50}\b(together|at the same time|same time|with each other|alongside|on top of|in combination)\b/,
+  new RegExp(String.raw`\b${OTC}\b.{0,25}\b(and|with|plus|after|then|on top of|while (on|taking)|if i (already )?(took|take|had|am taking))\b.{0,20}\b${OTC}\b`),
+  new RegExp(String.raw`\b(take|taking|took|mix|mixing|combine|combining|use|using|had|have)\b.{0,30}\b${OTC}\b.{0,10}(&|\+)\s*${OTC}\b`),
+  // Alcohol with a medicine.
+  /with alcohol/, /while drinking/,
+  new RegExp(String.raw`\b(drink|drinking|drank|alcohol|beers?|wine|liquor|booze|drunk)\b(?! (of |some |more |lots of |plenty of |enough )?(water|tea|fluids|juice|coffee|milk|gatorade|electrolytes|enough|lots|more|plenty))\b.{0,30}\b(on|after|with|while|before|and|then)\b.{0,25}\b(${OTC}|taking|meds|medicine|pills?)\b`),
+  new RegExp(String.raw`\b(${OTC}|meds|medicine|pills?)\b.{0,30}\b(after|with|while|before|and|then)\b.{0,20}\b(drink|drinking|drank|alcohol|beers?|wine|liquor|booze|drunk)\b(?! (of |some |more |lots of |plenty of |enough )?(water|tea|fluids|juice|coffee|milk|gatorade|electrolytes|enough|lots|more|plenty))`),
 ];
-const SAFE_PHRASES = [/baby aspirin/g, /triple[- ]antibiotic/g, /antibiotic ointment/g];
+// Removed before the pharmacist check: phrases that use those words in an unrelated sense.
+const SAFE_PHRASES = [
+  /baby aspirin/g, /triple[- ]antibiotic/g, /antibiotic (ointment|cream)/g, /(mouth|canker|tongue|lip|cheek) ulcers?/g,
+  /(not|n't|nt|never|to prevent|to avoid|to stop it from|so it won't|keep (it|them|\w+|a \w+|the \w+) from) (get |getting |become |becoming |be |being )?infected/g,
+  /prescription[- ]strength/g, /(not|isn't|isnt|without|no|non|doesn't need|don't need) (a |an )?prescription/g, /non-prescription/g,
+  /dose of (reality|sunshine|fresh air|humor|humour)/g, /like a baby/g, /son of a (gun|bitch|b)\b/g, /baby ?sit\w*/g, /daughter ?boards?/g,
+  /refill(ing|ed)? (my |the |a |our )?(water|cup|glass|coffee|drink|bottle|tank|gas|mug|plate)\w*/g,
+  /(how much|what) (does|do|is) .{0,30}(cost|price)/g, /how much (is|are) (a |the )?\w+ (at|in|from) /g,
+  // Children as the cause or the setting, not the patient: "a cold from my kids", "i teach kids", "my son gave me his cold".
+  /\b(from|by|around) (my|the|our|his|her|their) (kids?|sons?|daughters?|child|children|baby|toddlers?)\b(?! (has|have|is|are|got|gets|feels|seems|keeps|can't|cant|won't|wont|needs?|ate|swallowed|drank|took))/g,
+  /\b(teach|teaching|coach|coaching|babysit|babysitting|chasing|hugging|carrying|lifting|picking up|playing with|wrangling) (the |my |our |some |his |her )?(kids?|sons?|daughters?|child|children|baby|babies|toddlers?)\b/g,
+  /\b(my|the|our) (kids?|sons?|daughters?|child|children|baby|toddlers?) (gave|passed|brought|got) (me|us)\b/g,
+];
 
 export function normalize(message: string) {
   return message.replaceAll('’', "'").replace(/\s+/g, ' ').trim().toLowerCase();
@@ -60,6 +110,8 @@ function loadVocab() {
   try { runRules('', new Picks()); } finally { recordPhrases(null); }
   addRegexVocab([...EMERGENCY_PATTERNS, ...PHARMACIST_PATTERNS]);
   addVocab(...EMERGENCY_WORDS);
+  // Pharmacist words the patterns only hold as fragments (/pregnan/), so "pregant" becomes pregnant.
+  addVocab('pregnant pregnancy breastfeeding prescription prescribed antibiotics dosage interaction');
 }
 
 /** Normalized message with typos fixed ("my stomache hurst" -> "my stomach hurts"). */
@@ -85,11 +137,15 @@ export function matchSymptoms(message: string): { ids: string[]; refuse: boolean
   const picks = new Picks();
 
   // Requests the helper must not answer: diagnosis and "what do I have" questions.
-  if (has(t, 'diagnose', 'diagnosis', 'what do i have', 'what is wrong with me', "what's wrong with me", 'am i sick', 'do i have cancer', 'is it cancer', 'std', 'sti')) {
+  // ("what do i have to do to stop sneezing" and "what do i have that helps" are ordinary requests.)
+  if (has(t, 'diagnose', 'diagnosis', 'what is wrong with me', "what's wrong with me", 'am i sick', 'do i have cancer', 'is it cancer', 'std', 'sti')
+    || /\bwhat do i have\b(?! (to|that|for|in|at|on hand|here|left))/.test(t)) {
     return { ids: [], refuse: true };
   }
   // Attempts to change the helper's rules.
-  if (has(t, 'ignore previous', 'ignore all', 'ignore your', 'system prompt', 'your instructions', 'pretend to be', 'act as', 'jailbreak')) {
+  if (has(t, 'ignore previous', 'ignore all previous', 'ignore all prior', 'ignore all instructions', 'ignore all rules', 'ignore all your', 'ignore the rules',
+    'ignore your', 'system prompt', 'your instructions', 'pretend to be', 'pretend you are', 'jailbreak', 'developer mode')
+    || /\b(you|now|please|pls|and|to) act as\b|^act as\b|\bact as (a|an|my) (doctor|pharmacist|physician|nurse|ai|assistant|chatbot|bot|model|unrestricted|unfiltered)\b/.test(t)) {
     return { ids: [], refuse: true };
   }
 
@@ -130,16 +186,37 @@ function retailerUrl(value: unknown) {
   } catch { return null; }
 }
 
+let catalogVocab = false;
+let wordsLoaded = false;
+
+// The big English list keeps real words from being "fixed"; until it loads, only shorthand is expanded.
+async function loadWords() {
+  if (wordsLoaded) return;
+  const words = await loadWordList();
+  if (words) { addCommonWords(words); wordsLoaded = true; }
+}
+
+/** Load the word list and build the rules once (about a second on a phone), so the first reply is quick. */
+export async function warmUp() {
+  await loadWords();
+  screen('warm up');
+  matchSymptoms('warm up');
+}
+
 /** Answer one helper message entirely in the browser. */
 export async function answer(message: string): Promise<ChatReply> {
   const reply = (status: ChatStatus): ChatReply => ({ status, message: TEMPLATES[status as keyof typeof TEMPLATES] || TEMPLATES.no_match, suggestions: [] });
+  await loadWords();
   const flag = screen(message);
   if (flag) return reply(flag);
   let catalog: Record<string, any>[];
   try { catalog = inStockCatalog(await loadCatalog()); }
   catch { return reply('unavailable'); }
-  // Brand and product names are known words too, so "tylenl" or "zyrtek" still find the product.
-  for (const m of catalog) addVocab(...catalogTerms(m).filter((term) => !DESCRIPTIVE.test(term)));
+  // Brand and product names are known words too, so "tylenl" or "zyrtek" still find the product (added once).
+  if (!catalogVocab) {
+    catalogVocab = true;
+    for (const m of catalog) addVocab(...catalogTerms(m).filter((term) => !DESCRIPTIVE.test(term)));
+  }
   const stocked = new Set(catalog.map((m) => m.id));
 
   const { ids: symptomIds, refuse } = matchSymptoms(message);

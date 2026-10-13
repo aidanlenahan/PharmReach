@@ -2,11 +2,10 @@
 // Each word the helper doesn't know is swapped for the closest word it does know, so "hedache",
 // "stomache pian" and "sucidal" reach the same rules as the plain spelling. The known words are
 // every phrase the rules and the emergency screen look for, plus catalog product names.
-// Real English words (./commonWords.ts) are never changed, and run-together words ("hurtmyself")
-// are split when both halves are known.
-import { COMMON_WORDS } from './commonWords';
-
-const common = new Set(COMMON_WORDS.split(/\s+/).filter(Boolean));
+// Real English words are never changed: the chat loads public/english-words.txt on first use, and
+// until it has, only shorthand is expanded (no guessing). Run-together words ("iwanttodie") are
+// split into known words.
+const common = new Set<string>();
 const vocab = new Set<string>();
 // Vocabulary words grouped by length, so a lookup only compares words of a similar size.
 const byLength = new Map<number, string[]>();
@@ -14,6 +13,7 @@ const byLength = new Map<number, string[]>();
 const stems = new Set<string>();
 const stemsByLength = new Map<number, string[]>();
 const cache = new Map<string, string>();
+let ready = false;
 
 // Texting shorthand, expanded before the rules run.
 const SHORTHAND: Record<string, string> = {
@@ -22,8 +22,20 @@ const SHORTHAND: Record<string, string> = {
   idk: "i don't know", rn: 'right now', bc: 'because', cuz: 'because', coz: 'because', abt: 'about', pls: 'please', plz: 'please',
   w: 'with', wo: 'without', smth: 'something', sth: 'something', rly: 'really', rlly: 'really', srsly: 'seriously',
   r: 'are', n: 'and', y: 'why', tmrw: 'tomorrow', tho: 'though', thru: 'through', ppl: 'people', bf: 'boyfriend', gf: 'girlfriend',
+  // Short slips the fuzzy match skips (it only fixes words of 4+ letters).
+  wnt: 'want', wan: 'want', wat: 'what', tp: 'to', dei: 'die', tok: 'took', slef: 'self', urself: 'yourself',
   myslf: 'myself', meself: 'myself', mysef: 'myself', myslef: 'myself', mysefl: 'myself', mysel: 'myself',
 };
+
+// Shorthand spellings are words the fixer should land on ("cnat" -> "cant").
+addVocab(...Object.keys(SHORTHAND).filter((word) => word.length >= 4));
+
+/** Add real English words (whitespace separated) that must never be "fixed". */
+export function addCommonWords(list: string) {
+  cache.clear();
+  for (const word of list.split(/\s+/)) if (word) common.add(word);
+  ready = common.size > 0;
+}
 
 /** Add every word of these phrases to the known vocabulary. A trailing * (prefix match) also adds a stem. */
 export function addVocab(...phrases: string[]) {
@@ -81,6 +93,7 @@ function known(word: string) {
   const ending = word.match(ENDINGS)?.[0];
   if (!ending) return false;
   const base = word.slice(0, -ending.length);
+  if (ending === 'd' && !base.endsWith('e')) return false; // "hoped", not "scrapd"
   // Also "hoping" -> "hope" and "stopped" -> "stop".
   return base.length >= 4 && (common.has(base) || common.has(base + 'e') || (base.length >= 5 && base.at(-1) === base.at(-2) && common.has(base.slice(0, -1))));
 }
@@ -112,7 +125,11 @@ function closest(word: string, max: number) {
     if (s !== null && s < bestScore) { best = result; bestScore = s; }
   };
   for (let length = word.length - max; length <= word.length + max; length++) {
-    for (const candidate of byLength.get(length) || []) if (candidate.length >= 4) consider(word, candidate, candidate);
+    for (const candidate of byLength.get(length) || []) {
+      // Cheap first-letter check before the edit distance (see score()).
+      if (candidate[0] !== word[0] && (max === 2 || (word.length < 7 && candidate[0] !== word[1]))) continue;
+      if (candidate.length >= 4) consider(word, candidate, candidate);
+    }
   }
   // "scaped" against the stem "scrape*" -> "scraped": compare the start of the word with each stem.
   for (let length = 4; length <= word.length + max; length++) {
@@ -135,26 +152,44 @@ function doubling(word: string) {
   return null;
 }
 
-/** "hurtmyself" -> "hurt myself" when both halves are known words (one at least 4 letters).
- *  Never splits inside a stem the rules already match ("sunburn*" keeps "sunburn"). */
-function split(word: string) {
-  for (let i = Math.max(2, stemLength(word)); i <= word.length - 2; i++) {
-    const left = word.slice(0, i), right = word.slice(i);
-    if (new RegExp(`^${ENDINGS.source}`).test(right)) continue; // "embarrassment" is not "embarrass ment"
-    if (known(left) && known(right) && Math.max(left.length, right.length) >= 4 && (vocab.has(left) || vocab.has(right))) return `${left} ${right}`;
+// Short words allowed as pieces of a run-together message; other pieces must be rule words or 4+ letters.
+const SHORT_PIECES = new Set(['i', 'a', 'to', 'my', 'me', 'in', 'on', 'of', 'it', 'is', 'so', 'up', 'an', 'do', 'go', 'no', 'be', 'am', 'at', 'im', 'he', 'we',
+  'the', 'and', 'now', 'too', 'can', 'for', 'not', 'all', 'out', 'get', 'got', 'had', 'has', 'her', 'him', 'his', 'how', 'see', 'she', 'way', 'who', 'why', 'you', 'die']);
+const ENDING_ONLY = new RegExp(`^${ENDINGS.source}`);
+
+/** "iwanttodie" -> "i want to die": fewest known words that spell the whole thing, one of them a rule word.
+ *  Never cuts inside a stem the rules already match ("sunburn*" keeps "sunburn"), and never splits
+ *  off an ending ("embarrassment" is not "embarrass ment"). */
+function segment(word: string) {
+  const firstCut = stemLength(word);
+  // best[i] = fewest pieces spelling word.slice(0, i), with the pieces.
+  const best: (string[] | null)[] = [[]];
+  for (let end = 1; end <= word.length; end++) {
+    best[end] = null;
+    for (let start = 0; start < end; start++) {
+      const before = best[start];
+      if (!before || (start > 0 && start < firstCut)) continue;
+      const piece = word.slice(start, end);
+      if (!(SHORT_PIECES.has(piece) || vocab.has(piece) || (piece.length >= 4 && known(piece))) || (start > 0 && ENDING_ONLY.test(piece))) continue;
+      if (!best[end] || before.length + 1 < best[end]!.length) best[end] = [...before, piece];
+    }
   }
-  return null;
+  const pieces = best[word.length];
+  return pieces && pieces.length > 1 && pieces.some((piece) => vocab.has(piece)) ? pieces.join(' ') : null;
 }
 
 function fixWord(word: string) {
   const key = word.replace(/'/g, '');
   if (SHORTHAND[key]) return SHORTHAND[key];
-  if (key.length < 4 || known(key)) return word;
+  // Dropped g: "killin", "thinkin", "sleepin" (only when the -ing word is one the rules use).
+  if (key.length >= 5 && key.endsWith('in') && vocab.has(key + 'g')) return key + 'g';
+  if (key.length < 4 || !ready || known(key)) return word;
   if (cache.has(key)) return cache.get(key)!;
   // Words a "prefix*" phrase already matches ("sneezin") only get the one-letter fixes.
-  const fixed = doubling(key) || closest(key, 1) || (key.length >= 7 && !stemLength(key) ? closest(key, 2) : null) || split(key) || word;
-  cache.set(key, fixed);
-  return fixed;
+  const fixed = doubling(key) || closest(key, 1) || (key.length >= 7 && !stemLength(key) ? closest(key, 2) : null) || segment(key) || word;
+  const result = SHORTHAND[fixed] || fixed; // "cnat" -> "cant" -> "can't"
+  cache.set(key, result);
+  return result;
 }
 
 /** Fix typos in an already normalized (lowercase) message. Numbers and punctuation are left alone. */
