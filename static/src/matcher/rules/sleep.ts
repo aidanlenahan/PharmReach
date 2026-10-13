@@ -14,7 +14,7 @@ export function sleepRules(t: string, picks: Picks) {
   }
 
   // ---- Sleep: waking up at night / can't stay asleep ----
-  if (has(t, 'stay asleep', 'staying asleep', 'keep waking up', 'keep waking', 'wake up at night', 'waking up at night', 'wake up in the night', 'waking up in the night', 'wake up during the night', 'waking up during the night', 'wake up all night', 'waking up all night', 'wake up every hour', 'waking up every hour', 'wake up too early', 'waking up too early', 'wake up at 3', 'wake up at 3am', 'wake up at 4am', 'woke up at 3am', 'awake at 3am', 'awake at 3 am', 'awake at 2am', 'awake at 4am', 'wide awake', 'awake at night', 'awake all night', 'up all night', 'up till 4', 'up until 4am', 'broken sleep', 'interrupted sleep', 'fragmented sleep', 'light sleeper', 'sleep through the night', 'sleeping through the night', "can't stay asleep", 'cant stay asleep')) {
+  if (has(t, 'stay asleep', 'staying asleep', 'keep waking up', 'keep waking', 'wake up at night', 'waking up at night', 'wake up in the night', 'waking up in the night', 'wake up during the night', 'waking up during the night', 'wake up all night', 'waking up all night', 'wake up every hour', 'waking up every hour', 'wake up too early', 'waking up too early', 'wake up at 3', 'wake up at 3am', 'wake up at 4am', 'woke up at 3am', 'awake at 3am', 'awake at 3 am', 'awake at 2am', 'awake at 4am', 'wide awake', 'awake for hours', 'been awake all night', 'still awake', 'awake at night', 'awake all night', 'up all night', 'up till 4', 'up until 4am', 'broken sleep', 'interrupted sleep', 'fragmented sleep', 'light sleeper', 'sleep through the night', 'sleeping through the night', "can't stay asleep", 'cant stay asleep')) {
     picks.add(3, P.melatonin, P.melatoninCvs);
   }
 
@@ -45,7 +45,7 @@ export function sleepRules(t: string, picks: Picks) {
   }
 
   // ---- Jet lag, time zones, travel ----
-  if (has(t, 'jet lag', 'jetlag', 'jet lagged', 'jetlagged', 'jet lagd', 'jetlaged', 'jet laged', 'jet-lagged', 'jetleg', 'jet leg', 'jett lag', 'jet lagg', 'jetlagg', 'time zone*', 'timezone*', 'time-zone change*', 'timezone change*', 'different time zone', 'changing time zones', 'crossing time zones', 'long flight', 'long haul flight', 'overnight flight', 'international flight', 'flew in from europe', 'flew in from asia', 'flew back from', 'flying to europe', 'flying to asia', 'just landed', 'back from overseas', 'traveling overseas', 'travelling overseas', 'trip overseas', 'body clock', 'internal clock', 'circadian rhythm*', 'circadian', 'daylight saving*', 'daylight savings time', 'clocks change', 'clocks went back', 'clocks went forward')) {
+  if (has(t, 'jet lag', 'jetlag', 'jet lagged', 'jetlagged', 'jet lagd', 'jetlaged', 'jet laged', 'jet-lagged', 'jetleg', 'jet leg', 'jett lag', 'jet lagg', 'jetlagg', 'time zone*', 'time difference', 'adjust to the time*', 'adjusting to the time*', 'time change', 'timezone*', 'time-zone change*', 'timezone change*', 'different time zone', 'changing time zones', 'crossing time zones', 'long flight', 'long haul flight', 'overnight flight', 'international flight', 'flew in from europe', 'flew in from asia', 'flew back from', 'flying to europe', 'flying to asia', 'just landed', 'back from overseas', 'traveling overseas', 'travelling overseas', 'trip overseas', 'body clock', 'internal clock', 'circadian rhythm*', 'circadian', 'daylight saving*', 'daylight savings time', 'clocks change', 'clocks went back', 'clocks went forward')) {
     picks.add(4, P.melatonin, P.melatoninCvs);
   }
 

@@ -292,7 +292,7 @@ export function productsRules(t: string, picks: Picks) {
   if (has(t,
     'neosporins', 'neosporin\'s', 'neospirin', 'neosporen', 'neosproin', 'nesporin', 'neosperin', 'neosoporin',
     'neosporan', 'neospoin', 'neoporin', 'neo sporin', 'neo-sporin', 'neospoirn', 'neosporin plus',
-    'neosporin original', 'triple antibiotics', 'triple antibotic', 'triple anitbiotic', 'triple antibiodic',
+    'neosporin original', 'triple antibiotics',
     'triple antibiotic ointment', 'triple-antibiotic', 'bacitracin neomycin polymyxin',
     'neomycin polymyxin bacitracin', 'neomycin', 'polymyxin b', 'enosporin', 'eosporin', 'naosporin', 'neasporin',
     'neeosporin', 'neocporin', 'neoosporin', 'neopsorin', 'neosoprin', 'neosorin', 'neosparin', 'neospoorin',
