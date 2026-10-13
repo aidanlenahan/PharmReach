@@ -3,7 +3,7 @@
 // The safety screens (emergency / ask a pharmacist) are ported from backend/chat.py and run first,
 // and every reply is built from the same templates the Gemini helper used.
 import { inStockCatalog, loadCatalog, loadWordList } from './staticApi';
-import { Picks, has, recordPhrases } from './matcher/shared';
+import { Picks, has, precompile, recordPhrases } from './matcher/shared';
 import { EMERGENCY_PATTERNS, EMERGENCY_WORDS } from './matcher/emergency';
 import { addCommonWords, addRegexVocab, addVocab, fixTypos, wordsReady } from './matcher/typos';
 import { coldSoreRules, skinRules } from './matcher/rules/skin';
@@ -103,10 +103,11 @@ export function normalize(message: string) {
 
 // The typo fixer only knows the words the rules use: run every rule once in record mode to collect them.
 let vocabReady = false;
+const phraseLists: string[][] = [];
 function loadVocab() {
   if (vocabReady) return;
   vocabReady = true;
-  recordPhrases((phrases) => addVocab(...phrases));
+  recordPhrases((phrases) => { addVocab(...phrases); phraseLists.push(phrases); });
   try { runRules('', new Picks()); } finally { recordPhrases(null); }
   addRegexVocab([...EMERGENCY_PATTERNS, ...PHARMACIST_PATTERNS]);
   addVocab(...EMERGENCY_WORDS);
@@ -198,11 +199,26 @@ async function loadWords() {
   if (words) { addCommonWords(words); wordsLoaded = true; }
 }
 
-/** Load the word list and build the rules once (about a second on a phone), so the first reply is quick. */
+const pause = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+/** Load the word list and compile every pattern ahead of the first message. The browser compiles a
+ *  regex the first time it runs (about a second for all of them on a phone), so this runs in small
+ *  batches with pauses between, keeping the page responsive while the user types. */
 export async function warmUp() {
   await loadWords();
-  screen('warm up');
-  matchSymptoms('warm up');
+  await pause();
+  loadVocab();
+  // Each pattern runs twice: the browser first interprets a regex and compiles it fully on a later run.
+  const samples = ['i have a headache and a sore throat, my stomach hurts and i cant sleep', 'my back is sore'];
+  const work = [
+    ...EMERGENCY_PATTERNS.map((pattern) => () => samples.forEach((sample) => pattern.test(sample))),
+    ...PHARMACIST_PATTERNS.map((pattern) => () => samples.forEach((sample) => pattern.test(sample))),
+    ...phraseLists.map((phrases) => () => samples.forEach((sample) => precompile(phrases, sample))),
+  ];
+  for (let i = 0; i < work.length; i += 20) {
+    await pause();
+    work.slice(i, i + 20).forEach((run) => run());
+  }
 }
 
 /** Answer one helper message entirely in the browser. */
