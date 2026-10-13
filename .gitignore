@@ -111,3 +111,4 @@ frontend/README.md
 
 # Data collection and eval helpers: kept locally, not needed to run the site
 backend/scripts/
+report.md
