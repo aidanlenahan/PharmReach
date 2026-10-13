@@ -40,7 +40,7 @@ function locationsAsset(): Plugin {
 }
 
 // Serve /results etc. from results.html in dev and preview, matching backend/serve.py.
-const cleanPages = new Set(['find-medicine', 'results', 'settings', 'privacy', 'onboarding', 'products']);
+const cleanPages = new Set(['find-medicine', 'results', 'settings', 'privacy', 'disclaimer', 'about', 'onboarding', 'products']);
 function cleanUrls(): Plugin {
   const rewrite = (middlewares: { use: (handler: (request: { url?: string }, response: unknown, next: () => void) => void) => void }) => {
     middlewares.use((request, _response, next) => {
@@ -76,6 +76,8 @@ export default defineConfig(({ mode }) => {
           results: resolve(rootDir, 'results.html'),
           settings: resolve(rootDir, 'settings.html'),
           privacy: resolve(rootDir, 'privacy.html'),
+          disclaimer: resolve(rootDir, 'disclaimer.html'),
+          about: resolve(rootDir, 'about.html'),
           onboarding: resolve(rootDir, 'onboarding.html'),
           products: resolve(rootDir, 'products.html'),
           styles: resolve(rootDir, 'styles/index.html'),
