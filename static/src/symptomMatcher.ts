@@ -3,8 +3,9 @@
 // The safety screens (emergency / ask a pharmacist) are ported from backend/chat.py and run first,
 // and every reply is built from the same templates the Gemini helper used.
 import { inStockCatalog, loadCatalog } from './staticApi';
-import { Picks, has } from './matcher/shared';
-import { EMERGENCY_PATTERNS } from './matcher/emergency';
+import { Picks, has, recordPhrases } from './matcher/shared';
+import { EMERGENCY_PATTERNS, EMERGENCY_WORDS } from './matcher/emergency';
+import { addRegexVocab, addVocab, fixTypos } from './matcher/typos';
 import { coldSoreRules, skinRules } from './matcher/rules/skin';
 import { painRules } from './matcher/rules/pain';
 import { stomachRules } from './matcher/rules/stomach';
@@ -50,17 +51,37 @@ export function normalize(message: string) {
   return message.replaceAll('’', "'").replace(/\s+/g, ' ').trim().toLowerCase();
 }
 
+// The typo fixer only knows the words the rules use: run every rule once in record mode to collect them.
+let vocabReady = false;
+function loadVocab() {
+  if (vocabReady) return;
+  vocabReady = true;
+  recordPhrases((phrases) => addVocab(...phrases));
+  try { runRules('', new Picks()); } finally { recordPhrases(null); }
+  addRegexVocab([...EMERGENCY_PATTERNS, ...PHARMACIST_PATTERNS]);
+  addVocab(...EMERGENCY_WORDS);
+}
+
+/** Normalized message with typos fixed ("my stomache hurst" -> "my stomach hurts"). */
+export function clean(message: string) {
+  loadVocab();
+  return fixTypos(normalize(message));
+}
+
 export function screen(message: string): 'emergency' | 'pharmacist' | null {
-  let text = normalize(message);
-  if (EMERGENCY_PATTERNS.some((pattern) => pattern.test(text))) return 'emergency';
-  for (const phrase of SAFE_PHRASES) text = text.replace(phrase, ' ');
-  if (PHARMACIST_PATTERNS.some((pattern) => pattern.test(text))) return 'pharmacist';
+  // The emergency screen checks the message as typed and with typos fixed; either one matching counts.
+  const typed = normalize(message), fixed = clean(message);
+  if (EMERGENCY_PATTERNS.some((pattern) => pattern.test(typed) || pattern.test(fixed))) return 'emergency';
+  for (let text of [typed, fixed]) {
+    for (const phrase of SAFE_PHRASES) text = text.replace(phrase, ' ');
+    if (PHARMACIST_PATTERNS.some((pattern) => pattern.test(text))) return 'pharmacist';
+  }
   return null;
 }
 
 /** Map a message to products with plain keyword checks. Returns ranked product IDs (may be empty). */
 export function matchSymptoms(message: string): { ids: string[]; refuse: boolean } {
-  let t = normalize(message);
+  const t = clean(message);
   const picks = new Picks();
 
   // Requests the helper must not answer: diagnosis and "what do I have" questions.
@@ -72,6 +93,11 @@ export function matchSymptoms(message: string): { ids: string[]; refuse: boolean
     return { ids: [], refuse: true };
   }
 
+  runRules(t, picks);
+  return { ids: picks.ranked(), refuse: false };
+}
+
+function runRules(t: string, picks: Picks) {
   t = coldSoreRules(t, picks);
   productsRules(t, picks);
   painRules(t, picks);
@@ -80,18 +106,19 @@ export function matchSymptoms(message: string): { ids: string[]; refuse: boolean
   respiratoryRules(t, picks);
   skinRules(t, picks);
   sleepRules(t, picks);
-
-  return { ids: picks.ranked(), refuse: false };
 }
 
 // Catalog aliases also hold descriptions ("heartburn relief", "allergy medicine"); those are left to the symptom rules.
 const DESCRIPTIVE = /relief|medicine|reliever|reducer|heartburn|stomach|diarrh|constipation|congestion|cough|allerg|antacid|laxative|softener|sleep|itch|first aid|spray|drops|cream|ointment|rinse|steroid|expectorant|decongestant|antihistamine|non-drowsy|24-hour|cold sore/;
 
 /** Product names or brands typed directly ("tylenol", "zyrtec") match catalog names and aliases. */
+function catalogTerms(m: Record<string, any>): string[] {
+  return [m.name, ...(m.aka || '').split(' · '), ...(m.search_terms || [])].map((term: string) => normalize(term || ''));
+}
+
 function nameMatches(message: string, catalog: Record<string, any>[]) {
-  const t = normalize(message);
-  return catalog.filter((m) => [m.name, ...(m.aka || '').split(' · '), ...(m.search_terms || [])]
-    .map((term: string) => normalize(term || ''))
+  const t = clean(message);
+  return catalog.filter((m) => catalogTerms(m)
     .some((term: string) => term.length >= 4 && !DESCRIPTIVE.test(term) && has(t, term))).map((m) => m.id);
 }
 
@@ -111,6 +138,8 @@ export async function answer(message: string): Promise<ChatReply> {
   let catalog: Record<string, any>[];
   try { catalog = inStockCatalog(await loadCatalog()); }
   catch { return reply('unavailable'); }
+  // Brand and product names are known words too, so "tylenl" or "zyrtek" still find the product.
+  for (const m of catalog) addVocab(...catalogTerms(m).filter((term) => !DESCRIPTIVE.test(term)));
   const stocked = new Set(catalog.map((m) => m.id));
 
   const { ids: symptomIds, refuse } = matchSymptoms(message);

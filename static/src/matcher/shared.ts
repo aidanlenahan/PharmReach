@@ -55,8 +55,13 @@ export class Picks {
   }
 }
 
+// While set, has() hands its phrases to this callback instead of matching (collects the typo vocabulary).
+let recorder: ((phrases: string[]) => void) | null = null;
+export function recordPhrases(record: typeof recorder) { recorder = record; }
+
 /** True when any phrase appears in the text as whole words. A trailing * allows any ending ("sneez*"). */
 export function has(text: string, ...phrases: string[]) {
+  if (recorder) { recorder(phrases); return false; }
   return phrases.some((phrase) => {
     const source = phrase.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\\?\*$/, '\\w*').replace(/ /g, "[\\s-]+");
     return new RegExp(`(^|[^a-z0-9])${source}(?![a-z0-9])`).test(text);

@@ -3,6 +3,9 @@
 // Each section lists the plain phrasing first, then common misspellings / texting forms.
 // Lookarounds keep minor, everyday messages (stuffy nose, minor burn, heartburn, headache,
 // food poisoning, "dying of boredom") out of this screen so they reach the product rules.
+// Words the typo fixer (./typos.ts) should know besides the literal words in the patterns below.
+export const EMERGENCY_WORDS = ['myself', 'hurt', 'harm', 'kill', 'die', 'dying', 'suicide', 'suicidal', 'overdose', 'pills', 'breathe', 'breathing', 'unconscious', 'bleeding', 'seizure', 'emergency', 'ambulance'];
+
 export const EMERGENCY_PATTERNS = [
   // --- General: 911, ambulance, "emergency", dying ---
   /\b(call(ing|ed)?|dial(ing|ed)?|phone|ring) (9-?1-?1|nine one one)\b/, /\b911\b/,
