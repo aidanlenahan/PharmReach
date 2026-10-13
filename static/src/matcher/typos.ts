@@ -9,6 +9,8 @@ const common = new Set<string>();
 const vocab = new Set<string>();
 // Vocabulary words grouped by length, so a lookup only compares words of a similar size.
 const byLength = new Map<number, string[]>();
+// The same words keyed by length and first letter ("5:p"), since most fixes keep the first letter.
+const byStart = new Map<string, string[]>();
 // Stems of "prefix*" phrases ("sneez*"): any word starting with one is known, and typos are fixed against the stem.
 const stems = new Set<string>();
 const stemsByLength = new Map<number, string[]>();
@@ -53,6 +55,9 @@ export function addVocab(...phrases: string[]) {
       vocab.add(key);
       if (!byLength.has(key.length)) byLength.set(key.length, []);
       byLength.get(key.length)!.push(key);
+      const start = `${key.length}:${key[0]}`;
+      if (!byStart.has(start)) byStart.set(start, []);
+      byStart.get(start)!.push(key);
     }
   }
 }
@@ -124,16 +129,17 @@ function closest(word: string, max: number) {
     const s = d > max || d === 0 ? null : score(typed, candidate, d);
     if (s !== null && s < bestScore) { best = result; bestScore = s; }
   };
+  // Only words that can pass score()'s first-letter rule: the same first letter, or the first two
+  // swapped, or (one edit, long words) any first letter.
+  const starts = max === 2 ? [word[0]] : word.length < 7 ? [word[0], word[1]] : null;
   for (let length = word.length - max; length <= word.length + max; length++) {
-    for (const candidate of byLength.get(length) || []) {
-      // Cheap first-letter check before the edit distance (see score()).
-      if (candidate[0] !== word[0] && (max === 2 || (word.length < 7 && candidate[0] !== word[1]))) continue;
-      if (candidate.length >= 4) consider(word, candidate, candidate);
-    }
+    const candidates = starts ? starts.flatMap((letter) => byStart.get(`${length}:${letter}`) || []) : byLength.get(length) || [];
+    for (const candidate of candidates) if (candidate.length >= 4) consider(word, candidate, candidate);
   }
   // "scaped" against the stem "scrape*" -> "scraped": compare the start of the word with each stem.
   for (let length = 4; length <= word.length + max; length++) {
     for (const stem of stemsByLength.get(length) || []) {
+      if (stem[0] !== word[0]) continue; // as in score(): the first letter is kept
       // Only short endings after the stem, so "hurtmyself" isn't read as the stem "hurt" plus "yself".
       for (let cut = Math.max(length - max, 4, word.length - 3); cut <= Math.min(length + max, word.length); cut++) {
         consider(word.slice(0, cut), stem, stem + word.slice(cut));
