@@ -52,7 +52,7 @@ export function stomachRules(t: string, picks: Picks) {
   }
 
   // ---- Upset stomach, stomach ache ----
-  if (has(t, 'upset stomach*', 'stomach upset', 'stomach is upset', 'stomachs upset', "stomach's upset", 'upset tummy', 'tummy upset', 'tummy is upset', 'upset belly', 'belly upset', 'upset gut', 'gut is upset', 'upsetting my stomach', 'upset my stomach', 'unsettled stomach', 'stomach unsettled', 'unsettled tummy',
+  if (has(t, 'upset stomach*', 'stomach upset', 'tummie ache*', 'tummie hurt*', 'tummies hurt', 'tumy ache*', 'stummy ache*', 'stummy hurt*', 'stomach is upset', 'stomachs upset', "stomach's upset", 'upset tummy', 'tummy upset', 'tummy is upset', 'upset belly', 'belly upset', 'upset gut', 'gut is upset', 'upsetting my stomach', 'upset my stomach', 'unsettled stomach', 'stomach unsettled', 'unsettled tummy',
     'stomach feels off', 'stomach feels weird', 'stomach feels funny', 'stomach feels bad', 'stomach feels awful', 'stomach feels gross', 'stomach is off', 'stomach is acting up', 'stomach acting up', 'tummy acting up', 'tummy trouble*', 'stomach trouble*', 'stomach issue*', 'stomach problem*', 'tummy issue*', 'tummy problem*', 'gut issue*', 'gut problem*',
     'gi issue*', 'gi upset', 'gi distress', 'gastric upset', 'gastric distress', 'stomach distress', 'gastrointestinal', 'dodgy stomach', 'dodgy tummy', 'iffy stomach', 'gippy tummy', 'collywobbles', 'stomach churning', 'stomach is churning', 'churning stomach', 'stomach in knots', 'stomach is in knots', 'knot in my stomach',
     'stomach gurgling', 'stomach is gurgling', 'gurgling stomach', 'stomach rumbling', 'rumbly tummy', 'tummy rumbling', 'grumbly tummy', 'sick stomach', 'stomach sick', 'stomach is killing me', 'stomach killing me', 'tummy is killing me', 'belly is killing me')) {
@@ -68,7 +68,7 @@ export function stomachRules(t: string, picks: Picks) {
   }
 
   // ---- Gas, bloating, burping, fullness (Pepto label: gas, belching, fullness from overindulgence) ----
-  if (has(t, 'bloat*', 'blaoted', 'bloted', 'gassy', 'gas pain*', 'gas pains', 'trapped gas', 'bad gas', 'lots of gas', 'so much gas', 'too much gas', 'excess gas', 'stomach gas', 'gas in my stomach', 'fart', 'farts', 'farting', 'farted', 'farty', 'flatulen*',
+  if (has(t, 'bloat*', 'blaoted', 'bloted', 'bloting', 'bloteing', 'blotted', 'gassy', 'gas pain*', 'gas pains', 'trapped gas', 'bad gas', 'lots of gas', 'lot of gas', 'so much gas', 'have gas', 'got gas', 'having gas', 'gas is bad', 'too much gas', 'excess gas', 'stomach gas', 'gas in my stomach', 'fart', 'farts', 'farting', 'farted', 'farty', 'flatulen*',
     'burp', 'burps', 'burping', 'burped', 'burpy', 'belch*', 'swollen stomach', 'swollen belly', 'distended stomach', 'distended belly', 'puffy stomach', 'stomach feels tight', 'stomach is tight')) {
     picks.add(2, P.pepto, P.tums);
   }
@@ -83,7 +83,7 @@ export function stomachRules(t: string, picks: Picks) {
   // Vomiting (mild) and feeling like vomiting.
   if (has(t, 'vomit*', 'vommit*', 'vomet*', 'vomt*', 'vomitt*', 'vomitting', 'vom', 'vomming', 'emesis', 'throwing up', 'throw up', 'threw up', 'thrown up', 'throwin up', 'throwup', 'trowing up', 'thowing up', 'throughing up', 'throwning up', 'throwed up', 'throws up',
     'puke*', 'puking', 'puked', 'barf*', 'upchuck*', 'up chuck*', 'retch*', 'dry heav*', 'tossing my cookies', 'toss my cookies', 'tossed my cookies', 'blowing chunks', 'hurled', 'hurling my guts',
-    'like throwing up', 'like i might throw up', 'want to throw up', 'wanna throw up', 'gonna throw up', 'going to throw up', 'about to throw up', 'wanna puke', 'want to puke', 'gonna puke', 'going to puke', 'about to puke', 'gonna hurl', 'gonna be sick', 'going to be sick', 'about to be sick', 'urge to vomit')) {
+    'like throwing up', 'like i might throw up', 'want to throw up', 'wanna throw up', 'gonna throw up', 'going to throw up', 'about to throw up', 'wanna puke', 'want to puke', 'gonna puke', 'going to puke', 'about to puke', 'gonna hurl', 'going to hurl', 'about to hurl', 'might hurl', 'like hurling', 'feel like hurling', 'gonna be sick', 'going to be sick', 'about to be sick', 'urge to vomit')) {
     picks.add(3, P.pepto);
   }
 
@@ -117,12 +117,12 @@ export function stomachRules(t: string, picks: Picks) {
   if (has(t, 'constipat*', 'constapat*', 'constpat*', 'consipat*', 'consitpat*', 'contipat*', 'constipt*', 'constopat*', 'consapat*', 'constiapt*', 'constapait*', 'constipait*', 'conspiated', 'constiptaed', 'cinstipated', 'constiapted', 'constepated', 'constepation', 'constupated', 'constapted', 'constapaited', 'conistpated', 'constipatd', 'constpiated',
     "can't poop", 'cant poop', 'cannot poop', 'can not poop', "can't go poop", 'cant go poop', "can't go number two", 'cant go number two', "can't go number 2", 'cant go number 2', "can't go to the bathroom", 'cant go to the bathroom', "can't have a bowel movement", 'cant have a bowel movement', "can't take a dump", 'cant take a dump', "can't shit", 'cant shit', 'unable to poop', 'trouble going to the bathroom',
     "haven't pooped", 'havent pooped', 'have not pooped', 'not pooping', 'no poop', 'no bowel movement*', "haven't gone in days", 'havent gone in days', "haven't gone in a few days", 'havent gone in a few days', "haven't gone in a week", 'havent gone in a week', "haven't gone in a while", 'havent gone in a while', "haven't gone number two", 'havent gone number two',
-    "haven't been to the bathroom in days", 'havent been to the bathroom in days', "haven't had a bm", 'havent had a bm', "haven't had a bowel movement", 'havent had a bowel movement', "haven't shit", 'havent shit', "haven't taken a dump", 'havent taken a dump', 'backed up down there', 'all backed up down there', 'bowels are backed up', 'bowels are blocked', 'blocked bowels',
+    "haven't been to the bathroom in days", 'havent been to the bathroom in days', "haven't had a bm", 'havent had a bm', "haven't had a bowel movement", 'havent had a bowel movement', "haven't shit", 'havent shit', "haven't taken a dump", 'havent taken a dump', 'backed up down there', "i'm backed up", "i'm all backed up", 'feel backed up', 'feeling backed up', 'so backed up', 'all backed up down there', 'bowels are backed up', 'bowels are blocked', 'blocked bowels',
     'irregularity', 'occasional irregularity', 'irregular bowel*', 'stay regular', 'staying regular', 'regularity')) {
     picks.add(4, P.miralax, P.docusate, P.magnesiumCitrate);
   }
   // Hard stools and straining: a stool softener first.
-  if (has(t, 'hard stool*', 'hard poop*', 'hard to poop', 'hard to go to the bathroom', 'painful to poop', 'painful bowel movement*', 'pooping hurts', 'poop hurts', 'hurts to poop', 'rock hard poop', 'pebble poop', 'pebbly poop', 'small hard poop*', 'dry stool*', 'dry poop', 'difficult bowel movement*', 'difficulty pooping', 'trouble pooping', 'struggling to poop',
+  if (has(t, 'hard stool*', 'hard poop*', 'hard to poop', 'hard to go to the bathroom', 'painful to poop', 'painful bowel movement*', 'pooping hurts', 'poop hurts', 'hurts to poop', 'hurts when i poop', 'hurts when i go poop', 'hurts when i go to the bathroom', 'pain when i poop', 'painful when i poop', 'hurts to go number 2', 'rock hard poop', 'pebble poop', 'pebbly poop', 'small hard poop*', 'dry stool*', 'dry poop', 'difficult bowel movement*', 'difficulty pooping', 'trouble pooping', 'struggling to poop',
     'hard bowel movement*', 'straining to poop', 'strain to poop', 'straining on the toilet', 'straining when i poop', 'incomplete evacuation', 'stool softener*', 'stool softner*', 'stoolsoftener', 'stool sofener', 'poop softener', 'softener for stool', 'soften my stool', 'soften stool*', 'softer stool*')) {
     picks.add(5, P.docusate, P.miralax);
   }

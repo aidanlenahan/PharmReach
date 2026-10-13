@@ -31,11 +31,12 @@ export function allergyRules(t: string, picks: Picks) {
     picks.add(3, P.cetirizine, P.loratadine, P.fexofenadine);
   }
 
-  // ---- Indoor triggers: dust, mold, pets ("cat"/"dog" alone are avoided: "my cat scratched me", "dog bite") ----
+  // ---- Indoor triggers: dust, mold, pets ("cat"/"dog" alone are avoided: "my cat scratched me", "dog bite";
+  // so are "new puppy" / "litter box" alone: "i got a new puppy" is not a symptom, and the symptom words catch the rest) ----
   if (has(t, 'dust', 'dusty', 'dusting', 'dust mite*', 'dustmite*', 'dust bunnies', 'dusty room', 'dusty house', 'dusty attic', 'cleaning the attic', 'cleaning the basement', 'feather pillow*', 'down pillow*',
     'mold', 'mould', 'moldy', 'mouldy', 'mold spores', 'mould spores', 'mildew', 'musty', 'damp house', 'damp room', 'damp basement', 'black mold',
-    'pet dander', 'dander', 'cat dander', 'dog dander', 'cat hair', 'dog hair', 'pet hair', 'animal hair', 'animal dander', 'cat fur', 'dog fur', 'pet fur', 'cat saliva', 'cat litter', 'litter box',
-    'around cats', 'around my cat', 'around the cat', 'around dogs', 'around my dog', 'around the dog', 'around animals', 'around pets', 'near cats', 'near my cat', 'near dogs', 'pet my cat', 'petting the cat', 'petting cats', 'petted a cat', 'petting the dog', 'petting dogs', 'cats make me', 'cat makes me', 'my cat makes me', 'dogs make me', 'dog makes me', 'my dog makes me', 'new kitten', 'new puppy', 'new cat', 'new dog', 'friends cat', "friend's cat", 'friends dog', "friend's dog", 'house with cats', 'house with a cat', 'house with dogs', 'horse dander', 'rabbit hair', 'bunny fur')) {
+    'pet dander', 'dander', 'cat dander', 'dog dander', 'cat hair', 'dog hair', 'pet hair', 'animal hair', 'animal dander', 'cat fur', 'dog fur', 'pet fur', 'cat saliva', 'kitten dander', 'kitten fur', 'puppy dander', 'puppy fur', 'litter box dust', 'cat litter dust', 'dusty litter',
+    'around cats', 'around my cat', 'around the cat', 'around dogs', 'around my dog', 'around the dog', 'around animals', 'around pets', 'near cats', 'near my cat', 'near dogs', 'pet my cat', 'petting the cat', 'petting cats', 'petted a cat', 'petting the dog', 'petting dogs', 'cats make me', 'cat makes me', 'my cat makes me', 'dogs make me', 'dog makes me', 'my dog makes me', 'house with cats', 'house with a cat', 'house with dogs', 'horse dander', 'rabbit hair', 'bunny fur')) {
     picks.add(3, P.cetirizine, P.loratadine, P.fexofenadine);
   }
 
@@ -68,7 +69,7 @@ export function allergyRules(t: string, picks: Picks) {
   }
 
   // ---- Itchy eyes (and typos: itchey eyes, itchy eys, ichy eyes) ----
-  if (has(t, 'itchy eye*', 'itchey eye*', 'itchie eye*', 'ichy eye*', 'itcy eye*', 'itchyeyes', 'itchy eys', 'itchy eyse', 'itchy eyez', 'itchy yees', 'itchy eues', 'itchy wyes', 'itching eye*', 'eyes itch*', 'eye itch*', 'eyes are itchy', 'eyes are so itchy', 'eyes feel itchy', 'eyes keep itching', 'eyeballs itch*', 'itchy eyeball*', 'itchy eyelid*', 'eyelids itch*', 'rubbing my eyes', 'rub my eyes', 'cant stop rubbing my eyes', "can't stop rubbing my eyes", 'want to scratch my eyes', 'scratch my eyes out', 'claw my eyes out', 'scratchy eye*', 'gritty eye*', 'eyes feel gritty', 'eyes feel scratchy', 'sandy eyes', 'eyes feel like sand')) {
+  if (has(t, 'itchy eye*', 'itchey eye*', 'itchie eye*', 'ichy eye*', 'itcy eye*', 'itchyeyes', 'itchy eys', 'itchy eyse', 'itchy eyez', 'itchy yees', 'itchy eues', 'itchy wyes', 'itching eye*', 'eyes itch*', 'eye itch*', 'eyes are itchy', 'eyes r itchy', 'eyes are so itchy', 'eyes r so itchy', 'eyes feel itchy', 'eyes keep itching', 'eyeballs itch*', 'itchy eyeball*', 'itchy eyelid*', 'eyelids itch*', 'rubbing my eyes', 'rub my eyes', 'cant stop rubbing my eyes', "can't stop rubbing my eyes", 'want to scratch my eyes', 'scratch my eyes out', 'claw my eyes out', 'scratchy eye*', 'gritty eye*', 'eyes feel gritty', 'eyes feel scratchy', 'sandy eyes', 'eyes feel like sand')) {
     picks.add(4, P.olopatadine, P.cetirizine, P.loratadine);
   }
   // ---- Watery / teary / streaming eyes ----
@@ -87,7 +88,7 @@ export function allergyRules(t: string, picks: Picks) {
 
   // ---- Stuffy / blocked nose ("congest*" alone is avoided so "chest congestion" stays with respiratory.ts) ----
   if (has(t, 'stuffy', 'stuffy nose', 'stuffy noes', 'stuffy nos', 'stuffy nsoe', 'stufy nose', 'stufy', 'stuffie nose', 'stuffey nose', 'stuffed nose', 'stufed nose', 'stuff nose', 'stuffynose', 'stuffiness', 'nasal stuffiness', 'stuffed up', 'stuffed up nose', 'all stuffed up', 'nose is stuffed', 'nose is stuffy', 'nose is so stuffy', 'nose feels stuffy',
-    'blocked nose', 'nose is blocked', 'blocked up nose', 'nose blocked', 'blocked sinuses', 'plugged nose', 'nose is plugged', 'plugged up nose', 'clogged nose', 'nose is clogged', 'clogged up nose', 'clogged sinuses', 'clogged nostril*', 'blocked nostril*', 'nostril is blocked', 'nostrils are blocked', 'one nostril', 'stuffy nostril*', 'nose is closed', 'nose closed up', 'nose is shut', 'stopped up nose', 'nose is stopped up', 'full nose', 'nose feels full',
+    'blocked nose', 'nose is blocked', 'blocked up nose', 'nose blocked', 'blocked sinuses', 'plugged nose', 'nose is plugged', 'plugged up nose', 'clogged nose', 'nose is clogged', 'nose is all clogged', 'nose is all stuffed', 'nose is all blocked', 'nose all clogged', 'clogged up nose', 'clogged sinuses', 'clogged nostril*', 'blocked nostril*', 'nostril is blocked', 'nostrils are blocked', 'one nostril', 'stuffy nostril*', 'nose is closed', 'nose closed up', 'nose is shut', 'stopped up nose', 'nose is stopped up', 'full nose', 'nose feels full',
     "can't breathe through my nose", 'cant breathe through my nose', 'cannot breathe through my nose', "can't breath through my nose", 'cant breath through my nose', "can't breathe out of my nose", 'cant breathe out of my nose', "can't breathe out my nose", 'cant breathe out my nose', 'cant breath out of my nose', 'hard to breathe through my nose', 'trouble breathing through my nose', 'breathing through my mouth', 'mouth breathing', 'nose wont let me breathe', 'snoring from congestion')) {
     picks.add(3, P.oxymetazoline, P.saline, P.budesonide);
   }
@@ -139,7 +140,7 @@ export function allergyRules(t: string, picks: Picks) {
   }
 
   // ---- Hives, welts and mild allergic reactions (emergency.ts catches throat/face swelling first) ----
-  if (has(t, 'hives', 'hivez', 'hievs', 'hives*', 'hiving', 'broke out in hives', 'broken out in hives', 'breaking out in hives', 'welts', 'welt', 'whelps', 'whelts', 'wheals', 'wheal', 'urticaria', 'urticaria*', 'urticara', 'urticuria', 'raised bumps', 'raised red bumps', 'raised itchy bumps', 'itchy welts', 'itchy raised', 'blotchy hives', 'red blotches', 'blotchy skin', 'splotches', 'red splotches',
+  if (has(t, 'hives', 'hivez', 'hievs', 'hivs', 'hiives', 'hives*', 'hiving', 'broke out in hives', 'broken out in hives', 'breaking out in hives', 'welts', 'welt', 'whelps', 'whelts', 'wheals', 'wheal', 'urticaria', 'urticaria*', 'urticara', 'urticuria', 'raised bumps', 'raised red bumps', 'raised itchy bumps', 'itchy welts', 'itchy raised', 'blotchy hives', 'red blotches', 'blotchy skin', 'splotches', 'red splotches',
     'allergic reaction*', 'mild allergic reaction', 'mild reaction', 'had a reaction', 'having a reaction', 'reacted to', 'skin reaction', 'reaction to a food', 'reaction to food', 'food reaction', 'reaction to a new soap', 'reaction to detergent', 'reaction to laundry detergent', 'reaction to makeup', 'reaction to a lotion', 'reaction to perfume', 'reaction to a plant', 'reaction to a bee sting', 'reaction to latex', 'latex', 'contact allergy', 'allergic to something', 'something i ate made me itch', 'ate something and itch*')) {
     picks.add(3, P.diphenhydramine, P.cetirizine, P.hydrocortisone);
   }
