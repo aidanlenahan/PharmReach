@@ -3,6 +3,8 @@
 </p>
 
 # PharmReach
+HackRU 2026 at Rutgers University, developed in 24 hours
+
 
 [pharmreach.tech](https://pharmreach.tech)
 
