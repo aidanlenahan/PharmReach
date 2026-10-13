@@ -3,7 +3,7 @@ import { ArrowUpRight, GitFork } from 'lucide-react';
 import { AppShell } from './components/AppShell';
 import './privacy.css';
 
-const REPO_URL = 'https://github.com/aidanlenahan/PharmReach';
+const REPO_URL = 'https://github.com/aidanlenahan/pharmreach';
 
 export function AboutPage() {
   return <AppShell><main className="privacy-page about-page">

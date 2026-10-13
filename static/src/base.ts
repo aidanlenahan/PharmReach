@@ -1,11 +1,11 @@
 // Where the site is mounted, worked out at runtime so one build works at
-// aidanlenahan.github.io/PharmReach/, pharmreach.alenahan.net/ or anywhere else.
+// aidanlenahan.github.io/pharmreach/, pharmreach.alenahan.net/ or anywhere else.
 // Every bundle lives in <base>assets/, so the base is one level up from this module.
 // (The URL is read through a variable so Vite doesn't treat it as an asset import.)
 const moduleUrl = import.meta.url;
 export const BASE = import.meta.env.DEV ? '/' : new URL('..', moduleUrl).pathname;
 
-/** Site-relative path ("/results?x=1") -> URL under the base ("/PharmReach/results?x=1"). */
+/** Site-relative path ("/results?x=1") -> URL under the base ("/pharmreach/results?x=1"). */
 export function href(path: string) {
   return BASE + path.replace(/^\/+/, '');
 }

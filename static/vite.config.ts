@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
   const mapsKey = process.env.VITE_GOOGLE_MAPS_API_KEY || env.VITE_GOOGLE_MAPS_API_KEY || env.GOOGLE_MAPS_API_KEY || env.GOOGLE_API_KEY || '';
   return {
     root: rootDir,
-    // Relative asset URLs: the same build works at a domain root or under /PharmReach/.
+    // Relative asset URLs: the same build works at a domain root or under /pharmreach/.
     base: './',
     plugins: [react(), cleanUrls(), loadingFrame(rootDir)],
     define: { 'import.meta.env.VITE_GOOGLE_MAPS_API_KEY': JSON.stringify(mapsKey) },

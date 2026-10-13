@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } f
 import { CircleAlert, FileText, GitFork, Info, ShieldCheck } from 'lucide-react';
 import './info-menu.css';
 
-const REPO_URL = 'https://github.com/aidanlenahan/PharmReach';
+const REPO_URL = 'https://github.com/aidanlenahan/pharmreach';
 
 // Header "!" button: opens on hover (mouse) or click/tap, with About, Disclaimer, Privacy and the source code.
 export function InfoMenu() {
