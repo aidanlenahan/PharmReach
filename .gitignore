@@ -108,3 +108,6 @@ frontend/README.md
 # Only the root README is tracked; READMEs in subfolders stay local
 **/README.md
 !/README.md
+
+# Data collection and eval helpers: kept locally, not needed to run the site
+backend/scripts/
