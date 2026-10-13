@@ -77,7 +77,6 @@ export function MedicationHelper() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
-  const goToDisclaimer = useRef(false);
   const [available, setAvailable] = useState<boolean | null>(null);
   const [draft, setDraft] = useState(saved.draft || '');
   const [turns, setTurns] = useState<Turn[]>(saved.turns || []);
@@ -101,13 +100,6 @@ export function MedicationHelper() {
       inputRef.current?.focus({ preventScroll: true });
     } else if (wasOpen.current) launcherRef.current?.focus();
     wasOpen.current = open;
-    if (!open && goToDisclaimer.current) {
-      goToDisclaimer.current = false;
-      const frame = window.requestAnimationFrame(() => {
-        window.dispatchEvent(new Event('pharmreach:disclaimer'));
-      });
-      return () => window.cancelAnimationFrame(frame);
-    }
     if (!open || !expanded) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -232,7 +224,7 @@ export function MedicationHelper() {
           </div>
         </form>
       </>}
-      <p className="helper-disclaimer"><b>Not medical advice.</b> <button type="button" className="helper-disclaimer-link" onClick={() => { goToDisclaimer.current = true; setOpen(false); }}>Disclaimer</button><span className="helper-emergency">If emergency, call 911. PharmReach is not liable for anything emergency related; always rely on emergency services.</span></p>
+      <p className="helper-disclaimer"><b>Not medical advice.</b> <a className="helper-disclaimer-link" href={href('/disclaimer')}>Disclaimer</a><span className="helper-emergency">If emergency, call 911.</span><span className="helper-liability">PharmReach is not responsible for medical emergencies; rely on emergency services.</span></p>
     </section>
     </dialog>
   </>;

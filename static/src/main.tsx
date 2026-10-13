@@ -2,7 +2,6 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { MedicationHelper } from './MedicationHelper';
-import { DisclaimerFooter } from './components/DisclaimerFooter';
 import './styles.css';
 import './theme.css';
 
@@ -13,4 +12,4 @@ function updateBrowserTheme() {
 updateBrowserTheme();
 systemTheme.addEventListener('change', updateBrowserTheme);
 
-createRoot(document.getElementById('app')!).render(<StrictMode><App /><DisclaimerFooter /><MedicationHelper /></StrictMode>);
+createRoot(document.getElementById('app')!).render(<StrictMode><App /><MedicationHelper /></StrictMode>);
