@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parent
 DATA_ROOT = ROOT / 'data'
 FRONTEND_ROOT = ROOT.parent / 'frontend' / 'dist'
 # Pages are built as <name>.html but published without the extension.
-CLEAN_PAGES = frozenset({'find-medicine', 'results', 'settings', 'privacy', 'onboarding', 'products'})
+CLEAN_PAGES = frozenset({'find-medicine', 'results', 'settings', 'privacy', 'disclaimer', 'about', 'onboarding', 'products'})
 SORT_OPTIONS = ('Best match', 'Soonest arrival', 'Travel time', 'Medication cost', 'Travel cost', 'Total cost', 'Pharmacy', 'Availability')
 MODES = ('walk', 'transit', 'drive', 'bike')
 DEFAULT_ORIGIN = '40.744,-74.0324'
