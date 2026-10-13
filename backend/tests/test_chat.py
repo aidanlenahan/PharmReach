@@ -95,7 +95,7 @@ class CatalogAndRequestTests(unittest.TestCase):
 
     def test_default_model_is_verified_flash_lite(self):
         with mock.patch.dict(chat.os.environ, {'GEMINI_MODEL': ''}):
-            self.assertEqual(chat.model_id(), 'gemini-3.5-flash-lite')
+            self.assertEqual(chat.model_id(), 'gemini-3.1-flash-lite')
         with mock.patch.dict(chat.os.environ, {'GEMINI_MODEL': 'custom-model'}):
             self.assertEqual(chat.model_id(), 'custom-model')
 

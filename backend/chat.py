@@ -20,9 +20,10 @@ import envfile
 
 envfile.load_env()  # repo-root .env for local runs; real env vars win
 
-# Flash Lite verified against the catalog; full Flash generation timed out.
+# Stable 3.1 Flash Lite verified against the catalog; 3.5 Flash Lite kept returning
+# 503 "high demand" (2026-10-13) and full Flash generation timed out.
 # Override with GEMINI_MODEL when a different model is needed.
-DEFAULT_MODEL = 'gemini-3.5-flash-lite'
+DEFAULT_MODEL = 'gemini-3.1-flash-lite'
 GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models'
 GEMINI_TIMEOUT_SECONDS = 10
 MAX_BODY_BYTES = 2048
@@ -157,7 +158,7 @@ def build_request(message, catalog):
             'maxOutputTokens': 512,
             'responseMimeType': 'application/json',
             'responseSchema': response_schema(catalog),
-            'thinkingConfig': {'thinkingLevel': 'low'},
+            'thinkingConfig': {'thinkingLevel': 'minimal'},
         },
     }
 
