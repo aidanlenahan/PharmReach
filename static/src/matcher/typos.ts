@@ -178,12 +178,14 @@ function segment(word: string) {
   return pieces && pieces.length > 1 && pieces.some((piece) => vocab.has(piece)) ? pieces.join(' ') : null;
 }
 
-function fixWord(word: string) {
+function fixWord(word: string, eager: boolean) {
   const key = word.replace(/'/g, '');
   if (SHORTHAND[key]) return SHORTHAND[key];
   // Dropped g: "killin", "thinkin", "sleepin" (only when the -ing word is one the rules use).
   if (key.length >= 5 && key.endsWith('in') && vocab.has(key + 'g')) return key + 'g';
-  if (key.length < 4 || !ready || known(key)) return word;
+  // Contractions are typed on purpose ("they'd", "he'll").
+  if (key.length < 4 || word.includes("'") || (!ready && !eager) || known(key)) return word;
+  if (!ready) return doubling(key) || closest(key, 1) || segment(key) || word;
   if (cache.has(key)) return cache.get(key)!;
   // Words a "prefix*" phrase already matches ("sneezin") only get the one-letter fixes.
   const fixed = doubling(key) || closest(key, 1) || (key.length >= 7 && !stemLength(key) ? closest(key, 2) : null) || segment(key) || word;
@@ -192,11 +194,16 @@ function fixWord(word: string) {
   return result;
 }
 
-/** Fix typos in an already normalized (lowercase) message. Numbers and punctuation are left alone. */
-export function fixTypos(text: string) {
+/** Fix typos in an already normalized (lowercase) message. Numbers and punctuation are left alone.
+ *  Until the English word list loads, words are only guessed at when eager is set (the emergency
+ *  screen uses that: a wrong guess there can only make the screen more careful). */
+export function fixTypos(text: string, eager = false) {
   // Letters repeated for emphasis ("hellllp", "sooo") are cut to two first.
-  return text.replace(/([a-z])\1{2,}/g, '$1$1').replace(/[a-z']+/g, fixWord);
+  return text.replace(/([a-z])\1{2,}/g, '$1$1').replace(/[a-z']+/g, (word) => fixWord(word, eager));
 }
+
+/** True once the English word list has loaded. */
+export const wordsReady = () => ready;
 
 /** Number of known words (for tests). */
 export const vocabSize = () => vocab.size;

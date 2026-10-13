@@ -5,7 +5,7 @@
 import { inStockCatalog, loadCatalog, loadWordList } from './staticApi';
 import { Picks, has, recordPhrases } from './matcher/shared';
 import { EMERGENCY_PATTERNS, EMERGENCY_WORDS } from './matcher/emergency';
-import { addCommonWords, addRegexVocab, addVocab, fixTypos } from './matcher/typos';
+import { addCommonWords, addRegexVocab, addVocab, fixTypos, wordsReady } from './matcher/typos';
 import { coldSoreRules, skinRules } from './matcher/rules/skin';
 import { painRules } from './matcher/rules/pain';
 import { stomachRules } from './matcher/rules/stomach';
@@ -123,7 +123,9 @@ export function clean(message: string) {
 export function screen(message: string): 'emergency' | 'pharmacist' | null {
   // The emergency screen checks the message as typed and with typos fixed; either one matching counts.
   const typed = normalize(message), fixed = clean(message);
-  if (EMERGENCY_PATTERNS.some((pattern) => pattern.test(typed) || pattern.test(fixed))) return 'emergency';
+  // Without the word list the fixer won't guess, so the emergency screen also tries an eager guess.
+  const guessed = wordsReady() ? fixed : fixTypos(typed, true);
+  if (EMERGENCY_PATTERNS.some((pattern) => pattern.test(typed) || pattern.test(fixed) || pattern.test(guessed))) return 'emergency';
   for (let text of [typed, fixed]) {
     for (const phrase of SAFE_PHRASES) text = text.replace(phrase, ' ');
     if (PHARMACIST_PATTERNS.some((pattern) => pattern.test(text))) return 'pharmacist';
