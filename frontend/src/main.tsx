@@ -13,6 +13,11 @@ function updateBrowserTheme() {
 updateBrowserTheme();
 systemTheme.addEventListener('change', updateBrowserTheme);
 
+// Installable app: the service worker caches pages and data for offline use.
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => {}); });
+}
+
 // /styles/?palette=<id> previews the homepage recolored with that palette.
 const palette = location.pathname.startsWith('/styles') ? getPalette(new URLSearchParams(location.search).get('palette')) : undefined;
 if (palette) applyPalette(palette);
