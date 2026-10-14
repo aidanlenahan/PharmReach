@@ -12,4 +12,9 @@ function updateBrowserTheme() {
 updateBrowserTheme();
 systemTheme.addEventListener('change', updateBrowserTheme);
 
+// Installable app: the service worker caches pages and data for offline use.
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); });
+}
+
 createRoot(document.getElementById('app')!).render(<StrictMode><App /><MedicationHelper /></StrictMode>);
